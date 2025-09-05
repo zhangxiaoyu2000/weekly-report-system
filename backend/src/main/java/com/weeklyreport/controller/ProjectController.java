@@ -2,14 +2,16 @@ package com.weeklyreport.controller;
 
 import com.weeklyreport.dto.ApiResponse;
 import com.weeklyreport.dto.project.*;
+import com.weeklyreport.security.CustomUserPrincipal;
 import com.weeklyreport.service.ProjectService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,19 +35,14 @@ public class ProjectController extends BaseController {
      * POST /api/projects
      */
     @PostMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ApiResponse<ProjectResponse>> createProject(
             @Valid @RequestBody ProjectCreateRequest request,
-            HttpServletRequest httpRequest) {
+            @AuthenticationPrincipal CustomUserPrincipal currentUser) {
         try {
-            logger.info("Creating new project: {}", request.getName());
+            logger.info("Creating new project: {} by user: {}", request.getName(), currentUser.getId());
 
-            // TODO: Extract user ID from JWT token
-            Long userId = extractUserIdFromRequest(httpRequest);
-            if (userId == null) {
-                return error("Authentication required", HttpStatus.UNAUTHORIZED);
-            }
-
-            ProjectResponse project = projectService.createProject(request, userId);
+            ProjectResponse project = projectService.createProject(request, currentUser.getId());
             logger.info("Project created successfully with ID: {}", project.getId());
 
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -65,19 +62,15 @@ public class ProjectController extends BaseController {
      * PUT /api/projects/{id}
      */
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ApiResponse<ProjectResponse>> updateProject(
             @PathVariable Long id,
             @Valid @RequestBody ProjectUpdateRequest request,
-            HttpServletRequest httpRequest) {
+            @AuthenticationPrincipal CustomUserPrincipal currentUser) {
         try {
-            logger.info("Updating project: {}", id);
+            logger.info("Updating project: {} by user: {}", id, currentUser.getId());
 
-            Long userId = extractUserIdFromRequest(httpRequest);
-            if (userId == null) {
-                return error("Authentication required", HttpStatus.UNAUTHORIZED);
-            }
-
-            ProjectResponse project = projectService.updateProject(id, request, userId);
+            ProjectResponse project = projectService.updateProject(id, request, currentUser.getId());
             logger.info("Project updated successfully: {}", project.getId());
 
             return success("Project updated successfully", project);
@@ -99,18 +92,14 @@ public class ProjectController extends BaseController {
      * GET /api/projects/{id}
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ApiResponse<ProjectResponse>> getProject(
             @PathVariable Long id,
-            HttpServletRequest httpRequest) {
+            @AuthenticationPrincipal CustomUserPrincipal currentUser) {
         try {
-            logger.info("Getting project: {}", id);
+            logger.info("Getting project: {} for user: {}", id, currentUser.getId());
 
-            Long userId = extractUserIdFromRequest(httpRequest);
-            if (userId == null) {
-                return error("Authentication required", HttpStatus.UNAUTHORIZED);
-            }
-
-            ProjectResponse project = projectService.getProject(id, userId);
+            ProjectResponse project = projectService.getProject(id, currentUser.getId());
             return success("Project retrieved successfully", project);
 
         } catch (IllegalArgumentException e) {
@@ -130,6 +119,7 @@ public class ProjectController extends BaseController {
      * GET /api/projects
      */
     @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ApiResponse<ProjectListResponse>> getProjects(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String description,
@@ -144,14 +134,9 @@ public class ProjectController extends BaseController {
             @RequestParam(defaultValue = "20") Integer size,
             @RequestParam(defaultValue = "createdAt") String sortBy,
             @RequestParam(defaultValue = "DESC") String sortDirection,
-            HttpServletRequest httpRequest) {
+            @AuthenticationPrincipal CustomUserPrincipal currentUser) {
         try {
-            logger.info("Getting projects with filters - page: {}, size: {}", page, size);
-
-            Long userId = extractUserIdFromRequest(httpRequest);
-            if (userId == null) {
-                return error("Authentication required", HttpStatus.UNAUTHORIZED);
-            }
+            logger.info("Getting projects with filters - page: {}, size: {} for user: {}", page, size, currentUser.getId());
 
             // Build filter request
             ProjectFilterRequest filter = new ProjectFilterRequest();
@@ -169,7 +154,7 @@ public class ProjectController extends BaseController {
             filter.setSortBy(sortBy);
             filter.setSortDirection(sortDirection);
 
-            ProjectListResponse projects = projectService.getProjects(filter, userId);
+            ProjectListResponse projects = projectService.getProjects(filter, currentUser.getId());
             return success("Projects retrieved successfully", projects);
 
         } catch (IllegalArgumentException e) {
@@ -186,18 +171,14 @@ public class ProjectController extends BaseController {
      * DELETE /api/projects/{id}
      */
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ApiResponse<String>> deleteProject(
             @PathVariable Long id,
-            HttpServletRequest httpRequest) {
+            @AuthenticationPrincipal CustomUserPrincipal currentUser) {
         try {
-            logger.info("Deleting project: {}", id);
+            logger.info("Deleting project: {} by user: {}", id, currentUser.getId());
 
-            Long userId = extractUserIdFromRequest(httpRequest);
-            if (userId == null) {
-                return error("Authentication required", HttpStatus.UNAUTHORIZED);
-            }
-
-            projectService.deleteProject(id, userId);
+            projectService.deleteProject(id, currentUser.getId());
             logger.info("Project deleted successfully: {}", id);
 
             return success("Project deleted successfully", "");
@@ -219,14 +200,11 @@ public class ProjectController extends BaseController {
      * GET /api/projects/statistics
      */
     @GetMapping("/statistics")
-    public ResponseEntity<ApiResponse<List<Object[]>>> getProjectStatistics(HttpServletRequest httpRequest) {
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<ApiResponse<List<Object[]>>> getProjectStatistics(
+            @AuthenticationPrincipal CustomUserPrincipal currentUser) {
         try {
-            logger.info("Getting project statistics");
-
-            Long userId = extractUserIdFromRequest(httpRequest);
-            if (userId == null) {
-                return error("Authentication required", HttpStatus.UNAUTHORIZED);
-            }
+            logger.info("Getting project statistics for user: {}", currentUser.getId());
 
             List<Object[]> statistics = projectService.getProjectStatistics();
             return success("Project statistics retrieved successfully", statistics);
@@ -242,16 +220,13 @@ public class ProjectController extends BaseController {
      * GET /api/projects/overdue
      */
     @GetMapping("/overdue")
-    public ResponseEntity<ApiResponse<List<ProjectResponse>>> getOverdueProjects(HttpServletRequest httpRequest) {
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<ApiResponse<List<ProjectResponse>>> getOverdueProjects(
+            @AuthenticationPrincipal CustomUserPrincipal currentUser) {
         try {
-            logger.info("Getting overdue projects");
+            logger.info("Getting overdue projects for user: {}", currentUser.getId());
 
-            Long userId = extractUserIdFromRequest(httpRequest);
-            if (userId == null) {
-                return error("Authentication required", HttpStatus.UNAUTHORIZED);
-            }
-
-            List<ProjectResponse> overdueProjects = projectService.getOverdueProjects(userId);
+            List<ProjectResponse> overdueProjects = projectService.getOverdueProjects(currentUser.getId());
             return success("Overdue projects retrieved successfully", overdueProjects);
 
         } catch (Exception e) {
@@ -265,18 +240,14 @@ public class ProjectController extends BaseController {
      * GET /api/projects/ending-soon?days={days}
      */
     @GetMapping("/ending-soon")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ApiResponse<List<ProjectResponse>>> getProjectsEndingSoon(
             @RequestParam(defaultValue = "7") Integer days,
-            HttpServletRequest httpRequest) {
+            @AuthenticationPrincipal CustomUserPrincipal currentUser) {
         try {
-            logger.info("Getting projects ending in {} days", days);
+            logger.info("Getting projects ending in {} days for user: {}", days, currentUser.getId());
 
-            Long userId = extractUserIdFromRequest(httpRequest);
-            if (userId == null) {
-                return error("Authentication required", HttpStatus.UNAUTHORIZED);
-            }
-
-            List<ProjectResponse> projectsEndingSoon = projectService.getProjectsEndingSoon(days, userId);
+            List<ProjectResponse> projectsEndingSoon = projectService.getProjectsEndingSoon(days, currentUser.getId());
             return success("Projects ending soon retrieved successfully", projectsEndingSoon);
 
         } catch (Exception e) {
@@ -286,32 +257,6 @@ public class ProjectController extends BaseController {
     }
 
     // Helper methods
-
-    /**
-     * Extract user ID from JWT token in request
-     * TODO: This will be properly implemented when authentication is integrated
-     */
-    private Long extractUserIdFromRequest(HttpServletRequest request) {
-        String token = extractTokenFromRequest(request);
-        if (token == null) {
-            return null;
-        }
-        
-        // TODO: Implement actual JWT token parsing
-        // return jwtTokenProvider.getUserIdFromToken(token);
-        return 1L; // Temporary placeholder - return admin user ID
-    }
-
-    /**
-     * Extract JWT token from Authorization header
-     */
-    private String extractTokenFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
 
     /**
      * Parse project status from string

@@ -3,6 +3,7 @@ package com.weeklyreport.controller;
 import com.weeklyreport.dto.ApiResponse;
 import com.weeklyreport.dto.ai.*;
 import com.weeklyreport.security.CustomUserPrincipal;
+import com.weeklyreport.service.ai.AIMonitoringService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,11 @@ public class AIController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(AIController.class);
 
-    // Note: These services will be injected once Stream A and B are completed
-    // @Autowired
-    // private AIAnalysisService aiAnalysisService;
-    // 
-    // @Autowired
-    // private AISuggestionService aiSuggestionService;
-    // 
-    // @Autowired
-    // private AIProjectInsightService aiProjectInsightService;
+    @Autowired
+    private AIMonitoringService aiMonitoringService;
+
+    @Autowired
+    private com.weeklyreport.service.AIAnalysisService aiAnalysisService;
 
     /**
      * 启动周报AI分析
@@ -58,13 +55,40 @@ public class AIController extends BaseController {
             // Set the reportId from path parameter
             request.setReportId(reportId);
             
-            // TODO: Replace with actual service call once Stream B is completed
-            // CompletableFuture<AIAnalysisResponse> analysisTask = aiAnalysisService.analyzeReportAsync(request, currentUser.getId());
+            // Record the start of AI analysis request
+            Long requestId = System.currentTimeMillis();
+            aiMonitoringService.recordRequestStart(requestId);
             
-            // Mock response for now
-            AIAnalysisResponse mockResponse = createMockAnalysisResponse(reportId);
-            
-            return success(mockResponse, "AI analysis started successfully");
+            try {
+                // Start async analysis using actual service
+                aiAnalysisService.analyzeWeeklyReportAsync(reportId)
+                    .thenAccept(results -> {
+                        aiMonitoringService.recordRequestSuccess(requestId);
+                        logger.info("AI analysis completed successfully for report {} with {} results", 
+                                reportId, results.size());
+                    })
+                    .exceptionally(ex -> {
+                        aiMonitoringService.recordRequestFailure(requestId, "analysis_error");
+                        logger.error("AI analysis failed for report {}: {}", reportId, ex.getMessage(), ex);
+                        return null;
+                    });
+                
+                // Return immediate response indicating analysis has started
+                AIAnalysisResponse response = AIAnalysisResponse.builder()
+                        .analysisId(requestId)
+                        .reportId(reportId)
+                        .status("PROCESSING")
+                        .summary("AI analysis has been started and is processing in the background")
+                        .sentiment("NEUTRAL", 0.0)
+                        .confidenceScore(0)
+                        .build();
+                
+                return success(response, "AI analysis started successfully");
+                
+            } catch (Exception e) {
+                aiMonitoringService.recordRequestFailure(requestId, "service_error");
+                throw e;
+            }
             
         } catch (Exception e) {
             logger.error("Failed to start AI analysis for report {}: {}", reportId, e.getMessage(), e);
@@ -88,14 +112,43 @@ public class AIController extends BaseController {
             // Validate report access permissions
             validateReportAccess(reportId, currentUser);
             
-            // TODO: Replace with actual service call once Stream B is completed
-            // AIAnalysisResponse result = aiAnalysisService.getAnalysisResult(reportId);
+            // Get analysis results from service
+            var analysisResults = aiAnalysisService.getAnalysisResults(reportId);
             
-            // Mock response for now
-            AIAnalysisResponse mockResult = createMockAnalysisResponse(reportId);
-            mockResult.setStatus("COMPLETED");
+            if (analysisResults.isEmpty()) {
+                AIAnalysisResponse notFoundResponse = AIAnalysisResponse.builder()
+                        .analysisId(0L)
+                        .reportId(reportId)
+                        .status("NOT_FOUND")
+                        .summary("No analysis results found for this report")
+                        .sentiment("NEUTRAL", 0.0)
+                        .confidenceScore(0)
+                        .build();
+                return success(notFoundResponse, "No analysis results found");
+            }
             
-            return success(mockResult, "Analysis result retrieved successfully");
+            // Get the most recent completed analysis
+            var latestResult = analysisResults.stream()
+                    .filter(r -> r.getStatus() == com.weeklyreport.entity.AIAnalysisResult.AnalysisStatus.COMPLETED)
+                    .reduce((first, second) -> second); // Get last one
+            
+            if (latestResult.isEmpty()) {
+                AIAnalysisResponse processingResponse = AIAnalysisResponse.builder()
+                        .analysisId(0L)
+                        .reportId(reportId)
+                        .status("PROCESSING")
+                        .summary("Analysis is still in progress")
+                        .sentiment("NEUTRAL", 0.0)
+                        .confidenceScore(0)
+                        .build();
+                return success(processingResponse, "Analysis still in progress");
+            }
+            
+            // Convert to response DTO
+            var result = latestResult.get();
+            AIAnalysisResponse response = convertToAnalysisResponse(result);
+            
+            return success(response, "Analysis result retrieved successfully");
             
         } catch (Exception e) {
             logger.error("Failed to get AI analysis result for report {}: {}", reportId, e.getMessage(), e);
@@ -193,15 +246,38 @@ public class AIController extends BaseController {
         logger.info("AI service health check requested");
         
         try {
-            // TODO: Implement actual health check once Stream A is completed
-            // Map<String, Object> healthStatus = aiHealthService.checkHealth();
+            boolean isHealthy = aiMonitoringService.performHealthCheck();
             
-            // Mock health status for now
-            return success(createMockHealthStatus(), "AI service is healthy");
+            if (isHealthy) {
+                return success(createMockHealthStatus(), "AI service is healthy");
+            } else {
+                return error("AI service is experiencing issues");
+            }
             
         } catch (Exception e) {
             logger.error("AI service health check failed: {}", e.getMessage(), e);
             return error("AI service health check failed: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 获取AI服务性能指标
+     * GET /api/ai/metrics
+     */
+    @GetMapping("/metrics")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<AIMetricsResponse>> getAIMetrics(
+            @RequestParam(required = false, defaultValue = "24h") String timeRange) {
+        
+        logger.info("AI service metrics requested for time range: {}", timeRange);
+        
+        try {
+            AIMetricsResponse metrics = aiMonitoringService.getMetrics(timeRange);
+            return success(metrics, "AI metrics retrieved successfully");
+            
+        } catch (Exception e) {
+            logger.error("Failed to retrieve AI metrics: {}", e.getMessage(), e);
+            return error("Failed to retrieve AI metrics: " + e.getMessage());
         }
     }
 
@@ -275,5 +351,71 @@ public class AIController extends BaseController {
                 "response_time", "250ms",
                 "last_check", java.time.LocalDateTime.now().toString()
         );
+    }
+
+    /**
+     * Convert AIAnalysisResult entity to AIAnalysisResponse DTO
+     */
+    private AIAnalysisResponse convertToAnalysisResponse(com.weeklyreport.entity.AIAnalysisResult result) {
+        AIAnalysisResponse.Builder builder = AIAnalysisResponse.builder()
+                .analysisId(result.getId())
+                .reportId(result.getWeeklyReport().getId())
+                .status(result.getStatus().name())
+                .confidenceScore(result.getConfidenceScore() != null ? result.getConfidenceScore().intValue() : 0);
+
+        // Extract data from JSON result
+        if (result.getResultData() != null && !result.getResultData().isEmpty()) {
+            try {
+                // Parse JSON and extract fields
+                // This is a simplified implementation - in practice you might use a JSON library
+                String resultData = result.getResultData();
+                
+                builder.summary(extractJsonField(resultData, "summary", "Analysis completed"));
+                
+                // Extract sentiment if available
+                String sentiment = extractJsonField(resultData, "sentiment", "NEUTRAL");
+                Double sentimentScore = extractJsonDoubleField(resultData, "sentimentScore", 0.0);
+                builder.sentiment(sentiment, sentimentScore);
+                
+            } catch (Exception e) {
+                logger.warn("Failed to parse analysis result data: {}", e.getMessage());
+                builder.summary("Analysis completed but data parsing failed");
+                builder.sentiment("NEUTRAL", 0.0);
+            }
+        } else {
+            builder.summary("Analysis completed");
+            builder.sentiment("NEUTRAL", 0.0);
+        }
+
+        return builder.build();
+    }
+
+    /**
+     * Simple JSON field extraction (simplified implementation)
+     */
+    private String extractJsonField(String json, String fieldName, String defaultValue) {
+        try {
+            // Simple regex-based extraction - in production, use proper JSON library
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(
+                    "\"" + fieldName + "\"\\s*:\\s*\"([^\"]+)\"");
+            java.util.regex.Matcher matcher = pattern.matcher(json);
+            return matcher.find() ? matcher.group(1) : defaultValue;
+        } catch (Exception e) {
+            return defaultValue;
+        }
+    }
+
+    /**
+     * Simple JSON double field extraction
+     */
+    private Double extractJsonDoubleField(String json, String fieldName, Double defaultValue) {
+        try {
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(
+                    "\"" + fieldName + "\"\\s*:\\s*([0-9.]+)");
+            java.util.regex.Matcher matcher = pattern.matcher(json);
+            return matcher.find() ? Double.parseDouble(matcher.group(1)) : defaultValue;
+        } catch (Exception e) {
+            return defaultValue;
+        }
     }
 }

@@ -142,4 +142,32 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
      */
     @Query("SELECT COUNT(p) > 0 FROM Project p WHERE LOWER(p.name) = LOWER(:name) AND (:id IS NULL OR p.id != :id)")
     boolean existsByNameIgnoreCaseAndIdNot(@Param("name") String name, @Param("id") Long id);
+
+    /**
+     * Find projects with complex filters
+     */
+    @Query("SELECT p FROM Project p WHERE " +
+           "(:name IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
+           "(:status IS NULL OR p.status = :status) AND " +
+           "(:priority IS NULL OR p.priority = :priority) AND " +
+           "(:createdBy IS NULL OR p.createdBy = :createdBy) AND " +
+           "(:departmentId IS NULL OR p.department.id = :departmentId) AND " +
+           "(:isPublic IS NULL OR p.isPublic = :isPublic) AND " +
+           "(:archived IS NULL OR p.archived = :archived)")
+    Page<Project> findWithFilters(@Param("name") String name,
+                                  @Param("status") Project.ProjectStatus status,
+                                  @Param("priority") Project.ProjectPriority priority,
+                                  @Param("createdBy") User createdBy,
+                                  @Param("departmentId") Long departmentId,
+                                  @Param("isPublic") Boolean isPublic,
+                                  @Param("archived") Boolean archived,
+                                  Pageable pageable);
+
+    /**
+     * Find projects accessible to a user (public projects or projects where user is member/creator)
+     */
+    @Query("SELECT DISTINCT p FROM Project p LEFT JOIN p.members pm WHERE " +
+           "p.isPublic = true OR p.createdBy = :user OR " +
+           "(pm.user = :user AND pm.isActive = true)")
+    Page<Project> findAccessibleProjects(@Param("user") User user, Pageable pageable);
 }

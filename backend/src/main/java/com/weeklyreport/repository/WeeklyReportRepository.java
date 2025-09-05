@@ -36,6 +36,8 @@ public interface WeeklyReportRepository extends JpaRepository<WeeklyReport, Long
     Optional<WeeklyReport> findByAuthorIdAndReportWeek(Long authorId, LocalDate reportWeek);
     
     boolean existsByAuthorIdAndReportWeek(Long authorId, LocalDate reportWeek);
+    
+    boolean existsByAuthorAndReportWeek(User author, LocalDate reportWeek);
 
     // Find by status
     List<WeeklyReport> findByStatus(WeeklyReport.ReportStatus status);
@@ -210,4 +212,67 @@ public interface WeeklyReportRepository extends JpaRepository<WeeklyReport, Long
     // Find most recent report by author
     @Query("SELECT r FROM WeeklyReport r WHERE r.author.id = :authorId ORDER BY r.reportWeek DESC")
     List<WeeklyReport> findLatestReportsByAuthor(@Param("authorId") Long authorId);
+
+    /**
+     * Find reports with complex filters for WeeklyReportService
+     */
+    @Query("SELECT r FROM WeeklyReport r WHERE " +
+           "(:title IS NULL OR LOWER(r.title) LIKE LOWER(CONCAT('%', :title, '%'))) AND " +
+           "(:status IS NULL OR r.status = :status) AND " +
+           "(:authorId IS NULL OR r.author.id = :authorId) AND " +
+           "(:reviewerId IS NULL OR r.reviewer.id = :reviewerId) AND " +
+           "(:projectId IS NULL OR r.project.id = :projectId) AND " +
+           "(:templateId IS NULL OR r.template.id = :templateId) AND " +
+           "(:year IS NULL OR r.year = :year) AND " +
+           "(:weekNumber IS NULL OR r.weekNumber = :weekNumber) AND " +
+           "(:reportWeekFrom IS NULL OR r.reportWeek >= :reportWeekFrom) AND " +
+           "(:reportWeekTo IS NULL OR r.reportWeek <= :reportWeekTo) AND " +
+           "(:submittedFrom IS NULL OR r.submittedAt >= :submittedFrom) AND " +
+           "(:submittedTo IS NULL OR r.submittedAt <= :submittedTo) AND " +
+           "(:priorityMin IS NULL OR r.priority >= :priorityMin) AND " +
+           "(:priorityMax IS NULL OR r.priority <= :priorityMax) AND " +
+           "(:isLate IS NULL OR r.isLate = :isLate) AND " +
+           "(:searchTerm IS NULL OR " +
+           " LOWER(r.title) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+           " LOWER(r.content) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+           " LOWER(r.workSummary) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+           " LOWER(r.achievements) LIKE LOWER(CONCAT('%', :searchTerm, '%')))")
+    Page<WeeklyReport> findWithFilters(@Param("title") String title,
+                                       @Param("status") WeeklyReport.ReportStatus status,
+                                       @Param("authorId") Long authorId,
+                                       @Param("reviewerId") Long reviewerId,
+                                       @Param("projectId") Long projectId,
+                                       @Param("templateId") Long templateId,
+                                       @Param("year") Integer year,
+                                       @Param("weekNumber") Integer weekNumber,
+                                       @Param("reportWeekFrom") LocalDate reportWeekFrom,
+                                       @Param("reportWeekTo") LocalDate reportWeekTo,
+                                       @Param("submittedFrom") LocalDate submittedFrom,
+                                       @Param("submittedTo") LocalDate submittedTo,
+                                       @Param("priorityMin") Integer priorityMin,
+                                       @Param("priorityMax") Integer priorityMax,
+                                       @Param("isLate") Boolean isLate,
+                                       @Param("searchTerm") String searchTerm,
+                                       Pageable pageable);
+
+    /**
+     * Find reports accessible to a user (own reports + reviewable reports for managers)
+     */
+    @Query("SELECT DISTINCT r FROM WeeklyReport r WHERE " +
+           "r.author = :user OR " +
+           "(:user.role IN ('ADMIN', 'HR_MANAGER', 'DEPARTMENT_MANAGER') AND " +
+           " (r.author.department = :user.department OR :user.role IN ('ADMIN', 'HR_MANAGER')))")
+    Page<WeeklyReport> findAccessibleReports(@Param("user") User user, Pageable pageable);
+
+    /**
+     * Get global report statistics by status
+     */
+    @Query("SELECT r.status, COUNT(r) FROM WeeklyReport r GROUP BY r.status")
+    List<Object[]> getGlobalReportStatsByStatus();
+
+    /**
+     * Get user-specific report statistics by status
+     */
+    @Query("SELECT r.status, COUNT(r) FROM WeeklyReport r WHERE r.author = :user GROUP BY r.status")
+    List<Object[]> getUserReportStatsByStatus(@Param("user") User user);
 }
