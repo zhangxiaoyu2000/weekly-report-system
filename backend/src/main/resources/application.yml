@@ -172,6 +172,46 @@ cors:
   allowed-headers: "*"
   allow-credentials: true
 
+# AI Services configuration
+ai:
+  enabled: true
+  default-provider: mock  # Use mock by default for development
+  enable-fallback: true
+  max-retries: 3
+  timeout-ms: 30000
+  
+  # OpenAI configuration
+  openai:
+    enabled: false  # Disabled by default - requires API key
+    api-key: ${OPENAI_API_KEY:}
+    base-url: https://api.openai.com/v1
+    model: gpt-3.5-turbo
+    temperature: 0.7
+    max-tokens: 4096
+  
+  # Anthropic configuration  
+  anthropic:
+    enabled: false  # Disabled by default - requires API key
+    api-key: ${ANTHROPIC_API_KEY:}
+    base-url: https://api.anthropic.com/v1
+    model: claude-3-sonnet-20240229
+    temperature: 0.7
+    max-tokens: 4096
+  
+  # Local AI configuration
+  local:
+    enabled: false  # Disabled by default
+    endpoint: http://localhost:8000
+    model: local-model
+    temperature: 0.7
+    max-tokens: 2048
+  
+  # Mock AI configuration for testing and development
+  mock:
+    enabled: true  # Enabled by default for development
+    simulated-delay: 1000  # 1 second delay to simulate processing
+    confidence: 0.95
+
 ---
 # Development profile
 spring:
@@ -207,6 +247,15 @@ spring:
         use_sql_comments: true
         generate_statistics: true
 
+# AI configuration for development - use mock service
+ai:
+  default-provider: mock
+  mock:
+    enabled: true
+    simulated-delay: 500  # Faster in dev
+  openai:
+    enabled: false  # Keep disabled unless testing with real API
+
 ---
 # Test profile
 spring:
@@ -236,6 +285,15 @@ spring:
         hbm2ddl:
           import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
         generate_statistics: false
+
+# AI configuration for testing - use mock service with no delay
+ai:
+  default-provider: mock
+  mock:
+    enabled: true
+    simulated-delay: 0  # No delay in tests
+  openai:
+    enabled: false  # Disabled in tests
 
 ---
 # Docker profile
@@ -330,6 +388,16 @@ spring:
         generate_statistics: false
         connection:
           provider_disables_autocommit: true
+
+# AI configuration for production - enable real AI services
+ai:
+  default-provider: openai  # Use OpenAI in production
+  enable-fallback: true
+  max-retries: 2  # Fewer retries in production
+  openai:
+    enabled: true  # Enable OpenAI in production (requires API key)
+  mock:
+    enabled: false  # Disable mock in production
   
 # Production-specific logging
 logging:
