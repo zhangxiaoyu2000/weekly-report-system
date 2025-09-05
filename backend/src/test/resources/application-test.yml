@@ -1,0 +1,118 @@
+# Test-specific configuration
+# This file provides optimized settings for running tests
+spring:
+  application:
+    name: weekly-report-backend-test
+  
+  # Fast H2 in-memory database configuration for tests
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS weekly_report
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    
+    # Minimal HikariCP settings for tests
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 3  # Small pool for tests
+      idle-timeout: 30000   # 30 seconds
+      max-lifetime: 300000  # 5 minutes
+      connection-timeout: 3000  # 3 seconds
+      pool-name: WeeklyReportHikariCP-Test
+      connection-init-sql: SET REFERENTIAL_INTEGRITY FALSE  # Allow easier test data setup
+  
+  # H2 Console for debugging tests (disabled in CI)
+  h2:
+    console:
+      enabled: false  # Disabled for security in tests
+  
+  # JPA configuration optimized for fast test execution
+  jpa:
+    hibernate:
+      ddl-auto: create-drop  # Fresh schema for each test
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false  # Reduce test output noise
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: false
+        use_sql_comments: false
+        
+        # Performance settings for tests
+        jdbc:
+          batch_size: 10  # Smaller batches for tests
+          fetch_size: 20
+        order_inserts: true
+        order_updates: true
+        
+        # Cache disabled for predictable test results
+        cache:
+          use_second_level_cache: false
+          use_query_cache: false
+        
+        # Statistics disabled for performance
+        generate_statistics: false
+        
+        # Test-specific settings
+        hbm2ddl:
+          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+    
+    defer-datasource-initialization: true
+    open-in-view: false
+
+# Security configuration for tests
+spring:
+  security:
+    user:
+      name: testuser
+      password: testpass
+
+# JWT configuration for tests
+jwt:
+  secret: testSecretKeyForTestingPurposesOnly
+  expiration: 3600000  # 1 hour for tests
+
+# Logging configuration for tests
+logging:
+  level:
+    com.weeklyreport: DEBUG
+    org.springframework.test: INFO
+    org.springframework.security: WARN
+    com.zaxxer.hikari: WARN
+    org.hibernate.SQL: WARN  # Enable for debugging specific tests
+    org.hibernate.type: WARN
+    org.springframework.web: WARN
+    org.springframework.boot.test: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Actuator configuration for tests - minimal setup
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+  metrics:
+    export:
+      simple:
+        enabled: false  # Disable metrics collection in tests
+
+# CORS disabled for tests
+cors:
+  allowed-origins: "*"
+  allowed-methods: "*"
+  allowed-headers: "*"
+  allow-credentials: false
+
+# Test data configuration
+testdata:
+  cleanup:
+    enabled: true  # Clean up test data after tests
+  users:
+    default-password: testpass123
+  departments:
+    create-defaults: true
