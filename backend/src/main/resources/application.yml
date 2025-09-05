@@ -1,0 +1,409 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: weekly-report-backend
+  
+  profiles:
+    active: dev
+  
+  # Database configuration with optimized HikariCP settings
+  datasource:
+    url: jdbc:mysql://localhost:3306/weekly_report?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: ${DB_USERNAME:weekly_report}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    
+    # HikariCP connection pool configuration
+    hikari:
+      # Connection pool sizing
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 300000  # 5 minutes
+      max-lifetime: 1800000  # 30 minutes
+      connection-timeout: 20000  # 20 seconds
+      
+      # Performance settings
+      leak-detection-threshold: 60000  # 1 minute
+      pool-name: WeeklyReportHikariCP
+      
+      # Connection validation
+      connection-test-query: SELECT 1
+      validation-timeout: 5000
+      
+      # Additional connection properties
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+    
+  # Enhanced JPA configuration
+  jpa:
+    hibernate:
+      ddl-auto: validate  # Use Flyway for schema management
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+    show-sql: true
+    properties:
+      hibernate:
+        # Dialect and SQL settings
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        
+  # Flyway configuration  
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+    out-of-order: false
+    clean-disabled: true
+        format_sql: true
+        use_sql_comments: true
+        
+        # Performance optimizations
+        jdbc:
+          batch_size: 20
+          fetch_size: 50
+          time_zone: UTC
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+        
+        # Cache configuration
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+        
+        # Connection and session settings
+        connection:
+          provider_disables_autocommit: true
+        temp:
+          use_jdbc_metadata_defaults: false
+          
+        # Statistics and monitoring
+        generate_statistics: true
+        session:
+          events:
+            log:
+              LOG_QUERIES_SLOWER_THAN_MS: 1000
+              
+    defer-datasource-initialization: true
+    open-in-view: false  # Disable to avoid lazy loading issues in web layer
+
+  # Transaction management configuration
+  transaction:
+    default-timeout: 30  # 30 seconds default timeout
+    rollback-on-commit-failure: true
+  
+  # Security configuration
+  security:
+    user:
+      name: admin
+      password: ${ADMIN_PASSWORD:admin123}
+
+# JWT configuration
+jwt:
+  secret: ${JWT_SECRET:MyVerySecureWeeklyReportJwtSigningKey2024!@#}
+  access-token-expiration: ${JWT_ACCESS_EXPIRATION:900000}   # 15 minutes (900000 ms)
+  refresh-token-expiration: ${JWT_REFRESH_EXPIRATION:604800000}  # 7 days (604800000 ms)
+
+# Logging configuration
+logging:
+  level:
+    com.weeklyreport: DEBUG
+    org.springframework.security: DEBUG
+    com.zaxxer.hikari: INFO  # Monitor connection pool
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Show parameter bindings
+    org.hibernate.stat: INFO  # Hibernate statistics
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/weekly-report.log
+
+# Actuator configuration for monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,hikaricp,flyway,liquibase
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when_authorized
+      show-components: always
+    metrics:
+      enabled: true
+  metrics:
+    export:
+      # Simple metrics export (can be extended with Prometheus/Grafana)
+      simple:
+        enabled: true
+    enable:
+      hikaricp: true
+      jvm: true
+      system: true
+      jdbc: true
+      hibernate: true
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+
+# CORS configuration
+cors:
+  allowed-origins: http://localhost:3000,http://localhost:3002
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+
+# AI Services configuration
+ai:
+  enabled: true
+  default-provider: mock  # Use mock by default for development
+  enable-fallback: true
+  max-retries: 3
+  timeout-ms: 30000
+  
+  # OpenAI configuration
+  openai:
+    enabled: false  # Disabled by default - requires API key
+    api-key: ${OPENAI_API_KEY:}
+    base-url: https://api.openai.com/v1
+    model: gpt-3.5-turbo
+    temperature: 0.7
+    max-tokens: 4096
+  
+  # Anthropic configuration  
+  anthropic:
+    enabled: false  # Disabled by default - requires API key
+    api-key: ${ANTHROPIC_API_KEY:}
+    base-url: https://api.anthropic.com/v1
+    model: claude-3-sonnet-20240229
+    temperature: 0.7
+    max-tokens: 4096
+  
+  # Local AI configuration
+  local:
+    enabled: false  # Disabled by default
+    endpoint: http://localhost:8000
+    model: local-model
+    temperature: 0.7
+    max-tokens: 2048
+  
+  # Mock AI configuration for testing and development
+  mock:
+    enabled: true  # Enabled by default for development
+    simulated-delay: 1000  # 1 second delay to simulate processing
+    confidence: 0.95
+
+---
+# Development profile
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 10
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      connection-timeout: 10000
+      pool-name: WeeklyReportHikariCP-Dev
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true  # Allow external connections in dev mode
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        use_sql_comments: true
+        generate_statistics: true
+
+# AI configuration for development - use mock service
+ai:
+  default-provider: mock
+  mock:
+    enabled: true
+    simulated-delay: 500  # Faster in dev
+  openai:
+    enabled: false  # Keep disabled unless testing with real API
+
+---
+# Test profile
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 5
+      idle-timeout: 60000
+      max-lifetime: 1800000
+      connection-timeout: 5000
+      pool-name: WeeklyReportHikariCP-Test
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false  # Reduce test noise
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: false
+        hbm2ddl:
+          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+        generate_statistics: false
+
+# AI configuration for testing - use mock service with no delay
+ai:
+  default-provider: mock
+  mock:
+    enabled: true
+    simulated-delay: 0  # No delay in tests
+  openai:
+    enabled: false  # Disabled in tests
+
+---
+# Docker profile
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:weekly_report}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: ${DB_USERNAME:weekly_report}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      connection-timeout: 20000
+      leak-detection-threshold: 60000
+      pool-name: WeeklyReportHikariCP-Docker
+      connection-test-query: SELECT 1
+      validation-timeout: 5000
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        jdbc:
+          batch_size: 20
+          fetch_size: 50
+          time_zone: UTC
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+        generate_statistics: false  # Disable in docker for performance
+
+---
+# Production profile
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 50  # Higher for production load
+      idle-timeout: 600000   # 10 minutes
+      max-lifetime: 1800000  # 30 minutes
+      connection-timeout: 30000  # 30 seconds
+      leak-detection-threshold: 120000  # 2 minutes
+      pool-name: WeeklyReportHikariCP-Prod
+      connection-test-query: SELECT 1
+      validation-timeout: 10000
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 500  # Larger cache for production
+        prepStmtCacheSqlLimit: 4096
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+  jpa:
+    hibernate:
+      ddl-auto: validate  # Never auto-modify production schema
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        jdbc:
+          batch_size: 50  # Larger batches in production
+          fetch_size: 100
+          time_zone: UTC
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+        generate_statistics: false
+        connection:
+          provider_disables_autocommit: true
+
+# AI configuration for production - enable real AI services
+ai:
+  default-provider: openai  # Use OpenAI in production
+  enable-fallback: true
+  max-retries: 2  # Fewer retries in production
+  openai:
+    enabled: true  # Enable OpenAI in production (requires API key)
+  mock:
+    enabled: false  # Disable mock in production
+  
+# Production-specific logging
+logging:
+  level:
+    com.weeklyreport: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type: WARN
+    com.zaxxer.hikari: WARN

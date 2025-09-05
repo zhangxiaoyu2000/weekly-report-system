@@ -1,0 +1,197 @@
+name: Performance Tests
+
+on:
+  schedule:
+    # Run performance tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to test'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - test
+          - staging
+      duration:
+        description: 'Test duration in minutes'
+        required: true
+        default: '5'
+        type: string
+
+jobs:
+  frontend-performance:
+    name: Frontend Performance Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build application
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Install Lighthouse
+        run: npm install -g lighthouse
+
+      - name: Run Lighthouse CI
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm run serve &
+          sleep 10
+          lighthouse http://localhost:4173 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless"
+
+      - name: Upload Lighthouse Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: frontend/lighthouse-report.json
+          retention-days: 30
+
+  backend-performance:
+    name: Backend Performance Tests
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: testroot
+          MYSQL_DATABASE: weekly_report_test
+          MYSQL_USER: testuser
+          MYSQL_PASSWORD: testpass
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Build and start backend
+        if: hashFiles('backend/pom.xml') != ''
+        run: |
+          cd backend
+          mvn clean package -DskipTests
+          java -jar target/*.jar --spring.profiles.active=test &
+          sleep 30
+        env:
+          MYSQL_URL: jdbc:mysql://localhost:3306/weekly_report_test
+          MYSQL_USERNAME: testuser
+          MYSQL_PASSWORD: testpass
+
+      - name: Install Apache Bench
+        run: sudo apt-get update && sudo apt-get install -y apache2-utils
+
+      - name: Run load tests
+        run: |
+          # Health check endpoint
+          ab -n 1000 -c 10 http://localhost:8080/actuator/health
+          
+          # API endpoints (when implemented)
+          # ab -n 500 -c 5 http://localhost:8080/api/reports
+          
+          echo "Load test completed"
+
+      - name: Generate performance report
+        run: |
+          echo "# Performance Test Results" > performance-report.md
+          echo "Date: $(date)" >> performance-report.md
+          echo "" >> performance-report.md
+          echo "## Load Test Summary" >> performance-report.md
+          echo "- Health endpoint: 1000 requests, 10 concurrent" >> performance-report.md
+          echo "- Average response time: TBD" >> performance-report.md
+          echo "- Requests per second: TBD" >> performance-report.md
+
+      - name: Upload Performance Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-report
+          path: performance-report.md
+          retention-days: 30
+
+  k6-load-test:
+    name: K6 Load Testing
+    runs-on: ubuntu-latest
+    if: github.event.inputs.environment != ''
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create K6 test script
+        run: |
+          mkdir -p k6-tests
+          cat > k6-tests/load-test.js << 'EOF'
+          import http from 'k6/http';
+          import { check, sleep } from 'k6';
+
+          export const options = {
+            stages: [
+              { duration: '1m', target: 10 }, // Ramp-up to 10 users over 1 minute
+              { duration: '${{ github.event.inputs.duration || "5" }}m', target: 10 }, // Stay at 10 users for test duration
+              { duration: '1m', target: 0 }, // Ramp-down to 0 users
+            ],
+          };
+
+          const BASE_URL = 'http://localhost:8080'; // Will be replaced with actual environment URL
+
+          export default function () {
+            // Test health endpoint
+            const healthResponse = http.get(`${BASE_URL}/actuator/health`);
+            check(healthResponse, {
+              'health check status is 200': (r) => r.status === 200,
+              'health check response time < 500ms': (r) => r.timings.duration < 500,
+            });
+
+            // Add more API endpoint tests here when implemented
+            
+            sleep(1);
+          }
+          EOF
+
+      - name: Run K6 Load Test
+        uses: grafana/k6-action@v0.3.1
+        with:
+          filename: k6-tests/load-test.js
+        env:
+          K6_OUT: json=k6-results.json
+
+      - name: Upload K6 Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-results
+          path: k6-results.json
+          retention-days: 30

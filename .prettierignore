@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+vendor/
+target/
+
+# Build outputs
+dist/
+build/
+*.min.js
+*.min.css
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated files
+coverage/
+*.coverage
+*.lcov
+
+# Database files
+*.db
+*.sqlite
+
+# Environment files
+.env*
+
+# Git files
+.git/
+.gitignore
+
+# Docker files
+Dockerfile*
+docker-compose*.yml
+
+# Documentation that shouldn't be formatted
+CHANGELOG.md
+LICENSE

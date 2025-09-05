@@ -1,0 +1,138 @@
+name: Dependency Updates
+
+on:
+  schedule:
+    # Run weekly on Mondays at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  update-npm-dependencies:
+    name: Update NPM Dependencies
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Update dependencies
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm update
+          npm audit fix --audit-level=moderate
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update npm dependencies"
+          title: "chore: automated npm dependency updates"
+          body: |
+            This PR contains automated updates to npm dependencies.
+            
+            - Updated to latest patch and minor versions
+            - Applied audit fixes for moderate+ vulnerabilities
+            
+            Please review the changes before merging.
+          branch: automated/npm-updates
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
+
+  update-maven-dependencies:
+    name: Update Maven Dependencies
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Update dependencies
+        if: hashFiles('backend/pom.xml') != ''
+        run: |
+          cd backend
+          mvn versions:update-properties
+          mvn versions:use-latest-versions -DallowMajorUpdates=false
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update maven dependencies"
+          title: "chore: automated maven dependency updates"
+          body: |
+            This PR contains automated updates to Maven dependencies.
+            
+            - Updated to latest patch and minor versions
+            - Major version updates are excluded for stability
+            
+            Please review the changes before merging.
+          branch: automated/maven-updates
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
+
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: hashFiles('frontend/package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: NPM Security Audit
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm install
+          npm audit --audit-level=moderate
+
+      - name: Setup Java
+        if: hashFiles('backend/pom.xml') != ''
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: OWASP Dependency Check
+        if: hashFiles('backend/pom.xml') != ''
+        run: |
+          cd backend
+          mvn org.owasp:dependency-check-maven:check
+
+      - name: Upload Security Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-reports
+          path: |
+            backend/target/dependency-check-report.html
+            frontend/npm-audit.json
+          retention-days: 30
