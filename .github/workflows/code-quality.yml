@@ -1,0 +1,197 @@
+name: Code Quality
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  lint-and-format:
+    name: Lint and Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        if: hashFiles('frontend/package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Run ESLint with annotations
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npx eslint . --format=@microsoft/eslint-formatter-sarif --output-file=eslint-results.sarif
+        continue-on-error: true
+
+      - name: Upload ESLint results to GitHub
+        if: hashFiles('frontend/package.json') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: frontend/eslint-results.sarif
+          wait-for-processing: true
+
+      - name: Run Prettier check
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npx prettier --check .
+
+      - name: Setup Java
+        if: hashFiles('backend/pom.xml') != ''
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven dependencies
+        if: hashFiles('backend/pom.xml') != ''
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run backend linting
+        if: hashFiles('backend/pom.xml') != ''
+        run: |
+          cd backend
+          mvn spotless:check checkstyle:check
+
+  dependency-check:
+    name: Dependency Security Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: hashFiles('frontend/package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Audit npm dependencies
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm audit --audit-level=high
+
+      - name: Setup Java
+        if: hashFiles('backend/pom.xml') != ''
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Run OWASP Dependency Check
+        if: hashFiles('backend/pom.xml') != ''
+        run: |
+          cd backend
+          mvn org.owasp:dependency-check-maven:check
+
+  test-coverage:
+    name: Test Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: hashFiles('frontend/package.json') != ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Run frontend tests with coverage
+        if: hashFiles('frontend/package.json') != ''
+        run: |
+          cd frontend
+          npm run test:coverage
+
+      - name: Upload frontend coverage to Codecov
+        if: hashFiles('frontend/package.json') != ''
+        uses: codecov/codecov-action@v4
+        with:
+          directory: ./frontend
+          flags: frontend
+          name: frontend-coverage
+
+      - name: Setup Java
+        if: hashFiles('backend/pom.xml') != ''
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven dependencies
+        if: hashFiles('backend/pom.xml') != ''
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run backend tests with coverage
+        if: hashFiles('backend/pom.xml') != ''
+        run: |
+          cd backend
+          mvn clean test jacoco:report
+
+      - name: Upload backend coverage to Codecov
+        if: hashFiles('backend/pom.xml') != ''
+        uses: codecov/codecov-action@v4
+        with:
+          directory: ./backend
+          flags: backend
+          name: backend-coverage
+
+  pr-size-check:
+    name: PR Size Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR size
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            
+            const additions = pr.additions;
+            const deletions = pr.deletions;
+            const changes = additions + deletions;
+            
+            const maxChanges = 800;
+            
+            if (changes > maxChanges) {
+              core.setFailed(`PR is too large (${changes} changes). Consider splitting it into smaller PRs. Max recommended: ${maxChanges} changes.`);
+            } else if (changes > maxChanges * 0.8) {
+              core.warning(`PR is quite large (${changes} changes). Consider splitting it into smaller PRs.`);
+            } else {
+              core.info(`PR size is acceptable (${changes} changes).`);
+            }

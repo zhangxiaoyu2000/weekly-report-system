@@ -1,0 +1,4 @@
+com/weeklyreport/dto/ApiResponse.class
+com/weeklyreport/controller/BaseController.class
+com/weeklyreport/controller/HealthController.class
+com/weeklyreport/WeeklyReportApplication.class

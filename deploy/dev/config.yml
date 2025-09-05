@@ -1,0 +1,90 @@
+# Development Environment Configuration
+
+environment: development
+
+# Database Configuration
+database:
+  host: localhost
+  port: 3306
+  name: weekly_report_dev
+  username: ${DB_USERNAME:-dev_user}
+  password: ${DB_PASSWORD:-dev_password}
+  max_connections: 10
+  connection_timeout: 30s
+
+# Redis Configuration (for caching and sessions)
+redis:
+  host: localhost
+  port: 6379
+  database: 0
+  password: ${REDIS_PASSWORD:-}
+  timeout: 5s
+
+# Application Configuration
+app:
+  name: "Weekly Report System"
+  version: "1.0.0-dev"
+  port: 8080
+  debug: true
+  log_level: DEBUG
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://localhost:5173"
+  jwt_secret: ${JWT_SECRET:-dev-secret-key-change-in-production}
+  jwt_expiration: 86400 # 24 hours in seconds
+
+# Frontend Configuration
+frontend:
+  url: "http://localhost:5173"
+  api_base_url: "http://localhost:8080/api"
+
+# Email Configuration (for development, use mailtrap or similar)
+email:
+  smtp_host: ${SMTP_HOST:-smtp.mailtrap.io}
+  smtp_port: ${SMTP_PORT:-2525}
+  smtp_user: ${SMTP_USER:-}
+  smtp_password: ${SMTP_PASSWORD:-}
+  from_email: "noreply@weekly-report-dev.local"
+  from_name: "Weekly Report System (Dev)"
+
+# File Storage Configuration
+storage:
+  type: "local" # local, s3, or gcs
+  local_path: "./uploads"
+  max_file_size: 10MB
+  allowed_extensions:
+    - "pdf"
+    - "doc"
+    - "docx"
+    - "xls"
+    - "xlsx"
+    - "png"
+    - "jpg"
+    - "jpeg"
+
+# Monitoring Configuration
+monitoring:
+  enabled: false
+  metrics_port: 9090
+
+# External API Configuration
+external_apis:
+  enable_mock: true # Use mock data for development
+  timeout: 30s
+
+# Security Configuration
+security:
+  password_min_length: 8
+  password_require_special: true
+  password_require_numbers: true
+  max_login_attempts: 5
+  lockout_duration: 15m
+  session_timeout: 30m
+
+# Feature Flags
+features:
+  enable_registration: true
+  enable_password_reset: true
+  enable_email_notifications: false # Disabled in dev to avoid spam
+  enable_audit_logging: true
+  enable_data_export: true
