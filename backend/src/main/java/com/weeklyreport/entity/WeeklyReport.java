@@ -121,6 +121,11 @@ public class WeeklyReport {
     @OrderBy("createdAt ASC")
     private Set<Comment> comments = new HashSet<>();
 
+    // One-to-Many relationship with AIAnalysisResult
+    @OneToMany(mappedBy = "weeklyReport", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OrderBy("createdAt DESC")
+    private Set<AIAnalysisResult> analysisResults = new HashSet<>();
+
     // Report status enum
     public enum ReportStatus {
         DRAFT,          // 草稿状态
@@ -338,6 +343,14 @@ public class WeeklyReport {
         this.comments = comments;
     }
 
+    public Set<AIAnalysisResult> getAnalysisResults() {
+        return analysisResults;
+    }
+
+    public void setAnalysisResults(Set<AIAnalysisResult> analysisResults) {
+        this.analysisResults = analysisResults;
+    }
+
     // Utility methods for managing relationships
     public void addComment(Comment comment) {
         comments.add(comment);
@@ -347,6 +360,16 @@ public class WeeklyReport {
     public void removeComment(Comment comment) {
         comments.remove(comment);
         comment.setWeeklyReport(null);
+    }
+
+    public void addAnalysisResult(AIAnalysisResult analysisResult) {
+        analysisResults.add(analysisResult);
+        analysisResult.setWeeklyReport(this);
+    }
+
+    public void removeAnalysisResult(AIAnalysisResult analysisResult) {
+        analysisResults.remove(analysisResult);
+        analysisResult.setWeeklyReport(null);
     }
 
     // Business logic methods
