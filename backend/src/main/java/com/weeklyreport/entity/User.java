@@ -94,6 +94,14 @@ public class User {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Comment> comments = new HashSet<>();
 
+    // One-to-Many relationship with Project (as owner)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Project> ownedProjects = new HashSet<>();
+
+    // One-to-Many relationship with ProjectMember (as member)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ProjectMember> projectMemberships = new HashSet<>();
+
     // User roles enum
     public enum Role {
         ADMIN,          // 系统管理员
@@ -258,6 +266,22 @@ public class User {
         this.comments = comments;
     }
 
+    public Set<Project> getOwnedProjects() {
+        return ownedProjects;
+    }
+
+    public void setOwnedProjects(Set<Project> ownedProjects) {
+        this.ownedProjects = ownedProjects;
+    }
+
+    public Set<ProjectMember> getProjectMemberships() {
+        return projectMemberships;
+    }
+
+    public void setProjectMemberships(Set<ProjectMember> projectMemberships) {
+        this.projectMemberships = projectMemberships;
+    }
+
     // Utility methods for managing relationships
     public void addWeeklyReport(WeeklyReport report) {
         weeklyReports.add(report);
@@ -277,6 +301,26 @@ public class User {
     public void removeComment(Comment comment) {
         comments.remove(comment);
         comment.setAuthor(null);
+    }
+
+    public void addOwnedProject(Project project) {
+        ownedProjects.add(project);
+        project.setOwner(this);
+    }
+
+    public void removeOwnedProject(Project project) {
+        ownedProjects.remove(project);
+        project.setOwner(null);
+    }
+
+    public void addProjectMembership(ProjectMember membership) {
+        projectMemberships.add(membership);
+        membership.setUser(this);
+    }
+
+    public void removeProjectMembership(ProjectMember membership) {
+        projectMemberships.remove(membership);
+        membership.setUser(null);
     }
 
     @Override

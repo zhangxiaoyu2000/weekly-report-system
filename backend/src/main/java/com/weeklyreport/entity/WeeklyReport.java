@@ -116,6 +116,11 @@ public class WeeklyReport {
     @JoinColumn(name = "reviewer_id")
     private User reviewer;
 
+    // Many-to-One relationship with Project
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
+
     // One-to-Many relationship with Comment
     @OneToMany(mappedBy = "weeklyReport", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @OrderBy("createdAt ASC")
@@ -333,6 +338,14 @@ public class WeeklyReport {
 
     public void setReviewer(User reviewer) {
         this.reviewer = reviewer;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Set<Comment> getComments() {
