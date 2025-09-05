@@ -116,8 +116,9 @@ spring:
 
 # JWT configuration
 jwt:
-  secret: ${JWT_SECRET:mySecretKey}
-  expiration: 86400000 # 24 hours
+  secret: ${JWT_SECRET:MyVerySecureWeeklyReportJwtSigningKey2024!@#}
+  access-token-expiration: ${JWT_ACCESS_EXPIRATION:900000}   # 15 minutes (900000 ms)
+  refresh-token-expiration: ${JWT_REFRESH_EXPIRATION:604800000}  # 7 days (604800000 ms)
 
 # Logging configuration
 logging:
@@ -166,7 +167,7 @@ management:
 
 # CORS configuration
 cors:
-  allowed-origins: http://localhost:3000,http://localhost:8081
+  allowed-origins: http://localhost:3000,http://localhost:3002
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
   allowed-headers: "*"
   allow-credentials: true
