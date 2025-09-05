@@ -1,7 +1,7 @@
 ---
 name: weekly-report-system
 description: 项目管理和周报提交审批系统，支持项目创建、AI分析、审批流程和周报生成
-status: backlog
+status: completed
 created: 2025-09-04T09:13:29Z
 ---
 
