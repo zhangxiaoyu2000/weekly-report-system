@@ -1,5 +1,6 @@
 package com.weeklyreport.dto.auth;
 
+import com.weeklyreport.validation.PasswordMatching;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.Size;
 /**
  * Change password request DTO
  */
+@PasswordMatching(passwordField = "newPassword", confirmPasswordField = "confirmNewPassword")
 public class ChangePasswordRequest {
 
     @NotBlank(message = "Current password is required")

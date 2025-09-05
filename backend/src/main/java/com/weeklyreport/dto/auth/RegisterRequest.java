@@ -1,10 +1,12 @@
 package com.weeklyreport.dto.auth;
 
+import com.weeklyreport.validation.PasswordMatching;
 import jakarta.validation.constraints.*;
 
 /**
  * Registration request DTO
  */
+@PasswordMatching(passwordField = "password", confirmPasswordField = "confirmPassword")
 public class RegisterRequest {
 
     @NotBlank(message = "Username is required")
