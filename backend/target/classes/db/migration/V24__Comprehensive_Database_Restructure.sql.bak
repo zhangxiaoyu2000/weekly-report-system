@@ -1,0 +1,176 @@
+-- V24__Comprehensive_Database_Restructure.sql
+-- 根据error3.md要求进行完整的数据库重构
+
+-- ========================================
+-- 第一步：备份重要数据
+-- ========================================
+
+-- 创建临时表备份simple_projects数据
+CREATE TEMPORARY TABLE temp_projects_backup AS 
+SELECT * FROM simple_projects;
+
+-- 创建临时表备份任务数据
+CREATE TEMPORARY TABLE temp_tasks_backup AS 
+SELECT * FROM tasks;
+
+-- 创建临时表备份周报数据
+CREATE TEMPORARY TABLE temp_weekly_reports_backup AS 
+SELECT * FROM weekly_reports;
+
+-- ========================================
+-- 第二步：删除不需要的表
+-- ========================================
+
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS departments;
+DROP TABLE IF EXISTS simple_weekly_reports;
+DROP TABLE IF EXISTS task_templates;
+DROP TABLE IF EXISTS templates;
+
+-- 删除视图
+DROP VIEW IF EXISTS v_active_users;
+DROP VIEW IF EXISTS v_department_hierarchy;
+DROP VIEW IF EXISTS v_latest_reports;
+
+-- ========================================
+-- 第三步：重命名simple_projects为projects
+-- ========================================
+
+-- 如果projects表已存在，先删除
+DROP TABLE IF EXISTS projects;
+
+-- 重命名simple_projects为projects
+RENAME TABLE simple_projects TO projects;
+
+-- ========================================
+-- 第四步：修改projects表结构
+-- ========================================
+
+-- 添加AI分析和审批相关字段
+ALTER TABLE projects 
+ADD COLUMN ai_analysis_id BIGINT NULL COMMENT 'AI分析结果ID',
+ADD COLUMN admin_reviewer_id BIGINT NULL COMMENT '管理员审批人ID',
+ADD COLUMN super_admin_reviewer_id BIGINT NULL COMMENT '超级管理员审批人ID', 
+ADD COLUMN rejection_reason TEXT NULL COMMENT '拒绝理由',
+ADD COLUMN approval_status ENUM('DRAFT', 'AI_ANALYZING', 'AI_APPROVED', 'AI_REJECTED', 'ADMIN_REVIEWING', 'ADMIN_APPROVED', 'ADMIN_REJECTED', 'SUPER_ADMIN_REVIEWING', 'SUPER_ADMIN_APPROVED', 'SUPER_ADMIN_REJECTED', 'FINAL_APPROVED') DEFAULT 'DRAFT' COMMENT '审批状态';
+
+-- 添加外键约束
+ALTER TABLE projects 
+ADD CONSTRAINT fk_projects_ai_analysis 
+FOREIGN KEY (ai_analysis_id) REFERENCES ai_analysis_results(id) ON DELETE SET NULL;
+
+ALTER TABLE projects 
+ADD CONSTRAINT fk_projects_admin_reviewer 
+FOREIGN KEY (admin_reviewer_id) REFERENCES users(id) ON DELETE SET NULL;
+
+ALTER TABLE projects 
+ADD CONSTRAINT fk_projects_super_admin_reviewer 
+FOREIGN KEY (super_admin_reviewer_id) REFERENCES users(id) ON DELETE SET NULL;
+
+-- ========================================
+-- 第五步：修改tasks表结构
+-- ========================================
+
+-- 添加项目关联字段
+ALTER TABLE tasks 
+ADD COLUMN project_id BIGINT NULL COMMENT '关联项目ID（发展性任务使用）';
+
+-- 添加外键约束
+ALTER TABLE tasks 
+ADD CONSTRAINT fk_tasks_project 
+FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+-- 修改任务类型枚举以支持日常性和发展性任务
+ALTER TABLE tasks 
+MODIFY COLUMN task_type ENUM('DAILY', 'WEEKLY', 'MONTHLY', 'DEVELOPMENT') NOT NULL COMMENT '任务类型：DAILY=每日，WEEKLY=每周，MONTHLY=每月，DEVELOPMENT=发展性';
+
+-- ========================================
+-- 第六步：修改weekly_reports表结构
+-- ========================================
+
+-- 删除旧的不需要的字段
+ALTER TABLE weekly_reports 
+DROP COLUMN IF EXISTS work_summary,
+DROP COLUMN IF EXISTS achievements,
+DROP COLUMN IF EXISTS challenges,
+DROP COLUMN IF EXISTS next_week_plan,
+DROP COLUMN IF EXISTS priority,
+DROP COLUMN IF EXISTS project_id,
+DROP COLUMN IF EXISTS template_id;
+
+-- 修改content字段为JSON类型存储结构化数据
+ALTER TABLE weekly_reports 
+MODIFY COLUMN content JSON NOT NULL COMMENT '周报内容（JSON格式存储任务引用）';
+
+-- 添加下周规划字段
+ALTER TABLE weekly_reports 
+ADD COLUMN next_week_plan JSON NULL COMMENT '下周规划（JSON格式存储任务引用）';
+
+-- 添加AI分析和审批相关字段
+ALTER TABLE weekly_reports 
+ADD COLUMN ai_analysis_id BIGINT NULL COMMENT 'AI分析结果ID',
+ADD COLUMN admin_reviewer_id BIGINT NULL COMMENT '管理员审批人ID',
+ADD COLUMN rejection_reason TEXT NULL COMMENT '拒绝理由',
+ADD COLUMN approval_status ENUM('DRAFT', 'AI_ANALYZING', 'AI_APPROVED', 'AI_REJECTED', 'ADMIN_REVIEWING', 'ADMIN_APPROVED', 'ADMIN_REJECTED', 'SUPER_ADMIN_REVIEWING', 'SUPER_ADMIN_APPROVED', 'SUPER_ADMIN_REJECTED', 'FINAL_APPROVED') DEFAULT 'DRAFT' COMMENT '审批状态';
+
+-- 修改reportWeek字段为TEXT类型存储中文格式
+ALTER TABLE weekly_reports 
+MODIFY COLUMN report_week VARCHAR(50) NOT NULL COMMENT '报告周期（中文格式：几月第几周（周几））';
+
+-- 添加外键约束
+ALTER TABLE weekly_reports 
+ADD CONSTRAINT fk_weekly_reports_ai_analysis 
+FOREIGN KEY (ai_analysis_id) REFERENCES ai_analysis_results(id) ON DELETE SET NULL;
+
+ALTER TABLE weekly_reports 
+ADD CONSTRAINT fk_weekly_reports_admin_reviewer 
+FOREIGN KEY (admin_reviewer_id) REFERENCES users(id) ON DELETE SET NULL;
+
+-- ========================================
+-- 第七步：数据清理和初始化
+-- ========================================
+
+-- 清空weekly_reports表的旧数据（因为数据结构已完全改变）
+TRUNCATE TABLE weekly_reports;
+
+-- 为tasks表添加示例数据结构说明
+INSERT INTO tasks (task_name, task_description, task_type, assigned_to_id, created_by_id, status, priority, created_at, updated_at) 
+VALUES 
+('系统维护', '日常系统维护和监控', 'DAILY', 1, 1, 'ACTIVE', 'NORMAL', NOW(), NOW()),
+('周会准备', '准备每周团队会议资料', 'WEEKLY', 1, 1, 'ACTIVE', 'NORMAL', NOW(), NOW()),
+('月度报告', '编写月度工作总结报告', 'MONTHLY', 1, 1, 'ACTIVE', 'NORMAL', NOW(), NOW())
+ON DUPLICATE KEY UPDATE task_name = task_name;
+
+-- ========================================
+-- 第八步：创建索引优化性能
+-- ========================================
+
+-- 为projects表添加索引
+CREATE INDEX idx_projects_approval_status ON projects(approval_status);
+CREATE INDEX idx_projects_ai_analysis_id ON projects(ai_analysis_id);
+CREATE INDEX idx_projects_admin_reviewer_id ON projects(admin_reviewer_id);
+
+-- 为tasks表添加索引
+CREATE INDEX idx_tasks_project_id ON tasks(project_id);
+CREATE INDEX idx_tasks_type_status ON tasks(task_type, status);
+CREATE INDEX idx_tasks_assigned_to ON tasks(assigned_to_id);
+
+-- 为weekly_reports表添加索引
+CREATE INDEX idx_weekly_reports_approval_status ON weekly_reports(approval_status);
+CREATE INDEX idx_weekly_reports_ai_analysis_id ON weekly_reports(ai_analysis_id);
+CREATE INDEX idx_weekly_reports_admin_reviewer_id ON weekly_reports(admin_reviewer_id);
+CREATE INDEX idx_weekly_reports_user_week ON weekly_reports(user_id, report_week);
+
+-- ========================================
+-- 第九步：更新数据结构说明
+-- ========================================
+
+-- 添加表注释
+ALTER TABLE projects COMMENT = '项目表：存储项目基础信息和审批流程数据';
+ALTER TABLE tasks COMMENT = '任务表：存储日常性任务和发展性任务，通过task_type和project_id区分';
+ALTER TABLE weekly_reports COMMENT = '周报表：存储结构化周报数据，使用JSON格式存储任务引用';
+ALTER TABLE project_phases COMMENT = '项目阶段表：存储项目的各个阶段信息';
+ALTER TABLE ai_analysis_results COMMENT = 'AI分析结果表：存储AI对项目和周报的分析结果';
+ALTER TABLE users COMMENT = '用户表：存储系统用户信息';
+
+COMMIT;

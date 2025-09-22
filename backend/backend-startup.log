@@ -1,0 +1,210 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ weekly-report-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 29 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ weekly-report-backend ---
+[INFO] skip non existing resourceDirectory /Volumes/project/my-project/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ weekly-report-backend ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ weekly-report-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ weekly-report-backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m              [2m (v3.2.0)[0;39m
+
+2025-09-19 23:51:29 - Starting WeeklyReportApplication using Java 23.0.2 with PID 26622 (/Volumes/project/my-project/backend/target/classes started by zhangxiaoyu in /Volumes/project/my-project/backend)
+2025-09-19 23:51:29 - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-09-19 23:51:29 - The following 1 profile is active: "dev"
+2025-09-19 23:51:29 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-19 23:51:29 - Finished Spring Data repository scanning in 41 ms. Found 14 JPA repository interfaces.
+2025-09-19 23:51:30 - Tomcat initialized with port 8081 (http)
+2025-09-19 23:51:30 - Starting service [Tomcat]
+2025-09-19 23:51:30 - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-09-19 23:51:30 - Initializing Spring embedded WebApplicationContext
+2025-09-19 23:51:30 - Root WebApplicationContext: initialization completed in 1055 ms
+2025-09-19 23:51:30 - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-19 23:51:30 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-19 23:51:30 - HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-09-19 23:51:30 - HHH000026: Second-level cache disabled
+2025-09-19 23:51:30 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-19 23:51:30 - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-19 23:51:30 - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-19 23:51:31 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-19 23:51:31 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19 23:51:31 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-19 23:51:32 - AI Monitoring Service initialized
+2025-09-19 23:51:32 - Initializing AI service providers...
+2025-09-19 23:51:32 - Calling DeepSeek API with URL: https://api.deepseek.com/chat/completions
+2025-09-19 23:51:32 - Request payload: {"model":"deepseek-chat","messages":[{"role":"user","content":"hello"}],"temperature":0.1,"stream":false,"max_tokens":10}
+2025-09-19 23:51:37 - DeepSeek API response status: 200 OK
+2025-09-19 23:51:37 - DeepSeek API response body: {"id":"3528e79e-ac29-48b1-b03c-934c840c32b0","object":"chat.completion","created":1758297094,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"Hello! How can I help you today?"},"logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"completion_tokens":9,"total_tokens":14,"prompt_tokens_details":{"cached_tokens":0},"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":5},"system_fingerprint":"fp_08f168e49b_prod0820_fp8_kvcache"}
+2025-09-19 23:51:37 - Registered AI provider: DeepSeek AI Service - Status: Configured and healthy
+2025-09-19 23:51:37 - Registered AI provider: Mock AI Service for Testing - Status: CONFIGURED
+2025-09-19 23:51:37 - Initialized 2 AI service providers
+2025-09-19 23:51:38 - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-09-19 23:51:38 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2941fab3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5f1ced43, org.springframework.security.web.context.SecurityContextHolderFilter@139ad296, org.springframework.security.web.header.HeaderWriterFilter@7e8f62a0, org.springframework.web.filter.CorsFilter@62a877f4, org.springframework.security.web.authentication.logout.LogoutFilter@1c6ebece, com.weeklyreport.security.JwtAuthenticationFilter@278de2b2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@75447fbd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@559e3508, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1ea12b21, org.springframework.security.web.session.SessionManagementFilter@f92b89, org.springframework.security.web.access.ExceptionTranslationFilter@401b146b, org.springframework.security.web.access.intercept.AuthorizationFilter@3d959df4]
+2025-09-19 23:51:39 - Tomcat started on port 8081 (http) with context path '/api'
+2025-09-19 23:51:39 - Started WeeklyReportApplication in 10.541 seconds (process running for 10.707)
+2025-09-19 23:51:39 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-19 23:51:39 - WeeklyReportHikariCP-Dev - Starting...
+2025-09-19 23:51:39 - WeeklyReportHikariCP-Dev - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c3a9a36
+2025-09-19 23:51:39 - WeeklyReportHikariCP-Dev - Start completed.
+2025-09-19 23:51:39 - SQL Error: 1054, SQLState: 42S22
+2025-09-19 23:51:39 - Unknown column 'u1_0.created_at' in 'field list'
+2025-09-19 23:51:39 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-09-19 23:51:39 - Application run failed
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:789)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:770)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:571)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:765)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
+	at com.weeklyreport.WeeklyReportApplication.main(WeeklyReportApplication.java:13)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: JDBC exception executing SQL [/* <criteria> */ select u1_0.id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.role,u1_0.status,u1_0.updated_at,u1_0.username from users u1_0 where u1_0.username=?] [Unknown column 'u1_0.created_at' in 'field list'] [n/a]; SQL [n/a]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:277)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:152)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:249)
+	at jdk.proxy2/jdk.proxy2.$Proxy175.findByUsername(Unknown Source)
+	at com.weeklyreport.config.DataInitializer.createSuperAdmin(DataInitializer.java:43)
+	at com.weeklyreport.config.DataInitializer.createSuperAdminUser(DataInitializer.java:37)
+	at com.weeklyreport.config.DataInitializer.run(DataInitializer.java:30)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:786)
+	... 14 common frames omitted
+Caused by: org.hibernate.exception.SQLGrammarException: JDBC exception executing SQL [/* <criteria> */ select u1_0.id,u1_0.created_at,u1_0.email,u1_0.password,u1_0.role,u1_0.status,u1_0.updated_at,u1_0.username from users u1_0 where u1_0.username=?] [Unknown column 'u1_0.created_at' in 'field list'] [n/a]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:66)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:94)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:258)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.getResultSet(DeferredResultSetAccess.java:164)
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.advanceNext(JdbcValuesResultSetImpl.java:218)
+	at org.hibernate.sql.results.jdbc.internal.JdbcValuesResultSetImpl.processNext(JdbcValuesResultSetImpl.java:98)
+	at org.hibernate.sql.results.jdbc.internal.AbstractJdbcValues.next(AbstractJdbcValues.java:19)
+	at org.hibernate.sql.results.internal.RowProcessingStateStandardImpl.next(RowProcessingStateStandardImpl.java:66)
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:200)
+	at org.hibernate.sql.results.spi.ListResultsConsumer.consume(ListResultsConsumer.java:33)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.doExecuteQuery(JdbcSelectExecutorStandardImpl.java:361)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.executeQuery(JdbcSelectExecutorStandardImpl.java:168)
+	at org.hibernate.sql.exec.internal.JdbcSelectExecutorStandardImpl.list(JdbcSelectExecutorStandardImpl.java:93)
+	at org.hibernate.sql.exec.spi.JdbcSelectExecutor.list(JdbcSelectExecutor.java:31)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.lambda$new$0(ConcreteSqmSelectQueryPlan.java:109)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.withCacheableSqmInterpretation(ConcreteSqmSelectQueryPlan.java:305)
+	at org.hibernate.query.sqm.internal.ConcreteSqmSelectQueryPlan.performList(ConcreteSqmSelectQueryPlan.java:246)
+	at org.hibernate.query.sqm.internal.QuerySqmImpl.doList(QuerySqmImpl.java:509)
+	at org.hibernate.query.spi.AbstractSelectionQuery.list(AbstractSelectionQuery.java:427)
+	at org.hibernate.query.spi.AbstractSelectionQuery.getSingleResult(AbstractSelectionQuery.java:559)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$DeferredQueryInvocationHandler.invoke(SharedEntityManagerCreator.java:405)
+	at jdk.proxy2/jdk.proxy2.$Proxy217.getSingleResult(Unknown Source)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:223)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:92)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:149)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:137)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:164)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	... 25 common frames omitted
+Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'u1_0.created_at' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java)
+	at org.hibernate.sql.results.jdbc.internal.DeferredResultSetAccess.executeQuery(DeferredResultSetAccess.java:240)
+	... 62 common frames omitted
+2025-09-19 23:51:50 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19 23:51:50 - WeeklyReportHikariCP-Dev - Shutdown initiated...
+2025-09-19 23:51:50 - WeeklyReportHikariCP-Dev - Shutdown completed.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  23.047 s
+[INFO] Finished at: 2025-09-19T23:51:50+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project weekly-report-backend: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

@@ -1,0 +1,163 @@
+package com.weeklyreport.repository;
+
+import com.weeklyreport.entity.Task;
+import com.weeklyreport.entity.WeeklyReport;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+/**
+ * Repository interface for Task entity operations
+ */
+@Repository
+public interface TaskRepository extends JpaRepository<Task, Long> {
+
+    /**
+     * Find all tasks by weekly report
+     */
+    List<Task> findByWeeklyReportOrderByReportSectionAscTaskTypeAscCreatedAtAsc(WeeklyReport weeklyReport);
+
+    /**
+     * Find all tasks by weekly report with associations loaded
+     */
+    @Query("SELECT t FROM Task t " +
+           "LEFT JOIN FETCH t.simpleProject " +
+           "LEFT JOIN FETCH t.projectPhase " +
+           "WHERE t.weeklyReport = :weeklyReport " +
+           "ORDER BY t.reportSection ASC, t.taskType ASC, t.createdAt ASC")
+    List<Task> findByWeeklyReportWithAssociationsOrderByReportSectionAscTaskTypeAscCreatedAtAsc(@Param("weeklyReport") WeeklyReport weeklyReport);
+
+    /**
+     * Find tasks by weekly report and task type with associations
+     */
+    @Query("SELECT t FROM Task t " +
+           "LEFT JOIN FETCH t.simpleProject " +
+           "LEFT JOIN FETCH t.projectPhase " +
+           "WHERE t.weeklyReport = :weeklyReport AND t.taskType = :taskType " +
+           "ORDER BY t.reportSection ASC, t.createdAt ASC")
+    List<Task> findByWeeklyReportAndTaskTypeOrderByReportSectionAscCreatedAtAsc(
+            @Param("weeklyReport") WeeklyReport weeklyReport, @Param("taskType") Task.TaskType taskType);
+
+    /**
+     * Find tasks by weekly report and report section with associations
+     */
+    @Query("SELECT t FROM Task t " +
+           "LEFT JOIN FETCH t.simpleProject " +
+           "LEFT JOIN FETCH t.projectPhase " +
+           "WHERE t.weeklyReport = :weeklyReport AND t.reportSection = :reportSection " +
+           "ORDER BY t.taskType ASC, t.createdAt ASC")
+    List<Task> findByWeeklyReportAndReportSectionOrderByTaskTypeAscCreatedAtAsc(
+            @Param("weeklyReport") WeeklyReport weeklyReport, @Param("reportSection") Task.ReportSection reportSection);
+
+    /**
+     * Find tasks by weekly report, task type and report section with associations
+     */
+    @Query("SELECT t FROM Task t " +
+           "LEFT JOIN FETCH t.simpleProject " +
+           "LEFT JOIN FETCH t.projectPhase " +
+           "WHERE t.weeklyReport = :weeklyReport AND t.taskType = :taskType AND t.reportSection = :reportSection " +
+           "ORDER BY t.createdAt ASC")
+    List<Task> findByWeeklyReportAndTaskTypeAndReportSectionOrderByCreatedAtAsc(
+            @Param("weeklyReport") WeeklyReport weeklyReport, @Param("taskType") Task.TaskType taskType, @Param("reportSection") Task.ReportSection reportSection);
+
+    /**
+     * Find overdue tasks
+     */
+    @Query("SELECT t FROM Task t WHERE t.isOverdue = true AND t.isCompleted = false")
+    List<Task> findOverdueTasks();
+
+    /**
+     * Find completed tasks by date range
+     */
+    @Query("SELECT t FROM Task t WHERE t.isCompleted = true AND t.completionDate BETWEEN :startDate AND :endDate")
+    List<Task> findCompletedTasksByDateRange(@Param("startDate") LocalDate startDate, 
+                                           @Param("endDate") LocalDate endDate);
+
+    /**
+     * Find tasks by user (via weekly report author)
+     */
+    @Query("SELECT t FROM Task t WHERE t.weeklyReport.author.id = :userId ORDER BY t.createdAt DESC")
+    Page<Task> findTasksByUserId(@Param("userId") Long userId, Pageable pageable);
+
+    /**
+     * Find tasks by user and completion status
+     */
+    @Query("SELECT t FROM Task t WHERE t.weeklyReport.author.id = :userId AND t.isCompleted = :isCompleted ORDER BY t.createdAt DESC")
+    List<Task> findTasksByUserIdAndCompletionStatus(@Param("userId") Long userId, 
+                                                    @Param("isCompleted") Boolean isCompleted);
+
+    /**
+     * Count tasks by task type for a specific weekly report
+     */
+    @Query("SELECT t.taskType, COUNT(t) FROM Task t WHERE t.weeklyReport.id = :reportId GROUP BY t.taskType")
+    List<Object[]> countTasksByTypeForReport(@Param("reportId") Long reportId);
+
+    /**
+     * Count tasks by report section for a specific weekly report
+     */
+    @Query("SELECT t.reportSection, COUNT(t) FROM Task t WHERE t.weeklyReport.id = :reportId GROUP BY t.reportSection")
+    List<Object[]> countTasksBySectionForReport(@Param("reportId") Long reportId);
+
+    /**
+     * Get task statistics for a user
+     */
+    @Query("SELECT " +
+           "COUNT(CASE WHEN t.isCompleted = true THEN 1 END) as completedCount, " +
+           "COUNT(CASE WHEN t.isCompleted = false THEN 1 END) as pendingCount, " +
+           "COUNT(CASE WHEN t.isOverdue = true AND t.isCompleted = false THEN 1 END) as overdueCount " +
+           "FROM Task t WHERE t.weeklyReport.author.id = :userId")
+    Object[] getTaskStatisticsByUserId(@Param("userId") Long userId);
+
+    /**
+     * Find tasks due within next N days
+     */
+    @Query("SELECT t FROM Task t WHERE t.dueDate <= :dueDate AND t.isCompleted = false ORDER BY t.dueDate ASC")
+    List<Task> findTasksDueSoon(@Param("dueDate") LocalDate dueDate);
+
+    /**
+     * Get average completion percentage for tasks in a weekly report
+     */
+    @Query("SELECT AVG(t.progress) FROM Task t WHERE t.weeklyReport.id = :reportId")
+    Double getAverageProgressForReport(@Param("reportId") Long reportId);
+
+    /**
+     * Find tasks by personnel assignment (partial match)
+     */
+    @Query("SELECT t FROM Task t WHERE t.personnelAssignment LIKE %:personnel% ORDER BY t.createdAt DESC")
+    List<Task> findTasksByPersonnelAssignment(@Param("personnel") String personnel);
+
+    /**
+     * Update overdue status for all tasks
+     */
+    @Query("UPDATE Task t SET t.isOverdue = true WHERE t.dueDate < CURRENT_DATE AND t.isCompleted = false")
+    int updateOverdueTasks();
+
+    /**
+     * Delete tasks by weekly report
+     */
+    void deleteByWeeklyReport(WeeklyReport weeklyReport);
+
+    /**
+     * Check if task exists by name and weekly report
+     */
+    boolean existsByTaskNameAndWeeklyReport(String taskName, WeeklyReport weeklyReport);
+
+    /**
+     * Find routine tasks for selection in weekly reports
+     * These are routine task templates not associated with specific weekly reports
+     */
+    @Query("SELECT DISTINCT t FROM Task t WHERE t.taskType = 'ROUTINE' AND t.weeklyReport IS NULL ORDER BY t.taskName ASC")
+    List<Task> findSelectableRoutineTasks();
+
+    /**
+     * Check if routine task template exists by name
+     */
+    @Query("SELECT COUNT(t) > 0 FROM Task t WHERE t.taskName = :taskName AND t.taskType = 'ROUTINE' AND t.weeklyReport IS NULL")
+    boolean existsRoutineTaskTemplateByName(@Param("taskName") String taskName);
+}

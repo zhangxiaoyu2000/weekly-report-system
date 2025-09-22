@@ -1,23 +1,23 @@
 package com.weeklyreport.dto.ai;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import java.util.List;
+import com.weeklyreport.entity.AIAnalysisResult;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 /**
- * Request DTO for AI analysis operations
+ * Request DTO for AI analysis operations - 严格按照AIAnalysisResult.java设计
  */
 public class AIAnalysisRequest {
 
     @NotNull(message = "Report ID is required")
     @Positive(message = "Report ID must be positive")
-    private Long reportId;
+    private Long reportId;                              // 对应weekly_reports表ID
 
-    private List<String> analysisTypes; // e.g., ["summary", "sentiment", "keywords", "risks"]
+    private AIAnalysisResult.AnalysisType analysisType; // 分析类型
     
-    private String analysisLanguage = "zh-CN"; // Default to Chinese
+    private String analysisLanguage = "zh-CN";          // 分析语言
     
-    private Boolean includeDetails = false;
+    private Boolean includeDetails = false;             // 是否包含详细信息
 
     // Constructors
     public AIAnalysisRequest() {}
@@ -26,9 +26,9 @@ public class AIAnalysisRequest {
         this.reportId = reportId;
     }
 
-    public AIAnalysisRequest(Long reportId, List<String> analysisTypes) {
+    public AIAnalysisRequest(Long reportId, AIAnalysisResult.AnalysisType analysisType) {
         this.reportId = reportId;
-        this.analysisTypes = analysisTypes;
+        this.analysisType = analysisType;
     }
 
     // Getters and Setters
@@ -40,12 +40,12 @@ public class AIAnalysisRequest {
         this.reportId = reportId;
     }
 
-    public List<String> getAnalysisTypes() {
-        return analysisTypes;
+    public AIAnalysisResult.AnalysisType getAnalysisType() {
+        return analysisType;
     }
 
-    public void setAnalysisTypes(List<String> analysisTypes) {
-        this.analysisTypes = analysisTypes;
+    public void setAnalysisType(AIAnalysisResult.AnalysisType analysisType) {
+        this.analysisType = analysisType;
     }
 
     public String getAnalysisLanguage() {
@@ -68,7 +68,7 @@ public class AIAnalysisRequest {
     public String toString() {
         return "AIAnalysisRequest{" +
                 "reportId=" + reportId +
-                ", analysisTypes=" + analysisTypes +
+                ", analysisType=" + analysisType +
                 ", analysisLanguage='" + analysisLanguage + '\'' +
                 ", includeDetails=" + includeDetails +
                 '}';

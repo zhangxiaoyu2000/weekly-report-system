@@ -1,0 +1,101 @@
+# Optimized Database Configuration Recommendations
+# Based on analysis of current issues and failures
+
+spring:
+  datasource:
+    hikari:
+      # Optimized connection pool settings for development
+      minimum-idle: 3              # Increased from 2
+      maximum-pool-size: 15        # Increased from 10
+      idle-timeout: 180000         # Reduced to 3 minutes
+      max-lifetime: 900000         # Reduced to 15 minutes  
+      connection-timeout: 15000    # Increased to 15 seconds
+      validation-timeout: 8000     # Increased to 8 seconds
+      
+      # Enhanced leak detection
+      leak-detection-threshold: 30000  # Reduced to 30 seconds for faster detection
+      
+      # Connection validation improvements
+      connection-test-query: SELECT 1 FROM DUAL
+      
+      # Additional performance properties
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 300
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: true      # Enable for monitoring
+        useLocalTransactionState: true
+        
+  # Transaction management optimization  
+  transaction:
+    default-timeout: 45            # Unified timeout - 45 seconds
+    rollback-on-commit-failure: true
+    
+  jpa:
+    properties:
+      hibernate:
+        # Connection and transaction settings
+        connection:
+          provider_disables_autocommit: true  # Let Hibernate manage autocommit
+        jdbc:
+          batch_size: 25
+          fetch_size: 75
+        
+        # Enable session-level batch management
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+        
+        # Transaction coordination
+        transaction:
+          coordinator_class: jdbc
+          
+        # Enhanced logging for debugging
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        
+        # Session management
+        session:
+          events:
+            log:
+              LOG_QUERIES_SLOWER_THAN_MS: 500  # Log slow queries
+
+# Logging improvements for database monitoring
+logging:
+  level:
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari.HikariDataSource: DEBUG
+    com.zaxxer.hikari.pool.HikariPool: DEBUG
+    org.hibernate.resource.jdbc: DEBUG
+    org.hibernate.engine.transaction: DEBUG
+    org.springframework.transaction: DEBUG
+    org.springframework.orm.jpa: DEBUG
+
+# Recommendations for fixing specific issues:
+
+# 1. WeeklyReport Lazy Loading Fix:
+#    - Add @Transactional(readOnly = true) to read methods
+#    - Use @EntityGraph for eager loading specific collections
+#    - Consider DTOs for API responses to avoid lazy loading
+
+# 2. AI Controller 500 Errors:
+#    - Check if AI service beans are properly initialized
+#    - Verify DeepSeek API connectivity and credentials
+#    - Add proper exception handling in AIController
+
+# 3. Simple Test Endpoints 401 Errors:
+#    - Verify JWT filter shouldNotFilter method includes /api/simple/*
+#    - Check SecurityConfig permitAll for simple endpoints
+#    - Ensure test endpoints don't require authentication
+
+# 4. Transaction Manager Optimization:
+#    - Use single primary transaction manager
+#    - Avoid multiple transaction manager beans in same profile
+#    - Ensure @Transactional uses correct transaction manager

@@ -1,112 +1,103 @@
 package com.weeklyreport.dto.weeklyreport;
 
 import com.weeklyreport.entity.WeeklyReport;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.WeekFields;
+import java.util.Locale;
 
 /**
- * DTO for weekly report responses
+ * Response DTO for WeeklyReport entity - 严格按照WeeklyReport.java设计
  */
 public class WeeklyReportResponse {
 
     private Long id;
-    private String title;
-    private LocalDate reportWeek;
-    private Integer year;
-    private Integer weekNumber;
-    private String content;
-    private String workSummary;
-    private String achievements;
-    private String challenges;
-    private String nextWeekPlan;
-    private String additionalNotes;
-    private WeeklyReport.ReportStatus status;
-    private LocalDateTime submittedAt;
-    private LocalDateTime reviewedAt;
-    private String reviewComment;
-    private Boolean isLate;
-    private Integer wordCount;
-    private Integer priority;
-    private Integer completionPercentage;
+    private Long userId;                            // #提交周报的用户ID
+    private String title;                           // #周报标题
+    private String reportWeek;                      // 几月第几周（周几）
+    private String additionalNotes;                 // #其他备注
+    private String developmentOpportunities;        // #可发展性清单
+    
+    // 审批流程字段
+    private Long aiAnalysisId;                      // AI分析结果id（外键）
+    private Long adminReviewerId;                   // 管理员审批人ID
+    private String rejectionReason;                 // 拒绝理由
+    private WeeklyReport.ApprovalStatus approvalStatus; // 审批状态
+    
+    // 时间戳字段
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    // Author information
-    private Long authorId;
+    
+    // 兼容性字段
+    private String content;                         // 关联表汇总内容
+    private String summary;                         // 摘要
+    private WeeklyReport.ReportStatus status;       // 兼容ReportStatus
+    private LocalDateTime submittedAt;              // 提交时间
+    private LocalDateTime reviewedAt;               // 审核时间
+    private String reviewComment;                   // 审核意见
+    private Integer priority;                       // 优先级
+    
+    // 日期相关兼容字段
+    private LocalDate weekStart;
+    private LocalDate weekEnd;
+    private Integer year;
+    private Integer weekNumber;
+    
+    // 用户信息
     private String authorName;
     private String authorEmail;
-
-    // Template information
-    private Long templateId;
-    private String templateName;
-
-    // Reviewer information
-    private Long reviewerId;
+    
+    // 审核人信息
     private String reviewerName;
-
-    // Project information
-    private Long projectId;
-    private String projectName;
-
-    // Statistics
-    private Integer commentCount;
-    private Integer analysisCount;
 
     // Constructors
     public WeeklyReportResponse() {}
 
     public WeeklyReportResponse(WeeklyReport report) {
         this.id = report.getId();
+        this.userId = report.getUserId();
         this.title = report.getTitle();
         this.reportWeek = report.getReportWeek();
-        this.year = report.getYear();
-        this.weekNumber = report.getWeekNumber();
-        this.content = report.getContent();
-        this.workSummary = report.getWorkSummary();
-        this.achievements = report.getAchievements();
-        this.challenges = report.getChallenges();
-        this.nextWeekPlan = report.getNextWeekPlan();
         this.additionalNotes = report.getAdditionalNotes();
-        this.status = report.getStatus();
-        this.submittedAt = report.getSubmittedAt();
-        this.reviewedAt = report.getReviewedAt();
-        this.reviewComment = report.getReviewComment();
-        this.isLate = report.getIsLate();
-        this.wordCount = report.getWordCount();
-        this.priority = report.getPriority();
-        this.completionPercentage = report.getCompletionPercentage();
+        this.developmentOpportunities = report.getDevelopmentOpportunities();
+        
+        // 审批流程字段
+        this.aiAnalysisId = report.getAiAnalysisId();
+        this.adminReviewerId = report.getAdminReviewerId();
+        this.rejectionReason = report.getRejectionReason();
+        this.approvalStatus = report.getApprovalStatus();
+        
+        // 时间戳字段
         this.createdAt = report.getCreatedAt();
         this.updatedAt = report.getUpdatedAt();
-
-        // Author information
-        if (report.getAuthor() != null) {
-            this.authorId = report.getAuthor().getId();
-            this.authorName = report.getAuthor().getFullName();
-            this.authorEmail = report.getAuthor().getEmail();
+        
+        // 兼容性字段
+        this.content = report.getContent();
+        this.summary = report.getSummary();
+        this.status = report.getStatus();
+        this.submittedAt = report.getApprovalStatus() != WeeklyReport.ApprovalStatus.AI_ANALYZING ? 
+            report.getCreatedAt() : null;
+        this.reviewedAt = report.isApproved() ? report.getUpdatedAt() : null;
+        this.reviewComment = report.getRejectionReason();
+        this.priority = 2; // 默认中等优先级
+        
+        // 日期兼容处理
+        if (report.getReportWeek() != null) {
+            LocalDate estimatedDate = report.getCreatedAt() != null ? 
+                report.getCreatedAt().toLocalDate() : LocalDate.now();
+            this.weekStart = estimatedDate.with(java.time.DayOfWeek.MONDAY);
+            this.weekEnd = estimatedDate.with(java.time.DayOfWeek.SUNDAY);
+            this.year = estimatedDate.getYear();
+            this.weekNumber = estimatedDate.get(WeekFields.of(Locale.CHINA).weekOfYear());
         }
-
-        // Template information
-        if (report.getTemplate() != null) {
-            this.templateId = report.getTemplate().getId();
-            this.templateName = report.getTemplate().getName();
-        }
-
-        // Reviewer information
-        if (report.getReviewer() != null) {
-            this.reviewerId = report.getReviewer().getId();
-            this.reviewerName = report.getReviewer().getFullName();
-        }
-
-        // Project information
-        if (report.getProject() != null) {
-            this.projectId = report.getProject().getId();
-            this.projectName = report.getProject().getName();
-        }
-
-        // Statistics
-        this.commentCount = report.getComments() != null ? report.getComments().size() : 0;
-        this.analysisCount = report.getAnalysisResults() != null ? report.getAnalysisResults().size() : 0;
+        
+        // 用户信息
+        this.authorName = "User-" + report.getUserId();
+        this.authorEmail = "user" + report.getUserId() + "@example.com";
+        
+        // 审核人信息
+        this.reviewerName = report.getAdminReviewerId() != null ? 
+            "Admin-" + report.getAdminReviewerId() : null;
     }
 
     // Getters and Setters
@@ -126,12 +117,36 @@ public class WeeklyReportResponse {
         this.title = title;
     }
 
-    public LocalDate getReportWeek() {
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getReportWeek() {
         return reportWeek;
     }
 
-    public void setReportWeek(LocalDate reportWeek) {
+    public void setReportWeek(String reportWeek) {
         this.reportWeek = reportWeek;
+    }
+
+    public LocalDate getWeekStart() {
+        return weekStart;
+    }
+
+    public void setWeekStart(LocalDate weekStart) {
+        this.weekStart = weekStart;
+    }
+
+    public LocalDate getWeekEnd() {
+        return weekEnd;
+    }
+
+    public void setWeekEnd(LocalDate weekEnd) {
+        this.weekEnd = weekEnd;
     }
 
     public Integer getYear() {
@@ -150,52 +165,52 @@ public class WeeklyReportResponse {
         this.weekNumber = weekNumber;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getWorkSummary() {
-        return workSummary;
-    }
-
-    public void setWorkSummary(String workSummary) {
-        this.workSummary = workSummary;
-    }
-
-    public String getAchievements() {
-        return achievements;
-    }
-
-    public void setAchievements(String achievements) {
-        this.achievements = achievements;
-    }
-
-    public String getChallenges() {
-        return challenges;
-    }
-
-    public void setChallenges(String challenges) {
-        this.challenges = challenges;
-    }
-
-    public String getNextWeekPlan() {
-        return nextWeekPlan;
-    }
-
-    public void setNextWeekPlan(String nextWeekPlan) {
-        this.nextWeekPlan = nextWeekPlan;
-    }
-
     public String getAdditionalNotes() {
         return additionalNotes;
     }
 
     public void setAdditionalNotes(String additionalNotes) {
         this.additionalNotes = additionalNotes;
+    }
+
+    public String getDevelopmentOpportunities() {
+        return developmentOpportunities;
+    }
+
+    public void setDevelopmentOpportunities(String developmentOpportunities) {
+        this.developmentOpportunities = developmentOpportunities;
+    }
+
+    public Long getAiAnalysisId() {
+        return aiAnalysisId;
+    }
+
+    public void setAiAnalysisId(Long aiAnalysisId) {
+        this.aiAnalysisId = aiAnalysisId;
+    }
+
+    public Long getAdminReviewerId() {
+        return adminReviewerId;
+    }
+
+    public void setAdminReviewerId(Long adminReviewerId) {
+        this.adminReviewerId = adminReviewerId;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
+    }
+
+    public WeeklyReport.ApprovalStatus getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(WeeklyReport.ApprovalStatus approvalStatus) {
+        this.approvalStatus = approvalStatus;
     }
 
     public WeeklyReport.ReportStatus getStatus() {
@@ -230,36 +245,12 @@ public class WeeklyReportResponse {
         this.reviewComment = reviewComment;
     }
 
-    public Boolean getIsLate() {
-        return isLate;
-    }
-
-    public void setIsLate(Boolean isLate) {
-        this.isLate = isLate;
-    }
-
-    public Integer getWordCount() {
-        return wordCount;
-    }
-
-    public void setWordCount(Integer wordCount) {
-        this.wordCount = wordCount;
-    }
-
     public Integer getPriority() {
         return priority;
     }
 
     public void setPriority(Integer priority) {
         this.priority = priority;
-    }
-
-    public Integer getCompletionPercentage() {
-        return completionPercentage;
-    }
-
-    public void setCompletionPercentage(Integer completionPercentage) {
-        this.completionPercentage = completionPercentage;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -278,12 +269,20 @@ public class WeeklyReportResponse {
         this.updatedAt = updatedAt;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public String getContent() {
+        return content;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getAuthorName() {
@@ -302,30 +301,6 @@ public class WeeklyReportResponse {
         this.authorEmail = authorEmail;
     }
 
-    public Long getTemplateId() {
-        return templateId;
-    }
-
-    public void setTemplateId(Long templateId) {
-        this.templateId = templateId;
-    }
-
-    public String getTemplateName() {
-        return templateName;
-    }
-
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
-    }
-
-    public Long getReviewerId() {
-        return reviewerId;
-    }
-
-    public void setReviewerId(Long reviewerId) {
-        this.reviewerId = reviewerId;
-    }
-
     public String getReviewerName() {
         return reviewerName;
     }
@@ -334,69 +309,25 @@ public class WeeklyReportResponse {
         this.reviewerName = reviewerName;
     }
 
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public Integer getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(Integer commentCount) {
-        this.commentCount = commentCount;
-    }
-
-    public Integer getAnalysisCount() {
-        return analysisCount;
-    }
-
-    public void setAnalysisCount(Integer analysisCount) {
-        this.analysisCount = analysisCount;
-    }
-
     // Helper methods
-    public boolean isOverdue() {
-        return isLate != null && isLate;
-    }
-
     public boolean isDraft() {
-        return status == WeeklyReport.ReportStatus.DRAFT;
+        return approvalStatus == WeeklyReport.ApprovalStatus.AI_ANALYZING;
     }
 
     public boolean isSubmitted() {
-        return status == WeeklyReport.ReportStatus.SUBMITTED ||
-               status == WeeklyReport.ReportStatus.UNDER_REVIEW;
+        return approvalStatus == WeeklyReport.ApprovalStatus.ADMIN_REVIEWING || 
+               approvalStatus == WeeklyReport.ApprovalStatus.ADMIN_APPROVED;
     }
 
     public boolean isApproved() {
-        return status == WeeklyReport.ReportStatus.APPROVED;
+        return approvalStatus == WeeklyReport.ApprovalStatus.ADMIN_APPROVED;
     }
 
-    public boolean needsAttention() {
-        return status == WeeklyReport.ReportStatus.REVISION_REQUESTED ||
-               status == WeeklyReport.ReportStatus.REJECTED;
+    public boolean isRejected() {
+        return approvalStatus == WeeklyReport.ApprovalStatus.AI_REJECTED ||
+               approvalStatus == WeeklyReport.ApprovalStatus.ADMIN_REJECTED;
     }
 
-    @Override
-    public String toString() {
-        return "WeeklyReportResponse{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", reportWeek=" + reportWeek +
-                ", status=" + status +
-                ", authorName='" + authorName + '\'' +
-                '}';
-    }
+    // AI Analysis fields getters and setters
+    // AI分析相关字段已移除，通过AIAnalysisResult实体关联获取
 }

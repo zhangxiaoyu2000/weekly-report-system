@@ -9,7 +9,20 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * AIAnalysisResult entity representing AI-generated analysis results for weekly reports
+ * AIAnalysisResult entity - 严格按照数据库设计.md第40-57行要求
+ * 
+ * 核心字段映射:
+ * - report_id BIGINT NOT NULL (简单外键，不是对象关联)
+ * - analysis_type VARCHAR(50) NOT NULL
+ * - result TEXT NOT NULL
+ * - confidence DECIMAL(3,2) 
+ * - status VARCHAR(20) NOT NULL DEFAULT 'PENDING'
+ * - processing_time_ms BIGINT
+ * - model_version VARCHAR(100)
+ * - parameters TEXT
+ * - error_message TEXT
+ * - metadata JSON
+ * - created_at, updated_at, completed_at TIMESTAMP
  */
 @Entity
 @Table(name = "ai_analysis_results", indexes = {
@@ -24,10 +37,14 @@ public class AIAnalysisResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Weekly report cannot be null")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "report_id", nullable = false)
-    private WeeklyReport weeklyReport;
+    @NotNull(message = "Report ID cannot be null")
+    @Column(name = "report_id", nullable = false)
+    private Long reportId;                          // 实体ID (项目ID或周报ID)
+
+    @NotNull(message = "Entity type cannot be null")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "entity_type", nullable = false, length = 20)
+    private EntityType entityType = EntityType.WEEKLY_REPORT;  // 关联的实体类型
 
     @NotNull(message = "Analysis type cannot be null")
     @Enumerated(EnumType.STRING)
@@ -40,7 +57,7 @@ public class AIAnalysisResult {
 
     @DecimalMin(value = "0.0", message = "Confidence must be between 0 and 1")
     @DecimalMax(value = "1.0", message = "Confidence must be between 0 and 1")
-    @Column(name = "confidence", precision = 3, scale = 2)
+    @Column(name = "confidence")
     private Double confidence;
 
     @NotNull(message = "Status cannot be null")
@@ -74,6 +91,12 @@ public class AIAnalysisResult {
     @Column(name = "completed_at")
     private LocalDateTime completedAt;
 
+    // Entity type enum
+    public enum EntityType {
+        PROJECT,       // 项目
+        WEEKLY_REPORT  // 周报
+    }
+
     // Analysis type enum
     public enum AnalysisType {
         SUMMARY,          // 内容摘要
@@ -100,9 +123,17 @@ public class AIAnalysisResult {
     // Constructors
     public AIAnalysisResult() {}
 
-    public AIAnalysisResult(WeeklyReport weeklyReport, AnalysisType analysisType) {
-        this.weeklyReport = weeklyReport;
+    public AIAnalysisResult(Long reportId, AnalysisType analysisType) {
+        this.reportId = reportId;
         this.analysisType = analysisType;
+        this.status = AnalysisStatus.PENDING;
+        this.entityType = EntityType.WEEKLY_REPORT; // 默认为周报
+    }
+
+    public AIAnalysisResult(Long reportId, AnalysisType analysisType, EntityType entityType) {
+        this.reportId = reportId;
+        this.analysisType = analysisType;
+        this.entityType = entityType;
         this.status = AnalysisStatus.PENDING;
     }
 
@@ -115,12 +146,20 @@ public class AIAnalysisResult {
         this.id = id;
     }
 
-    public WeeklyReport getWeeklyReport() {
-        return weeklyReport;
+    public Long getReportId() {
+        return reportId;
     }
 
-    public void setWeeklyReport(WeeklyReport weeklyReport) {
-        this.weeklyReport = weeklyReport;
+    public void setReportId(Long reportId) {
+        this.reportId = reportId;
+    }
+
+    public EntityType getEntityType() {
+        return entityType;
+    }
+
+    public void setEntityType(EntityType entityType) {
+        this.entityType = entityType;
     }
 
     public AnalysisType getAnalysisType() {
@@ -262,6 +301,15 @@ public class AIAnalysisResult {
         }
         return null;
     }
+    
+    // Alias methods for compatibility
+    public Double getConfidenceScore() {
+        return confidence;
+    }
+    
+    public String getResultData() {
+        return result;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -283,7 +331,7 @@ public class AIAnalysisResult {
                 ", analysisType=" + analysisType +
                 ", status=" + status +
                 ", confidence=" + confidence +
-                ", reportId=" + (weeklyReport != null ? weeklyReport.getId() : "null") +
+                ", reportId=" + reportId +
                 '}';
     }
 }

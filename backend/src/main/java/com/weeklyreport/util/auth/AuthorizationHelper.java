@@ -154,10 +154,7 @@ public class AuthorizationHelper {
             throw new AccessDeniedException("Access denied: Only admin can assign admin role");
         }
         
-        // HR can assign roles below admin
-        if (currentUser.getRole() == User.Role.HR_MANAGER && targetRole != User.Role.ADMIN) {
-            return;
-        }
+        // Only admin can assign roles in this simplified system
         
         // Admin can assign any role
         if (currentUser.getRole() == User.Role.ADMIN) {

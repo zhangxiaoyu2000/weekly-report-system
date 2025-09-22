@@ -1,0 +1,64 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ weekly-report-backend ---
+[INFO] Deleting /Volumes/project/my-project/backend/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 34 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 154 source files with javac [debug release 17] to target/classes
+[INFO] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java: 某些输入文件使用或覆盖了已过时的 API。
+[INFO] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/entity/WeeklyReport.java:[288,39] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/entity/WeeklyReport.java:[288,66] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/entity/WeeklyReport.java:[289,72] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/WeeklyReportController.java:[317,36] 找不到符号
+  符号:   方法 superAdminApproveWeeklyReport(java.lang.Long)
+  位置: 类型为com.weeklyreport.service.WeeklyReportService的变量 weeklyReportService
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/WeeklyReportController.java:[324,69] 找不到符号
+  符号:   变量 SUPER_ADMIN_APPROVED
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[72,39] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportResponse.java:[324,61] 找不到符号
+  符号:   变量 SUPER_ADMIN_APPROVED
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[INFO] 7 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.822 s
+[INFO] Finished at: 2025-09-22T10:23:41+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project weekly-report-backend: Compilation failure: Compilation failure: 
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/entity/WeeklyReport.java:[288,39] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/entity/WeeklyReport.java:[288,66] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/entity/WeeklyReport.java:[289,72] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/WeeklyReportController.java:[317,36] 找不到符号
+[ERROR]   符号:   方法 superAdminApproveWeeklyReport(java.lang.Long)
+[ERROR]   位置: 类型为com.weeklyreport.service.WeeklyReportService的变量 weeklyReportService
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/WeeklyReportController.java:[324,69] 找不到符号
+[ERROR]   符号:   变量 SUPER_ADMIN_APPROVED
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[72,39] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportResponse.java:[324,61] 找不到符号
+[ERROR]   符号:   变量 SUPER_ADMIN_APPROVED
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

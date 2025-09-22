@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简化项目周报管理系统</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部导航 */
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #4338ca;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #666;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+        }
+
+        /* 主内容 */
+        .main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 登录页面 */
+        .login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .login-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .login-card h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1f2937;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* 标签页 */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+            color: #64748b;
+        }
+
+        .tab:hover {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+        }
+
+        .tab.active {
+            background: #6366f1;
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* 内容区域 */
+        .content {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            background: white;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(107, 114, 128, 0.1);
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(107, 114, 128, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* 项目卡片 */
+        .project-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .card-header h4 {
+            color: #1f2937;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pending {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+        }
+
+        .status-approved {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .status-rejected {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .tab {
+                text-align: center;
+            }
+
+            .content {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .login-card {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .loading::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 错误信息 */
+        .error {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 14px;
+            border: 1px solid #f87171;
+        }
+
+        /* 成功信息 */
+        .success {
+            background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
+            color: #166534;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-size: 14px;
+            border: 1px solid #4ade80;
+        }
+
+        /* 隐藏元素 */
+        .hidden { display: none; }
+
+        /* AI分析结果 */
+        .ai-result {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%);
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 12px;
+            color: #0c4a6e;
+            font-size: 14px;
+        }
+
+        /* 表单网格 */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 项目列表 */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .empty-state p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="app">
+        <!-- 登录页面 -->
+        <div id="loginPage" class="login-page">
+            <div class="login-card">
+                <h2>🚀 项目周报管理系统</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>用户名</label>
+                        <input type="text" id="username" value="admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" id="password" value="admin123" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <span id="loginText">登录系统</span>
+                    </button>
+                    <div id="loginError"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 主应用 -->
+        <div id="mainApp" class="hidden">
+            <!-- 头部 -->
+            <header class="header">
+                <div class="container">
+                    <h1>📋 项目周报管理系统</h1>
+                    <div class="user-info">
+                        <span id="currentUser"></span>
+                        <button class="logout-btn" onclick="logout()">退出</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 主内容 -->
+            <main class="main">
+                <div class="container">
+                    <!-- 标签页 -->
+                    <div class="tabs">
+                        <button class="tab active" onclick="showTab('projects')">📋 项目管理</button>
+                        <button class="tab" onclick="showTab('reports')">📊 周报管理</button>
+                        <button class="tab" onclick="showTab('tasks')">✅ 任务清单</button>
+                    </div>
+
+                    <!-- 项目管理 -->
+                    <div id="projectsTab" class="content">
+                        <h3 style="margin-bottom: 24px; color: #1f2937; font-size: 24px;">创建新项目</h3>
+                        <form id="projectForm" style="margin-bottom: 40px;">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>项目名称 *</label>
+                                    <input type="text" id="projectName" required placeholder="请输入项目名称">
+                                </div>
+                                <div class="form-group">
+                                    <label>项目成员 *</label>
+                                    <input type="text" id="projectMembers" required placeholder="请输入项目成员">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>项目内容 *</label>
+                                <textarea id="projectContent" required placeholder="请描述项目的具体内容和目标" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>关键性指标 *</label>
+                                <textarea id="keyIndicators" required placeholder="请定义项目的关键性指标" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>预期结果 *</label>
+                                    <textarea id="expectedResults" required placeholder="请描述项目的预期结果" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>实际结果</label>
+                                    <textarea id="actualResults" placeholder="可选：目前的实际结果" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>时间线 *</label>
+                                    <textarea id="timeline" required placeholder="请制定项目时间线" rows="2"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>止损点 *</label>
+                                    <textarea id="stopLoss" required placeholder="请定义项目的止损点" rows="2"></textarea>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 12px; margin-top: 24px;">
+                                <button type="submit" class="btn btn-primary" id="createProjectBtn">
+                                    🚀 创建项目
+                                </button>
+                                <button type="button" class="btn btn-secondary" onclick="resetProjectForm()">
+                                    重置表单
+                                </button>
+                            </div>
+                        </form>
+
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h3 style="color: #1f2937; font-size: 20px;">我的项目</h3>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-secondary" onclick="loadProjects()">🔄 刷新</button>
+                                <button class="btn btn-secondary" onclick="loadProjects('APPROVED')">已审批</button>
+                                <button class="btn btn-secondary" onclick="loadProjects('PENDING_APPROVAL')">待审批</button>
+                            </div>
+                        </div>
+
+                        <div id="projectsList" class="project-grid"></div>
+                    </div>
+
+                    <!-- 周报管理 -->
+                    <div id="reportsTab" class="content hidden">
+                        <h3 style="margin-bottom: 24px; color: #1f2937; font-size: 24px;">创建周报</h3>
+                        
+                        <form id="reportForm" style="margin-bottom: 40px;">
+                            <div class="form-group">
+                                <label>选择项目 *</label>
+                                <select id="reportProject" required>
+                                    <option value="">请选择已审批的项目</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>关键性指标 *</label>
+                                <textarea id="reportKeyIndicators" required placeholder="本周项目关键性指标情况" rows="4"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>实际结果 *</label>
+                                <textarea id="reportActualResults" required placeholder="本周项目实际结果" rows="4"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-success" style="width: 100%;" id="createReportBtn">
+                                📝 提交周报
+                            </button>
+                        </form>
+
+                        <h3 style="margin-bottom: 20px; color: #1f2937; font-size: 20px;">我的周报</h3>
+                        <button class="btn btn-secondary" onclick="loadReports()" style="margin-bottom: 20px;">🔄 刷新周报</button>
+                        <div id="reportsList"></div>
+                    </div>
+
+                    <!-- 任务清单 -->
+                    <div id="tasksTab" class="content hidden">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <h3 style="color: #1f2937; font-size: 24px; margin-bottom: 8px;">✅ 任务清单</h3>
+                            <p style="color: #6b7280; font-size: 16px;">这里显示所有审批通过的项目</p>
+                        </div>
+                        
+                        <button class="btn btn-secondary" onclick="loadApprovedProjects()" style="margin-bottom: 20px;">🔄 刷新任务</button>
+                        <div id="tasksList"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // 全局变量
+        let token = '';
+        let currentUser = null;
+        let projects = [];
+        let reports = [];
+        let approvedProjects = [];
+        
+        const BASE_URL = 'http://localhost:8081/api';
+
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            setupEventListeners();
+        });
+
+        // 检查登录状态
+        function checkAuthStatus() {
+            token = localStorage.getItem('token');
+            const userStr = localStorage.getItem('user');
+            
+            if (token && userStr) {
+                try {
+                    currentUser = JSON.parse(userStr);
+                    showMainApp();
+                } catch (e) {
+                    localStorage.clear();
+                    showLoginPage();
+                }
+            } else {
+                showLoginPage();
+            }
+        }
+
+        // 显示登录页面
+        function showLoginPage() {
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+        }
+
+        // 显示主应用
+        function showMainApp() {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            document.getElementById('currentUser').textContent = currentUser?.username || '用户';
+            
+            // 加载初始数据
+            loadProjects();
+            loadApprovedProjectsForSelect();
+        }
+
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 登录表单
+            document.getElementById('loginForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                await login();
+            });
+
+            // 项目表单
+            document.getElementById('projectForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                await createProject();
+            });
+
+            // 周报表单
+            document.getElementById('reportForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                await createReport();
+            });
+        }
+
+        // 登录
+        async function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginText');
+            const errorDiv = document.getElementById('loginError');
+            
+            loginBtn.textContent = '登录中...';
+            errorDiv.innerHTML = '';
+            
+            try {
+                const response = await fetch(`${BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success && data.data.token) {
+                    token = data.data.token;
+                    currentUser = data.data.user;
+                    localStorage.setItem('token', token);
+                    localStorage.setItem('user', JSON.stringify(currentUser));
+                    showMainApp();
+                } else {
+                    errorDiv.innerHTML = `<div class="error">❌ ${data.message || '登录失败'}</div>`;
+                }
+            } catch (error) {
+                errorDiv.innerHTML = `<div class="error">❌ 网络错误：${error.message}</div>`;
+            } finally {
+                loginBtn.textContent = '登录系统';
+            }
+        }
+
+        // 退出登录
+        function logout() {
+            localStorage.clear();
+            token = '';
+            currentUser = null;
+            showLoginPage();
+        }
+
+        // 切换标签页
+        function showTab(tabName) {
+            // 隐藏所有标签页
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 显示当前标签页
+            document.getElementById(tabName + 'Tab').classList.remove('hidden');
+            event.target.classList.add('active');
+        }
+
+        // 创建项目
+        async function createProject() {
+            const btn = document.getElementById('createProjectBtn');
+            btn.innerHTML = '<span class="loading">创建中</span>';
+            btn.disabled = true;
+            
+            const projectData = {
+                projectName: document.getElementById('projectName').value,
+                projectContent: document.getElementById('projectContent').value,
+                projectMembers: document.getElementById('projectMembers').value,
+                keyIndicators: document.getElementById('keyIndicators').value,
+                expectedResults: document.getElementById('expectedResults').value,
+                actualResults: document.getElementById('actualResults').value,
+                timeline: document.getElementById('timeline').value,
+                stopLoss: document.getElementById('stopLoss').value
+            };
+            
+            try {
+                const response = await fetch(`${BASE_URL}/simple/projects`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(projectData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('✅ 项目创建成功！AI正在分析中...');
+                    resetProjectForm();
+                    loadProjects();
+                    loadApprovedProjectsForSelect();
+                } else {
+                    alert('❌ 创建失败：' + data.message);
+                }
+            } catch (error) {
+                alert('❌ 网络错误：' + error.message);
+            } finally {
+                btn.innerHTML = '🚀 创建项目';
+                btn.disabled = false;
+            }
+        }
+
+        // 重置项目表单
+        function resetProjectForm() {
+            document.getElementById('projectForm').reset();
+        }
+
+        // 加载项目列表
+        async function loadProjects(status = 'ALL') {
+            try {
+                const response = await fetch(`${BASE_URL}/simple/projects/my?status=${status}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    projects = data.data;
+                    displayProjects();
+                }
+            } catch (error) {
+                console.error('Load projects error:', error);
+            }
+        }
+
+        // 显示项目列表
+        function displayProjects() {
+            const container = document.getElementById('projectsList');
+            container.innerHTML = '';
+            
+            if (projects.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>📋 暂无项目</h3>
+                        <p>创建您的第一个项目开始使用</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h4>${project.projectName}</h4>
+                        <span class="status-badge ${getStatusClass(project.status)}">${getStatusText(project.status)}</span>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <p style="margin-bottom: 8px; color: #6b7280;"><strong>内容：</strong>${truncateText(project.projectContent, 100)}</p>
+                        <p style="margin-bottom: 8px; color: #6b7280;"><strong>成员：</strong>${project.projectMembers}</p>
+                        <p style="margin-bottom: 8px; color: #6b7280;"><strong>关键指标：</strong>${truncateText(project.keyIndicators, 80)}</p>
+                        <p style="color: #9ca3af; font-size: 12px;">创建时间：${formatDate(project.createdAt)}</p>
+                    </div>
+                    ${project.aiAnalysisResult ? `<div class="ai-result"><strong>🤖 AI分析：</strong>${project.aiAnalysisResult}</div>` : ''}
+                    <div style="display: flex; gap: 8px; margin-top: 16px;">
+                        ${getActionButtons(project)}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 获取状态样式类
+        function getStatusClass(status) {
+            const classes = {
+                'PENDING_AI_ANALYSIS': 'status-pending',
+                'AI_REJECTED': 'status-rejected',
+                'PENDING_APPROVAL': 'status-pending',
+                'APPROVED': 'status-approved'
+            };
+            return classes[status] || 'status-pending';
+        }
+
+        // 获取状态文本
+        function getStatusText(status) {
+            const texts = {
+                'PENDING_AI_ANALYSIS': '待AI分析',
+                'AI_REJECTED': 'AI不合格',
+                'PENDING_APPROVAL': '待审批',
+                'APPROVED': '审批通过'
+            };
+            return texts[status] || status;
+        }
+
+        // 获取操作按钮
+        function getActionButtons(project) {
+            let buttons = '';
+            
+            if (project.status === 'PENDING_AI_ANALYSIS') {
+                buttons += `<button class="btn btn-primary" onclick="submitForApproval(${project.id})">📤 提交审批</button>`;
+            }
+            
+            if (project.status === 'PENDING_APPROVAL') {
+                buttons += `
+                    <button class="btn btn-success" onclick="approveProject(${project.id}, true)">✅ 通过</button>
+                    <button class="btn" style="background: #ef4444; color: white;" onclick="approveProject(${project.id}, false)">❌ 拒绝</button>
+                `;
+            }
+            
+            if (project.status === 'APPROVED') {
+                buttons += `<button class="btn btn-secondary" onclick="showTab('reports')">📊 创建周报</button>`;
+            }
+            
+            return buttons;
+        }
+
+        // 提交审批
+        async function submitForApproval(projectId) {
+            try {
+                const response = await fetch(`${BASE_URL}/simple/projects/${projectId}/submit-approval`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('✅ 项目已提交审批');
+                    loadProjects();
+                } else {
+                    alert('❌ 提交失败：' + data.message);
+                }
+            } catch (error) {
+                alert('❌ 网络错误：' + error.message);
+            }
+        }
+
+        // 审批项目
+        async function approveProject(projectId, approved) {
+            try {
+                const response = await fetch(`${BASE_URL}/simple/projects/${projectId}/approve?approved=${approved}`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert(approved ? '✅ 项目审批通过' : '❌ 项目审批拒绝');
+                    loadProjects();
+                    loadApprovedProjectsForSelect();
+                } else {
+                    alert('❌ 审批失败：' + data.message);
+                }
+            } catch (error) {
+                alert('❌ 网络错误：' + error.message);
+            }
+        }
+
+        // 加载已审批项目到下拉框
+        async function loadApprovedProjectsForSelect() {
+            try {
+                const response = await fetch(`${BASE_URL}/simple/projects/my?status=APPROVED`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const select = document.getElementById('reportProject');
+                    select.innerHTML = '<option value="">请选择已审批的项目</option>';
+                    
+                    data.data.forEach(project => {
+                        const option = document.createElement('option');
+                        option.value = project.id;
+                        option.textContent = project.projectName;
+                        select.appendChild(option);
+                    });
+                    
+                    approvedProjects = data.data;
+                }
+            } catch (error) {
+                console.error('Load approved projects error:', error);
+            }
+        }
+
+        // 创建周报
+        async function createReport() {
+            const btn = document.getElementById('createReportBtn');
+            btn.innerHTML = '<span class="loading">提交中</span>';
+            btn.disabled = true;
+            
+            const reportData = {
+                projectId: parseInt(document.getElementById('reportProject').value),
+                keyIndicators: document.getElementById('reportKeyIndicators').value,
+                actualResults: document.getElementById('reportActualResults').value
+            };
+            
+            try {
+                const response = await fetch(`${BASE_URL}/simple/weekly-reports`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(reportData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('✅ 周报创建成功！');
+                    document.getElementById('reportForm').reset();
+                    loadReports();
+                } else {
+                    alert('❌ 创建失败：' + data.message);
+                }
+            } catch (error) {
+                alert('❌ 网络错误：' + error.message);
+            } finally {
+                btn.innerHTML = '📝 提交周报';
+                btn.disabled = false;
+            }
+        }
+
+        // 加载周报列表
+        async function loadReports() {
+            try {
+                const response = await fetch(`${BASE_URL}/simple/weekly-reports/my`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    reports = data.data;
+                    displayReports();
+                }
+            } catch (error) {
+                console.error('Load reports error:', error);
+            }
+        }
+
+        // 显示周报列表
+        function displayReports() {
+            const container = document.getElementById('reportsList');
+            container.innerHTML = '';
+            
+            if (reports.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>📊 暂无周报</h3>
+                        <p>为已审批的项目创建第一份周报</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            reports.forEach(report => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h4>周报 #${report.id}</h4>
+                        <span style="color: #6b7280; font-size: 14px;">${formatDate(report.createdAt)}</span>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <p style="margin-bottom: 12px; color: #4f46e5; font-weight: 600;">项目：${report.project.projectName}</p>
+                        <div style="margin-bottom: 12px;">
+                            <strong style="color: #374151;">📊 关键指标：</strong>
+                            <p style="margin-top: 4px; color: #6b7280;">${report.keyIndicators}</p>
+                        </div>
+                        <div>
+                            <strong style="color: #374151;">📈 实际结果：</strong>
+                            <p style="margin-top: 4px; color: #6b7280;">${report.actualResults}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 加载任务清单
+        async function loadApprovedProjects() {
+            try {
+                const response = await fetch(`${BASE_URL}/simple/projects/my?status=APPROVED`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    approvedProjects = data.data;
+                    displayTasks();
+                }
+            } catch (error) {
+                console.error('Load approved projects error:', error);
+            }
+        }
+
+        // 显示任务清单
+        function displayTasks() {
+            const container = document.getElementById('tasksList');
+            container.innerHTML = '';
+            
+            if (approvedProjects.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>✅ 暂无任务</h3>
+                        <p>暂无已审批的项目</p>
+                        <button class="btn btn-primary" onclick="showTab('projects')">🚀 去创建项目</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            approvedProjects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h4>📋 ${project.projectName}</h4>
+                        <span class="status-badge status-approved">已审批</span>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <p style="margin-bottom: 8px; color: #6b7280;"><strong>内容：</strong>${project.projectContent}</p>
+                        <p style="margin-bottom: 8px; color: #6b7280;"><strong>成员：</strong>${project.projectMembers}</p>
+                        <p style="margin-bottom: 8px; color: #6b7280;"><strong>关键指标：</strong>${project.keyIndicators}</p>
+                        <p style="margin-bottom: 8px; color: #6b7280;"><strong>时间线：</strong>${project.timeline}</p>
+                        <p style="color: #9ca3af; font-size: 12px;">创建时间：${formatDate(project.createdAt)}</p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-success" onclick="createReportForProject(${project.id})">📝 创建周报</button>
+                        <button class="btn btn-secondary" onclick="showTab('reports')">📊 查看周报</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 为特定项目创建周报
+        function createReportForProject(projectId) {
+            showTab('reports');
+            document.getElementById('reportProject').value = projectId;
+        }
+
+        // 工具函数
+        function truncateText(text, length) {
+            if (!text) return '';
+            return text.length > length ? text.substring(0, length) + '...' : text;
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleString('zh-CN');
+        }
+    </script>
+</body>
+</html>

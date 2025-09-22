@@ -127,45 +127,71 @@ public class SecurityConfig {
             // Configure authorization rules
             .authorizeHttpRequests(authz -> authz
                 // Public endpoints - no authentication required
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/health").permitAll()
-                .requestMatchers("/api/actuator/health").permitAll()
-                .requestMatchers("/api/public/**").permitAll()
+                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/health").permitAll()
+                .requestMatchers("/actuator/health").permitAll()
+                .requestMatchers("/public/**").permitAll()
+                .requestMatchers("/debug/**").permitAll()  // Debug endpoints for development
                 
                 // Development and testing endpoints
-                .requestMatchers("/api/h2-console/**").permitAll()
-                .requestMatchers("/api/actuator/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/actuator/**").hasAuthority("ROLE_ADMIN")
                 
                 // Admin only endpoints
-                .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/users/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN")
                 
-                // User management (Admin and HR)
-                .requestMatchers(HttpMethod.GET, "/api/users").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER")
-                .requestMatchers(HttpMethod.POST, "/api/users").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER")
-                .requestMatchers(HttpMethod.PUT, "/api/users/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER")
+                // User profile management (allow users to update their own profile)
+                .requestMatchers(HttpMethod.GET, "/users/profile").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/users/profile").authenticated()
                 
-                // Department management
-                .requestMatchers("/api/departments/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER", "ROLE_DEPARTMENT_MANAGER")
+                // User management (Admin and Super Admin)
+                .requestMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN")
+                .requestMatchers(HttpMethod.POST, "/users").hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN")
+                
+                // Department management (Admin only)
+                .requestMatchers("/departments/**").hasAnyAuthority("ROLE_ADMIN")
                 
                 // Report management by role
-                .requestMatchers(HttpMethod.GET, "/api/reports").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER", "ROLE_DEPARTMENT_MANAGER", "ROLE_TEAM_LEADER", "ROLE_EMPLOYEE")
-                .requestMatchers(HttpMethod.POST, "/api/reports").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER", "ROLE_DEPARTMENT_MANAGER", "ROLE_TEAM_LEADER", "ROLE_EMPLOYEE")
-                .requestMatchers(HttpMethod.PUT, "/api/reports/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER", "ROLE_DEPARTMENT_MANAGER", "ROLE_TEAM_LEADER", "ROLE_EMPLOYEE")
-                .requestMatchers(HttpMethod.DELETE, "/api/reports/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER", "ROLE_DEPARTMENT_MANAGER")
+                .requestMatchers(HttpMethod.GET, "/reports").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                .requestMatchers(HttpMethod.POST, "/reports").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/reports/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/reports/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
                 
                 // Profile management
-                .requestMatchers(HttpMethod.GET, "/api/profile").authenticated()
-                .requestMatchers(HttpMethod.PUT, "/api/profile").authenticated()
+                .requestMatchers(HttpMethod.GET, "/profile").authenticated()
+                .requestMatchers(HttpMethod.PUT, "/profile").authenticated()
                 
                 // Comments
-                .requestMatchers("/api/comments/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER", "ROLE_DEPARTMENT_MANAGER", "ROLE_TEAM_LEADER", "ROLE_EMPLOYEE")
+                .requestMatchers("/comments/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
                 
                 // Templates
-                .requestMatchers(HttpMethod.GET, "/api/templates/**").authenticated()
-                .requestMatchers(HttpMethod.POST, "/api/templates").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER", "ROLE_DEPARTMENT_MANAGER")
-                .requestMatchers(HttpMethod.PUT, "/api/templates/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER", "ROLE_DEPARTMENT_MANAGER")
-                .requestMatchers(HttpMethod.DELETE, "/api/templates/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_HR_MANAGER")
+                .requestMatchers(HttpMethod.GET, "/templates/**").authenticated()
+                .requestMatchers(HttpMethod.POST, "/templates").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
+                .requestMatchers(HttpMethod.PUT, "/templates/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER")
+                .requestMatchers(HttpMethod.DELETE, "/templates/**").hasAnyAuthority("ROLE_ADMIN")
+                
+                // AI Analysis endpoints
+                .requestMatchers("/ai/analysis/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                .requestMatchers("/ai/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                
+                // API endpoints for projects and weekly reports (context-path is /api, so patterns are relative)
+                .requestMatchers("/projects/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                .requestMatchers("/simple/projects/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                .requestMatchers("/weekly-reports/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                
+                // Task management endpoints
+                .requestMatchers("/tasks/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                
+                // User profile endpoints - allow MANAGER to access their own profile
+                .requestMatchers(HttpMethod.GET, "/users/profile").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/users/profile").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                // Other user management endpoints - Admin only
+                .requestMatchers("/users/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN")
+                
+                // Simple project endpoints (backward compatibility)
+                .requestMatchers("/simple/projects/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
+                .requestMatchers("/simple/weekly-reports/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_SUPER_ADMIN")
                 
                 // All other requests require authentication
                 .anyRequest().authenticated()

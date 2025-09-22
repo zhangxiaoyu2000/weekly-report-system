@@ -1,0 +1,12 @@
+-- V21: 为 weekly_reports 表添加结构化字段
+-- 支持前端提交的完整周报数据结构
+
+ALTER TABLE `weekly_reports` 
+ADD COLUMN `work_summary` TEXT COMMENT '工作总结 - 本周工作汇总',
+ADD COLUMN `achievements` TEXT COMMENT '成就列表 - 本周取得的成果',
+ADD COLUMN `challenges` TEXT COMMENT '挑战问题 - 本周遇到的困难和解决方案',
+ADD COLUMN `next_week_plan` TEXT COMMENT '下周计划 - 下周的工作安排';
+
+-- 添加索引以优化查询性能
+CREATE INDEX `idx_weekly_reports_work_summary` ON `weekly_reports` (`work_summary`(100));
+CREATE INDEX `idx_weekly_reports_next_week_plan` ON `weekly_reports` (`next_week_plan`(100));

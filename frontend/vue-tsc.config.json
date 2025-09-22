@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "exclude": [
+    "node_modules", 
+    "dist", 
+    ".vite",
+    "**/*.vue.js",
+    "**/*.js",
+    "src/components/AIAnalysisResult.vue.js",
+    "src/components/ApprovalHistoryTimeline.vue.js", 
+    "src/components/ReportApprovalActions.vue.js",
+    "src/components/ReportApprovalProgress.vue.js",
+    "src/views/ReportDetailView.vue.js"
+  ]
+}

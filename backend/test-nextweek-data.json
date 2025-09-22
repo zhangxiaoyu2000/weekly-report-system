@@ -1,0 +1,36 @@
+{
+  "title": "测试下周规划数据插入",
+  "reportWeek": "2025年9月第4周",
+  "content": {
+    "Routine_tasks": [
+      {
+        "task_id": "13",
+        "actual_result": "测试本周任务",
+        "AnalysisofResultDifferences": "测试本周分析"
+      }
+    ],
+    "Developmental_tasks": [
+      {
+        "project_id": "58", 
+        "phase_id": "29",
+        "actual_result": "测试本周项目",
+        "AnalysisofResultDifferences": "测试本周项目分析"
+      }
+    ]
+  },
+  "nextWeekPlan": {
+    "Routine_tasks": [
+      {
+        "task_id": "14"
+      }
+    ],
+    "Developmental_tasks": [
+      {
+        "project_id": "59",
+        "phase_id": "31"
+      }
+    ]
+  },
+  "additionalNotes": "测试备注",
+  "developmentOpportunities": "测试发展机会"
+}

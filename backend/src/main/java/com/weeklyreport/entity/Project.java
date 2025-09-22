@@ -4,93 +4,74 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
- * Project entity representing projects in the system
+ * Project entity - 严格按照数据库设计.md第82-115行和error3.md要求重构
+ * 
+ * 字段映射 (数据库设计.md 第88-102行)：
+ * - project_name → name
+ * - project_content → description  
+ * - project_members → members
+ * 
+ * 删除的字段包括：actual_results, status, ai_analysis_result, 复杂审批字段等
+ * 保留核心审批字段：ai_analysis_id, admin_reviewer_id, super_admin_reviewer_id, rejection_reason, approval_status
  */
 @Entity
 @Table(name = "projects", indexes = {
     @Index(name = "idx_project_name", columnList = "name"),
-    @Index(name = "idx_project_status", columnList = "status"),
-    @Index(name = "idx_project_created_by", columnList = "created_by"),
-    @Index(name = "idx_project_department", columnList = "department_id"),
-    @Index(name = "idx_project_dates", columnList = "start_date, end_date"),
-    @Index(name = "idx_project_deleted_at", columnList = "deleted_at")
+    @Index(name = "idx_project_approval_status", columnList = "approval_status"),
+    @Index(name = "idx_project_created_by", columnList = "created_by")
 })
-@SQLDelete(sql = "UPDATE projects SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
-@Where(clause = "deleted_at IS NULL")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;                                // #项目ID (error3.md要求)
 
     @NotBlank(message = "Project name cannot be blank")
-    @Size(min = 2, max = 100, message = "Project name must be between 2 and 100 characters")
-    @Column(name = "name", nullable = false, length = 100)
-    private String name;
+    @Size(max = 200, message = "Project name must not exceed 200 characters")
+    @Column(name = "name", nullable = false, length = 200)
+    private String name;                            // #项目名称 (原project_name字段)
 
-    @Size(max = 1000, message = "Description must not exceed 1000 characters")
     @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
+    private String description;                     // #项目内容 (原project_content字段)
 
-    @NotNull(message = "Project status cannot be null")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
-    private ProjectStatus status = ProjectStatus.PLANNING;
+    @Column(name = "members", columnDefinition = "TEXT")
+    private String members;                         // #项目成员 (原project_members字段)
 
-    @NotNull(message = "Project priority cannot be null")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "priority", nullable = false, length = 20)
-    private ProjectPriority priority = ProjectPriority.MEDIUM;
+    @Column(name = "expected_results", columnDefinition = "TEXT")
+    private String expectedResults;                 // #预期结果
 
-    @Column(name = "start_date")
-    private LocalDate startDate;
+    @Column(name = "timeline", columnDefinition = "TEXT")
+    private String timeline;                        // #时间线
 
-    @Column(name = "end_date")
-    private LocalDate endDate;
+    @Column(name = "stop_loss", columnDefinition = "TEXT")
+    private String stopLoss;                        // #止损点（可选）
 
-    @Column(name = "budget", precision = 15, scale = 2)
-    private BigDecimal budget;
-
-    @Min(value = 0, message = "Progress cannot be negative")
-    @Max(value = 100, message = "Progress cannot exceed 100%")
-    @Column(name = "progress", nullable = false)
-    private Integer progress = 0;
-
-    @Size(max = 200, message = "Tags must not exceed 200 characters")
-    @Column(name = "tags", length = 200)
-    private String tags;
-
-    @Column(name = "is_public", nullable = false)
-    private Boolean isPublic = true;
-
-    @Column(name = "archived", nullable = false)
-    private Boolean archived = false;
-
-    // Relationships
     @NotNull(message = "Project creator cannot be null")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by", nullable = false)
-    private User createdBy;
+    @Column(name = "created_by", nullable = false)
+    private Long createdBy;                         // 创建者ID
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
-    private Department department;
+    // 审批流程字段 (按数据库设计.md要求)
+    @Column(name = "ai_analysis_id")
+    private Long aiAnalysisId;                      // AI分析结果ID（外键）
 
-    // One-to-Many relationship with WeeklyReport
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<WeeklyReport> weeklyReports = new HashSet<>();
+    @Column(name = "admin_reviewer_id")
+    private Long adminReviewerId;                   // 管理员审批人ID
 
-    // Timestamps
+    @Column(name = "super_admin_reviewer_id")
+    private Long superAdminReviewerId;              // 超级管理员审批人ID
+
+    @Column(name = "rejection_reason", columnDefinition = "TEXT")
+    private String rejectionReason;                 // 拒绝理由
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "approval_status", length = 30, nullable = false)
+    private ApprovalStatus approvalStatus = ApprovalStatus.AI_ANALYZING; // 审批状态
+
+    // 时间戳字段
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -99,33 +80,47 @@ public class Project {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
+    // 简化版本：不使用JPA关联关系，通过Repository查询获取ProjectPhase
+    // 相关ProjectPhase可以通过ProjectPhaseRepository.findByProjectId(Long projectId)获取
 
-    // Project status enum
-    public enum ProjectStatus {
-        PLANNING,       // 规划中
-        ACTIVE,         // 进行中
-        ON_HOLD,        // 暂停
-        COMPLETED,      // 已完成
-        CANCELLED       // 已取消
+    // 审批状态枚举 (完整的三级审批流程 - 按数据库设计.md第108-121行)
+    public enum ApprovalStatus {
+        AI_ANALYZING,            // AI分析中
+        AI_APPROVED,             // AI分析通过
+        AI_REJECTED,             // AI分析拒绝
+        ADMIN_REVIEWING,         // 管理员审核中
+        ADMIN_APPROVED,          // 管理员审核通过
+        ADMIN_REJECTED,          // 管理员审核拒绝
+        SUPER_ADMIN_REVIEWING,   // 超级管理员审核中
+        SUPER_ADMIN_APPROVED,    // 超级管理员审核通过
+        SUPER_ADMIN_REJECTED,    // 超级管理员审核拒绝
+        FINAL_APPROVED           // 最终批准
     }
 
-    // Project priority enum
+    // 项目状态枚举 - 兼容性
+    public enum ProjectStatus {
+        ACTIVE,                 // 进行中
+        COMPLETED,              // 已完成
+        CANCELLED,              // 已取消
+        ON_HOLD                 // 暂停
+    }
+
+    // 项目优先级枚举 - 兼容性
     public enum ProjectPriority {
-        LOW,            // 低优先级
-        MEDIUM,         // 中优先级
-        HIGH,           // 高优先级
-        URGENT          // 紧急
+        LOW,                    // 低优先级
+        MEDIUM,                 // 中优先级
+        HIGH,                   // 高优先级
+        URGENT                  // 紧急
     }
 
     // Constructors
     public Project() {}
 
-    public Project(String name, String description, User createdBy) {
+    public Project(String name, String description, Long createdBy) {
         this.name = name;
         this.description = description;
         this.createdBy = createdBy;
+        this.approvalStatus = ApprovalStatus.AI_ANALYZING;
     }
 
     // Getters and Setters
@@ -153,100 +148,84 @@ public class Project {
         this.description = description;
     }
 
-    public ProjectStatus getStatus() {
-        return status;
+    public String getMembers() {
+        return members;
     }
 
-    public void setStatus(ProjectStatus status) {
-        this.status = status;
+    public void setMembers(String members) {
+        this.members = members;
     }
 
-    public ProjectPriority getPriority() {
-        return priority;
+    public String getExpectedResults() {
+        return expectedResults;
     }
 
-    public void setPriority(ProjectPriority priority) {
-        this.priority = priority;
+    public void setExpectedResults(String expectedResults) {
+        this.expectedResults = expectedResults;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public String getTimeline() {
+        return timeline;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setTimeline(String timeline) {
+        this.timeline = timeline;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public String getStopLoss() {
+        return stopLoss;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setStopLoss(String stopLoss) {
+        this.stopLoss = stopLoss;
     }
 
-    public BigDecimal getBudget() {
-        return budget;
-    }
-
-    public void setBudget(BigDecimal budget) {
-        this.budget = budget;
-    }
-
-    public Integer getProgress() {
-        return progress;
-    }
-
-    public void setProgress(Integer progress) {
-        this.progress = progress;
-    }
-
-    public String getTags() {
-        return tags;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
-    public Boolean getIsPublic() {
-        return isPublic;
-    }
-
-    public void setIsPublic(Boolean isPublic) {
-        this.isPublic = isPublic;
-    }
-
-    public Boolean getArchived() {
-        return archived;
-    }
-
-    public void setArchived(Boolean archived) {
-        this.archived = archived;
-    }
-
-    public User getCreatedBy() {
+    public Long getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Long getAiAnalysisId() {
+        return aiAnalysisId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setAiAnalysisId(Long aiAnalysisId) {
+        this.aiAnalysisId = aiAnalysisId;
     }
 
-    public Set<WeeklyReport> getWeeklyReports() {
-        return weeklyReports;
+    public Long getAdminReviewerId() {
+        return adminReviewerId;
     }
 
-    public void setWeeklyReports(Set<WeeklyReport> weeklyReports) {
-        this.weeklyReports = weeklyReports;
+    public void setAdminReviewerId(Long adminReviewerId) {
+        this.adminReviewerId = adminReviewerId;
+    }
+
+    public Long getSuperAdminReviewerId() {
+        return superAdminReviewerId;
+    }
+
+    public void setSuperAdminReviewerId(Long superAdminReviewerId) {
+        this.superAdminReviewerId = superAdminReviewerId;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
+    }
+
+    public ApprovalStatus getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(ApprovalStatus approvalStatus) {
+        this.approvalStatus = approvalStatus;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -265,33 +244,79 @@ public class Project {
         this.updatedAt = updatedAt;
     }
 
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
+    // 简化版本：项目阶段管理通过Repository操作
+    // 使用 ProjectPhaseRepository.save(projectPhase) 创建阶段
+    // 使用 ProjectPhaseRepository.findByProjectId(projectId) 查询阶段
+
+    // Business logic methods
+    public void submit() {
+        this.approvalStatus = ApprovalStatus.AI_ANALYZING;
     }
 
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
+    public void aiApprove() {
+        this.approvalStatus = ApprovalStatus.AI_APPROVED;
     }
 
-    // Utility methods
-    public void addWeeklyReport(WeeklyReport report) {
-        weeklyReports.add(report);
-        report.setProject(this);
+    public void adminApprove(Long adminId) {
+        this.adminReviewerId = adminId;
+        // 管理员审批通过后，应该进入超级管理员审核阶段
+        this.approvalStatus = ApprovalStatus.SUPER_ADMIN_REVIEWING;
     }
 
-    public void removeWeeklyReport(WeeklyReport report) {
-        weeklyReports.remove(report);
-        report.setProject(null);
+    public void superAdminApprove(Long superAdminId) {
+        this.superAdminReviewerId = superAdminId;
+        this.approvalStatus = ApprovalStatus.SUPER_ADMIN_APPROVED;
     }
 
-    public boolean isOverdue() {
-        return endDate != null && LocalDate.now().isAfter(endDate) 
-               && status != ProjectStatus.COMPLETED && status != ProjectStatus.CANCELLED;
+    public void reject(Long reviewerId, String reason) {
+        if (this.approvalStatus == ApprovalStatus.AI_APPROVED) {
+            this.adminReviewerId = reviewerId;
+            this.approvalStatus = ApprovalStatus.ADMIN_REJECTED;
+        } else {
+            this.superAdminReviewerId = reviewerId;
+            this.approvalStatus = ApprovalStatus.SUPER_ADMIN_REJECTED;
+        }
+        this.rejectionReason = reason;
     }
 
-    public boolean isActive() {
-        return status == ProjectStatus.ACTIVE || status == ProjectStatus.PLANNING;
+    /**
+     * 管理员拒绝项目
+     */
+    public void adminReject(Long adminId, String reason) {
+        this.adminReviewerId = adminId;
+        this.approvalStatus = ApprovalStatus.ADMIN_REJECTED;
+        this.rejectionReason = reason;
     }
+
+    /**
+     * 超级管理员拒绝项目
+     */
+    public void superAdminReject(Long superAdminId, String reason) {
+        this.superAdminReviewerId = superAdminId;
+        this.approvalStatus = ApprovalStatus.SUPER_ADMIN_REJECTED;
+        this.rejectionReason = reason;
+    }
+
+    public boolean isDraft() {
+        return approvalStatus == ApprovalStatus.AI_ANALYZING;
+    }
+
+    public boolean isSubmitted() {
+        return approvalStatus == ApprovalStatus.AI_ANALYZING;
+    }
+
+    public boolean isApproved() {
+        return approvalStatus == ApprovalStatus.SUPER_ADMIN_APPROVED || 
+               approvalStatus == ApprovalStatus.FINAL_APPROVED;
+    }
+
+    public boolean isRejected() {
+        return approvalStatus == ApprovalStatus.ADMIN_REJECTED || 
+               approvalStatus == ApprovalStatus.SUPER_ADMIN_REJECTED ||
+               approvalStatus == ApprovalStatus.AI_REJECTED;
+    }
+
+    // 简化版本中不支持项目阶段管理
 
     @Override
     public boolean equals(Object o) {
@@ -306,14 +331,80 @@ public class Project {
         return getClass().hashCode();
     }
 
+    // 业务方法 - 直接支持DTO所需字段
+    public ProjectStatus getStatus() {
+        // 使用approval_status映射到ProjectStatus
+        switch (this.approvalStatus) {
+            case AI_ANALYZING: case AI_APPROVED: case ADMIN_REVIEWING: case SUPER_ADMIN_REVIEWING: return ProjectStatus.ACTIVE;
+            case SUPER_ADMIN_APPROVED: case FINAL_APPROVED: return ProjectStatus.COMPLETED;
+            case AI_REJECTED: case ADMIN_REJECTED: case SUPER_ADMIN_REJECTED: return ProjectStatus.ON_HOLD;
+            default: return ProjectStatus.ACTIVE;
+        }
+    }
+    
+    public void setStatus(ProjectStatus status) {
+        // ProjectStatus is calculated from approvalStatus, so this is a no-op
+        // Included for compatibility
+    }
+
+    public ProjectPriority getPriority() {
+        return ProjectPriority.MEDIUM; // 简化版本默认中等优先级
+    }
+
+    public java.time.LocalDate getStartDate() {
+        return createdAt != null ? createdAt.toLocalDate() : null;
+    }
+
+    public java.time.LocalDate getEndDate() {
+        return null; // 简化版本中不支持
+    }
+
+    public java.math.BigDecimal getBudget() {
+        return null; // 简化版本中不支持
+    }
+
+    public Integer getProgress() {
+        // 基于审批状态计算进度
+        switch (this.approvalStatus) {
+            case AI_ANALYZING: return 15;
+            case AI_APPROVED: return 40;
+            case ADMIN_REVIEWING: return 60;
+            case SUPER_ADMIN_REVIEWING: return 80;
+            case SUPER_ADMIN_APPROVED: return 95;
+            case FINAL_APPROVED: return 100;
+            case AI_REJECTED: case ADMIN_REJECTED: case SUPER_ADMIN_REJECTED: return 0;
+            default: return 0;
+        }
+    }
+    
+    public void setProgress(int progress) {
+        // Progress is calculated from approvalStatus, so this is a no-op
+        // Included for compatibility
+    }
+
+    public String getTags() {
+        return null; // 简化版本中不支持
+    }
+
+    public Boolean getIsPublic() {
+        return false; // 简化版本默认私有
+    }
+
+    public Boolean getArchived() {
+        return false; // 简化版本默认未归档
+    }
+
+    public Object getDepartment() {
+        return null; // 简化版本中不支持部门
+    }
+
     @Override
     public String toString() {
         return "Project{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", status=" + status +
-                ", priority=" + priority +
-                ", progress=" + progress +
+                ", approvalStatus=" + approvalStatus +
+                ", createdBy=" + createdBy +
                 '}';
     }
 }

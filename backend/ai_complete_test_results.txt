@@ -1,0 +1,21 @@
+=== AI模块 - 测试所有接口 ===
+
+1. POST /ai/analyze/project - 项目AI分析
+jq: parse error: Invalid numeric literal at line 1, column 10
+HTTP_CODE: 404
+
+2. POST /ai/analyze/weekly-report - 周报AI分析
+jq: parse error: Invalid numeric literal at line 1, column 10
+HTTP_CODE: 404
+
+3. GET /ai/analysis/1 - 获取分析结果
+jq: parse error: Invalid numeric literal at line 1, column 10
+HTTP_CODE: 404
+
+4. GET /ai/health - AI健康检查
+jq: parse error: Invalid numeric literal at line 1, column 10
+HTTP_CODE: 404
+
+5. GET /ai/metrics - AI服务指标
+jq: parse error: Invalid numeric literal at line 1, column 10
+HTTP_CODE: 404

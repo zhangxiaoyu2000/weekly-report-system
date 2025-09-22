@@ -1,0 +1,82 @@
+=== TASKS模块 - 测试所有接口 ===
+
+1. POST /api/tasks - 创建任务
+{
+  "success": false,
+  "message": "Internal server error: JSON parse error: Cannot deserialize value of type `com.weeklyreport.entity.Task$TaskType` from String \"ROUTINE\": not one of the values accepted for Enum class: [WEEKLY, MONTHLY, DAILY]",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:11.072972"
+}
+HTTP_CODE: 500
+
+2. GET /api/tasks - 获取任务列表
+{
+  "success": true,
+  "message": "Success",
+  "data": {
+    "content": [],
+    "pageable": {
+      "pageNumber": 0,
+      "pageSize": 10,
+      "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+      },
+      "offset": 0,
+      "paged": true,
+      "unpaged": false
+    },
+    "totalElements": 0,
+    "last": true,
+    "totalPages": 0,
+    "numberOfElements": 0,
+    "first": true,
+    "size": 10,
+    "number": 0,
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "empty": true
+  },
+  "timestamp": "2025-09-20T13:52:11.112589"
+}
+HTTP_CODE: 200
+
+3. GET /api/tasks/1 - 获取任务详情
+{
+  "success": false,
+  "message": "Task not found",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:11.157687"
+}
+HTTP_CODE: 404
+
+4. PUT /api/tasks/1 - 更新任务
+{
+  "success": false,
+  "message": "Internal server error: JSON parse error: Cannot deserialize value of type `com.weeklyreport.entity.Task$TaskType` from String \"DEVELOPMENT\": not one of the values accepted for Enum class: [WEEKLY, MONTHLY, DAILY]",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:11.187108"
+}
+HTTP_CODE: 500
+
+5. GET /api/tasks/my - 获取我的任务
+{
+  "success": true,
+  "message": "Success",
+  "data": [],
+  "timestamp": "2025-09-20T13:52:11.221234"
+}
+HTTP_CODE: 200
+
+6. DELETE /api/tasks/1 - 删除任务
+{
+  "success": false,
+  "message": "Task not found",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:11.257216"
+}
+HTTP_CODE: 404

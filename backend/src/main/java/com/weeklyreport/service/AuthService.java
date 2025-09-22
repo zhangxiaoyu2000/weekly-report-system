@@ -3,7 +3,7 @@ package com.weeklyreport.service;
 import com.weeklyreport.dto.auth.*;
 import com.weeklyreport.entity.User;
 import com.weeklyreport.repository.UserRepository;
-import com.weeklyreport.repository.DepartmentRepository;
+// import com.weeklyreport.repository.DepartmentRepository; // 简化版本中不需要
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +27,14 @@ public class AuthService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private DepartmentRepository departmentRepository;
+    // @Autowired
+    // private DepartmentRepository departmentRepository; // 简化版本中不需要
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    // Note: JwtTokenProvider will be injected when Stream A completes the security configuration
-    // @Autowired
-    // private JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private com.weeklyreport.security.JwtTokenProvider jwtTokenProvider;
 
     /**
      * Authenticate user with username/email and password
@@ -47,9 +46,14 @@ public class AuthService {
         User user = findUserByUsernameOrEmail(loginRequest.getUsernameOrEmail())
                 .orElseThrow(() -> new BadCredentialsException("Invalid username/email or password"));
 
-        // Check user status
+        // Check user status - only allow active users to login
         if (user.getStatus() != User.UserStatus.ACTIVE) {
-            throw new BadCredentialsException("Account is not active");
+            switch (user.getStatus()) {
+                case INACTIVE:
+                    throw new BadCredentialsException("Account has been deactivated");
+                default:
+                    throw new BadCredentialsException("Account is not available");
+            }
         }
 
         // Verify password
@@ -58,14 +62,14 @@ public class AuthService {
             throw new BadCredentialsException("Invalid username/email or password");
         }
 
-        // Update last login time
-        user.setLastLoginTime(LocalDateTime.now());
-        userRepository.save(user);
+        // Last login tracking disabled in simplified version
+        // user.setLastLogin(LocalDateTime.now());
+        // userRepository.save(user);
 
-        // Generate JWT tokens (will be implemented when Stream A completes)
-        String accessToken = "temp-access-token"; // jwtTokenProvider.generateAccessToken(user);
-        String refreshToken = "temp-refresh-token"; // jwtTokenProvider.generateRefreshToken(user);
-        Long expiresIn = 3600L; // jwtTokenProvider.getAccessTokenValidityInSeconds();
+        // Generate JWT tokens
+        String accessToken = jwtTokenProvider.generateAccessToken(user);
+        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUsername());
+        Long expiresIn = jwtTokenProvider.getAccessTokenValidityInSeconds();
 
         logger.info("User {} logged in successfully", user.getUsername());
         return AuthResponse.success(accessToken, refreshToken, expiresIn, user);
@@ -92,38 +96,32 @@ public class AuthService {
             throw new IllegalArgumentException("Email already exists");
         }
 
-        // Check if employee ID already exists (if provided)
-        if (registerRequest.getEmployeeId() != null && 
-            !registerRequest.getEmployeeId().isEmpty() &&
-            userRepository.existsByEmployeeId(registerRequest.getEmployeeId())) {
-            throw new IllegalArgumentException("Employee ID already exists");
-        }
+        // Employee ID check disabled in simplified entity
 
         // Create new user
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setFullName(registerRequest.getFullName());
-        user.setEmployeeId(registerRequest.getEmployeeId());
-        user.setPhone(registerRequest.getPhone());
-        user.setPosition(registerRequest.getPosition());
-        user.setRole(User.Role.EMPLOYEE); // Default role
+        // Set first and last name instead of full name
+        // Full name fields not available in simplified entity
+        // Phone, position, employeeId not supported in simplified entity
+        user.setRole(registerRequest.getRole() != null ? registerRequest.getRole() : User.Role.MANAGER);
         user.setStatus(User.UserStatus.ACTIVE);
 
-        // Set department if provided
+        // Set department if provided (simplified version - skip department assignment)
         if (registerRequest.getDepartmentId() != null) {
-            departmentRepository.findById(registerRequest.getDepartmentId())
-                    .ifPresent(user::setDepartment);
+            // 简化版本中不支持部门管理，跳过部门分配
+            logger.info("Department assignment skipped in simplified version");
         }
 
         // Save user
         user = userRepository.save(user);
 
-        // Generate JWT tokens (will be implemented when Stream A completes)
-        String accessToken = "temp-access-token"; // jwtTokenProvider.generateAccessToken(user);
-        String refreshToken = "temp-refresh-token"; // jwtTokenProvider.generateRefreshToken(user);
-        Long expiresIn = 3600L; // jwtTokenProvider.getAccessTokenValidityInSeconds();
+        // Generate JWT tokens
+        String accessToken = jwtTokenProvider.generateAccessToken(user);
+        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUsername());
+        Long expiresIn = jwtTokenProvider.getAccessTokenValidityInSeconds();
 
         logger.info("User {} registered successfully", user.getUsername());
         return AuthResponse.success(accessToken, refreshToken, expiresIn, user);
@@ -146,9 +144,14 @@ public class AuthService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new BadCredentialsException("User not found"));
 
-        // Check user status
+        // Check user status - only allow active users to refresh tokens
         if (user.getStatus() != User.UserStatus.ACTIVE) {
-            throw new BadCredentialsException("Account is not active");
+            switch (user.getStatus()) {
+                case INACTIVE:
+                    throw new BadCredentialsException("Account has been deactivated");
+                default:
+                    throw new BadCredentialsException("Account is not available");
+            }
         }
 
         // Generate new tokens

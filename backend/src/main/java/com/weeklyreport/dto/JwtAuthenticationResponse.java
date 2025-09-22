@@ -90,12 +90,10 @@ public class JwtAuthenticationResponse {
             this.username = user.getUsername();
             this.email = user.getEmail();
             this.fullName = user.getFullName();
-            this.employeeId = user.getEmployeeId();
-            this.position = user.getPosition();
+            // 简化版本中不支持employeeId和position
             this.role = user.getRole();
             this.status = user.getStatus();
-            this.departmentName = user.getDepartment() != null ? user.getDepartment().getName() : null;
-            this.avatarUrl = user.getAvatarUrl();
+            // 简化版本中不支持部门和头像
             this.lastLoginTime = user.getLastLoginTime();
         }
 

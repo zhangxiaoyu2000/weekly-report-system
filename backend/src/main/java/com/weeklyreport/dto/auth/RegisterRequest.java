@@ -1,10 +1,11 @@
 package com.weeklyreport.dto.auth;
 
+import com.weeklyreport.entity.User;
 import com.weeklyreport.validation.PasswordMatching;
 import jakarta.validation.constraints.*;
 
 /**
- * Registration request DTO
+ * Registration request DTO - 严格按照User.java简化设计
  */
 @PasswordMatching(passwordField = "password", confirmPasswordField = "confirmPassword")
 public class RegisterRequest {
@@ -12,46 +13,32 @@ public class RegisterRequest {
     @NotBlank(message = "Username is required")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "Username can only contain letters, numbers and underscores")
-    private String username;
+    private String username;                    // #用户名
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
     @Size(max = 100, message = "Email must not exceed 100 characters")
-    private String email;
+    private String email;                       // #邮箱
 
     @NotBlank(message = "Password is required")
     @Size(min = 8, max = 100, message = "Password must be between 8 and 100 characters")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$", 
-             message = "Password must contain at least one uppercase letter, one lowercase letter, one digit and one special character")
-    private String password;
+    private String password;                    // #密码（简化验证规则）
 
     @NotBlank(message = "Password confirmation is required")
-    private String confirmPassword;
+    private String confirmPassword;             // 确认密码
 
-    @NotBlank(message = "Full name is required")
-    @Size(max = 100, message = "Full name must not exceed 100 characters")
-    private String fullName;
-
-    @Size(max = 20, message = "Employee ID must not exceed 20 characters")
-    private String employeeId;
-
-    @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Phone number must be valid")
-    private String phone;
-
-    @Size(max = 100, message = "Position must not exceed 100 characters")
-    private String position;
-
-    private Long departmentId;
+    @NotNull(message = "Role cannot be null")
+    private User.Role role = User.Role.MANAGER; // #角色（系统角色分为主管，管理员和超级管理员）
 
     // Constructors
     public RegisterRequest() {}
 
-    public RegisterRequest(String username, String email, String password, String confirmPassword, String fullName) {
+    public RegisterRequest(String username, String email, String password, String confirmPassword, User.Role role) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.fullName = fullName;
+        this.role = role;
     }
 
     // Getters and Setters
@@ -87,49 +74,43 @@ public class RegisterRequest {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getFullName() {
-        return fullName;
+
+    public User.Role getRole() {
+        return role;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
+    public void setRole(User.Role role) {
+        this.role = role;
     }
 
     // Custom validation method
     public boolean isPasswordMatching() {
         return password != null && password.equals(confirmPassword);
+    }
+
+    // 兼容性方法
+    public String getFirstName() {
+        return username; // 简化版本中用username代替
+    }
+
+    public void setFirstName(String firstName) {
+        // 简化版本中忽略
+    }
+
+    public String getLastName() {
+        return ""; // 简化版本中返回空字符串
+    }
+
+    public void setLastName(String lastName) {
+        // 简化版本中忽略
+    }
+
+    public Long getDepartmentId() {
+        return null; // 简化版本中不支持部门
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        // 简化版本中忽略
     }
 
     @Override
@@ -139,11 +120,7 @@ public class RegisterRequest {
                 ", email='" + email + '\'' +
                 ", password='[PROTECTED]'" +
                 ", confirmPassword='[PROTECTED]'" +
-                ", fullName='" + fullName + '\'' +
-                ", employeeId='" + employeeId + '\'' +
-                ", phone='" + phone + '\'' +
-                ", position='" + position + '\'' +
-                ", departmentId=" + departmentId +
+                ", role=" + role +
                 '}';
     }
 }

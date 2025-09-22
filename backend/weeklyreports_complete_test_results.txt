@@ -1,0 +1,91 @@
+=== WEEKLYREPORTS模块 - 测试所有接口 ===
+
+1. POST /api/weekly-reports - 创建周报
+{
+  "success": false,
+  "message": "Internal server error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.weeklyreport.dto.ApiResponse<com.weeklyreport.entity.WeeklyReport>> com.weeklyreport.controller.WeeklyReportController.createWeeklyReport(com.weeklyreport.dto.weeklyreport.WeeklyReportCreateRequest) with 3 errors: [Field error in object 'weeklyReportCreateRequest' on field 'title': rejected value [null]; codes [NotBlank.weeklyReportCreateRequest.title,NotBlank.title,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [weeklyReportCreateRequest.title,title]; arguments []; default message [title]]; default message [Title cannot be blank]] [Field error in object 'weeklyReportCreateRequest' on field 'reportWeek': rejected value [null]; codes [NotBlank.weeklyReportCreateRequest.reportWeek,NotBlank.reportWeek,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [weeklyReportCreateRequest.reportWeek,reportWeek]; arguments []; default message [reportWeek]]; default message [Report week cannot be blank]] [Field error in object 'weeklyReportCreateRequest' on field 'userId': rejected value [null]; codes [NotNull.weeklyReportCreateRequest.userId,NotNull.userId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [weeklyReportCreateRequest.userId,userId]; arguments []; default message [userId]]; default message [User ID cannot be null]] ",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:45.386324"
+}
+HTTP_CODE: 500
+
+2. GET /api/weekly-reports - 获取所有周报
+{
+  "success": true,
+  "message": "获取周报列表成功",
+  "data": [],
+  "timestamp": "2025-09-20T13:52:45.423725"
+}
+HTTP_CODE: 200
+
+3. GET /api/weekly-reports/my - 获取我的周报
+{
+  "success": true,
+  "message": "获取我的周报列表成功",
+  "data": [],
+  "timestamp": "2025-09-20T13:52:45.473418"
+}
+HTTP_CODE: 200
+
+4. GET /api/weekly-reports/pending - 获取待审批周报
+{
+  "success": true,
+  "message": "获取待审批周报列表成功",
+  "data": [],
+  "timestamp": "2025-09-20T13:52:45.514039"
+}
+HTTP_CODE: 200
+
+5. GET /api/weekly-reports/1 - 获取周报详情
+{
+  "success": false,
+  "message": "周报不存在",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:45.55491"
+}
+HTTP_CODE: 404
+
+6. PUT /api/weekly-reports/1 - 更新周报
+{
+  "success": false,
+  "message": "Internal server error: Validation failed for argument [1] in public org.springframework.http.ResponseEntity<com.weeklyreport.dto.ApiResponse<com.weeklyreport.entity.WeeklyReport>> com.weeklyreport.controller.WeeklyReportController.updateWeeklyReport(java.lang.Long,com.weeklyreport.dto.weeklyreport.WeeklyReportCreateRequest) with 3 errors: [Field error in object 'weeklyReportCreateRequest' on field 'title': rejected value [null]; codes [NotBlank.weeklyReportCreateRequest.title,NotBlank.title,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [weeklyReportCreateRequest.title,title]; arguments []; default message [title]]; default message [Title cannot be blank]] [Field error in object 'weeklyReportCreateRequest' on field 'reportWeek': rejected value [null]; codes [NotBlank.weeklyReportCreateRequest.reportWeek,NotBlank.reportWeek,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [weeklyReportCreateRequest.reportWeek,reportWeek]; arguments []; default message [reportWeek]]; default message [Report week cannot be blank]] [Field error in object 'weeklyReportCreateRequest' on field 'userId': rejected value [null]; codes [NotNull.weeklyReportCreateRequest.userId,NotNull.userId,NotNull.java.lang.Long,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [weeklyReportCreateRequest.userId,userId]; arguments []; default message [userId]]; default message [User ID cannot be null]] ",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:45.589242"
+}
+HTTP_CODE: 500
+
+7. PUT /api/weekly-reports/1/submit - 提交周报
+{
+  "success": false,
+  "message": "周报不存在",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:45.621671"
+}
+HTTP_CODE: 404
+
+8. PUT /api/weekly-reports/1/ai-approve - AI审批周报
+{
+  "success": false,
+  "message": "Internal server error: Required request parameter 'aiAnalysisId' for method parameter type Long is not present",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:45.654835"
+}
+HTTP_CODE: 500
+
+9. PUT /api/weekly-reports/1/admin-approve - 管理员审批
+{
+  "success": false,
+  "message": "周报不存在",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:45.685521"
+}
+HTTP_CODE: 404
+
+10. PUT /api/weekly-reports/1/super-admin-approve - 超管审批
+{
+  "success": false,
+  "message": "只有超级管理员可以进行终审",
+  "data": null,
+  "timestamp": "2025-09-20T13:52:45.723625"
+}
+HTTP_CODE: 403

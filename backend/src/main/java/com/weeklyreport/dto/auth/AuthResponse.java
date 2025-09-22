@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
 
 /**
- * Authentication response DTO
+ * Authentication response DTO - 严格按照User.java简化设计
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AuthResponse {
@@ -72,23 +72,44 @@ public class AuthResponse {
     public void setUser(UserInfo user) {
         this.user = user;
     }
+    
+    // 兼容性方法 - 用于测试接口
+    public void setUserId(Long userId) {
+        if (this.user == null) {
+            this.user = new UserInfo();
+        }
+        this.user.setId(userId);
+    }
+    
+    public void setUsername(String username) {
+        if (this.user == null) {
+            this.user = new UserInfo();
+        }
+        this.user.setUsername(username);
+    }
+    
+    public void setRole(User.Role role) {
+        if (this.user == null) {
+            this.user = new UserInfo();
+        }
+        this.user.setRole(role);
+    }
 
     /**
-     * User information DTO for authentication response
+     * User information DTO for authentication response - 简化版本
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class UserInfo {
-        private Long id;
-        private String username;
-        private String email;
-        private String fullName;
-        private String employeeId;
-        private String position;
-        private User.Role role;
-        private User.UserStatus status;
-        private String avatarUrl;
-        private String departmentName;
-        private LocalDateTime lastLoginTime;
+        private Long id;                        // #用户ID
+        private String username;                // #用户名
+        private String email;                   // #邮箱
+        private User.Role role;                 // #角色（系统角色分为主管，管理员和超级管理员）
+        private User.UserStatus status;         // #状态
+        private LocalDateTime createdAt;        // 创建时间
+        private LocalDateTime updatedAt;        // 更新时间
+        
+        // 兼容性字段
+        private String fullName;                // 计算字段，供前端使用
 
         // Constructors
         public UserInfo() {}
@@ -99,18 +120,13 @@ public class AuthResponse {
             userInfo.setId(user.getId());
             userInfo.setUsername(user.getUsername());
             userInfo.setEmail(user.getEmail());
-            userInfo.setFullName(user.getFullName());
-            userInfo.setEmployeeId(user.getEmployeeId());
-            userInfo.setPosition(user.getPosition());
             userInfo.setRole(user.getRole());
             userInfo.setStatus(user.getStatus());
-            userInfo.setAvatarUrl(user.getAvatarUrl());
-            userInfo.setLastLoginTime(user.getLastLoginTime());
+            userInfo.setCreatedAt(user.getCreatedAt());
+            userInfo.setUpdatedAt(user.getUpdatedAt());
             
-            // Set department name if department exists
-            if (user.getDepartment() != null) {
-                userInfo.setDepartmentName(user.getDepartment().getName());
-            }
+            // 兼容性字段
+            userInfo.setFullName(user.getFullName()); // 在简化版本中，用username作为全名
             
             return userInfo;
         }
@@ -140,6 +156,22 @@ public class AuthResponse {
             this.email = email;
         }
 
+        public LocalDateTime getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public LocalDateTime getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(LocalDateTime updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
         public String getFullName() {
             return fullName;
         }
@@ -147,21 +179,22 @@ public class AuthResponse {
         public void setFullName(String fullName) {
             this.fullName = fullName;
         }
-
-        public String getEmployeeId() {
-            return employeeId;
+        
+        // 兼容性方法
+        public String getFirstName() {
+            return username; // 简化版本中用username代替
         }
 
-        public void setEmployeeId(String employeeId) {
-            this.employeeId = employeeId;
+        public void setFirstName(String firstName) {
+            // 简化版本中忽略
         }
 
-        public String getPosition() {
-            return position;
+        public String getLastName() {
+            return ""; // 简化版本中返回空字符串
         }
 
-        public void setPosition(String position) {
-            this.position = position;
+        public void setLastName(String lastName) {
+            // 简化版本中忽略
         }
 
         public User.Role getRole() {
@@ -180,28 +213,37 @@ public class AuthResponse {
             this.status = status;
         }
 
-        public String getAvatarUrl() {
-            return avatarUrl;
-        }
-
-        public void setAvatarUrl(String avatarUrl) {
-            this.avatarUrl = avatarUrl;
-        }
-
         public String getDepartmentName() {
-            return departmentName;
+            return null; // 简化版本中不支持部门
         }
 
         public void setDepartmentName(String departmentName) {
-            this.departmentName = departmentName;
+            // 简化版本中忽略
         }
 
-        public LocalDateTime getLastLoginTime() {
-            return lastLoginTime;
+        public LocalDateTime getLastLogin() {
+            return null; // 简化版本中不支持最后登录时间
         }
 
-        public void setLastLoginTime(LocalDateTime lastLoginTime) {
-            this.lastLoginTime = lastLoginTime;
+        public void setLastLogin(LocalDateTime lastLogin) {
+            // 简化版本中忽略
+        }
+        
+        // 业务方法
+        public boolean isManager() {
+            return role == User.Role.MANAGER;
+        }
+
+        public boolean isAdmin() {
+            return role == User.Role.ADMIN;
+        }
+
+        public boolean isSuperAdmin() {
+            return role == User.Role.SUPER_ADMIN;
+        }
+
+        public boolean isActive() {
+            return status == User.UserStatus.ACTIVE;
         }
     }
 }

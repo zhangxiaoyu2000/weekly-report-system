@@ -1,27 +1,38 @@
 package com.weeklyreport.dto.project;
 
 import com.weeklyreport.entity.Project;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * DTO for updating existing projects
  */
 public class ProjectUpdateRequest {
 
-    @NotBlank(message = "Project name cannot be blank")
     @Size(min = 2, max = 100, message = "Project name must be between 2 and 100 characters")
     private String name;
 
     @Size(max = 1000, message = "Description must not exceed 1000 characters")
     private String description;
 
-    @NotNull(message = "Project status cannot be null")
+    @Size(max = 5000, message = "Members must not exceed 5000 characters")
+    private String members;                         // #项目成员
+
+    @Size(max = 5000, message = "Expected results must not exceed 5000 characters")
+    private String expectedResults;                 // #预期结果
+
+    @Size(max = 5000, message = "Timeline must not exceed 5000 characters")
+    private String timeline;                        // #时间线
+
+    @Size(max = 5000, message = "Stop loss must not exceed 5000 characters")
+    private String stopLoss;                        // #止损点
+
     private Project.ProjectStatus status;
 
-    @NotNull(message = "Project priority cannot be null")
     private Project.ProjectPriority priority;
 
     private LocalDate startDate;
@@ -43,6 +54,9 @@ public class ProjectUpdateRequest {
     private Boolean archived;
 
     private Long departmentId;
+
+    @Valid
+    private List<ProjectPhaseCreateRequest> projectPhases;
 
     // Constructors
     public ProjectUpdateRequest() {}
@@ -69,6 +83,38 @@ public class ProjectUpdateRequest {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getMembers() {
+        return members;
+    }
+
+    public void setMembers(String members) {
+        this.members = members;
+    }
+
+    public String getExpectedResults() {
+        return expectedResults;
+    }
+
+    public void setExpectedResults(String expectedResults) {
+        this.expectedResults = expectedResults;
+    }
+
+    public String getTimeline() {
+        return timeline;
+    }
+
+    public void setTimeline(String timeline) {
+        this.timeline = timeline;
+    }
+
+    public String getStopLoss() {
+        return stopLoss;
+    }
+
+    public void setStopLoss(String stopLoss) {
+        this.stopLoss = stopLoss;
     }
 
     public Project.ProjectStatus getStatus() {
@@ -149,6 +195,14 @@ public class ProjectUpdateRequest {
 
     public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public List<ProjectPhaseCreateRequest> getProjectPhases() {
+        return projectPhases;
+    }
+
+    public void setProjectPhases(List<ProjectPhaseCreateRequest> projectPhases) {
+        this.projectPhases = projectPhases;
     }
 
     @Override

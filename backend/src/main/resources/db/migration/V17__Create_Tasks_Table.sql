@@ -1,0 +1,43 @@
+-- Create missing tasks table
+CREATE TABLE tasks (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    task_name VARCHAR(200) NOT NULL,
+    task_type VARCHAR(20) NOT NULL,
+    report_section VARCHAR(20),
+    personnel_assignment VARCHAR(100),
+    timeline VARCHAR(200),
+    quantitative_metrics VARCHAR(300),
+    expected_results VARCHAR(500),
+    actual_results VARCHAR(500),
+    result_difference_analysis TEXT,
+    stop_loss_point VARCHAR(500),
+    progress INT NOT NULL DEFAULT 0,
+    start_date DATE,
+    due_date DATE,
+    completion_date DATE,
+    budget DECIMAL(10,2),
+    is_completed BOOLEAN NOT NULL DEFAULT FALSE,
+    is_overdue BOOLEAN NOT NULL DEFAULT FALSE,
+    priority INT DEFAULT 5,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    weekly_report_id BIGINT,
+    simple_project_id BIGINT,
+    project_phase_id BIGINT,
+    task_template_id BIGINT,
+    
+    INDEX idx_task_weekly_report (weekly_report_id),
+    INDEX idx_task_type (task_type),
+    INDEX idx_task_section (report_section),
+    INDEX idx_tasks_project_phase_id (project_phase_id),
+    INDEX idx_tasks_task_template_id (task_template_id),
+    INDEX idx_tasks_simple_project_id (simple_project_id),
+    
+    FOREIGN KEY (weekly_report_id) REFERENCES weekly_reports(id) ON DELETE CASCADE,
+    FOREIGN KEY (simple_project_id) REFERENCES simple_projects(id) ON DELETE SET NULL,
+    FOREIGN KEY (project_phase_id) REFERENCES project_phases(id) ON DELETE SET NULL,
+    FOREIGN KEY (task_template_id) REFERENCES task_templates(id) ON DELETE SET NULL,
+    
+    CONSTRAINT chk_tasks_progress CHECK (progress >= 0 AND progress <= 100),
+    CONSTRAINT chk_tasks_priority CHECK (priority >= 1 AND priority <= 10)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Tasks table';

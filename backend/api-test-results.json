@@ -1,0 +1,1481 @@
+[
+  {
+    "endpoint": "/auth/register",
+    "method": "POST",
+    "description": "用户注册",
+    "input": {
+      "username": "testuser_1758381704653",
+      "password": "password123",
+      "confirmPassword": "password123",
+      "email": "test_1758381704653@example.com",
+      "fullName": "Test User Full",
+      "role": "MANAGER"
+    },
+    "output": {
+      "success": true,
+      "message": "Registration successful",
+      "data": {
+        "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcl8xNzU4MzgxNzA0NjUzIiwicm9sZXMiOiJST0xFX01BTkFHRVIiLCJpYXQiOjE3NTgzODE3MDUsImV4cCI6MTc1ODM4NTMwNSwidXNlcklkIjoxMDAzMSwiZnVsbE5hbWUiOiJ0ZXN0dXNlcl8xNzU4MzgxNzA0NjUzIiwiZW1haWwiOiJ0ZXN0XzE3NTgzODE3MDQ2NTNAZXhhbXBsZS5jb20ifQ.3eem0CU3i_QH1EBIkAINQSwAkaUYhjRVl5_Vh3B7dzr0GVmYLDs22Vy4S-UXYezguDIlkpO9vIl-zhHiOoeNBQ",
+        "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcl8xNzU4MzgxNzA0NjUzIiwiaWF0IjoxNzU4MzgxNzA1LCJleHAiOjE3NTg5ODY1MDV9.gGb96tQu9LIRNSVBUVTbwD1F8NkUrM_CPro61moBjvlvoeRwUAtm95AZT0r5WppP491x4GWIWjOBSypoE3lpNQ",
+        "tokenType": "Bearer",
+        "expiresIn": 3600,
+        "user": {
+          "id": 10031,
+          "username": "testuser_1758381704653",
+          "email": "test_1758381704653@example.com",
+          "role": "MANAGER",
+          "status": "ACTIVE",
+          "createdAt": "2025-09-20T23:21:45.033866",
+          "updatedAt": "2025-09-20T23:21:45.03388",
+          "fullName": "testuser_1758381704653",
+          "superAdmin": false,
+          "manager": true,
+          "admin": false,
+          "firstName": "testuser_1758381704653",
+          "lastName": "",
+          "active": true
+        }
+      },
+      "timestamp": "2025-09-20T23:21:45.040993"
+    },
+    "status": 201,
+    "timestamp": "2025-09-20T15:21:45.044Z"
+  },
+  {
+    "endpoint": "/auth/login",
+    "method": "POST",
+    "description": "用户登录",
+    "input": {
+      "usernameOrEmail": "testuser",
+      "password": "newpassword123"
+    },
+    "output": {
+      "success": true,
+      "message": "Login successful",
+      "data": {
+        "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsInJvbGVzIjoiUk9MRV9NQU5BR0VSIiwiaWF0IjoxNzU4MzgxNzA1LCJleHAiOjE3NTgzODUzMDUsInVzZXJJZCI6MTAwMDUsImZ1bGxOYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20ifQ.irBwmg_c41DkseDr1huDjMspfbrK5M0KM-F34geGp6A9RVqq05NR2c0OXrYg_d-kgdp0XN5f6aAo070nRhoz_w",
+        "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc1ODM4MTcwNSwiZXhwIjoxNzU4OTg2NTA1fQ.LpxmbGx5RjnG8qpp1uY2FjOOKfxBO9AXcuHbtb-6WwZ7AJ-gxUxVEVLTjEj8d36rLBf6OTAQPMgfX4TjmWi2FQ",
+        "tokenType": "Bearer",
+        "expiresIn": 3600,
+        "user": {
+          "id": 10005,
+          "username": "testuser",
+          "email": "test@example.com",
+          "role": "MANAGER",
+          "status": "ACTIVE",
+          "createdAt": "2025-09-20T15:23:41",
+          "updatedAt": "2025-09-20T23:15:53",
+          "fullName": "testuser",
+          "superAdmin": false,
+          "manager": true,
+          "admin": false,
+          "firstName": "testuser",
+          "lastName": "",
+          "active": true
+        }
+      },
+      "timestamp": "2025-09-20T23:21:45.413387"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:45.414Z"
+  },
+  {
+    "endpoint": "/auth/change-password",
+    "method": "POST",
+    "description": "修改密码",
+    "input": {
+      "currentPassword": "newpassword123",
+      "newPassword": "finalpassword123",
+      "confirmNewPassword": "finalpassword123"
+    },
+    "output": {
+      "success": true,
+      "message": "Password changed successfully",
+      "data": "",
+      "timestamp": "2025-09-20T23:21:46.512578"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.513Z"
+  },
+  {
+    "endpoint": "/users/search",
+    "method": "GET",
+    "description": "用户搜索",
+    "input": {
+      "keyword": "test",
+      "page": 0,
+      "size": 10
+    },
+    "output": {
+      "success": false,
+      "message": "Failed to search users",
+      "data": null,
+      "timestamp": "2025-09-20T23:21:46.51987"
+    },
+    "status": 500,
+    "timestamp": "2025-09-20T15:21:46.521Z"
+  },
+  {
+    "endpoint": "/projects",
+    "method": "POST",
+    "description": "创建项目（包含阶段）",
+    "input": {
+      "name": "API测试项目 1758381706521",
+      "description": "这是一个完整的API测试项目，包含阶段任务",
+      "members": "API测试团队：开发者、测试者、产品经理",
+      "expectedResults": "完成API接口的全面测试和文档生成",
+      "timeline": "2个月完成",
+      "stopLoss": "如果测试覆盖率低于90%或发现超过5个严重bug则暂停",
+      "phases": [
+        {
+          "phaseName": "需求分析阶段",
+          "description": "分析所有API接口需求，确定测试范围",
+          "assignedMembers": "产品经理、架构师",
+          "schedule": "第1-2周",
+          "expectedResults": "完成需求文档和测试计划"
+        },
+        {
+          "phaseName": "开发实现阶段",
+          "description": "实现API接口功能，确保业务逻辑正确",
+          "assignedMembers": "后端开发者、前端开发者",
+          "schedule": "第3-6周",
+          "expectedResults": "完成所有API接口开发"
+        },
+        {
+          "phaseName": "测试验证阶段",
+          "description": "全面测试API接口，生成测试报告",
+          "assignedMembers": "测试工程师、QA",
+          "schedule": "第7-8周",
+          "expectedResults": "完成测试验证和文档输出"
+        }
+      ]
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "id": 30,
+        "name": "API测试项目 1758381706521",
+        "description": "这是一个完整的API测试项目，包含阶段任务",
+        "members": "API测试团队：开发者、测试者、产品经理",
+        "expectedResults": "完成API接口的全面测试和文档生成",
+        "timeline": "2个月完成",
+        "stopLoss": "如果测试覆盖率低于90%或发现超过5个严重bug则暂停",
+        "createdBy": 10005,
+        "aiAnalysisId": null,
+        "adminReviewerId": null,
+        "superAdminReviewerId": null,
+        "rejectionReason": null,
+        "approvalStatus": "DRAFT",
+        "createdAt": "2025-09-20T23:21:46.533142",
+        "updatedAt": "2025-09-20T23:21:46.533148",
+        "status": "DRAFT",
+        "priority": "MEDIUM",
+        "progress": 0,
+        "phases": [
+          {
+            "id": 15,
+            "projectId": 30,
+            "phaseName": "需求分析阶段",
+            "description": "分析所有API接口需求，确定测试范围",
+            "assignedMembers": "产品经理、架构师",
+            "schedule": "第1-2周",
+            "expectedResults": "完成需求文档和测试计划",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "createdAt": "2025-09-20T23:21:46.537929",
+            "updatedAt": "2025-09-20T23:21:46.537936",
+            "completionPercentage": 71,
+            "completed": false
+          },
+          {
+            "id": 16,
+            "projectId": 30,
+            "phaseName": "开发实现阶段",
+            "description": "实现API接口功能，确保业务逻辑正确",
+            "assignedMembers": "后端开发者、前端开发者",
+            "schedule": "第3-6周",
+            "expectedResults": "完成所有API接口开发",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "createdAt": "2025-09-20T23:21:46.540388",
+            "updatedAt": "2025-09-20T23:21:46.540393",
+            "completionPercentage": 71,
+            "completed": false
+          },
+          {
+            "id": 17,
+            "projectId": 30,
+            "phaseName": "测试验证阶段",
+            "description": "全面测试API接口，生成测试报告",
+            "assignedMembers": "测试工程师、QA",
+            "schedule": "第7-8周",
+            "expectedResults": "完成测试验证和文档输出",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "createdAt": "2025-09-20T23:21:46.54159",
+            "updatedAt": "2025-09-20T23:21:46.541596",
+            "completionPercentage": 71,
+            "completed": false
+          }
+        ],
+        "draft": true,
+        "rejected": false,
+        "submitted": false,
+        "approved": false
+      },
+      "timestamp": "2025-09-20T23:21:46.544027"
+    },
+    "status": 201,
+    "timestamp": "2025-09-20T15:21:46.545Z"
+  },
+  {
+    "endpoint": "/projects",
+    "method": "GET",
+    "description": "获取项目列表（分页）",
+    "input": {
+      "page": 0,
+      "size": 10,
+      "sort": "createdAt,desc"
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "content": [
+          {
+            "id": 30,
+            "name": "API测试项目 1758381706521",
+            "description": "这是一个完整的API测试项目，包含阶段任务",
+            "members": "API测试团队：开发者、测试者、产品经理",
+            "expectedResults": "完成API接口的全面测试和文档生成",
+            "timeline": "2个月完成",
+            "stopLoss": "如果测试覆盖率低于90%或发现超过5个严重bug则暂停",
+            "createdBy": 10005,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "DRAFT",
+            "createdAt": "2025-09-20T23:21:47",
+            "updatedAt": "2025-09-20T23:21:47",
+            "status": "DRAFT",
+            "priority": "MEDIUM",
+            "progress": 0,
+            "phases": [
+              {
+                "id": 15,
+                "projectId": 30,
+                "phaseName": "需求分析阶段",
+                "description": "分析所有API接口需求，确定测试范围",
+                "assignedMembers": "产品经理、架构师",
+                "schedule": "第1-2周",
+                "expectedResults": "完成需求文档和测试计划",
+                "actualResults": null,
+                "resultDifferenceAnalysis": null,
+                "createdAt": "2025-09-20T23:21:47",
+                "updatedAt": "2025-09-20T23:21:47",
+                "completionPercentage": 71,
+                "completed": false
+              },
+              {
+                "id": 16,
+                "projectId": 30,
+                "phaseName": "开发实现阶段",
+                "description": "实现API接口功能，确保业务逻辑正确",
+                "assignedMembers": "后端开发者、前端开发者",
+                "schedule": "第3-6周",
+                "expectedResults": "完成所有API接口开发",
+                "actualResults": null,
+                "resultDifferenceAnalysis": null,
+                "createdAt": "2025-09-20T23:21:47",
+                "updatedAt": "2025-09-20T23:21:47",
+                "completionPercentage": 71,
+                "completed": false
+              },
+              {
+                "id": 17,
+                "projectId": 30,
+                "phaseName": "测试验证阶段",
+                "description": "全面测试API接口，生成测试报告",
+                "assignedMembers": "测试工程师、QA",
+                "schedule": "第7-8周",
+                "expectedResults": "完成测试验证和文档输出",
+                "actualResults": null,
+                "resultDifferenceAnalysis": null,
+                "createdAt": "2025-09-20T23:21:47",
+                "updatedAt": "2025-09-20T23:21:47",
+                "completionPercentage": 71,
+                "completed": false
+              }
+            ],
+            "draft": true,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 29,
+            "name": "更新后的测试项目",
+            "description": "更新描述",
+            "members": "更新团队",
+            "expectedResults": "更新结果",
+            "timeline": "2个月",
+            "stopLoss": "更新止损",
+            "createdBy": 10005,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "AI_APPROVED",
+            "createdAt": "2025-09-20T23:13:47",
+            "updatedAt": "2025-09-20T23:13:47",
+            "status": "ACTIVE",
+            "priority": "MEDIUM",
+            "progress": 40,
+            "phases": [
+              {
+                "id": 14,
+                "projectId": 29,
+                "phaseName": "测试阶段1",
+                "description": "测试阶段描述",
+                "assignedMembers": "测试员",
+                "schedule": "第1周",
+                "expectedResults": "阶段1完成",
+                "actualResults": null,
+                "resultDifferenceAnalysis": null,
+                "createdAt": "2025-09-20T23:13:47",
+                "updatedAt": "2025-09-20T23:13:47",
+                "completionPercentage": 71,
+                "completed": false
+              }
+            ],
+            "draft": false,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 28,
+            "name": "Test Project with Phases",
+            "description": "Testing project phases functionality",
+            "members": "Test Team",
+            "expectedResults": "Complete verification",
+            "timeline": "2 months",
+            "stopLoss": "Stop if issues found",
+            "createdBy": 10005,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "DRAFT",
+            "createdAt": "2025-09-20T23:12:19",
+            "updatedAt": "2025-09-20T23:12:19",
+            "status": "DRAFT",
+            "priority": "MEDIUM",
+            "progress": 0,
+            "phases": [
+              {
+                "id": 12,
+                "projectId": 28,
+                "phaseName": "Phase 1 - Setup",
+                "description": "Initial setup phase",
+                "assignedMembers": "Team Lead, Developer 1",
+                "schedule": "Week 1-2",
+                "expectedResults": "Environment setup completed",
+                "actualResults": null,
+                "resultDifferenceAnalysis": null,
+                "createdAt": "2025-09-20T23:12:20",
+                "updatedAt": "2025-09-20T23:12:20",
+                "completionPercentage": 71,
+                "completed": false
+              },
+              {
+                "id": 13,
+                "projectId": 28,
+                "phaseName": "Phase 2 - Development",
+                "description": "Core development phase",
+                "assignedMembers": "Developer 1, Developer 2",
+                "schedule": "Week 3-6",
+                "expectedResults": "Core features implemented",
+                "actualResults": null,
+                "resultDifferenceAnalysis": null,
+                "createdAt": "2025-09-20T23:12:20",
+                "updatedAt": "2025-09-20T23:12:20",
+                "completionPercentage": 71,
+                "completed": false
+              }
+            ],
+            "draft": true,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 26,
+            "name": "Updated Test Project Manager1",
+            "description": "Updated project by manager1",
+            "members": "Updated manager team",
+            "expectedResults": "Updated results",
+            "timeline": "3 months",
+            "stopLoss": "Stop if budget exceeds 150k",
+            "createdBy": 10004,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "AI_APPROVED",
+            "createdAt": "2025-09-20T22:51:45",
+            "updatedAt": "2025-09-20T22:52:31",
+            "status": "ACTIVE",
+            "priority": "MEDIUM",
+            "progress": 40,
+            "phases": [],
+            "draft": false,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 25,
+            "name": "Test Project For Update",
+            "description": "This project will be updated",
+            "members": "Test team",
+            "expectedResults": "Test results",
+            "timeline": "2 months",
+            "stopLoss": "Stop if budget exceeds 100k",
+            "createdBy": 1,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "DRAFT",
+            "createdAt": "2025-09-20T22:48:16",
+            "updatedAt": "2025-09-20T22:48:16",
+            "status": "DRAFT",
+            "priority": "MEDIUM",
+            "progress": 0,
+            "phases": [],
+            "draft": true,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 24,
+            "name": "完整测试项目 1758379147140",
+            "description": "这是一个包含完整阶段任务的测试项目",
+            "members": "完整测试团队",
+            "expectedResults": "完成核心功能开发和测试",
+            "timeline": "3个月",
+            "stopLoss": "如果预算超支50%或时间延误2个月则暂停",
+            "createdBy": 1,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "DRAFT",
+            "createdAt": "2025-09-20T22:39:07",
+            "updatedAt": "2025-09-20T22:39:07",
+            "status": "DRAFT",
+            "priority": "MEDIUM",
+            "progress": 0,
+            "phases": [],
+            "draft": true,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 23,
+            "name": "测试项目 1758378676370",
+            "description": "这是一个包含阶段任务的测试项目",
+            "members": "测试团队",
+            "expectedResults": "完成核心功能开发",
+            "timeline": "3个月",
+            "stopLoss": "如果预算超支50%则暂停",
+            "createdBy": 1,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "DRAFT",
+            "createdAt": "2025-09-20T22:31:16",
+            "updatedAt": "2025-09-20T22:31:16",
+            "status": "DRAFT",
+            "priority": "MEDIUM",
+            "progress": 0,
+            "phases": [],
+            "draft": true,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 22,
+            "name": "Test Project 1758376993989",
+            "description": "This is a test project",
+            "members": "Team Alpha",
+            "expectedResults": "Complete API development",
+            "timeline": "3 months",
+            "stopLoss": "Project budget exceeds 200k or timeline exceeds 6 months",
+            "createdBy": 10004,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "DRAFT",
+            "createdAt": "2025-09-20T22:03:14",
+            "updatedAt": "2025-09-20T22:03:14",
+            "status": "DRAFT",
+            "priority": "MEDIUM",
+            "progress": 0,
+            "phases": [],
+            "draft": true,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 21,
+            "name": "测试项目 1758376359569",
+            "description": "这是一个测试项目",
+            "members": "测试成员",
+            "expectedResults": "预期结果",
+            "timeline": "3个月",
+            "stopLoss": "如果预算超支50%则暂停",
+            "createdBy": 1,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "DRAFT",
+            "createdAt": "2025-09-20T21:52:40",
+            "updatedAt": "2025-09-20T21:52:40",
+            "status": "DRAFT",
+            "priority": "MEDIUM",
+            "progress": 0,
+            "phases": [],
+            "draft": true,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          },
+          {
+            "id": 20,
+            "name": "测试项目 1758376029552",
+            "description": "这是一个测试项目",
+            "members": "测试成员",
+            "expectedResults": "预期结果",
+            "timeline": "3个月",
+            "stopLoss": "如果预算超支50%则暂停",
+            "createdBy": 1,
+            "aiAnalysisId": null,
+            "adminReviewerId": null,
+            "superAdminReviewerId": null,
+            "rejectionReason": null,
+            "approvalStatus": "DRAFT",
+            "createdAt": "2025-09-20T21:47:10",
+            "updatedAt": "2025-09-20T21:47:10",
+            "status": "DRAFT",
+            "priority": "MEDIUM",
+            "progress": 0,
+            "phases": [],
+            "draft": true,
+            "rejected": false,
+            "submitted": false,
+            "approved": false
+          }
+        ],
+        "pageable": {
+          "pageNumber": 0,
+          "pageSize": 10,
+          "sort": {
+            "unsorted": false,
+            "sorted": true,
+            "empty": false
+          },
+          "offset": 0,
+          "paged": true,
+          "unpaged": false
+        },
+        "last": false,
+        "totalElements": 21,
+        "totalPages": 3,
+        "first": true,
+        "numberOfElements": 10,
+        "size": 10,
+        "number": 0,
+        "sort": {
+          "unsorted": false,
+          "sorted": true,
+          "empty": false
+        },
+        "empty": false
+      },
+      "timestamp": "2025-09-20T23:21:46.576833"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.578Z"
+  },
+  {
+    "endpoint": "/projects/my",
+    "method": "GET",
+    "description": "获取当前用户的项目",
+    "input": {},
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": [
+        {
+          "id": 30,
+          "name": "API测试项目 1758381706521",
+          "description": "这是一个完整的API测试项目，包含阶段任务",
+          "members": "API测试团队：开发者、测试者、产品经理",
+          "expectedResults": "完成API接口的全面测试和文档生成",
+          "timeline": "2个月完成",
+          "stopLoss": "如果测试覆盖率低于90%或发现超过5个严重bug则暂停",
+          "createdBy": 10005,
+          "aiAnalysisId": null,
+          "adminReviewerId": null,
+          "superAdminReviewerId": null,
+          "rejectionReason": null,
+          "approvalStatus": "DRAFT",
+          "createdAt": "2025-09-20T23:21:47",
+          "updatedAt": "2025-09-20T23:21:47",
+          "status": "DRAFT",
+          "priority": "MEDIUM",
+          "progress": 0,
+          "phases": [
+            {
+              "id": 15,
+              "projectId": 30,
+              "phaseName": "需求分析阶段",
+              "description": "分析所有API接口需求，确定测试范围",
+              "assignedMembers": "产品经理、架构师",
+              "schedule": "第1-2周",
+              "expectedResults": "完成需求文档和测试计划",
+              "actualResults": null,
+              "resultDifferenceAnalysis": null,
+              "createdAt": "2025-09-20T23:21:47",
+              "updatedAt": "2025-09-20T23:21:47",
+              "completionPercentage": 71,
+              "completed": false
+            },
+            {
+              "id": 16,
+              "projectId": 30,
+              "phaseName": "开发实现阶段",
+              "description": "实现API接口功能，确保业务逻辑正确",
+              "assignedMembers": "后端开发者、前端开发者",
+              "schedule": "第3-6周",
+              "expectedResults": "完成所有API接口开发",
+              "actualResults": null,
+              "resultDifferenceAnalysis": null,
+              "createdAt": "2025-09-20T23:21:47",
+              "updatedAt": "2025-09-20T23:21:47",
+              "completionPercentage": 71,
+              "completed": false
+            },
+            {
+              "id": 17,
+              "projectId": 30,
+              "phaseName": "测试验证阶段",
+              "description": "全面测试API接口，生成测试报告",
+              "assignedMembers": "测试工程师、QA",
+              "schedule": "第7-8周",
+              "expectedResults": "完成测试验证和文档输出",
+              "actualResults": null,
+              "resultDifferenceAnalysis": null,
+              "createdAt": "2025-09-20T23:21:47",
+              "updatedAt": "2025-09-20T23:21:47",
+              "completionPercentage": 71,
+              "completed": false
+            }
+          ],
+          "draft": true,
+          "rejected": false,
+          "submitted": false,
+          "approved": false
+        },
+        {
+          "id": 29,
+          "name": "更新后的测试项目",
+          "description": "更新描述",
+          "members": "更新团队",
+          "expectedResults": "更新结果",
+          "timeline": "2个月",
+          "stopLoss": "更新止损",
+          "createdBy": 10005,
+          "aiAnalysisId": null,
+          "adminReviewerId": null,
+          "superAdminReviewerId": null,
+          "rejectionReason": null,
+          "approvalStatus": "AI_APPROVED",
+          "createdAt": "2025-09-20T23:13:47",
+          "updatedAt": "2025-09-20T23:13:47",
+          "status": "ACTIVE",
+          "priority": "MEDIUM",
+          "progress": 40,
+          "phases": [
+            {
+              "id": 14,
+              "projectId": 29,
+              "phaseName": "测试阶段1",
+              "description": "测试阶段描述",
+              "assignedMembers": "测试员",
+              "schedule": "第1周",
+              "expectedResults": "阶段1完成",
+              "actualResults": null,
+              "resultDifferenceAnalysis": null,
+              "createdAt": "2025-09-20T23:13:47",
+              "updatedAt": "2025-09-20T23:13:47",
+              "completionPercentage": 71,
+              "completed": false
+            }
+          ],
+          "draft": false,
+          "rejected": false,
+          "submitted": false,
+          "approved": false
+        },
+        {
+          "id": 28,
+          "name": "Test Project with Phases",
+          "description": "Testing project phases functionality",
+          "members": "Test Team",
+          "expectedResults": "Complete verification",
+          "timeline": "2 months",
+          "stopLoss": "Stop if issues found",
+          "createdBy": 10005,
+          "aiAnalysisId": null,
+          "adminReviewerId": null,
+          "superAdminReviewerId": null,
+          "rejectionReason": null,
+          "approvalStatus": "DRAFT",
+          "createdAt": "2025-09-20T23:12:19",
+          "updatedAt": "2025-09-20T23:12:19",
+          "status": "DRAFT",
+          "priority": "MEDIUM",
+          "progress": 0,
+          "phases": [
+            {
+              "id": 12,
+              "projectId": 28,
+              "phaseName": "Phase 1 - Setup",
+              "description": "Initial setup phase",
+              "assignedMembers": "Team Lead, Developer 1",
+              "schedule": "Week 1-2",
+              "expectedResults": "Environment setup completed",
+              "actualResults": null,
+              "resultDifferenceAnalysis": null,
+              "createdAt": "2025-09-20T23:12:20",
+              "updatedAt": "2025-09-20T23:12:20",
+              "completionPercentage": 71,
+              "completed": false
+            },
+            {
+              "id": 13,
+              "projectId": 28,
+              "phaseName": "Phase 2 - Development",
+              "description": "Core development phase",
+              "assignedMembers": "Developer 1, Developer 2",
+              "schedule": "Week 3-6",
+              "expectedResults": "Core features implemented",
+              "actualResults": null,
+              "resultDifferenceAnalysis": null,
+              "createdAt": "2025-09-20T23:12:20",
+              "updatedAt": "2025-09-20T23:12:20",
+              "completionPercentage": 71,
+              "completed": false
+            }
+          ],
+          "draft": true,
+          "rejected": false,
+          "submitted": false,
+          "approved": false
+        },
+        {
+          "id": 11,
+          "name": "Test Project",
+          "description": "Test Description",
+          "members": "testuser",
+          "expectedResults": "Test Results",
+          "timeline": "2 weeks",
+          "stopLoss": "Review if no progress",
+          "createdBy": 10005,
+          "aiAnalysisId": null,
+          "adminReviewerId": null,
+          "superAdminReviewerId": null,
+          "rejectionReason": null,
+          "approvalStatus": "DRAFT",
+          "createdAt": "2025-09-20T15:24:26",
+          "updatedAt": "2025-09-20T15:24:26",
+          "status": "DRAFT",
+          "priority": "MEDIUM",
+          "progress": 0,
+          "phases": [],
+          "draft": true,
+          "rejected": false,
+          "submitted": false,
+          "approved": false
+        }
+      ],
+      "timestamp": "2025-09-20T23:21:46.598306"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.599Z"
+  },
+  {
+    "endpoint": "/projects/{id}",
+    "method": "GET",
+    "description": "获取项目详情（包含阶段数据）",
+    "input": {
+      "id": 30
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "id": 30,
+        "name": "API测试项目 1758381706521",
+        "description": "这是一个完整的API测试项目，包含阶段任务",
+        "members": "API测试团队：开发者、测试者、产品经理",
+        "expectedResults": "完成API接口的全面测试和文档生成",
+        "timeline": "2个月完成",
+        "stopLoss": "如果测试覆盖率低于90%或发现超过5个严重bug则暂停",
+        "createdBy": 10005,
+        "aiAnalysisId": null,
+        "adminReviewerId": null,
+        "superAdminReviewerId": null,
+        "rejectionReason": null,
+        "approvalStatus": "DRAFT",
+        "createdAt": "2025-09-20T23:21:47",
+        "updatedAt": "2025-09-20T23:21:47",
+        "status": "DRAFT",
+        "priority": "MEDIUM",
+        "progress": 0,
+        "phases": [
+          {
+            "id": 15,
+            "projectId": 30,
+            "phaseName": "需求分析阶段",
+            "description": "分析所有API接口需求，确定测试范围",
+            "assignedMembers": "产品经理、架构师",
+            "schedule": "第1-2周",
+            "expectedResults": "完成需求文档和测试计划",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "createdAt": "2025-09-20T23:21:47",
+            "updatedAt": "2025-09-20T23:21:47",
+            "completionPercentage": 71,
+            "completed": false
+          },
+          {
+            "id": 16,
+            "projectId": 30,
+            "phaseName": "开发实现阶段",
+            "description": "实现API接口功能，确保业务逻辑正确",
+            "assignedMembers": "后端开发者、前端开发者",
+            "schedule": "第3-6周",
+            "expectedResults": "完成所有API接口开发",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "createdAt": "2025-09-20T23:21:47",
+            "updatedAt": "2025-09-20T23:21:47",
+            "completionPercentage": 71,
+            "completed": false
+          },
+          {
+            "id": 17,
+            "projectId": 30,
+            "phaseName": "测试验证阶段",
+            "description": "全面测试API接口，生成测试报告",
+            "assignedMembers": "测试工程师、QA",
+            "schedule": "第7-8周",
+            "expectedResults": "完成测试验证和文档输出",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "createdAt": "2025-09-20T23:21:47",
+            "updatedAt": "2025-09-20T23:21:47",
+            "completionPercentage": 71,
+            "completed": false
+          }
+        ],
+        "draft": true,
+        "rejected": false,
+        "submitted": false,
+        "approved": false
+      },
+      "timestamp": "2025-09-20T23:21:46.614091"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.615Z"
+  },
+  {
+    "endpoint": "/projects/{id}",
+    "method": "PUT",
+    "description": "更新项目信息",
+    "input": {
+      "id": 30,
+      "name": "API测试项目（已更新）",
+      "description": "更新后的项目描述，增加了更多测试细节",
+      "members": "API测试团队：资深开发者、高级测试者、产品总监",
+      "expectedResults": "完成API接口的全面测试、文档生成和性能优化",
+      "timeline": "优化为1.5个月完成",
+      "stopLoss": "如果测试覆盖率低于95%或发现超过3个严重bug则暂停"
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "id": 30,
+        "name": "API测试项目（已更新）",
+        "description": "更新后的项目描述，增加了更多测试细节",
+        "members": "API测试团队：资深开发者、高级测试者、产品总监",
+        "expectedResults": "完成API接口的全面测试、文档生成和性能优化",
+        "timeline": "优化为1.5个月完成",
+        "stopLoss": "如果测试覆盖率低于95%或发现超过3个严重bug则暂停",
+        "createdBy": 10005,
+        "aiAnalysisId": null,
+        "adminReviewerId": null,
+        "superAdminReviewerId": null,
+        "rejectionReason": null,
+        "approvalStatus": "DRAFT",
+        "createdAt": "2025-09-20T23:21:47",
+        "updatedAt": "2025-09-20T23:21:46.630793",
+        "status": "DRAFT",
+        "priority": "MEDIUM",
+        "progress": 0,
+        "phases": null,
+        "draft": true,
+        "rejected": false,
+        "submitted": false,
+        "approved": false
+      },
+      "timestamp": "2025-09-20T23:21:46.635584"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.636Z"
+  },
+  {
+    "endpoint": "/projects/{id}/submit",
+    "method": "PUT",
+    "description": "提交项目进入审批流程",
+    "input": {
+      "id": 30
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "id": 30,
+        "name": "API测试项目（已更新）",
+        "description": "更新后的项目描述，增加了更多测试细节",
+        "members": "API测试团队：资深开发者、高级测试者、产品总监",
+        "expectedResults": "完成API接口的全面测试、文档生成和性能优化",
+        "timeline": "优化为1.5个月完成",
+        "stopLoss": "如果测试覆盖率低于95%或发现超过3个严重bug则暂停",
+        "createdBy": 10005,
+        "aiAnalysisId": null,
+        "adminReviewerId": null,
+        "superAdminReviewerId": null,
+        "rejectionReason": null,
+        "approvalStatus": "AI_APPROVED",
+        "createdAt": "2025-09-20T23:21:47",
+        "updatedAt": "2025-09-20T23:21:46.64894",
+        "status": "ACTIVE",
+        "priority": "MEDIUM",
+        "progress": 40,
+        "phases": null,
+        "draft": false,
+        "rejected": false,
+        "submitted": false,
+        "approved": false
+      },
+      "timestamp": "2025-09-20T23:21:46.653868"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.654Z"
+  },
+  {
+    "endpoint": "/tasks",
+    "method": "POST",
+    "description": "创建任务",
+    "input": {
+      "taskName": "API测试任务 1758381706654",
+      "personnelAssignment": "后端开发工程师、测试工程师",
+      "timeline": "2周内完成",
+      "quantitativeMetrics": "测试覆盖率达到100%，响应时间<200ms",
+      "expectedResults": "所有API接口测试通过，生成完整测试报告",
+      "taskType": "DEVELOPMENT"
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "id": 36,
+        "taskName": "API测试任务 1758381706654",
+        "personnelAssignment": "后端开发工程师、测试工程师",
+        "timeline": "2周内完成",
+        "quantitativeMetrics": "测试覆盖率达到100%，响应时间<200ms",
+        "expectedResults": "所有API接口测试通过，生成完整测试报告",
+        "actualResults": null,
+        "resultDifferenceAnalysis": null,
+        "taskType": "DEVELOPMENT",
+        "createdBy": 10005,
+        "createdAt": "2025-09-20T23:21:46.662624",
+        "updatedAt": "2025-09-20T23:21:46.662629",
+        "progress": 71,
+        "completed": false,
+        "taskTypeName": "DEVELOPMENT"
+      },
+      "timestamp": "2025-09-20T23:21:46.667253"
+    },
+    "status": 201,
+    "timestamp": "2025-09-20T15:21:46.668Z"
+  },
+  {
+    "endpoint": "/tasks",
+    "method": "POST",
+    "description": "创建日常任务",
+    "input": {
+      "taskName": "日常维护任务 1758381706668",
+      "personnelAssignment": "运维工程师",
+      "timeline": "每日执行",
+      "quantitativeMetrics": "系统可用性>99.9%，日志清理完成度100%",
+      "expectedResults": "系统稳定运行，日志管理规范",
+      "taskType": "ROUTINE"
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "id": 37,
+        "taskName": "日常维护任务 1758381706668",
+        "personnelAssignment": "运维工程师",
+        "timeline": "每日执行",
+        "quantitativeMetrics": "系统可用性>99.9%，日志清理完成度100%",
+        "expectedResults": "系统稳定运行，日志管理规范",
+        "actualResults": null,
+        "resultDifferenceAnalysis": null,
+        "taskType": "ROUTINE",
+        "createdBy": 10005,
+        "createdAt": "2025-09-20T23:21:46.676233",
+        "updatedAt": "2025-09-20T23:21:46.67624",
+        "progress": 71,
+        "completed": false,
+        "taskTypeName": "ROUTINE"
+      },
+      "timestamp": "2025-09-20T23:21:46.678715"
+    },
+    "status": 201,
+    "timestamp": "2025-09-20T15:21:46.679Z"
+  },
+  {
+    "endpoint": "/tasks",
+    "method": "GET",
+    "description": "获取任务列表（分页排序）",
+    "input": {
+      "page": 0,
+      "size": 10,
+      "sortBy": "createdAt",
+      "sortDir": "desc"
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "content": [
+          {
+            "id": 36,
+            "taskName": "API测试任务 1758381706654",
+            "personnelAssignment": "后端开发工程师、测试工程师",
+            "timeline": "2周内完成",
+            "quantitativeMetrics": "测试覆盖率达到100%，响应时间<200ms",
+            "expectedResults": "所有API接口测试通过，生成完整测试报告",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "taskType": "DEVELOPMENT",
+            "createdBy": 10005,
+            "createdAt": "2025-09-20T23:21:47",
+            "updatedAt": "2025-09-20T23:21:47",
+            "progress": 71,
+            "completed": false,
+            "taskTypeName": "DEVELOPMENT"
+          },
+          {
+            "id": 37,
+            "taskName": "日常维护任务 1758381706668",
+            "personnelAssignment": "运维工程师",
+            "timeline": "每日执行",
+            "quantitativeMetrics": "系统可用性>99.9%，日志清理完成度100%",
+            "expectedResults": "系统稳定运行，日志管理规范",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "taskType": "ROUTINE",
+            "createdBy": 10005,
+            "createdAt": "2025-09-20T23:21:47",
+            "updatedAt": "2025-09-20T23:21:47",
+            "progress": 71,
+            "completed": false,
+            "taskTypeName": "ROUTINE"
+          },
+          {
+            "id": 35,
+            "taskName": "测试任务 1758381227212",
+            "personnelAssignment": "测试人员",
+            "timeline": "1周",
+            "quantitativeMetrics": "100%完成",
+            "expectedResults": "任务完成",
+            "actualResults": null,
+            "resultDifferenceAnalysis": null,
+            "taskType": "ROUTINE",
+            "createdBy": 10005,
+            "createdAt": "2025-09-20T23:13:47",
+            "updatedAt": "2025-09-20T23:13:47",
+            "progress": 71,
+            "completed": false,
+            "taskTypeName": "ROUTINE"
+          }
+        ],
+        "pageable": {
+          "pageNumber": 0,
+          "pageSize": 10,
+          "sort": {
+            "unsorted": false,
+            "sorted": true,
+            "empty": false
+          },
+          "offset": 0,
+          "paged": true,
+          "unpaged": false
+        },
+        "last": true,
+        "totalElements": 3,
+        "totalPages": 1,
+        "first": true,
+        "numberOfElements": 3,
+        "size": 10,
+        "number": 0,
+        "sort": {
+          "unsorted": false,
+          "sorted": true,
+          "empty": false
+        },
+        "empty": false
+      },
+      "timestamp": "2025-09-20T23:21:46.691973"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.693Z"
+  },
+  {
+    "endpoint": "/tasks/my",
+    "method": "GET",
+    "description": "获取当前用户创建的任务",
+    "input": {},
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": [
+        {
+          "id": 36,
+          "taskName": "API测试任务 1758381706654",
+          "personnelAssignment": "后端开发工程师、测试工程师",
+          "timeline": "2周内完成",
+          "quantitativeMetrics": "测试覆盖率达到100%，响应时间<200ms",
+          "expectedResults": "所有API接口测试通过，生成完整测试报告",
+          "actualResults": null,
+          "resultDifferenceAnalysis": null,
+          "taskType": "DEVELOPMENT",
+          "createdBy": 10005,
+          "createdAt": "2025-09-20T23:21:47",
+          "updatedAt": "2025-09-20T23:21:47",
+          "progress": 71,
+          "completed": false,
+          "taskTypeName": "DEVELOPMENT"
+        },
+        {
+          "id": 37,
+          "taskName": "日常维护任务 1758381706668",
+          "personnelAssignment": "运维工程师",
+          "timeline": "每日执行",
+          "quantitativeMetrics": "系统可用性>99.9%，日志清理完成度100%",
+          "expectedResults": "系统稳定运行，日志管理规范",
+          "actualResults": null,
+          "resultDifferenceAnalysis": null,
+          "taskType": "ROUTINE",
+          "createdBy": 10005,
+          "createdAt": "2025-09-20T23:21:47",
+          "updatedAt": "2025-09-20T23:21:47",
+          "progress": 71,
+          "completed": false,
+          "taskTypeName": "ROUTINE"
+        },
+        {
+          "id": 35,
+          "taskName": "测试任务 1758381227212",
+          "personnelAssignment": "测试人员",
+          "timeline": "1周",
+          "quantitativeMetrics": "100%完成",
+          "expectedResults": "任务完成",
+          "actualResults": null,
+          "resultDifferenceAnalysis": null,
+          "taskType": "ROUTINE",
+          "createdBy": 10005,
+          "createdAt": "2025-09-20T23:13:47",
+          "updatedAt": "2025-09-20T23:13:47",
+          "progress": 71,
+          "completed": false,
+          "taskTypeName": "ROUTINE"
+        }
+      ],
+      "timestamp": "2025-09-20T23:21:46.704521"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.705Z"
+  },
+  {
+    "endpoint": "/tasks/by-type/{taskType}",
+    "method": "GET",
+    "description": "按类型获取任务",
+    "input": {
+      "taskType": "DEVELOPMENT"
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": [
+        {
+          "id": 36,
+          "taskName": "API测试任务 1758381706654",
+          "personnelAssignment": "后端开发工程师、测试工程师",
+          "timeline": "2周内完成",
+          "quantitativeMetrics": "测试覆盖率达到100%，响应时间<200ms",
+          "expectedResults": "所有API接口测试通过，生成完整测试报告",
+          "actualResults": null,
+          "resultDifferenceAnalysis": null,
+          "taskType": "DEVELOPMENT",
+          "createdBy": 10005,
+          "createdAt": "2025-09-20T23:21:47",
+          "updatedAt": "2025-09-20T23:21:47",
+          "progress": 71,
+          "completed": false,
+          "taskTypeName": "DEVELOPMENT"
+        }
+      ],
+      "timestamp": "2025-09-20T23:21:46.717062"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.717Z"
+  },
+  {
+    "endpoint": "/tasks/statistics",
+    "method": "GET",
+    "description": "获取任务统计信息",
+    "input": {},
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "pendingTasks": 3,
+        "completedTasks": 0,
+        "routineTasks": 2,
+        "developmentTasks": 1,
+        "totalTasks": 3,
+        "completionRate": 0
+      },
+      "timestamp": "2025-09-20T23:21:46.733514"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.734Z"
+  },
+  {
+    "endpoint": "/tasks/{id}",
+    "method": "GET",
+    "description": "获取任务详情",
+    "input": {
+      "id": 36
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "id": 36,
+        "taskName": "API测试任务 1758381706654",
+        "personnelAssignment": "后端开发工程师、测试工程师",
+        "timeline": "2周内完成",
+        "quantitativeMetrics": "测试覆盖率达到100%，响应时间<200ms",
+        "expectedResults": "所有API接口测试通过，生成完整测试报告",
+        "actualResults": null,
+        "resultDifferenceAnalysis": null,
+        "taskType": "DEVELOPMENT",
+        "createdBy": 10005,
+        "createdAt": "2025-09-20T23:21:47",
+        "updatedAt": "2025-09-20T23:21:47",
+        "progress": 71,
+        "completed": false,
+        "taskTypeName": "DEVELOPMENT"
+      },
+      "timestamp": "2025-09-20T23:21:46.746564"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.747Z"
+  },
+  {
+    "endpoint": "/tasks/{id}",
+    "method": "PUT",
+    "description": "更新任务信息",
+    "input": {
+      "id": 36,
+      "taskName": "API测试任务（已更新）",
+      "personnelAssignment": "资深后端开发工程师、高级测试工程师、QA主管",
+      "timeline": "优化为10天完成",
+      "quantitativeMetrics": "测试覆盖率达到100%，响应时间<100ms，错误率<0.1%",
+      "expectedResults": "所有API接口测试通过，生成详细测试报告和性能分析",
+      "taskType": "DEVELOPMENT"
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": {
+        "id": 36,
+        "taskName": "API测试任务（已更新）",
+        "personnelAssignment": "资深后端开发工程师、高级测试工程师、QA主管",
+        "timeline": "优化为10天完成",
+        "quantitativeMetrics": "测试覆盖率达到100%，响应时间<100ms，错误率<0.1%",
+        "expectedResults": "所有API接口测试通过，生成详细测试报告和性能分析",
+        "actualResults": null,
+        "resultDifferenceAnalysis": null,
+        "taskType": "DEVELOPMENT",
+        "createdBy": 10005,
+        "createdAt": "2025-09-20T23:21:47",
+        "updatedAt": "2025-09-20T23:21:46.762388",
+        "progress": 71,
+        "completed": false,
+        "taskTypeName": "DEVELOPMENT"
+      },
+      "timestamp": "2025-09-20T23:21:46.769206"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.770Z"
+  },
+  {
+    "endpoint": "/weekly-reports/{id}/ai-approve",
+    "method": "PUT",
+    "description": "AI审批周报",
+    "input": {
+      "id": 1,
+      "aiAnalysisId": 12345
+    },
+    "output": {
+      "success": false,
+      "message": "AI审批失败: 周报不存在: 1",
+      "data": null,
+      "timestamp": "2025-09-20T23:21:46.778564"
+    },
+    "status": 500,
+    "timestamp": "2025-09-20T15:21:46.779Z"
+  },
+  {
+    "endpoint": "/weekly-reports/{id}/admin-approve",
+    "method": "PUT",
+    "description": "管理员审批周报",
+    "input": {
+      "id": 1
+    },
+    "output": {
+      "success": false,
+      "message": "没有权限审批周报",
+      "data": null,
+      "timestamp": "2025-09-20T23:21:46.786853"
+    },
+    "status": 403,
+    "timestamp": "2025-09-20T15:21:46.787Z"
+  },
+  {
+    "endpoint": "/weekly-reports/{id}/super-admin-approve",
+    "method": "PUT",
+    "description": "超级管理员终审周报",
+    "input": {
+      "id": 1
+    },
+    "output": {
+      "success": false,
+      "message": "只有超级管理员可以进行终审",
+      "data": null,
+      "timestamp": "2025-09-20T23:21:46.79554"
+    },
+    "status": 403,
+    "timestamp": "2025-09-20T15:21:46.796Z"
+  },
+  {
+    "endpoint": "/weekly-reports/{id}/reject",
+    "method": "PUT",
+    "description": "拒绝周报并提供反馈",
+    "input": {
+      "id": 1,
+      "reason": "周报内容不够详细，需要补充以下方面：1. 具体的工作时间分配；2. 遇到的技术难题及解决方案；3. 下周具体的工作计划和里程碑"
+    },
+    "output": {
+      "success": false,
+      "message": "没有权限拒绝周报",
+      "data": null,
+      "timestamp": "2025-09-20T23:21:46.8035"
+    },
+    "status": 403,
+    "timestamp": "2025-09-20T15:21:46.804Z"
+  },
+  {
+    "endpoint": "/health",
+    "method": "GET",
+    "description": "系统健康检查",
+    "input": {},
+    "output": {
+      "success": true,
+      "message": "Service is healthy",
+      "data": {
+        "service": "weekly-report-backend",
+        "version": "1.0.0",
+        "status": "UP",
+        "timestamp": "2025-09-20T23:21:46.806074"
+      },
+      "timestamp": "2025-09-20T23:21:46.806076"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.806Z"
+  },
+  {
+    "endpoint": "/tasks/{id}",
+    "method": "DELETE",
+    "description": "删除任务",
+    "input": {
+      "id": 36
+    },
+    "output": {
+      "success": true,
+      "message": "Success",
+      "data": null,
+      "timestamp": "2025-09-20T23:21:46.829839"
+    },
+    "status": 200,
+    "timestamp": "2025-09-20T15:21:46.830Z"
+  },
+  {
+    "endpoint": "/projects/{id}",
+    "method": "DELETE",
+    "description": "删除项目",
+    "input": {
+      "id": 30
+    },
+    "output": {
+      "success": false,
+      "message": "Only DRAFT projects can be deleted",
+      "data": null,
+      "timestamp": "2025-09-20T23:21:46.841491"
+    },
+    "status": 400,
+    "timestamp": "2025-09-20T15:21:46.842Z"
+  }
+]

@@ -1,0 +1,106 @@
+-- V22: 基于前端UI需求重构周报表结构
+-- 删除不需要的字段，保留页面实际使用的字段
+
+-- 删除之前添加的不匹配字段（使用兼容的MySQL语法）
+-- 先检查字段是否存在，然后删除
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'weekly_reports' AND COLUMN_NAME = 'work_summary') > 0,
+    'ALTER TABLE weekly_reports DROP COLUMN work_summary',
+    'SELECT "Column work_summary does not exist" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'weekly_reports' AND COLUMN_NAME = 'achievements') > 0,
+    'ALTER TABLE weekly_reports DROP COLUMN achievements',
+    'SELECT "Column achievements does not exist" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'weekly_reports' AND COLUMN_NAME = 'challenges') > 0,
+    'ALTER TABLE weekly_reports DROP COLUMN challenges',
+    'SELECT "Column challenges does not exist" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'weekly_reports' AND COLUMN_NAME = 'next_week_plan') > 0,
+    'ALTER TABLE weekly_reports DROP COLUMN next_week_plan',
+    'SELECT "Column next_week_plan does not exist" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- 保留的核心字段说明：
+-- title: 周报标题 ✓
+-- content: 自动生成的周报内容（基于任务数据生成的markdown） ✓  
+-- week_start: 周开始日期 ✓
+-- week_end: 周结束日期 ✓
+-- development_opportunities: 可发展性清单（用户手动填写） ✓
+-- 其他字段: summary, additional_notes 等保持不变
+
+-- 为任务表添加用户实际填写的字段（如果不存在）
+-- 这些字段存储在tasks表中，而不是weekly_reports表中
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tasks' AND COLUMN_NAME = 'actual_results') = 0,
+    'ALTER TABLE tasks ADD COLUMN actual_results TEXT COMMENT "实际结果 - 本周汇报任务的实际完成情况"',
+    'SELECT "Column actual_results already exists" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tasks' AND COLUMN_NAME = 'result_difference_analysis') = 0,
+    'ALTER TABLE tasks ADD COLUMN result_difference_analysis TEXT COMMENT "结果差异分析 - 预期与实际的差异分析"',
+    'SELECT "Column result_difference_analysis already exists" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- 为任务表添加索引以优化查询（如果不存在）
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tasks' AND INDEX_NAME = 'idx_tasks_actual_results') = 0,
+    'CREATE INDEX idx_tasks_actual_results ON tasks (actual_results(100))',
+    'SELECT "Index idx_tasks_actual_results already exists" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.STATISTICS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tasks' AND INDEX_NAME = 'idx_tasks_result_difference') = 0,
+    'CREATE INDEX idx_tasks_result_difference ON tasks (result_difference_analysis(100))',
+    'SELECT "Index idx_tasks_result_difference already exists" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+-- 添加备注字段到周报表（如果不存在）
+SET @sql = IF(
+    (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS 
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'weekly_reports' AND COLUMN_NAME = 'additional_notes') = 0,
+    'ALTER TABLE weekly_reports ADD COLUMN additional_notes TEXT COMMENT "其他备注 - 用户手动填写的额外说明"',
+    'SELECT "Column additional_notes already exists" as message'
+);
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;

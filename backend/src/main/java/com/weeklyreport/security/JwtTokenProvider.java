@@ -149,9 +149,13 @@ public class JwtTokenProvider {
 
         String roles = claims.get(AUTHORITIES_KEY).toString();
         
-        return Arrays.stream(roles.split(","))
+        Collection<? extends GrantedAuthority> authorities = Arrays.stream(roles.split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+        
+        logger.debug("Extracted authorities from token: {} for roles: {}", authorities, roles);
+        
+        return authorities;
     }
 
     /**
@@ -169,7 +173,10 @@ public class JwtTokenProvider {
             authorities
         );
 
-        return new UsernamePasswordAuthenticationToken(userPrincipal, token, authorities);
+        Authentication auth = new UsernamePasswordAuthenticationToken(userPrincipal, token, authorities);
+        logger.debug("Created authentication for user {} with authorities: {}", username, authorities);
+        
+        return auth;
     }
 
     /**
@@ -271,6 +278,20 @@ public class JwtTokenProvider {
     /**
      * Token type enumeration
      */
+    /**
+     * Get access token validity in seconds
+     */
+    public Long getAccessTokenValidityInSeconds() {
+        return accessTokenValidityInMilliseconds / 1000;
+    }
+
+    /**
+     * Get refresh token validity in seconds
+     */
+    public Long getRefreshTokenValidityInSeconds() {
+        return refreshTokenValidityInMilliseconds / 1000;
+    }
+
     public enum TokenType {
         ACCESS, REFRESH, UNKNOWN
     }

@@ -1,139 +1,76 @@
 package com.weeklyreport.dto.ai;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.weeklyreport.entity.AIAnalysisResult;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
 
 /**
- * Response DTO for AI analysis results
+ * Response DTO for AI analysis results - 严格按照AIAnalysisResult.java设计
  */
 public class AIAnalysisResponse {
 
-    private Long analysisId;
-    
-    private Long reportId;
-    
-    private String status; // PENDING, PROCESSING, COMPLETED, FAILED
-    
-    private String summary;
-    
-    private String sentiment; // POSITIVE, NEGATIVE, NEUTRAL
-    
-    private Double sentimentScore; // -1.0 to 1.0
-    
-    private List<String> keywords;
-    
-    private List<String> risks;
-    
-    private List<String> suggestions;
-    
-    private Map<String, Object> insights; // Additional structured insights
-    
-    private Integer confidenceScore; // 0-100
+    private Long id;                                        // 分析结果ID
+    private Long reportId;                                  // 对应周报ID
+    private AIAnalysisResult.AnalysisType analysisType;     // 分析类型
+    private AIAnalysisResult.AnalysisStatus analysisStatus; // 分析状态
+    private String analysisContent;                         // 分析内容
+    private Integer qualityScore;                           // 质量评分
+    private String improvementSuggestions;                  // 改进建议
+    private Long analyzedBy;                                // 分析人员ID
     
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime analysisStartTime;
+    private LocalDateTime analyzedAt;                       // 分析时间
     
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime analysisCompleteTime;
+    private LocalDateTime createdAt;                        // 创建时间
     
-    private Long processingTimeMs;
-    
-    private String errorMessage;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updatedAt;                        // 更新时间
 
     // Constructors
     public AIAnalysisResponse() {}
 
-    public AIAnalysisResponse(Long analysisId, Long reportId, String status) {
-        this.analysisId = analysisId;
+    public AIAnalysisResponse(Long id, Long reportId, AIAnalysisResult.AnalysisStatus status) {
+        this.id = id;
         this.reportId = reportId;
-        this.status = status;
+        this.analysisStatus = status;
+    }
+    
+    public AIAnalysisResponse(AIAnalysisResult result) {
+        this.id = result.getId();
+        this.reportId = result.getReportId();
+        this.analysisType = result.getAnalysisType();
+        this.analysisStatus = result.getStatus();  // 直接映射status字段
+        this.analysisContent = result.getResult();  // 直接映射result字段
+        this.qualityScore = result.getConfidence() != null ? 
+            (int)(result.getConfidence() * 100) : null;  // confidence转换为百分比
+        this.improvementSuggestions = result.getErrorMessage();
+        this.analyzedBy = null; // 简化版本中不包含此字段
+        this.analyzedAt = result.getCompletedAt();
+        this.createdAt = result.getCreatedAt();
+        this.updatedAt = result.getUpdatedAt();
     }
 
-    // Builder pattern for easier construction
-    public static class Builder {
-        private AIAnalysisResponse response = new AIAnalysisResponse();
-
-        public Builder analysisId(Long analysisId) {
-            response.analysisId = analysisId;
-            return this;
-        }
-
-        public Builder reportId(Long reportId) {
-            response.reportId = reportId;
-            return this;
-        }
-
-        public Builder status(String status) {
-            response.status = status;
-            return this;
-        }
-
-        public Builder summary(String summary) {
-            response.summary = summary;
-            return this;
-        }
-
-        public Builder sentiment(String sentiment, Double score) {
-            response.sentiment = sentiment;
-            response.sentimentScore = score;
-            return this;
-        }
-
-        public Builder keywords(List<String> keywords) {
-            response.keywords = keywords;
-            return this;
-        }
-
-        public Builder risks(List<String> risks) {
-            response.risks = risks;
-            return this;
-        }
-
-        public Builder suggestions(List<String> suggestions) {
-            response.suggestions = suggestions;
-            return this;
-        }
-
-        public Builder insights(Map<String, Object> insights) {
-            response.insights = insights;
-            return this;
-        }
-
-        public Builder confidenceScore(Integer score) {
-            response.confidenceScore = score;
-            return this;
-        }
-
-        public Builder timing(LocalDateTime startTime, LocalDateTime endTime, Long processingMs) {
-            response.analysisStartTime = startTime;
-            response.analysisCompleteTime = endTime;
-            response.processingTimeMs = processingMs;
-            return this;
-        }
-
-        public Builder error(String errorMessage) {
-            response.errorMessage = errorMessage;
-            return this;
-        }
-
-        public AIAnalysisResponse build() {
-            return response;
-        }
+    // Helper methods
+    public boolean isCompleted() {
+        return analysisStatus == AIAnalysisResult.AnalysisStatus.COMPLETED;
     }
-
-    public static Builder builder() {
-        return new Builder();
+    
+    public boolean isPending() {
+        return analysisStatus == AIAnalysisResult.AnalysisStatus.PENDING;
+    }
+    
+    public boolean isFailed() {
+        return analysisStatus == AIAnalysisResult.AnalysisStatus.FAILED;
     }
 
     // Getters and Setters
-    public Long getAnalysisId() {
-        return analysisId;
+    public Long getId() {
+        return id;
     }
 
-    public void setAnalysisId(Long analysisId) {
-        this.analysisId = analysisId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getReportId() {
@@ -144,119 +81,86 @@ public class AIAnalysisResponse {
         this.reportId = reportId;
     }
 
-    public String getStatus() {
-        return status;
+    public AIAnalysisResult.AnalysisType getAnalysisType() {
+        return analysisType;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setAnalysisType(AIAnalysisResult.AnalysisType analysisType) {
+        this.analysisType = analysisType;
     }
 
-    public String getSummary() {
-        return summary;
+    public AIAnalysisResult.AnalysisStatus getAnalysisStatus() {
+        return analysisStatus;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setAnalysisStatus(AIAnalysisResult.AnalysisStatus analysisStatus) {
+        this.analysisStatus = analysisStatus;
     }
 
-    public String getSentiment() {
-        return sentiment;
+    public String getAnalysisContent() {
+        return analysisContent;
     }
 
-    public void setSentiment(String sentiment) {
-        this.sentiment = sentiment;
+    public void setAnalysisContent(String analysisContent) {
+        this.analysisContent = analysisContent;
     }
 
-    public Double getSentimentScore() {
-        return sentimentScore;
+    public Integer getQualityScore() {
+        return qualityScore;
     }
 
-    public void setSentimentScore(Double sentimentScore) {
-        this.sentimentScore = sentimentScore;
+    public void setQualityScore(Integer qualityScore) {
+        this.qualityScore = qualityScore;
     }
 
-    public List<String> getKeywords() {
-        return keywords;
+    public String getImprovementSuggestions() {
+        return improvementSuggestions;
     }
 
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
+    public void setImprovementSuggestions(String improvementSuggestions) {
+        this.improvementSuggestions = improvementSuggestions;
     }
 
-    public List<String> getRisks() {
-        return risks;
+    public Long getAnalyzedBy() {
+        return analyzedBy;
     }
 
-    public void setRisks(List<String> risks) {
-        this.risks = risks;
+    public void setAnalyzedBy(Long analyzedBy) {
+        this.analyzedBy = analyzedBy;
     }
 
-    public List<String> getSuggestions() {
-        return suggestions;
+    public LocalDateTime getAnalyzedAt() {
+        return analyzedAt;
     }
 
-    public void setSuggestions(List<String> suggestions) {
-        this.suggestions = suggestions;
+    public void setAnalyzedAt(LocalDateTime analyzedAt) {
+        this.analyzedAt = analyzedAt;
     }
 
-    public Map<String, Object> getInsights() {
-        return insights;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setInsights(Map<String, Object> insights) {
-        this.insights = insights;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Integer getConfidenceScore() {
-        return confidenceScore;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setConfidenceScore(Integer confidenceScore) {
-        this.confidenceScore = confidenceScore;
-    }
-
-    public LocalDateTime getAnalysisStartTime() {
-        return analysisStartTime;
-    }
-
-    public void setAnalysisStartTime(LocalDateTime analysisStartTime) {
-        this.analysisStartTime = analysisStartTime;
-    }
-
-    public LocalDateTime getAnalysisCompleteTime() {
-        return analysisCompleteTime;
-    }
-
-    public void setAnalysisCompleteTime(LocalDateTime analysisCompleteTime) {
-        this.analysisCompleteTime = analysisCompleteTime;
-    }
-
-    public Long getProcessingTimeMs() {
-        return processingTimeMs;
-    }
-
-    public void setProcessingTimeMs(Long processingTimeMs) {
-        this.processingTimeMs = processingTimeMs;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
     public String toString() {
         return "AIAnalysisResponse{" +
-                "analysisId=" + analysisId +
+                "id=" + id +
                 ", reportId=" + reportId +
-                ", status='" + status + '\'' +
-                ", sentiment='" + sentiment + '\'' +
-                ", confidenceScore=" + confidenceScore +
-                ", processingTimeMs=" + processingTimeMs +
+                ", analysisType=" + analysisType +
+                ", analysisStatus=" + analysisStatus +
+                ", qualityScore=" + qualityScore +
                 '}';
     }
 }

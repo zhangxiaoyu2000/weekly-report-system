@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class WeeklyReportFilterRequest {
 
     private String title;
-    private WeeklyReport.ReportStatus status;
+    private WeeklyReport.ApprovalStatus approvalStatus;
     private Long authorId;
     private Long reviewerId;
     private Long projectId;
@@ -38,7 +38,7 @@ public class WeeklyReportFilterRequest {
     private Integer size = 20;
 
     // Sorting parameters
-    private String sortBy = "reportWeek";
+    private String sortBy = "weekStart";
     private String sortDirection = "DESC";
 
     // Constructors
@@ -53,12 +53,44 @@ public class WeeklyReportFilterRequest {
         this.title = title;
     }
 
-    public WeeklyReport.ReportStatus getStatus() {
-        return status;
+    public WeeklyReport.ApprovalStatus getApprovalStatus() {
+        return approvalStatus;
     }
 
+    public void setApprovalStatus(WeeklyReport.ApprovalStatus approvalStatus) {
+        this.approvalStatus = approvalStatus;
+    }
+
+    // 兼容性方法 - 支持旧代码中的getStatus()调用
+    public WeeklyReport.ReportStatus getStatus() {
+        if (approvalStatus == null) return null;
+        
+        // 将ApprovalStatus转换为ReportStatus
+        switch (approvalStatus) {
+            case AI_ANALYZING: return WeeklyReport.ReportStatus.DRAFT;
+            case ADMIN_REVIEWING: return WeeklyReport.ReportStatus.SUBMITTED;
+            case ADMIN_APPROVED: return WeeklyReport.ReportStatus.APPROVED;
+            case AI_REJECTED: return WeeklyReport.ReportStatus.REJECTED;
+            case ADMIN_REJECTED: return WeeklyReport.ReportStatus.REJECTED;
+            default: return WeeklyReport.ReportStatus.DRAFT;
+        }
+    }
+    
     public void setStatus(WeeklyReport.ReportStatus status) {
-        this.status = status;
+        if (status == null) {
+            this.approvalStatus = null;
+            return;
+        }
+        
+        // 将ReportStatus转换为ApprovalStatus
+        switch (status) {
+            case DRAFT: this.approvalStatus = WeeklyReport.ApprovalStatus.AI_ANALYZING; break;
+            case SUBMITTED: this.approvalStatus = WeeklyReport.ApprovalStatus.ADMIN_REVIEWING; break;
+            case IN_REVIEW: this.approvalStatus = WeeklyReport.ApprovalStatus.ADMIN_REVIEWING; break;
+            case APPROVED: this.approvalStatus = WeeklyReport.ApprovalStatus.ADMIN_APPROVED; break;
+            case REJECTED: this.approvalStatus = WeeklyReport.ApprovalStatus.AI_REJECTED; break;
+            default: this.approvalStatus = WeeklyReport.ApprovalStatus.AI_ANALYZING; break;
+        }
     }
 
     public Long getAuthorId() {
@@ -215,7 +247,7 @@ public class WeeklyReportFilterRequest {
 
     // Helper methods
     public boolean hasFilters() {
-        return title != null || status != null || authorId != null || reviewerId != null ||
+        return title != null || approvalStatus != null || authorId != null || reviewerId != null ||
                projectId != null || templateId != null || year != null || weekNumber != null ||
                reportWeekFrom != null || reportWeekTo != null || submittedFrom != null ||
                submittedTo != null || priorityMin != null || priorityMax != null ||
@@ -229,7 +261,7 @@ public class WeeklyReportFilterRequest {
     @Override
     public String toString() {
         return "WeeklyReportFilterRequest{" +
-                "status=" + status +
+                "approvalStatus=" + approvalStatus +
                 ", authorId=" + authorId +
                 ", year=" + year +
                 ", weekNumber=" + weekNumber +

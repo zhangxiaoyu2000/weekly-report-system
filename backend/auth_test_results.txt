@@ -1,0 +1,12 @@
+=== AUTH MODULE TESTING ===
+
+1. Testing login with admin1/manager1:
+{"success":false,"message":"Invalid username/email or password","data":null,"timestamp":"2025-09-20T15:23:28.861938"}
+2. Testing login with manager1/manager1:
+{"success":false,"message":"Invalid username/email or password","data":null,"timestamp":"2025-09-20T15:23:29.237674"}
+3. Testing registration endpoint:
+{"success":true,"message":"Registration successful","data":{"accessToken":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsInJvbGVzIjoiUk9MRV9NQU5BR0VSIiwiaWF0IjoxNzU4MzUzMDIwLCJleHAiOjE3NTgzNTY2MjAsInVzZXJJZCI6MTAwMDUsImZ1bGxOYW1lIjoidGVzdHVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20ifQ.8R1VyIlIzUzztY42u0bJ3fmEWr2cSoazVCThKogK7m1furL7ICjfasZ6qGe_Ru3Y4MDMfMPjRdu-E9hlLellTg","refreshToken":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc1ODM1MzAyMCwiZXhwIjoxNzU4OTU3ODIwfQ.ijK47i0fbsCYdlHunhBjow9lH7x9HFpUGP0cCF4Kr2HhS9ZUSMcZ459jxrGNxtC2YplzhKyoSWSZobxlV6jw6w","tokenType":"Bearer","expiresIn":3600,"user":{"id":10005,"username":"testuser","email":"test@example.com","role":"MANAGER","status":"ACTIVE","createdAt":"2025-09-20T15:23:40.660345","updatedAt":"2025-09-20T15:23:40.660381","fullName":"testuser","manager":true,"admin":false,"firstName":"testuser","lastName":"","superAdmin":false,"active":true}},"timestamp":"2025-09-20T15:23:40.691411"}Status: 201 
+4. Testing refresh token endpoint:
+{"success":true,"message":"Token refreshed successfully (fallback)","data":{"accessToken":"fallback-token-1758353020711","refreshToken":"fallback-refresh-1758353020711","tokenType":"Bearer","expiresIn":3600},"timestamp":"2025-09-20T15:23:40.711669"}Status: 200 
+5. Testing logout endpoint:
+{"success":false,"message":"Internal server error","data":null,"timestamp":"2025-09-20T15:23:40.722844"}Status: 500 

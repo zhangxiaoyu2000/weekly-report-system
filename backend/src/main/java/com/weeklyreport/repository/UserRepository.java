@@ -1,5 +1,6 @@
 package com.weeklyreport.repository;
 
+import com.weeklyreport.dto.user.UserListDTO;
 import com.weeklyreport.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,18 +25,17 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     
     Optional<User> findByEmail(String email);
     
-    Optional<User> findByEmployeeId(String employeeId);
-    
     boolean existsByUsername(String username);
     
     boolean existsByEmail(String email);
-    
-    boolean existsByEmployeeId(String employeeId);
 
     // Find by status
     List<User> findByStatus(User.UserStatus status);
     
     Page<User> findByStatus(User.UserStatus status, Pageable pageable);
+    
+    // Find by status not equal (exclude deleted users)
+    Page<User> findByStatusNot(User.UserStatus status, Pageable pageable);
 
     // Find by role
     List<User> findByRole(User.Role role);
@@ -44,49 +44,24 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     
     List<User> findByRoleIn(List<User.Role> roles);
 
-    // Find by department
-    List<User> findByDepartmentId(Long departmentId);
-    
-    Page<User> findByDepartmentId(Long departmentId, Pageable pageable);
-    
-    @Query("SELECT u FROM User u WHERE u.department.id = :departmentId AND u.status = :status")
-    List<User> findByDepartmentIdAndStatus(@Param("departmentId") Long departmentId, 
-                                          @Param("status") User.UserStatus status);
+    // Department-related queries removed as User entity no longer has department field
 
-    // Find by department hierarchy (including child departments)
-    @Query("SELECT u FROM User u WHERE u.department.path LIKE CONCAT(:departmentPath, '%')")
-    List<User> findByDepartmentHierarchy(@Param("departmentPath") String departmentPath);
-
-    // Search methods
+    // Search methods - firstName and lastName removed, use username only
     @Query("SELECT u FROM User u WHERE " +
-           "(LOWER(u.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-           "LOWER(u.username) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+           "(LOWER(u.username) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
            "LOWER(u.email) LIKE LOWER(CONCAT('%', :keyword, '%'))) AND " +
            "u.status = :status")
     Page<User> searchByKeywordAndStatus(@Param("keyword") String keyword, 
                                        @Param("status") User.UserStatus status, 
                                        Pageable pageable);
 
-    @Query("SELECT u FROM User u WHERE " +
-           "(LOWER(u.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-           "LOWER(u.username) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-           "LOWER(u.email) LIKE LOWER(CONCAT('%', :keyword, '%'))) AND " +
-           "u.department.id = :departmentId")
-    List<User> searchByKeywordInDepartment(@Param("keyword") String keyword, 
-                                          @Param("departmentId") Long departmentId);
+    // Department-specific search removed as User entity no longer has department field
 
-    // Find by position
-    List<User> findByPosition(String position);
-    
-    @Query("SELECT DISTINCT u.position FROM User u WHERE u.position IS NOT NULL ORDER BY u.position")
-    List<String> findAllPositions();
+    // Note: position field removed from User entity
 
     // Find managers and team leaders
     @Query("SELECT u FROM User u WHERE u.role IN :managerRoles AND u.status = 'ACTIVE'")
     List<User> findManagers(@Param("managerRoles") List<User.Role> managerRoles);
-    
-    @Query("SELECT u FROM User u WHERE u.role IN ('DEPARTMENT_MANAGER', 'TEAM_LEADER') AND u.department.id = :departmentId")
-    List<User> findDepartmentManagers(@Param("departmentId") Long departmentId);
 
     // Find users created in time range
     List<User> findByCreatedAtBetween(LocalDateTime startDate, LocalDateTime endDate);
@@ -94,12 +69,7 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     @Query("SELECT COUNT(u) FROM User u WHERE u.createdAt >= :startDate")
     long countUsersCreatedAfter(@Param("startDate") LocalDateTime startDate);
 
-    // Find users by last login
-    @Query("SELECT u FROM User u WHERE u.lastLoginTime < :cutoffDate AND u.status = 'ACTIVE'")
-    List<User> findInactiveUsers(@Param("cutoffDate") LocalDateTime cutoffDate);
-    
-    @Query("SELECT u FROM User u WHERE u.lastLoginTime IS NULL AND u.createdAt < :cutoffDate")
-    List<User> findUsersNeverLoggedIn(@Param("cutoffDate") LocalDateTime cutoffDate);
+    // Last login queries removed as User entity no longer has lastLogin field
 
     // Statistics methods
     @Query("SELECT COUNT(u) FROM User u WHERE u.status = :status")
@@ -108,12 +78,7 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     @Query("SELECT COUNT(u) FROM User u WHERE u.role = :role")
     long countByRole(@Param("role") User.Role role);
     
-    @Query("SELECT COUNT(u) FROM User u WHERE u.department.id = :departmentId")
-    long countByDepartmentId(@Param("departmentId") Long departmentId);
-
-    // Department statistics
-    @Query("SELECT u.department.id, COUNT(u) FROM User u WHERE u.status = 'ACTIVE' GROUP BY u.department.id")
-    List<Object[]> countActiveUsersByDepartment();
+    // Department count queries removed as User entity no longer has department field
     
     @Query("SELECT u.role, COUNT(u) FROM User u WHERE u.status = 'ACTIVE' GROUP BY u.role")
     List<Object[]> countActiveUsersByRole();
@@ -122,39 +87,51 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     @Query("UPDATE User u SET u.status = :newStatus WHERE u.id IN :userIds")
     int updateStatusBatch(@Param("userIds") List<Long> userIds, 
                          @Param("newStatus") User.UserStatus newStatus);
-    
-    @Query("UPDATE User u SET u.lastLoginTime = :loginTime WHERE u.id = :userId")
-    int updateLastLoginTime(@Param("userId") Long userId, 
-                           @Param("loginTime") LocalDateTime loginTime);
 
-    // Find users for reporting hierarchy
-    @Query("SELECT u FROM User u WHERE u.role = 'EMPLOYEE' AND u.department.id = :departmentId AND u.status = 'ACTIVE'")
-    List<User> findEmployeesInDepartment(@Param("departmentId") Long departmentId);
+    // Find users for reporting hierarchy - department filter removed
     
-    @Query("SELECT u FROM User u JOIN u.weeklyReports r WHERE r.reportWeek = :weekStart GROUP BY u ORDER BY COUNT(r) DESC")
-    List<User> findMostActiveReporters(@Param("weekStart") java.time.LocalDate weekStart);
+    // Most active reporters query removed as User entity no longer has weeklyReports relationship
 
-    // Find users without certain relationships
-    @Query("SELECT u FROM User u WHERE u.department IS NULL")
-    List<User> findUsersWithoutDepartment();
+    // Find users without certain relationships - department check removed
     
-    @Query("SELECT u FROM User u WHERE NOT EXISTS (SELECT r FROM WeeklyReport r WHERE r.author = u)")
-    List<User> findUsersWithoutReports();
+    // Query removed as WeeklyReport entity no longer has author field
 
-    // Complex queries for user management
+    // Complex queries for user management - department filter removed
     @Query("SELECT u FROM User u WHERE u.status = 'ACTIVE' AND " +
-           "(:departmentId IS NULL OR u.department.id = :departmentId) AND " +
-           "(:role IS NULL OR u.role = :role) AND " +
-           "(:position IS NULL OR u.position = :position)")
-    Page<User> findUsersWithFilters(@Param("departmentId") Long departmentId,
-                                   @Param("role") User.Role role,
-                                   @Param("position") String position,
+           "(:role IS NULL OR u.role = :role)")
+    Page<User> findUsersWithFilters(@Param("role") User.Role role,
                                    Pageable pageable);
 
     // Email and notification queries
     @Query("SELECT u.email FROM User u WHERE u.status = 'ACTIVE' AND u.role IN :roles")
     List<String> findEmailsByRoles(@Param("roles") List<User.Role> roles);
     
-    @Query("SELECT u FROM User u WHERE u.status = 'ACTIVE' AND u.department.id IN :departmentIds")
-    List<User> findByDepartmentIds(@Param("departmentIds") List<Long> departmentIds);
+    // Department batch queries removed as User entity no longer has department field
+
+    // Performance optimized queries using native SQL - simplified for current schema
+    @Query(value = "SELECT u.id, u.username, u.username as full_name, u.email, " +
+           "u.role, u.status, " +
+           "u.created_at, u.updated_at " +
+           "FROM users u " +
+           "ORDER BY u.created_at DESC",
+           nativeQuery = true)
+    Page<Object[]> findAllUserListNative(Pageable pageable);
+
+    // Note: UserListDTO queries temporarily removed - need to update DTO first
+
+    // Methods to exclude current user (for super admin user management)
+    Page<User> findByStatusNotAndUsernameNot(User.UserStatus status, String username, Pageable pageable);
+    
+    // Find all users excluding specific username
+    Page<User> findByUsernameNot(String username, Pageable pageable);
+
+    @Query(value = "SELECT u.id, u.username, u.username as full_name, u.email, " +
+           "u.role, u.status, " +
+           "u.created_at, u.updated_at " +
+           "FROM users u " +
+           "WHERE u.username != :excludeUsername " +
+           "ORDER BY u.created_at DESC",
+           countQuery = "SELECT COUNT(*) FROM users u WHERE u.username != :excludeUsername",
+           nativeQuery = true)
+    Page<Object[]> findAllUserListNativeExcludingCurrent(@Param("excludeUsername") String excludeUsername, Pageable pageable);
 }

@@ -1,0 +1,225 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ weekly-report-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 33 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 151 source files with javac [debug release 17] to target/classes
+[INFO] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java: 某些输入文件使用或覆盖了已过时的 API。
+[INFO] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/project/ProjectPhaseResponse.java:[34,35] 找不到符号
+  符号:   方法 getActualResults()
+  位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 phase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/project/ProjectPhaseResponse.java:[35,46] 找不到符号
+  符号:   方法 getResultDifferenceAnalysis()
+  位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 phase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/DataSanitizer.java:[67,39] 找不到符号
+  符号:   方法 getActualResults()
+  位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 phase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/DataSanitizer.java:[67,76] 找不到符号
+  符号:   方法 getActualResults()
+  位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 phase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[70,18] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[71,18] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[86,74] 找不到符号
+  符号:   变量 DRAFT
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[87,78] 找不到符号
+  符号:   变量 SUBMITTED
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[91,71] 找不到符号
+  符号:   变量 DRAFT
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportResponse.java:[78,85] 找不到符号
+  符号:   变量 DRAFT
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportResponse.java:[314,61] 找不到符号
+  符号:   变量 DRAFT
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportResponse.java:[318,61] 找不到符号
+  符号:   变量 SUBMITTED
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[38,70] 找不到符号
+  符号:   变量 SUBMITTED
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[123,73] 找不到符号
+  符号:   变量 SUBMITTED
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[135,18] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[137,18] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[63,67] 找不到符号
+  符号:   变量 DRAFT
+  位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[109,13] 找不到符号
+  符号:   方法 setActualResults(java.lang.String)
+  位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[110,13] 找不到符号
+  符号:   方法 setResultDifferenceAnalysis(java.lang.String)
+  位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[133,21] 找不到符号
+  符号:   方法 setActualResults(java.lang.String)
+  位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 projectPhase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[134,21] 找不到符号
+  符号:   方法 setResultDifferenceAnalysis(java.lang.String)
+  位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 projectPhase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/task/TaskResponse.java:[38,34] 找不到符号
+  符号:   方法 getActualResults()
+  位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/task/TaskResponse.java:[39,45] 找不到符号
+  符号:   方法 getResultDifferenceAnalysis()
+  位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/task/TaskResponse.java:[40,29] 找不到符号
+  符号:   方法 getTaskType()
+  位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[119,17] 找不到符号
+  符号:   方法 setTaskType(com.weeklyreport.entity.Task.TaskType)
+  位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[201,17] 找不到符号
+  符号:   方法 setTaskType(com.weeklyreport.entity.Task.TaskType)
+  位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[296,39] 找不到符号
+  符号:   方法 findByCreatedByAndTaskType(java.lang.Long,com.weeklyreport.entity.Task.TaskType)
+  位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[298,39] 找不到符号
+  符号:   方法 findByTaskType(com.weeklyreport.entity.Task.TaskType)
+  位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[334,48] 找不到符号
+  符号:   方法 countByCreatedByAndActualResultsIsNotNull(java.lang.Long)
+  位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[335,46] 找不到符号
+  符号:   方法 countByCreatedByAndTaskType(java.lang.Long,com.weeklyreport.entity.Task.TaskType)
+  位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[336,50] 找不到符号
+  符号:   方法 countByCreatedByAndTaskType(java.lang.Long,com.weeklyreport.entity.Task.TaskType)
+  位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[340,48] 找不到符号
+  符号:   方法 countByActualResultsIsNotNull()
+  位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[341,46] 找不到符号
+  符号:   方法 countByTaskType(com.weeklyreport.entity.Task.TaskType)
+  位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[342,50] 找不到符号
+  符号:   方法 countByTaskType(com.weeklyreport.entity.Task.TaskType)
+  位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[INFO] 34 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.220 s
+[INFO] Finished at: 2025-09-21T12:54:16+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project weekly-report-backend: Compilation failure: Compilation failure: 
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/project/ProjectPhaseResponse.java:[34,35] 找不到符号
+[ERROR]   符号:   方法 getActualResults()
+[ERROR]   位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 phase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/project/ProjectPhaseResponse.java:[35,46] 找不到符号
+[ERROR]   符号:   方法 getResultDifferenceAnalysis()
+[ERROR]   位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 phase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/DataSanitizer.java:[67,39] 找不到符号
+[ERROR]   符号:   方法 getActualResults()
+[ERROR]   位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 phase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/DataSanitizer.java:[67,76] 找不到符号
+[ERROR]   符号:   方法 getActualResults()
+[ERROR]   位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 phase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[70,18] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[71,18] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[86,74] 找不到符号
+[ERROR]   符号:   变量 DRAFT
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[87,78] 找不到符号
+[ERROR]   符号:   变量 SUBMITTED
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportFilterRequest.java:[91,71] 找不到符号
+[ERROR]   符号:   变量 DRAFT
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportResponse.java:[78,85] 找不到符号
+[ERROR]   符号:   变量 DRAFT
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportResponse.java:[314,61] 找不到符号
+[ERROR]   符号:   变量 DRAFT
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/weeklyreport/WeeklyReportResponse.java:[318,61] 找不到符号
+[ERROR]   符号:   变量 SUBMITTED
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[38,70] 找不到符号
+[ERROR]   符号:   变量 SUBMITTED
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[123,73] 找不到符号
+[ERROR]   符号:   变量 SUBMITTED
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[135,18] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[137,18] 枚举 switch case 标签必须为枚举常量的非限定名称
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[63,67] 找不到符号
+[ERROR]   符号:   变量 DRAFT
+[ERROR]   位置: 类 com.weeklyreport.entity.WeeklyReport.ApprovalStatus
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[109,13] 找不到符号
+[ERROR]   符号:   方法 setActualResults(java.lang.String)
+[ERROR]   位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[110,13] 找不到符号
+[ERROR]   符号:   方法 setResultDifferenceAnalysis(java.lang.String)
+[ERROR]   位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[133,21] 找不到符号
+[ERROR]   符号:   方法 setActualResults(java.lang.String)
+[ERROR]   位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 projectPhase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportServiceV3.java:[134,21] 找不到符号
+[ERROR]   符号:   方法 setResultDifferenceAnalysis(java.lang.String)
+[ERROR]   位置: 类型为com.weeklyreport.entity.ProjectPhase的变量 projectPhase
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/task/TaskResponse.java:[38,34] 找不到符号
+[ERROR]   符号:   方法 getActualResults()
+[ERROR]   位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/task/TaskResponse.java:[39,45] 找不到符号
+[ERROR]   符号:   方法 getResultDifferenceAnalysis()
+[ERROR]   位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/dto/task/TaskResponse.java:[40,29] 找不到符号
+[ERROR]   符号:   方法 getTaskType()
+[ERROR]   位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[119,17] 找不到符号
+[ERROR]   符号:   方法 setTaskType(com.weeklyreport.entity.Task.TaskType)
+[ERROR]   位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[201,17] 找不到符号
+[ERROR]   符号:   方法 setTaskType(com.weeklyreport.entity.Task.TaskType)
+[ERROR]   位置: 类型为com.weeklyreport.entity.Task的变量 task
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[296,39] 找不到符号
+[ERROR]   符号:   方法 findByCreatedByAndTaskType(java.lang.Long,com.weeklyreport.entity.Task.TaskType)
+[ERROR]   位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[298,39] 找不到符号
+[ERROR]   符号:   方法 findByTaskType(com.weeklyreport.entity.Task.TaskType)
+[ERROR]   位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[334,48] 找不到符号
+[ERROR]   符号:   方法 countByCreatedByAndActualResultsIsNotNull(java.lang.Long)
+[ERROR]   位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[335,46] 找不到符号
+[ERROR]   符号:   方法 countByCreatedByAndTaskType(java.lang.Long,com.weeklyreport.entity.Task.TaskType)
+[ERROR]   位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[336,50] 找不到符号
+[ERROR]   符号:   方法 countByCreatedByAndTaskType(java.lang.Long,com.weeklyreport.entity.Task.TaskType)
+[ERROR]   位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[340,48] 找不到符号
+[ERROR]   符号:   方法 countByActualResultsIsNotNull()
+[ERROR]   位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[341,46] 找不到符号
+[ERROR]   符号:   方法 countByTaskType(com.weeklyreport.entity.Task.TaskType)
+[ERROR]   位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/controller/TaskController.java:[342,50] 找不到符号
+[ERROR]   符号:   方法 countByTaskType(com.weeklyreport.entity.Task.TaskType)
+[ERROR]   位置: 类型为com.weeklyreport.repository.TaskRepository的变量 taskRepository
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

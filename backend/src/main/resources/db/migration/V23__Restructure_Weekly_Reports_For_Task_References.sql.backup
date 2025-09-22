@@ -1,0 +1,24 @@
+-- V23: Restructure Weekly Reports for Task References
+-- Based on error3.md requirements
+
+-- Add new fields to weekly_reports table
+ALTER TABLE weekly_reports ADD COLUMN IF NOT EXISTS development_opportunities TEXT;
+
+-- Update the content field to be JSON type to store structured task references
+-- Note: MySQL 5.7+ supports JSON type, for older versions use TEXT
+ALTER TABLE weekly_reports MODIFY COLUMN content JSON;
+
+-- Add comment for clarity
+ALTER TABLE weekly_reports MODIFY COLUMN content JSON COMMENT 'Structured content with task references: {thisWeekReport: {routineTasks: [], developmentTasks: []}, nextWeekPlan: {routineTasks: [], developmentTasks: []}}';
+
+-- Remove deprecated fields that are not needed
+ALTER TABLE weekly_reports DROP COLUMN IF EXISTS work_summary;
+ALTER TABLE weekly_reports DROP COLUMN IF EXISTS achievements; 
+ALTER TABLE weekly_reports DROP COLUMN IF EXISTS challenges;
+ALTER TABLE weekly_reports DROP COLUMN IF EXISTS next_week_plan;
+ALTER TABLE weekly_reports DROP COLUMN IF EXISTS priority;
+ALTER TABLE weekly_reports DROP COLUMN IF EXISTS project_id;
+ALTER TABLE weekly_reports DROP COLUMN IF EXISTS template_id;
+
+-- Ensure report_week field format is standardized
+ALTER TABLE weekly_reports MODIFY COLUMN report_week VARCHAR(50) COMMENT 'Format: 几月第几周（周几）';

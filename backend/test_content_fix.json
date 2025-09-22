@@ -1,0 +1,21 @@
+{
+  "userId": 10004,
+  "title": "测试JsonProperty注解修复",
+  "reportWeek": "2025-09-21",
+  "content": {
+    "Routine_tasks": [{
+      "task_id": "1",
+      "actual_result": "测试任务执行完成",
+      "AnalysisofResultDifferences": "按时完成，无差异"
+    }],
+    "Developmental_tasks": [{
+      "project_id": "2",
+      "phase_id": "3",
+      "actual_result": "项目阶段执行完成",
+      "AnalysisofResultDifferences": "进度正常"
+    }]
+  },
+  "nextWeekPlan": {},
+  "additionalNotes": "测试注解修复",
+  "developmentOpportunities": "提升效率"
+}

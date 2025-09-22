@@ -7,7 +7,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 import jakarta.persistence.EntityManagerFactory;
@@ -26,20 +26,21 @@ import org.springframework.beans.factory.annotation.Qualifier;
  */
 @Configuration
 @EnableTransactionManagement
-public class DatabaseConfig implements TransactionManagementConfigurer {
+public class DatabaseConfig {
 
     /**
      * Primary transaction manager using JPA/Hibernate.
      * Provides full JPA transaction support with optimized settings.
      */
     @Bean
+    @Primary
     @Qualifier("transactionManager")
     public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         
-        // Performance optimizations
-        transactionManager.setDefaultTimeout(30); // 30 seconds default timeout
+        // Performance optimizations - aligned with application.yml
+        transactionManager.setDefaultTimeout(45); // 45 seconds unified timeout
         transactionManager.setFailEarlyOnGlobalRollbackOnly(true);
         transactionManager.setRollbackOnCommitFailure(true);
         
@@ -60,12 +61,9 @@ public class DatabaseConfig implements TransactionManagementConfigurer {
 
     /**
      * Default transaction manager annotation support.
-     * Returns the primary JPA transaction manager for @Transactional annotations.
+     * This method is removed to avoid circular dependency with Flyway.
+     * Spring will use the @Bean annotated transaction manager automatically.
      */
-    @Override
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
-        return jpaTransactionManager(null); // Will be injected by Spring
-    }
 
     /**
      * Development profile specific configuration.

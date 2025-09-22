@@ -3,7 +3,7 @@
 -- Description: Add AI Analysis tables for weekly report analysis functionality
 
 -- Create ai_analysis_results table
-CREATE TABLE ai_analysis_results (
+CREATE TABLE IF NOT EXISTS ai_analysis_results (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     report_id BIGINT NOT NULL,
     analysis_type VARCHAR(50) NOT NULL,
@@ -32,34 +32,24 @@ CREATE TABLE ai_analysis_results (
     ))
 );
 
--- Create indexes for ai_analysis_results
-CREATE INDEX idx_analysis_report ON ai_analysis_results(report_id);
-CREATE INDEX idx_analysis_type ON ai_analysis_results(analysis_type);
-CREATE INDEX idx_analysis_status ON ai_analysis_results(status);
-CREATE INDEX idx_analysis_created ON ai_analysis_results(created_at);
-CREATE INDEX idx_analysis_completed ON ai_analysis_results(completed_at);
+-- Create indexes for ai_analysis_results (with IF NOT EXISTS)
+CREATE INDEX IF NOT EXISTS idx_analysis_report ON ai_analysis_results(report_id);
+CREATE INDEX IF NOT EXISTS idx_analysis_type ON ai_analysis_results(analysis_type);
+CREATE INDEX IF NOT EXISTS idx_analysis_status ON ai_analysis_results(status);
+CREATE INDEX IF NOT EXISTS idx_analysis_created ON ai_analysis_results(created_at);
+CREATE INDEX IF NOT EXISTS idx_analysis_completed ON ai_analysis_results(completed_at);
 
 -- Composite indexes for common query patterns
-CREATE INDEX idx_analysis_report_type ON ai_analysis_results(report_id, analysis_type);
-CREATE INDEX idx_analysis_type_status ON ai_analysis_results(analysis_type, status);
-CREATE INDEX idx_analysis_status_created ON ai_analysis_results(status, created_at);
+CREATE INDEX IF NOT EXISTS idx_analysis_report_type ON ai_analysis_results(report_id, analysis_type);
+CREATE INDEX IF NOT EXISTS idx_analysis_type_status ON ai_analysis_results(analysis_type, status);
+CREATE INDEX IF NOT EXISTS idx_analysis_status_created ON ai_analysis_results(status, created_at);
 
--- Index for confidence-based queries
-CREATE INDEX idx_analysis_confidence ON ai_analysis_results(confidence) WHERE status = 'COMPLETED';
+-- Index for confidence-based queries (MySQL doesn't support partial indexes)
+CREATE INDEX IF NOT EXISTS idx_analysis_confidence ON ai_analysis_results(confidence);
 
--- Index for performance monitoring
-CREATE INDEX idx_analysis_processing_time ON ai_analysis_results(processing_time_ms) WHERE status = 'COMPLETED';
+-- Index for performance monitoring (MySQL doesn't support partial indexes)
+CREATE INDEX IF NOT EXISTS idx_analysis_processing_time ON ai_analysis_results(processing_time_ms);
 
 -- Comments for documentation
-COMMENT ON TABLE ai_analysis_results IS 'AI-generated analysis results for weekly reports';
-COMMENT ON COLUMN ai_analysis_results.report_id IS 'Foreign key to weekly_reports table';
-COMMENT ON COLUMN ai_analysis_results.analysis_type IS 'Type of analysis performed (SUMMARY, KEYWORDS, etc.)';
-COMMENT ON COLUMN ai_analysis_results.result IS 'JSON or text result of the analysis';
-COMMENT ON COLUMN ai_analysis_results.confidence IS 'Confidence score between 0.0 and 1.0';
-COMMENT ON COLUMN ai_analysis_results.status IS 'Current status of the analysis task';
-COMMENT ON COLUMN ai_analysis_results.processing_time_ms IS 'Time taken to process the analysis in milliseconds';
-COMMENT ON COLUMN ai_analysis_results.model_version IS 'Version of the AI model used for analysis';
-COMMENT ON COLUMN ai_analysis_results.parameters IS 'JSON parameters used for the analysis';
-COMMENT ON COLUMN ai_analysis_results.error_message IS 'Error message if analysis failed';
-COMMENT ON COLUMN ai_analysis_results.metadata IS 'Additional metadata in JSON format';
-COMMENT ON COLUMN ai_analysis_results.completed_at IS 'Timestamp when analysis was completed';
+-- AI-generated analysis results for weekly reports
+-- Column comments removed (MySQL doesn't support COMMENT ON COLUMN syntax)

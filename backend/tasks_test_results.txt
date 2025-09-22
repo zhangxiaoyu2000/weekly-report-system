@@ -1,0 +1,7 @@
+=== TASKS MODULE TESTING ===
+1. Testing GET /api/tasks (no auth):
+{"path":"/api/tasks","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:06.558856","status":401}
+2. Testing POST /api/tasks (no auth):
+{"path":"/api/tasks","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:06.568541","status":401}
+3. Testing POST /api/tasks with DEVELOPMENT taskType:
+{"path":"/api/tasks","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:06.578164","status":401}

@@ -6,13 +6,14 @@ import java.util.*;
 
 /**
  * Utility class for managing role hierarchy and permissions
+ * Supports SUPER_ADMIN, ADMIN and MANAGER roles
  */
 public class RoleHierarchy {
 
     // Role hierarchy: higher roles inherit permissions of lower roles
     private static final Map<User.Role, Set<User.Role>> ROLE_HIERARCHY = new HashMap<>();
     
-    // Department-level permissions
+    // Role-based permissions
     private static final Map<User.Role, Set<Permission>> ROLE_PERMISSIONS = new HashMap<>();
 
     static {
@@ -25,39 +26,22 @@ public class RoleHierarchy {
      * Higher roles can perform actions of lower roles
      */
     private static void initializeRoleHierarchy() {
-        // ADMIN can act as any role
+        // SUPER_ADMIN can act as any role
+        ROLE_HIERARCHY.put(User.Role.SUPER_ADMIN, EnumSet.of(
+            User.Role.SUPER_ADMIN,
+            User.Role.ADMIN,
+            User.Role.MANAGER
+        ));
+
+        // ADMIN can act as admin and manager
         ROLE_HIERARCHY.put(User.Role.ADMIN, EnumSet.of(
             User.Role.ADMIN,
-            User.Role.HR_MANAGER,
-            User.Role.DEPARTMENT_MANAGER,
-            User.Role.TEAM_LEADER,
-            User.Role.EMPLOYEE
+            User.Role.MANAGER
         ));
 
-        // HR_MANAGER can act as department manager and below
-        ROLE_HIERARCHY.put(User.Role.HR_MANAGER, EnumSet.of(
-            User.Role.HR_MANAGER,
-            User.Role.DEPARTMENT_MANAGER,
-            User.Role.TEAM_LEADER,
-            User.Role.EMPLOYEE
-        ));
-
-        // DEPARTMENT_MANAGER can act as team leader and employee
-        ROLE_HIERARCHY.put(User.Role.DEPARTMENT_MANAGER, EnumSet.of(
-            User.Role.DEPARTMENT_MANAGER,
-            User.Role.TEAM_LEADER,
-            User.Role.EMPLOYEE
-        ));
-
-        // TEAM_LEADER can act as employee
-        ROLE_HIERARCHY.put(User.Role.TEAM_LEADER, EnumSet.of(
-            User.Role.TEAM_LEADER,
-            User.Role.EMPLOYEE
-        ));
-
-        // EMPLOYEE can only act as employee
-        ROLE_HIERARCHY.put(User.Role.EMPLOYEE, EnumSet.of(
-            User.Role.EMPLOYEE
+        // MANAGER can only act as manager
+        ROLE_HIERARCHY.put(User.Role.MANAGER, EnumSet.of(
+            User.Role.MANAGER
         ));
     }
 
@@ -65,6 +49,28 @@ public class RoleHierarchy {
      * Initialize role permissions
      */
     private static void initializePermissions() {
+        // SUPER_ADMIN permissions - ultimate system access
+        ROLE_PERMISSIONS.put(User.Role.SUPER_ADMIN, EnumSet.of(
+            Permission.MANAGE_USERS,
+            Permission.MANAGE_DEPARTMENTS,
+            Permission.MANAGE_SYSTEM,
+            Permission.VIEW_ALL_REPORTS,
+            Permission.APPROVE_REPORTS,
+            Permission.FINAL_APPROVE_REPORTS,
+            Permission.MANAGE_TEMPLATES,
+            Permission.VIEW_ANALYTICS,
+            Permission.MANAGE_ROLES,
+            Permission.RESET_PASSWORDS,
+            Permission.CREATE_REPORTS,
+            Permission.VIEW_OWN_REPORTS,
+            Permission.EDIT_OWN_REPORTS,
+            Permission.VIEW_PROFILE,
+            Permission.EDIT_PROFILE,
+            Permission.CREATE_PROJECTS,
+            Permission.APPROVE_PROJECTS,
+            Permission.FINAL_APPROVE_PROJECTS
+        ));
+
         // ADMIN permissions - full system access
         ROLE_PERMISSIONS.put(User.Role.ADMIN, EnumSet.of(
             Permission.MANAGE_USERS,
@@ -75,40 +81,26 @@ public class RoleHierarchy {
             Permission.MANAGE_TEMPLATES,
             Permission.VIEW_ANALYTICS,
             Permission.MANAGE_ROLES,
-            Permission.RESET_PASSWORDS
-        ));
-
-        // HR_MANAGER permissions - user and department management
-        ROLE_PERMISSIONS.put(User.Role.HR_MANAGER, EnumSet.of(
-            Permission.MANAGE_USERS,
-            Permission.MANAGE_DEPARTMENTS,
-            Permission.VIEW_ALL_REPORTS,
-            Permission.VIEW_ANALYTICS,
-            Permission.RESET_PASSWORDS
-        ));
-
-        // DEPARTMENT_MANAGER permissions - department-level management
-        ROLE_PERMISSIONS.put(User.Role.DEPARTMENT_MANAGER, EnumSet.of(
-            Permission.VIEW_DEPARTMENT_REPORTS,
-            Permission.APPROVE_REPORTS,
-            Permission.VIEW_DEPARTMENT_ANALYTICS,
-            Permission.MANAGE_DEPARTMENT_USERS
-        ));
-
-        // TEAM_LEADER permissions - team-level management
-        ROLE_PERMISSIONS.put(User.Role.TEAM_LEADER, EnumSet.of(
-            Permission.VIEW_TEAM_REPORTS,
-            Permission.APPROVE_REPORTS,
-            Permission.VIEW_TEAM_ANALYTICS
-        ));
-
-        // EMPLOYEE permissions - basic user permissions
-        ROLE_PERMISSIONS.put(User.Role.EMPLOYEE, EnumSet.of(
+            Permission.RESET_PASSWORDS,
             Permission.CREATE_REPORTS,
             Permission.VIEW_OWN_REPORTS,
             Permission.EDIT_OWN_REPORTS,
             Permission.VIEW_PROFILE,
-            Permission.EDIT_PROFILE
+            Permission.EDIT_PROFILE,
+            Permission.CREATE_PROJECTS,
+            Permission.APPROVE_PROJECTS
+        ));
+
+        // MANAGER permissions - project and report management
+        ROLE_PERMISSIONS.put(User.Role.MANAGER, EnumSet.of(
+            Permission.CREATE_REPORTS,
+            Permission.VIEW_OWN_REPORTS,
+            Permission.EDIT_OWN_REPORTS,
+            Permission.VIEW_PROFILE,
+            Permission.EDIT_PROFILE,
+            Permission.CREATE_PROJECTS,
+            Permission.MANAGER_APPROVE_REPORTS,
+            Permission.MANAGER_APPROVE_PROJECTS
         ));
     }
 
@@ -154,30 +146,18 @@ public class RoleHierarchy {
             return false;
         }
 
-        // Admin can manage anyone
-        if (manager.getRole() == User.Role.ADMIN) {
+        // Super admin can manage anyone
+        if (manager.getRole() == User.Role.SUPER_ADMIN) {
             return true;
         }
 
-        // HR can manage anyone except admin
-        if (manager.getRole() == User.Role.HR_MANAGER) {
-            return targetUser.getRole() != User.Role.ADMIN;
+        // Admin can manage anyone except super admin
+        if (manager.getRole() == User.Role.ADMIN) {
+            return targetUser.getRole() != User.Role.SUPER_ADMIN;
         }
 
-        // Department manager can manage users in their department (except admin/HR)
-        if (manager.getRole() == User.Role.DEPARTMENT_MANAGER) {
-            return targetUser.getRole() != User.Role.ADMIN && 
-                   targetUser.getRole() != User.Role.HR_MANAGER &&
-                   isSameDepartment(manager, targetUser);
-        }
-
-        // Team leader can manage employees in their department
-        if (manager.getRole() == User.Role.TEAM_LEADER) {
-            return targetUser.getRole() == User.Role.EMPLOYEE &&
-                   isSameDepartment(manager, targetUser);
-        }
-
-        return false;
+        // Manager can only manage their own profile
+        return manager.getId().equals(targetUser.getId());
     }
 
     /**
@@ -188,16 +168,14 @@ public class RoleHierarchy {
             return false;
         }
 
-        // Admin and HR can view all departments
-        if (user.getRole() == User.Role.ADMIN || user.getRole() == User.Role.HR_MANAGER) {
+        // Super admin and admin can view all departments
+        if (user.getRole() == User.Role.SUPER_ADMIN || user.getRole() == User.Role.ADMIN) {
             return true;
         }
 
-        // Department managers and team leaders can view their department
-        if (user.getRole() == User.Role.DEPARTMENT_MANAGER || 
-            user.getRole() == User.Role.TEAM_LEADER) {
-            return user.getDepartment() != null && 
-                   user.getDepartment().getId().equals(departmentId);
+        // 简化版本中不支持部门管理
+        if (user.getRole() == User.Role.MANAGER) {
+            return false; // 简化版本中管理员无部门限制
         }
 
         return false;
@@ -208,11 +186,10 @@ public class RoleHierarchy {
      */
     public static int getRoleLevel(User.Role role) {
         return switch (role) {
+            case SUPER_ADMIN -> 0;
             case ADMIN -> 1;
-            case HR_MANAGER -> 2;
-            case DEPARTMENT_MANAGER -> 3;
-            case TEAM_LEADER -> 4;
-            case EMPLOYEE -> 5;
+            case MANAGER -> 2;
+            case EMPLOYEE -> 3;
         };
     }
 
@@ -227,10 +204,8 @@ public class RoleHierarchy {
      * Check if users are in the same department
      */
     private static boolean isSameDepartment(User user1, User user2) {
-        if (user1.getDepartment() == null || user2.getDepartment() == null) {
-            return false;
-        }
-        return user1.getDepartment().getId().equals(user2.getDepartment().getId());
+        // 简化版本中不支持部门管理，始终返回false
+        return false;
     }
 
     /**
@@ -248,21 +223,26 @@ public class RoleHierarchy {
         CREATE_REPORTS,
         VIEW_OWN_REPORTS,
         EDIT_OWN_REPORTS,
-        VIEW_TEAM_REPORTS,
-        VIEW_DEPARTMENT_REPORTS,
         VIEW_ALL_REPORTS,
         APPROVE_REPORTS,
+
+        // Project management
+        CREATE_PROJECTS,
+        APPROVE_PROJECTS,
+        MANAGER_APPROVE_PROJECTS,
+        FINAL_APPROVE_PROJECTS,
+
+        // Report management by level
+        MANAGER_APPROVE_REPORTS,
+        FINAL_APPROVE_REPORTS,
 
         // Template management
         MANAGE_TEMPLATES,
 
         // Analytics and statistics
         VIEW_ANALYTICS,
-        VIEW_TEAM_ANALYTICS,
-        VIEW_DEPARTMENT_ANALYTICS,
 
         // User management
-        MANAGE_DEPARTMENT_USERS,
         VIEW_PROFILE,
         EDIT_PROFILE
     }

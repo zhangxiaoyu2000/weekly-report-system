@@ -1,0 +1,30 @@
+-- V21__Update_Weekly_Reports_Status_Enum.sql
+-- Update weekly_reports status ENUM to include all necessary values
+
+-- First, update existing data to map old values to new ones if needed
+UPDATE weekly_reports 
+SET status = 'DRAFT' 
+WHERE status NOT IN ('DRAFT', 'SUBMITTED', 'REVIEWED', 'PUBLISHED');
+
+-- Drop and recreate the ENUM with all required values
+ALTER TABLE weekly_reports 
+MODIFY COLUMN status ENUM(
+    'DRAFT',
+    'SUBMITTED', 
+    'REVIEWED',
+    'PUBLISHED',
+    'PENDING_MANAGER_REVIEW',
+    'PENDING_ADMIN_REVIEW', 
+    'PENDING_SUPER_ADMIN_REVIEW',
+    'APPROVED_BY_MANAGER',
+    'APPROVED_BY_ADMIN',
+    'APPROVED_BY_SUPER_ADMIN',
+    'REJECTED_BY_MANAGER',
+    'REJECTED_BY_ADMIN', 
+    'REJECTED_BY_SUPER_ADMIN',
+    'RESUBMITTED',
+    'AI_ANALYZING',
+    'APPROVED',
+    'ADMIN_REJECTED',
+    'SUPER_ADMIN_REJECTED'
+) NOT NULL DEFAULT 'DRAFT' COMMENT '状态';

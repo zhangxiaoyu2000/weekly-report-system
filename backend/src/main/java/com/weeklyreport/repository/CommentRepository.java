@@ -1,6 +1,7 @@
 package com.weeklyreport.repository;
 
 import com.weeklyreport.entity.Comment;
+import com.weeklyreport.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -75,10 +76,10 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpec
     List<Comment> findUnresolvedActionableComments();
 
     // Find by resolver
-    List<Comment> findByResolvedById(Long resolvedById);
+    List<Comment> findByResolvedBy(User resolvedBy);
     
-    @Query("SELECT c FROM Comment c WHERE c.resolvedBy.id = :resolvedById AND c.resolvedAt >= :sinceDate")
-    List<Comment> findResolvedByUserSince(@Param("resolvedById") Long resolvedById, 
+    @Query("SELECT c FROM Comment c WHERE c.resolvedBy = :resolvedBy AND c.resolvedAt >= :sinceDate")
+    List<Comment> findResolvedByUserSince(@Param("resolvedBy") User resolvedBy, 
                                          @Param("sinceDate") LocalDateTime sinceDate);
 
     // Find by date ranges
@@ -139,12 +140,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpec
     @Query("SELECT COUNT(c) FROM Comment c WHERE c.isResolved = :isResolved")
     long countByResolved(@Param("isResolved") Boolean isResolved);
 
-    // Department-based queries
-    @Query("SELECT c FROM Comment c WHERE c.weeklyReport.author.department.id = :departmentId")
-    List<Comment> findByReportAuthorDepartment(@Param("departmentId") Long departmentId);
-    
-    @Query("SELECT c FROM Comment c WHERE c.author.department.id = :departmentId")
-    List<Comment> findByCommentAuthorDepartment(@Param("departmentId") Long departmentId);
+    // Department-based queries removed - not supported in simplified schema
 
     // Analytics queries
     @Query("SELECT c.type, COUNT(c) FROM Comment c WHERE c.status = 'ACTIVE' GROUP BY c.type")
@@ -153,11 +149,11 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpec
     @Query("SELECT c.weeklyReport.id, COUNT(c) FROM Comment c WHERE c.status = 'ACTIVE' GROUP BY c.weeklyReport.id ORDER BY COUNT(c) DESC")
     List<Object[]> countCommentsByReport();
     
-    @Query("SELECT c.author.id, c.author.fullName, COUNT(c) FROM Comment c WHERE c.createdAt >= :startDate GROUP BY c.author.id, c.author.fullName ORDER BY COUNT(c) DESC")
+    @Query("SELECT c.author.id, c.author.username, COUNT(c) FROM Comment c WHERE c.createdAt >= :startDate GROUP BY c.author.id, c.author.username ORDER BY COUNT(c) DESC")
     List<Object[]> getCommentAuthorStats(@Param("startDate") LocalDateTime startDate);
 
     // Activity tracking
-    @Query("SELECT c.author.id, c.author.fullName, COUNT(c), AVG(c.likesCount) FROM Comment c WHERE c.createdAt >= :startDate AND c.status = 'ACTIVE' GROUP BY c.author.id, c.author.fullName ORDER BY COUNT(c) DESC")
+    @Query("SELECT c.author.id, c.author.username, COUNT(c), AVG(c.likesCount) FROM Comment c WHERE c.createdAt >= :startDate AND c.status = 'ACTIVE' GROUP BY c.author.id, c.author.username ORDER BY COUNT(c) DESC")
     List<Object[]> getCommentActivityStats(@Param("startDate") LocalDateTime startDate);
     
     @Query("SELECT DATE(c.createdAt), COUNT(c) FROM Comment c WHERE c.createdAt >= :startDate GROUP BY DATE(c.createdAt) ORDER BY DATE(c.createdAt)")
@@ -208,7 +204,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpec
     @Query("UPDATE Comment c SET c.isResolved = true, c.resolvedAt = :resolvedAt, c.resolvedBy = :resolvedBy WHERE c.id = :commentId")
     int resolveComment(@Param("commentId") Long commentId, 
                       @Param("resolvedAt") LocalDateTime resolvedAt, 
-                      @Param("resolvedBy") com.weeklyreport.entity.User resolvedBy);
+                      @Param("resolvedBy") User resolvedBy);
 
     // Cleanup operations
     @Query("SELECT c FROM Comment c WHERE c.status = 'DELETED' AND c.updatedAt < :cutoffDate")
@@ -218,7 +214,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long>, JpaSpec
     int permanentlyDeleteOldComments(@Param("cutoffDate") LocalDateTime cutoffDate);
 
     // Notification queries
-    @Query("SELECT c FROM Comment c WHERE c.weeklyReport.author.id = :authorId AND c.author.id != :authorId AND c.createdAt >= :sinceDate AND c.status = 'ACTIVE'")
+    @Query("SELECT c FROM Comment c WHERE c.weeklyReport.userId = :authorId AND c.author.id != :authorId AND c.createdAt >= :sinceDate AND c.status = 'ACTIVE'")
     List<Comment> findCommentsForNotification(@Param("authorId") Long authorId, 
                                              @Param("sinceDate") LocalDateTime sinceDate);
     

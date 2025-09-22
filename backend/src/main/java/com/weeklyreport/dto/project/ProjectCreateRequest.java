@@ -1,47 +1,42 @@
 package com.weeklyreport.dto.project;
 
-import com.weeklyreport.entity.Project;
 import jakarta.validation.constraints.*;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import jakarta.validation.Valid;
+import java.util.List;
 
 /**
- * DTO for creating new projects
+ * DTO for creating new projects - 严格按照数据库设计.md和Project.java要求
  */
 public class ProjectCreateRequest {
 
     @NotBlank(message = "Project name cannot be blank")
-    @Size(min = 2, max = 100, message = "Project name must be between 2 and 100 characters")
-    private String name;
+    @Size(max = 200, message = "Project name must not exceed 200 characters")
+    private String name;                            // #项目名称
 
-    @Size(max = 1000, message = "Description must not exceed 1000 characters")
-    private String description;
+    @Size(max = 5000, message = "Description must not exceed 5000 characters")
+    private String description;                     // #项目内容
 
-    @NotNull(message = "Project priority cannot be null")
-    private Project.ProjectPriority priority;
+    @Size(max = 5000, message = "Members must not exceed 5000 characters")
+    private String members;                         // #项目成员
 
-    private LocalDate startDate;
+    @Size(max = 5000, message = "Expected results must not exceed 5000 characters")
+    private String expectedResults;                 // #预期结果
 
-    private LocalDate endDate;
+    @Size(max = 5000, message = "Timeline must not exceed 5000 characters")
+    private String timeline;                        // #时间线
 
-    @DecimalMin(value = "0.0", inclusive = true, message = "Budget must be non-negative")
-    private BigDecimal budget;
+    @Size(max = 5000, message = "Stop loss must not exceed 5000 characters")
+    private String stopLoss;                        // #止损点
 
-    @Size(max = 200, message = "Tags must not exceed 200 characters")
-    private String tags;
-
-    private Boolean isPublic = true;
-
-    private Long departmentId;
+    @Valid
+    private List<ProjectPhaseCreateRequest> phases; // #阶段性任务列表
 
     // Constructors
     public ProjectCreateRequest() {}
 
-    public ProjectCreateRequest(String name, String description, Project.ProjectPriority priority) {
+    public ProjectCreateRequest(String name, String description) {
         this.name = name;
         this.description = description;
-        this.priority = priority;
     }
 
     // Getters and Setters
@@ -61,69 +56,52 @@ public class ProjectCreateRequest {
         this.description = description;
     }
 
-    public Project.ProjectPriority getPriority() {
-        return priority;
+    public String getMembers() {
+        return members;
     }
 
-    public void setPriority(Project.ProjectPriority priority) {
-        this.priority = priority;
+    public void setMembers(String members) {
+        this.members = members;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public String getExpectedResults() {
+        return expectedResults;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setExpectedResults(String expectedResults) {
+        this.expectedResults = expectedResults;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public String getTimeline() {
+        return timeline;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setTimeline(String timeline) {
+        this.timeline = timeline;
     }
 
-    public BigDecimal getBudget() {
-        return budget;
+    public String getStopLoss() {
+        return stopLoss;
     }
 
-    public void setBudget(BigDecimal budget) {
-        this.budget = budget;
+    public void setStopLoss(String stopLoss) {
+        this.stopLoss = stopLoss;
     }
 
-    public String getTags() {
-        return tags;
+    public List<ProjectPhaseCreateRequest> getPhases() {
+        return phases;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
-
-    public Boolean getIsPublic() {
-        return isPublic;
-    }
-
-    public void setIsPublic(Boolean isPublic) {
-        this.isPublic = isPublic;
-    }
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
+    public void setPhases(List<ProjectPhaseCreateRequest> phases) {
+        this.phases = phases;
     }
 
     @Override
     public String toString() {
         return "ProjectCreateRequest{" +
                 "name='" + name + '\'' +
-                ", priority=" + priority +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
+                ", description='" + description + '\'' +
+                ", phases=" + (phases != null ? phases.size() : 0) + " phases" +
                 '}';
     }
 }

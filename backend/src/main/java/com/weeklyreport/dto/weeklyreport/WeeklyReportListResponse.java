@@ -179,9 +179,9 @@ public class WeeklyReportListResponse {
             switch (report.getStatus()) {
                 case DRAFT -> drafts++;
                 case SUBMITTED -> submitted++;
-                case UNDER_REVIEW -> underReview++;
+                case IN_REVIEW -> underReview++;
                 case APPROVED -> approved++;
-                case REJECTED, REVISION_REQUESTED -> rejected++;
+                case REJECTED -> rejected++;
                 default -> {}
             }
         }

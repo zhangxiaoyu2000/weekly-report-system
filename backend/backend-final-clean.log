@@ -1,0 +1,5031 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ weekly-report-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 13 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ weekly-report-backend ---
+[INFO] skip non existing resourceDirectory /Volumes/project/my-project/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ weekly-report-backend ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ weekly-report-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ weekly-report-backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m              [2m (v3.2.0)[0;39m
+
+2025-09-17 14:15:12 - Starting WeeklyReportApplication using Java 23.0.2 with PID 81609 (/Volumes/project/my-project/backend/target/classes started by zhangxiaoyu in /Volumes/project/my-project/backend)
+2025-09-17 14:15:12 - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-09-17 14:15:12 - The following 1 profile is active: "dev"
+2025-09-17 14:15:13 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-17 14:15:13 - Finished Spring Data repository scanning in 48 ms. Found 13 JPA repository interfaces.
+2025-09-17 14:15:14 - Tomcat initialized with port 8081 (http)
+2025-09-17 14:15:14 - Starting service [Tomcat]
+2025-09-17 14:15:14 - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-09-17 14:15:14 - Initializing Spring embedded WebApplicationContext
+2025-09-17 14:15:14 - Root WebApplicationContext: initialization completed in 1390 ms
+2025-09-17 14:15:14 - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-17 14:15:14 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-17 14:15:14 - HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-09-17 14:15:14 - HHH000026: Second-level cache disabled
+2025-09-17 14:15:14 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-17 14:15:14 - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-17 14:15:14 - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-17 14:15:15 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-17 14:15:15 - WeeklyReportHikariCP-Dev - Starting...
+2025-09-17 14:15:15 - WeeklyReportHikariCP-Dev - Added connection com.mysql.cj.jdbc.ConnectionImpl@2c6c6b7b
+2025-09-17 14:15:15 - WeeklyReportHikariCP-Dev - Start completed.
+2025-09-17 14:15:15 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17 14:15:16 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-17 14:15:17 - AI Monitoring Service initialized
+2025-09-17 14:15:17 - Initializing AI service providers...
+2025-09-17 14:15:17 - Calling DeepSeek API with URL: https://api.deepseek.com/chat/completions
+2025-09-17 14:15:17 - Request payload: {"model":"deepseek-chat","messages":[{"role":"user","content":"hello"}],"temperature":0.1,"stream":false,"max_tokens":10}
+2025-09-17 14:15:24 - DeepSeek API response status: 200 OK
+2025-09-17 14:15:24 - DeepSeek API response body: {"id":"2be474b6-5ec9-45d8-9abd-cb5c087e9e8a","object":"chat.completion","created":1758089719,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"Hello! How can I help you today?"},"logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"completion_tokens":9,"total_tokens":14,"prompt_tokens_details":{"cached_tokens":0},"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":5},"system_fingerprint":"fp_08f168e49b_prod0820_fp8_kvcache"}
+2025-09-17 14:15:24 - Registered AI provider: DeepSeek AI Service - Status: Configured and healthy
+2025-09-17 14:15:24 - Registered AI provider: Mock AI Service for Testing - Status: CONFIGURED
+2025-09-17 14:15:24 - Initialized 2 AI service providers
+2025-09-17 14:15:25 - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-09-17 14:15:25 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@405360a1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@72ebefc, org.springframework.security.web.context.SecurityContextHolderFilter@73b7165f, org.springframework.security.web.header.HeaderWriterFilter@eb695f7, org.springframework.web.filter.CorsFilter@5450822, org.springframework.security.web.authentication.logout.LogoutFilter@2a1133a4, com.weeklyreport.security.JwtAuthenticationFilter@401926df, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7604bb54, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@64f517b6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@521e3470, org.springframework.security.web.session.SessionManagementFilter@618d701a, org.springframework.security.web.access.ExceptionTranslationFilter@1dd911b, org.springframework.security.web.access.intercept.AuthorizationFilter@9704e52]
+2025-09-17 14:15:26 - Tomcat started on port 8081 (http) with context path '/api'
+2025-09-17 14:15:26 - Started WeeklyReportApplication in 13.987 seconds (process running for 14.184)
+2025-09-17 14:15:26 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-17 14:15:26 - Super admin user already exists: superadmin
+2025-09-17 14:15:26 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-17 14:15:26 - Super admin user already exists: zhangxiaoyu
+2025-09-17 14:15:26 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-17 14:15:26 - Admin user already exists: admin1
+2025-09-17 14:15:26 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-17 14:15:26 - Admin user already exists: admin2
+2025-09-17 14:15:26 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-17 14:15:26 - Manager user already exists: manager1
+2025-09-17 14:16:28 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-17 14:16:28 - Initializing Servlet 'dispatcherServlet'
+2025-09-17 14:16:28 - Completed initialization in 2 ms
+2025-09-17 14:16:28 - Securing GET /reports
+2025-09-17 14:16:28 - Processing authentication for request: /api/reports
+2025-09-17 14:16:28 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:28 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:28 - Successfully authenticated user: manager1 for request: /api/reports
+2025-09-17 14:16:28 - Cache miss for REQUEST dispatch to '/api/reports' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2025-09-17 14:16:28 - Secured GET /reports
+2025-09-17 14:16:28 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:28 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:28 - Getting weekly reports with filters - page: 0, size: 20 for user: 5
+2025-09-17 14:16:28 - Getting weekly reports with filter for user: 5
+2025-09-17 14:16:28 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:28 - 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+Hibernate: 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+2025-09-17 14:16:28 - Found 2 reports from repository query
+2025-09-17 14:16:28 - Report ID=1, canView=true
+2025-09-17 14:16:28 - Converting report ID=1 to response DTO
+2025-09-17 14:16:28 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:28 - 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+Hibernate: 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+2025-09-17 14:16:28 - 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+Hibernate: 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+2025-09-17 14:16:28 - Report ID=2, canView=true
+2025-09-17 14:16:28 - Converting report ID=2 to response DTO
+2025-09-17 14:16:28 - Creating response with 2 report responses
+2025-09-17 14:16:28 - Response created successfully: totalElements=2, reports.size()=2
+2025-09-17 14:16:28 - Successfully retrieved 2 reports, total elements: 2
+2025-09-17 14:16:28 - Report: id=1, title=第37周工作周报 - 系统优化与审批流程实施, status=PENDING_SUPER_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:28 - Report: id=2, title=第37周工作周报 - AI功能集成与测试, status=PENDING_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:28 - Securing GET /tasks/weekly-report/2
+2025-09-17 14:16:28 - Securing GET /tasks/weekly-report/1
+2025-09-17 14:16:28 - Processing authentication for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:28 - Processing authentication for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:28 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:28 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:28 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:28 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:28 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:28 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:28 - Secured GET /tasks/weekly-report/1
+2025-09-17 14:16:28 - Secured GET /tasks/weekly-report/2
+2025-09-17 14:16:28 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:28 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:28 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:28 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:28 - Fetching tasks for weekly report: 2
+2025-09-17 14:16:28 - Fetching tasks for weekly report: 1
+2025-09-17 14:16:28 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:28 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:28 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:28 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:40 - Securing GET /reports
+2025-09-17 14:16:40 - Processing authentication for request: /api/reports
+2025-09-17 14:16:40 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:40 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:40 - Successfully authenticated user: manager1 for request: /api/reports
+2025-09-17 14:16:40 - Secured GET /reports
+2025-09-17 14:16:40 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:40 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:40 - Getting weekly reports with filters - page: 0, size: 20 for user: 5
+2025-09-17 14:16:40 - Getting weekly reports with filter for user: 5
+2025-09-17 14:16:40 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:40 - 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+Hibernate: 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+2025-09-17 14:16:40 - Found 2 reports from repository query
+2025-09-17 14:16:40 - Report ID=1, canView=true
+2025-09-17 14:16:40 - Converting report ID=1 to response DTO
+2025-09-17 14:16:40 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:40 - 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+Hibernate: 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+2025-09-17 14:16:40 - 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+Hibernate: 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+2025-09-17 14:16:40 - Report ID=2, canView=true
+2025-09-17 14:16:40 - Converting report ID=2 to response DTO
+2025-09-17 14:16:40 - Creating response with 2 report responses
+2025-09-17 14:16:40 - Response created successfully: totalElements=2, reports.size()=2
+2025-09-17 14:16:40 - Successfully retrieved 2 reports, total elements: 2
+2025-09-17 14:16:40 - Report: id=1, title=第37周工作周报 - 系统优化与审批流程实施, status=PENDING_SUPER_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:40 - Report: id=2, title=第37周工作周报 - AI功能集成与测试, status=PENDING_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:40 - Securing GET /tasks/weekly-report/1
+2025-09-17 14:16:40 - Securing GET /tasks/weekly-report/2
+2025-09-17 14:16:40 - Processing authentication for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:40 - Processing authentication for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:40 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:40 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:40 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:40 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:40 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:40 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:40 - Secured GET /tasks/weekly-report/2
+2025-09-17 14:16:40 - Secured GET /tasks/weekly-report/1
+2025-09-17 14:16:40 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:40 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:40 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:40 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:40 - Fetching tasks for weekly report: 1
+2025-09-17 14:16:40 - Fetching tasks for weekly report: 2
+2025-09-17 14:16:40 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:40 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:40 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:40 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:42 - Securing GET /reports
+2025-09-17 14:16:42 - Processing authentication for request: /api/reports
+2025-09-17 14:16:42 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:42 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:42 - Successfully authenticated user: manager1 for request: /api/reports
+2025-09-17 14:16:42 - Secured GET /reports
+2025-09-17 14:16:42 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:42 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:42 - Getting weekly reports with filters - page: 0, size: 20 for user: 5
+2025-09-17 14:16:42 - Getting weekly reports with filter for user: 5
+2025-09-17 14:16:42 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:42 - 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+Hibernate: 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+2025-09-17 14:16:42 - Found 2 reports from repository query
+2025-09-17 14:16:42 - Report ID=1, canView=true
+2025-09-17 14:16:42 - Converting report ID=1 to response DTO
+2025-09-17 14:16:42 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:42 - 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+Hibernate: 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+2025-09-17 14:16:42 - 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+Hibernate: 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+2025-09-17 14:16:42 - Report ID=2, canView=true
+2025-09-17 14:16:42 - Converting report ID=2 to response DTO
+2025-09-17 14:16:42 - Creating response with 2 report responses
+2025-09-17 14:16:42 - Response created successfully: totalElements=2, reports.size()=2
+2025-09-17 14:16:42 - Successfully retrieved 2 reports, total elements: 2
+2025-09-17 14:16:42 - Report: id=1, title=第37周工作周报 - 系统优化与审批流程实施, status=PENDING_SUPER_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:42 - Report: id=2, title=第37周工作周报 - AI功能集成与测试, status=PENDING_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:42 - Securing GET /tasks/weekly-report/1
+2025-09-17 14:16:42 - Securing GET /tasks/weekly-report/2
+2025-09-17 14:16:42 - Processing authentication for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:42 - Processing authentication for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:42 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:42 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:42 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:42 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:42 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:42 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:42 - Secured GET /tasks/weekly-report/2
+2025-09-17 14:16:42 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:42 - Secured GET /tasks/weekly-report/1
+2025-09-17 14:16:42 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:42 - Fetching tasks for weekly report: 2
+2025-09-17 14:16:42 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:42 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:42 - Fetching tasks for weekly report: 1
+2025-09-17 14:16:42 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:42 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:42 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:42 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:43 - Securing GET /simple/projects/my?status=ALL
+2025-09-17 14:16:43 - Processing authentication for request: /api/simple/projects/my
+2025-09-17 14:16:43 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:43 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:43 - Successfully authenticated user: manager1 for request: /api/simple/projects/my
+2025-09-17 14:16:43 - Secured GET /simple/projects/my?status=ALL
+2025-09-17 14:16:43 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:43 - 
+    /* SELECT
+        p 
+    FROM
+        SimpleProject p 
+    LEFT JOIN
+        
+    FETCH
+        p.createdBy 
+    LEFT JOIN
+        
+    FETCH
+        p.managerReviewer 
+    LEFT JOIN
+        
+    FETCH
+        p.adminReviewer 
+    LEFT JOIN
+        
+    FETCH
+        p.superAdminReviewer 
+    WHERE
+        p.createdBy = :createdBy 
+    ORDER BY
+        p.createdAt DESC */ select
+            sp1_0.id,
+            sp1_0.actual_results,
+            sp1_0.admin_review_comment,
+            sp1_0.admin_reviewed_at,
+            ar1_0.id,
+            ar1_0.avatar_url,
+            ar1_0.created_at,
+            ar1_0.department_id,
+            ar1_0.email,
+            ar1_0.employee_id,
+            ar1_0.full_name,
+            ar1_0.last_login_time,
+            ar1_0.password,
+            ar1_0.phone,
+            ar1_0.position,
+            ar1_0.role,
+            ar1_0.status,
+            ar1_0.updated_at,
+            ar1_0.username,
+            sp1_0.ai_analysis_result,
+            sp1_0.ai_analyzed_at,
+            sp1_0.ai_confidence,
+            sp1_0.ai_feasibility_score,
+            sp1_0.ai_key_issues,
+            sp1_0.ai_processing_time_ms,
+            sp1_0.ai_provider_used,
+            sp1_0.ai_recommendations,
+            sp1_0.ai_risk_level,
+            sp1_0.created_at,
+            sp1_0.created_by,
+            cb1_0.id,
+            cb1_0.avatar_url,
+            cb1_0.created_at,
+            cb1_0.department_id,
+            cb1_0.email,
+            cb1_0.employee_id,
+            cb1_0.full_name,
+            cb1_0.last_login_time,
+            cb1_0.password,
+            cb1_0.phone,
+            cb1_0.position,
+            cb1_0.role,
+            cb1_0.status,
+            cb1_0.updated_at,
+            cb1_0.username,
+            sp1_0.expected_results,
+            sp1_0.manager_review_comment,
+            sp1_0.manager_reviewed_at,
+            mr1_0.id,
+            mr1_0.avatar_url,
+            mr1_0.created_at,
+            mr1_0.department_id,
+            mr1_0.email,
+            mr1_0.employee_id,
+            mr1_0.full_name,
+            mr1_0.last_login_time,
+            mr1_0.password,
+            mr1_0.phone,
+            mr1_0.position,
+            mr1_0.role,
+            mr1_0.status,
+            mr1_0.updated_at,
+            mr1_0.username,
+            sp1_0.project_content,
+            sp1_0.project_members,
+            sp1_0.project_name,
+            sp1_0.status,
+            sp1_0.stop_loss,
+            sp1_0.super_admin_review_comment,
+            sp1_0.super_admin_reviewed_at,
+            sar1_0.id,
+            sar1_0.avatar_url,
+            sar1_0.created_at,
+            sar1_0.department_id,
+            sar1_0.email,
+            sar1_0.employee_id,
+            sar1_0.full_name,
+            sar1_0.last_login_time,
+            sar1_0.password,
+            sar1_0.phone,
+            sar1_0.position,
+            sar1_0.role,
+            sar1_0.status,
+            sar1_0.updated_at,
+            sar1_0.username,
+            sp1_0.timeline,
+            sp1_0.updated_at 
+        from
+            simple_projects sp1_0 
+        left join
+            users cb1_0 
+                on cb1_0.id=sp1_0.created_by 
+        left join
+            users mr1_0 
+                on mr1_0.id=sp1_0.manager_reviewer_id 
+        left join
+            users ar1_0 
+                on ar1_0.id=sp1_0.admin_reviewer_id 
+        left join
+            users sar1_0 
+                on sar1_0.id=sp1_0.super_admin_reviewer_id 
+        where
+            cb1_0.id=? 
+        order by
+            sp1_0.created_at desc
+Hibernate: 
+    /* SELECT
+        p 
+    FROM
+        SimpleProject p 
+    LEFT JOIN
+        
+    FETCH
+        p.createdBy 
+    LEFT JOIN
+        
+    FETCH
+        p.managerReviewer 
+    LEFT JOIN
+        
+    FETCH
+        p.adminReviewer 
+    LEFT JOIN
+        
+    FETCH
+        p.superAdminReviewer 
+    WHERE
+        p.createdBy = :createdBy 
+    ORDER BY
+        p.createdAt DESC */ select
+            sp1_0.id,
+            sp1_0.actual_results,
+            sp1_0.admin_review_comment,
+            sp1_0.admin_reviewed_at,
+            ar1_0.id,
+            ar1_0.avatar_url,
+            ar1_0.created_at,
+            ar1_0.department_id,
+            ar1_0.email,
+            ar1_0.employee_id,
+            ar1_0.full_name,
+            ar1_0.last_login_time,
+            ar1_0.password,
+            ar1_0.phone,
+            ar1_0.position,
+            ar1_0.role,
+            ar1_0.status,
+            ar1_0.updated_at,
+            ar1_0.username,
+            sp1_0.ai_analysis_result,
+            sp1_0.ai_analyzed_at,
+            sp1_0.ai_confidence,
+            sp1_0.ai_feasibility_score,
+            sp1_0.ai_key_issues,
+            sp1_0.ai_processing_time_ms,
+            sp1_0.ai_provider_used,
+            sp1_0.ai_recommendations,
+            sp1_0.ai_risk_level,
+            sp1_0.created_at,
+            sp1_0.created_by,
+            cb1_0.id,
+            cb1_0.avatar_url,
+            cb1_0.created_at,
+            cb1_0.department_id,
+            cb1_0.email,
+            cb1_0.employee_id,
+            cb1_0.full_name,
+            cb1_0.last_login_time,
+            cb1_0.password,
+            cb1_0.phone,
+            cb1_0.position,
+            cb1_0.role,
+            cb1_0.status,
+            cb1_0.updated_at,
+            cb1_0.username,
+            sp1_0.expected_results,
+            sp1_0.manager_review_comment,
+            sp1_0.manager_reviewed_at,
+            mr1_0.id,
+            mr1_0.avatar_url,
+            mr1_0.created_at,
+            mr1_0.department_id,
+            mr1_0.email,
+            mr1_0.employee_id,
+            mr1_0.full_name,
+            mr1_0.last_login_time,
+            mr1_0.password,
+            mr1_0.phone,
+            mr1_0.position,
+            mr1_0.role,
+            mr1_0.status,
+            mr1_0.updated_at,
+            mr1_0.username,
+            sp1_0.project_content,
+            sp1_0.project_members,
+            sp1_0.project_name,
+            sp1_0.status,
+            sp1_0.stop_loss,
+            sp1_0.super_admin_review_comment,
+            sp1_0.super_admin_reviewed_at,
+            sar1_0.id,
+            sar1_0.avatar_url,
+            sar1_0.created_at,
+            sar1_0.department_id,
+            sar1_0.email,
+            sar1_0.employee_id,
+            sar1_0.full_name,
+            sar1_0.last_login_time,
+            sar1_0.password,
+            sar1_0.phone,
+            sar1_0.position,
+            sar1_0.role,
+            sar1_0.status,
+            sar1_0.updated_at,
+            sar1_0.username,
+            sp1_0.timeline,
+            sp1_0.updated_at 
+        from
+            simple_projects sp1_0 
+        left join
+            users cb1_0 
+                on cb1_0.id=sp1_0.created_by 
+        left join
+            users mr1_0 
+                on mr1_0.id=sp1_0.manager_reviewer_id 
+        left join
+            users ar1_0 
+                on ar1_0.id=sp1_0.admin_reviewer_id 
+        left join
+            users sar1_0 
+                on sar1_0.id=sp1_0.super_admin_reviewer_id 
+        where
+            cb1_0.id=? 
+        order by
+            sp1_0.created_at desc
+2025-09-17 14:16:43 - Securing GET /reports
+2025-09-17 14:16:43 - Processing authentication for request: /api/reports
+2025-09-17 14:16:43 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:43 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:43 - Successfully authenticated user: manager1 for request: /api/reports
+2025-09-17 14:16:43 - Secured GET /reports
+2025-09-17 14:16:43 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:43 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:43 - Getting weekly reports with filters - page: 0, size: 20 for user: 5
+2025-09-17 14:16:43 - Getting weekly reports with filter for user: 5
+2025-09-17 14:16:43 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:43 - 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+Hibernate: 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+2025-09-17 14:16:43 - Found 2 reports from repository query
+2025-09-17 14:16:43 - Report ID=1, canView=true
+2025-09-17 14:16:43 - Converting report ID=1 to response DTO
+2025-09-17 14:16:43 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:43 - 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+Hibernate: 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+2025-09-17 14:16:43 - 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+Hibernate: 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+2025-09-17 14:16:43 - Report ID=2, canView=true
+2025-09-17 14:16:43 - Converting report ID=2 to response DTO
+2025-09-17 14:16:43 - Creating response with 2 report responses
+2025-09-17 14:16:43 - Response created successfully: totalElements=2, reports.size()=2
+2025-09-17 14:16:43 - Successfully retrieved 2 reports, total elements: 2
+2025-09-17 14:16:43 - Report: id=1, title=第37周工作周报 - 系统优化与审批流程实施, status=PENDING_SUPER_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:43 - Report: id=2, title=第37周工作周报 - AI功能集成与测试, status=PENDING_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:43 - Securing GET /tasks/weekly-report/2
+2025-09-17 14:16:43 - Securing GET /tasks/weekly-report/1
+2025-09-17 14:16:43 - Processing authentication for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:43 - Processing authentication for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:43 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:43 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:43 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:43 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:43 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:43 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:43 - Secured GET /tasks/weekly-report/1
+2025-09-17 14:16:43 - Secured GET /tasks/weekly-report/2
+2025-09-17 14:16:43 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:43 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:43 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:43 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:43 - Fetching tasks for weekly report: 2
+2025-09-17 14:16:43 - Fetching tasks for weekly report: 1
+2025-09-17 14:16:43 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:43 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:43 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:43 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:49 - Securing GET /task-templates
+2025-09-17 14:16:49 - Processing authentication for request: /api/task-templates
+2025-09-17 14:16:49 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:49 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:49 - Successfully authenticated user: manager1 for request: /api/task-templates
+2025-09-17 14:16:49 - Secured GET /task-templates
+2025-09-17 14:16:49 - Unexpected exception: No static resource task-templates. - Request: uri=/api/task-templates
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource task-templates.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at com.weeklyreport.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:72)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-09-17 14:16:53 - Securing GET /simple/projects/my?status=ALL
+2025-09-17 14:16:53 - Processing authentication for request: /api/simple/projects/my
+2025-09-17 14:16:53 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:53 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:53 - Successfully authenticated user: manager1 for request: /api/simple/projects/my
+2025-09-17 14:16:53 - Secured GET /simple/projects/my?status=ALL
+2025-09-17 14:16:53 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:53 - 
+    /* SELECT
+        p 
+    FROM
+        SimpleProject p 
+    LEFT JOIN
+        
+    FETCH
+        p.createdBy 
+    LEFT JOIN
+        
+    FETCH
+        p.managerReviewer 
+    LEFT JOIN
+        
+    FETCH
+        p.adminReviewer 
+    LEFT JOIN
+        
+    FETCH
+        p.superAdminReviewer 
+    WHERE
+        p.createdBy = :createdBy 
+    ORDER BY
+        p.createdAt DESC */ select
+            sp1_0.id,
+            sp1_0.actual_results,
+            sp1_0.admin_review_comment,
+            sp1_0.admin_reviewed_at,
+            ar1_0.id,
+            ar1_0.avatar_url,
+            ar1_0.created_at,
+            ar1_0.department_id,
+            ar1_0.email,
+            ar1_0.employee_id,
+            ar1_0.full_name,
+            ar1_0.last_login_time,
+            ar1_0.password,
+            ar1_0.phone,
+            ar1_0.position,
+            ar1_0.role,
+            ar1_0.status,
+            ar1_0.updated_at,
+            ar1_0.username,
+            sp1_0.ai_analysis_result,
+            sp1_0.ai_analyzed_at,
+            sp1_0.ai_confidence,
+            sp1_0.ai_feasibility_score,
+            sp1_0.ai_key_issues,
+            sp1_0.ai_processing_time_ms,
+            sp1_0.ai_provider_used,
+            sp1_0.ai_recommendations,
+            sp1_0.ai_risk_level,
+            sp1_0.created_at,
+            sp1_0.created_by,
+            cb1_0.id,
+            cb1_0.avatar_url,
+            cb1_0.created_at,
+            cb1_0.department_id,
+            cb1_0.email,
+            cb1_0.employee_id,
+            cb1_0.full_name,
+            cb1_0.last_login_time,
+            cb1_0.password,
+            cb1_0.phone,
+            cb1_0.position,
+            cb1_0.role,
+            cb1_0.status,
+            cb1_0.updated_at,
+            cb1_0.username,
+            sp1_0.expected_results,
+            sp1_0.manager_review_comment,
+            sp1_0.manager_reviewed_at,
+            mr1_0.id,
+            mr1_0.avatar_url,
+            mr1_0.created_at,
+            mr1_0.department_id,
+            mr1_0.email,
+            mr1_0.employee_id,
+            mr1_0.full_name,
+            mr1_0.last_login_time,
+            mr1_0.password,
+            mr1_0.phone,
+            mr1_0.position,
+            mr1_0.role,
+            mr1_0.status,
+            mr1_0.updated_at,
+            mr1_0.username,
+            sp1_0.project_content,
+            sp1_0.project_members,
+            sp1_0.project_name,
+            sp1_0.status,
+            sp1_0.stop_loss,
+            sp1_0.super_admin_review_comment,
+            sp1_0.super_admin_reviewed_at,
+            sar1_0.id,
+            sar1_0.avatar_url,
+            sar1_0.created_at,
+            sar1_0.department_id,
+            sar1_0.email,
+            sar1_0.employee_id,
+            sar1_0.full_name,
+            sar1_0.last_login_time,
+            sar1_0.password,
+            sar1_0.phone,
+            sar1_0.position,
+            sar1_0.role,
+            sar1_0.status,
+            sar1_0.updated_at,
+            sar1_0.username,
+            sp1_0.timeline,
+            sp1_0.updated_at 
+        from
+            simple_projects sp1_0 
+        left join
+            users cb1_0 
+                on cb1_0.id=sp1_0.created_by 
+        left join
+            users mr1_0 
+                on mr1_0.id=sp1_0.manager_reviewer_id 
+        left join
+            users ar1_0 
+                on ar1_0.id=sp1_0.admin_reviewer_id 
+        left join
+            users sar1_0 
+                on sar1_0.id=sp1_0.super_admin_reviewer_id 
+        where
+            cb1_0.id=? 
+        order by
+            sp1_0.created_at desc
+Hibernate: 
+    /* SELECT
+        p 
+    FROM
+        SimpleProject p 
+    LEFT JOIN
+        
+    FETCH
+        p.createdBy 
+    LEFT JOIN
+        
+    FETCH
+        p.managerReviewer 
+    LEFT JOIN
+        
+    FETCH
+        p.adminReviewer 
+    LEFT JOIN
+        
+    FETCH
+        p.superAdminReviewer 
+    WHERE
+        p.createdBy = :createdBy 
+    ORDER BY
+        p.createdAt DESC */ select
+            sp1_0.id,
+            sp1_0.actual_results,
+            sp1_0.admin_review_comment,
+            sp1_0.admin_reviewed_at,
+            ar1_0.id,
+            ar1_0.avatar_url,
+            ar1_0.created_at,
+            ar1_0.department_id,
+            ar1_0.email,
+            ar1_0.employee_id,
+            ar1_0.full_name,
+            ar1_0.last_login_time,
+            ar1_0.password,
+            ar1_0.phone,
+            ar1_0.position,
+            ar1_0.role,
+            ar1_0.status,
+            ar1_0.updated_at,
+            ar1_0.username,
+            sp1_0.ai_analysis_result,
+            sp1_0.ai_analyzed_at,
+            sp1_0.ai_confidence,
+            sp1_0.ai_feasibility_score,
+            sp1_0.ai_key_issues,
+            sp1_0.ai_processing_time_ms,
+            sp1_0.ai_provider_used,
+            sp1_0.ai_recommendations,
+            sp1_0.ai_risk_level,
+            sp1_0.created_at,
+            sp1_0.created_by,
+            cb1_0.id,
+            cb1_0.avatar_url,
+            cb1_0.created_at,
+            cb1_0.department_id,
+            cb1_0.email,
+            cb1_0.employee_id,
+            cb1_0.full_name,
+            cb1_0.last_login_time,
+            cb1_0.password,
+            cb1_0.phone,
+            cb1_0.position,
+            cb1_0.role,
+            cb1_0.status,
+            cb1_0.updated_at,
+            cb1_0.username,
+            sp1_0.expected_results,
+            sp1_0.manager_review_comment,
+            sp1_0.manager_reviewed_at,
+            mr1_0.id,
+            mr1_0.avatar_url,
+            mr1_0.created_at,
+            mr1_0.department_id,
+            mr1_0.email,
+            mr1_0.employee_id,
+            mr1_0.full_name,
+            mr1_0.last_login_time,
+            mr1_0.password,
+            mr1_0.phone,
+            mr1_0.position,
+            mr1_0.role,
+            mr1_0.status,
+            mr1_0.updated_at,
+            mr1_0.username,
+            sp1_0.project_content,
+            sp1_0.project_members,
+            sp1_0.project_name,
+            sp1_0.status,
+            sp1_0.stop_loss,
+            sp1_0.super_admin_review_comment,
+            sp1_0.super_admin_reviewed_at,
+            sar1_0.id,
+            sar1_0.avatar_url,
+            sar1_0.created_at,
+            sar1_0.department_id,
+            sar1_0.email,
+            sar1_0.employee_id,
+            sar1_0.full_name,
+            sar1_0.last_login_time,
+            sar1_0.password,
+            sar1_0.phone,
+            sar1_0.position,
+            sar1_0.role,
+            sar1_0.status,
+            sar1_0.updated_at,
+            sar1_0.username,
+            sp1_0.timeline,
+            sp1_0.updated_at 
+        from
+            simple_projects sp1_0 
+        left join
+            users cb1_0 
+                on cb1_0.id=sp1_0.created_by 
+        left join
+            users mr1_0 
+                on mr1_0.id=sp1_0.manager_reviewer_id 
+        left join
+            users ar1_0 
+                on ar1_0.id=sp1_0.admin_reviewer_id 
+        left join
+            users sar1_0 
+                on sar1_0.id=sp1_0.super_admin_reviewer_id 
+        where
+            cb1_0.id=? 
+        order by
+            sp1_0.created_at desc
+2025-09-17 14:16:55 - Securing GET /tasks/routine/selectable
+2025-09-17 14:16:55 - Processing authentication for request: /api/tasks/routine/selectable
+2025-09-17 14:16:55 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:55 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:55 - Successfully authenticated user: manager1 for request: /api/tasks/routine/selectable
+2025-09-17 14:16:55 - Secured GET /tasks/routine/selectable
+2025-09-17 14:16:55 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getSelectableRoutineTasks(); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:55 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getSelectableRoutineTasks(); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:55 - Fetching selectable routine tasks
+2025-09-17 14:16:55 - 
+    /* SELECT
+        DISTINCT t 
+    FROM
+        Task t 
+    WHERE
+        t.taskType = 'ROUTINE' 
+        AND t.weeklyReport IS NULL 
+    ORDER BY
+        t.taskName ASC */ select
+            distinct t1_0.id,
+            t1_0.actual_results,
+            t1_0.budget,
+            t1_0.completion_date,
+            t1_0.created_at,
+            t1_0.due_date,
+            t1_0.expected_results,
+            t1_0.is_completed,
+            t1_0.is_overdue,
+            t1_0.personnel_assignment,
+            t1_0.priority,
+            t1_0.progress,
+            t1_0.project_phase_id,
+            t1_0.quantitative_metrics,
+            t1_0.report_section,
+            t1_0.result_difference_analysis,
+            t1_0.simple_project_id,
+            t1_0.start_date,
+            t1_0.stop_loss_point,
+            t1_0.task_name,
+            t1_0.task_template_id,
+            t1_0.task_type,
+            t1_0.timeline,
+            t1_0.updated_at,
+            t1_0.weekly_report_id 
+        from
+            tasks t1_0 
+        where
+            t1_0.task_type='ROUTINE' 
+            and t1_0.weekly_report_id is null 
+        order by
+            t1_0.task_name
+Hibernate: 
+    /* SELECT
+        DISTINCT t 
+    FROM
+        Task t 
+    WHERE
+        t.taskType = 'ROUTINE' 
+        AND t.weeklyReport IS NULL 
+    ORDER BY
+        t.taskName ASC */ select
+            distinct t1_0.id,
+            t1_0.actual_results,
+            t1_0.budget,
+            t1_0.completion_date,
+            t1_0.created_at,
+            t1_0.due_date,
+            t1_0.expected_results,
+            t1_0.is_completed,
+            t1_0.is_overdue,
+            t1_0.personnel_assignment,
+            t1_0.priority,
+            t1_0.progress,
+            t1_0.project_phase_id,
+            t1_0.quantitative_metrics,
+            t1_0.report_section,
+            t1_0.result_difference_analysis,
+            t1_0.simple_project_id,
+            t1_0.start_date,
+            t1_0.stop_loss_point,
+            t1_0.task_name,
+            t1_0.task_template_id,
+            t1_0.task_type,
+            t1_0.timeline,
+            t1_0.updated_at,
+            t1_0.weekly_report_id 
+        from
+            tasks t1_0 
+        where
+            t1_0.task_type='ROUTINE' 
+            and t1_0.weekly_report_id is null 
+        order by
+            t1_0.task_name
+2025-09-17 14:16:55 - Retrieved 1 routine tasks for selection
+2025-09-17 14:16:56 - Securing GET /tasks/routine/selectable
+2025-09-17 14:16:56 - Processing authentication for request: /api/tasks/routine/selectable
+2025-09-17 14:16:56 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:56 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:56 - Successfully authenticated user: manager1 for request: /api/tasks/routine/selectable
+2025-09-17 14:16:56 - Secured GET /tasks/routine/selectable
+2025-09-17 14:16:56 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getSelectableRoutineTasks(); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:56 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getSelectableRoutineTasks(); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:56 - Fetching selectable routine tasks
+2025-09-17 14:16:56 - 
+    /* SELECT
+        DISTINCT t 
+    FROM
+        Task t 
+    WHERE
+        t.taskType = 'ROUTINE' 
+        AND t.weeklyReport IS NULL 
+    ORDER BY
+        t.taskName ASC */ select
+            distinct t1_0.id,
+            t1_0.actual_results,
+            t1_0.budget,
+            t1_0.completion_date,
+            t1_0.created_at,
+            t1_0.due_date,
+            t1_0.expected_results,
+            t1_0.is_completed,
+            t1_0.is_overdue,
+            t1_0.personnel_assignment,
+            t1_0.priority,
+            t1_0.progress,
+            t1_0.project_phase_id,
+            t1_0.quantitative_metrics,
+            t1_0.report_section,
+            t1_0.result_difference_analysis,
+            t1_0.simple_project_id,
+            t1_0.start_date,
+            t1_0.stop_loss_point,
+            t1_0.task_name,
+            t1_0.task_template_id,
+            t1_0.task_type,
+            t1_0.timeline,
+            t1_0.updated_at,
+            t1_0.weekly_report_id 
+        from
+            tasks t1_0 
+        where
+            t1_0.task_type='ROUTINE' 
+            and t1_0.weekly_report_id is null 
+        order by
+            t1_0.task_name
+Hibernate: 
+    /* SELECT
+        DISTINCT t 
+    FROM
+        Task t 
+    WHERE
+        t.taskType = 'ROUTINE' 
+        AND t.weeklyReport IS NULL 
+    ORDER BY
+        t.taskName ASC */ select
+            distinct t1_0.id,
+            t1_0.actual_results,
+            t1_0.budget,
+            t1_0.completion_date,
+            t1_0.created_at,
+            t1_0.due_date,
+            t1_0.expected_results,
+            t1_0.is_completed,
+            t1_0.is_overdue,
+            t1_0.personnel_assignment,
+            t1_0.priority,
+            t1_0.progress,
+            t1_0.project_phase_id,
+            t1_0.quantitative_metrics,
+            t1_0.report_section,
+            t1_0.result_difference_analysis,
+            t1_0.simple_project_id,
+            t1_0.start_date,
+            t1_0.stop_loss_point,
+            t1_0.task_name,
+            t1_0.task_template_id,
+            t1_0.task_type,
+            t1_0.timeline,
+            t1_0.updated_at,
+            t1_0.weekly_report_id 
+        from
+            tasks t1_0 
+        where
+            t1_0.task_type='ROUTINE' 
+            and t1_0.weekly_report_id is null 
+        order by
+            t1_0.task_name
+2025-09-17 14:16:56 - Retrieved 1 routine tasks for selection
+2025-09-17 14:16:59 - Securing GET /reports
+2025-09-17 14:16:59 - Processing authentication for request: /api/reports
+2025-09-17 14:16:59 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:59 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:59 - Successfully authenticated user: manager1 for request: /api/reports
+2025-09-17 14:16:59 - Secured GET /reports
+2025-09-17 14:16:59 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:59 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-17 14:16:59 - Getting weekly reports with filters - page: 0, size: 20 for user: 5
+2025-09-17 14:16:59 - Getting weekly reports with filter for user: 5
+2025-09-17 14:16:59 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:59 - 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+Hibernate: 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.reportWeek desc */ select
+            distinct wr1_0.id,
+            wr1_0.achievements,
+            wr1_0.additional_notes,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analysis_result,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.author_id,
+            wr1_0.challenges,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.is_late,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.next_week_plan,
+            wr1_0.priority,
+            wr1_0.report_week,
+            wr1_0.review_comment,
+            wr1_0.reviewed_at,
+            wr1_0.reviewer_id,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.week_number,
+            wr1_0.word_count,
+            wr1_0.work_summary,
+            wr1_0.report_year 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.author_id 
+        where
+            wr1_0.author_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.report_week desc 
+        limit
+            ?, ?
+2025-09-17 14:16:59 - Found 2 reports from repository query
+2025-09-17 14:16:59 - Report ID=1, canView=true
+2025-09-17 14:16:59 - Converting report ID=1 to response DTO
+2025-09-17 14:16:59 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.full_name,
+        u1_0.last_login_time,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-17 14:16:59 - 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+Hibernate: 
+    select
+        c1_0.weekly_report_id,
+        c1_0.id,
+        c1_0.attachments,
+        c1_0.author_id,
+        c1_0.content,
+        c1_0.created_at,
+        c1_0.is_private,
+        c1_0.is_resolved,
+        c1_0.likes_count,
+        c1_0.parent_id,
+        c1_0.priority,
+        c1_0.resolved_at,
+        c1_0.resolved_by,
+        c1_0.status,
+        c1_0.tags,
+        c1_0.type,
+        c1_0.updated_at 
+    from
+        comments c1_0 
+    where
+        c1_0.weekly_report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        c1_0.created_at
+2025-09-17 14:16:59 - 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+Hibernate: 
+    select
+        ar1_0.report_id,
+        ar1_0.id,
+        ar1_0.analysis_type,
+        ar1_0.completed_at,
+        ar1_0.confidence,
+        ar1_0.created_at,
+        ar1_0.error_message,
+        ar1_0.metadata,
+        ar1_0.model_version,
+        ar1_0.parameters,
+        ar1_0.processing_time_ms,
+        ar1_0.result,
+        ar1_0.status,
+        ar1_0.updated_at 
+    from
+        ai_analysis_results ar1_0 
+    where
+        ar1_0.report_id in (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+    order by
+        ar1_0.created_at desc
+2025-09-17 14:16:59 - Report ID=2, canView=true
+2025-09-17 14:16:59 - Converting report ID=2 to response DTO
+2025-09-17 14:16:59 - Creating response with 2 report responses
+2025-09-17 14:16:59 - Response created successfully: totalElements=2, reports.size()=2
+2025-09-17 14:16:59 - Successfully retrieved 2 reports, total elements: 2
+2025-09-17 14:16:59 - Report: id=1, title=第37周工作周报 - 系统优化与审批流程实施, status=PENDING_SUPER_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:59 - Report: id=2, title=第37周工作周报 - AI功能集成与测试, status=PENDING_ADMIN_REVIEW, authorName=主管一
+2025-09-17 14:16:59 - Securing GET /tasks/weekly-report/1
+2025-09-17 14:16:59 - Securing GET /tasks/weekly-report/2
+2025-09-17 14:16:59 - Processing authentication for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:59 - Processing authentication for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:59 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:59 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:16:59 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:59 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/1
+2025-09-17 14:16:59 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:16:59 - Successfully authenticated user: manager1 for request: /api/tasks/weekly-report/2
+2025-09-17 14:16:59 - Secured GET /tasks/weekly-report/1
+2025-09-17 14:16:59 - Secured GET /tasks/weekly-report/2
+2025-09-17 14:16:59 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:59 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:59 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:59 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.TaskController.getTasksByWeeklyReport(java.lang.Long); target is of class [com.weeklyreport.controller.TaskController]
+2025-09-17 14:16:59 - Fetching tasks for weekly report: 1
+2025-09-17 14:16:59 - Fetching tasks for weekly report: 2
+2025-09-17 14:16:59 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:59 - 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+Hibernate: 
+    select
+        wr1_0.id,
+        wr1_0.achievements,
+        wr1_0.additional_notes,
+        wr1_0.admin_review_comment,
+        wr1_0.admin_reviewed_at,
+        wr1_0.admin_reviewer_id,
+        wr1_0.ai_analysis_result,
+        wr1_0.ai_analyzed_at,
+        wr1_0.ai_confidence,
+        wr1_0.ai_key_issues,
+        wr1_0.ai_processing_time_ms,
+        wr1_0.ai_provider_used,
+        wr1_0.ai_quality_score,
+        wr1_0.ai_recommendations,
+        wr1_0.ai_risk_level,
+        wr1_0.author_id,
+        wr1_0.challenges,
+        wr1_0.content,
+        wr1_0.created_at,
+        wr1_0.is_late,
+        wr1_0.manager_review_comment,
+        wr1_0.manager_reviewed_at,
+        wr1_0.manager_reviewer_id,
+        wr1_0.next_week_plan,
+        wr1_0.priority,
+        wr1_0.report_week,
+        wr1_0.review_comment,
+        wr1_0.reviewed_at,
+        wr1_0.reviewer_id,
+        wr1_0.status,
+        wr1_0.submitted_at,
+        wr1_0.super_admin_review_comment,
+        wr1_0.super_admin_reviewed_at,
+        wr1_0.super_admin_reviewer_id,
+        wr1_0.template_id,
+        wr1_0.title,
+        wr1_0.updated_at,
+        wr1_0.week_number,
+        wr1_0.word_count,
+        wr1_0.work_summary,
+        wr1_0.report_year 
+    from
+        weekly_reports wr1_0 
+    where
+        wr1_0.id=?
+2025-09-17 14:16:59 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:16:59 - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+Hibernate: 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.actual_results,
+        t1_0.budget,
+        t1_0.completion_date,
+        t1_0.created_at,
+        t1_0.due_date,
+        t1_0.expected_results,
+        t1_0.is_completed,
+        t1_0.is_overdue,
+        t1_0.personnel_assignment,
+        t1_0.priority,
+        t1_0.progress,
+        t1_0.project_phase_id,
+        t1_0.quantitative_metrics,
+        t1_0.report_section,
+        t1_0.result_difference_analysis,
+        t1_0.simple_project_id,
+        t1_0.start_date,
+        t1_0.stop_loss_point,
+        t1_0.task_name,
+        t1_0.task_template_id,
+        t1_0.task_type,
+        t1_0.timeline,
+        t1_0.updated_at,
+        t1_0.weekly_report_id 
+    from
+        tasks t1_0 
+    where
+        t1_0.weekly_report_id=? 
+    order by
+        t1_0.report_section,
+        t1_0.task_type,
+        t1_0.created_at
+2025-09-17 14:19:01 - Securing GET /task-templates
+2025-09-17 14:19:01 - Processing authentication for request: /api/task-templates
+2025-09-17 14:19:01 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:19:01 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:19:01 - Successfully authenticated user: manager1 for request: /api/task-templates
+2025-09-17 14:19:01 - Secured GET /task-templates
+2025-09-17 14:19:01 - Unexpected exception: No static resource task-templates. - Request: uri=/api/task-templates
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource task-templates.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at com.weeklyreport.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:72)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-09-17 14:19:22 - Securing GET /task-templates
+2025-09-17 14:19:22 - Processing authentication for request: /api/task-templates
+2025-09-17 14:19:22 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-17 14:19:22 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-17 14:19:22 - Successfully authenticated user: manager1 for request: /api/task-templates
+2025-09-17 14:19:22 - Secured GET /task-templates
+2025-09-17 14:19:22 - Unexpected exception: No static resource task-templates. - Request: uri=/api/task-templates
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource task-templates.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at com.weeklyreport.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:72)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  06:06 min
+[INFO] Finished at: 2025-09-17T14:21:17+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project weekly-report-backend: Process terminated with exit code: 137 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

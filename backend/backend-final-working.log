@@ -1,0 +1,1215 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ weekly-report-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 19 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ weekly-report-backend ---
+[INFO] skip non existing resourceDirectory /Volumes/project/my-project/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ weekly-report-backend ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ weekly-report-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ weekly-report-backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m              [2m (v3.2.0)[0;39m
+
+2025-09-18 16:46:29 - Starting WeeklyReportApplication using Java 23.0.2 with PID 52943 (/Volumes/project/my-project/backend/target/classes started by zhangxiaoyu in /Volumes/project/my-project/backend)
+2025-09-18 16:46:29 - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-09-18 16:46:29 - The following 1 profile is active: "development"
+2025-09-18 16:46:30 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18 16:46:30 - Finished Spring Data repository scanning in 37 ms. Found 12 JPA repository interfaces.
+2025-09-18 16:46:31 - Tomcat initialized with port 8081 (http)
+2025-09-18 16:46:31 - Starting service [Tomcat]
+2025-09-18 16:46:31 - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-09-18 16:46:31 - Initializing Spring embedded WebApplicationContext
+2025-09-18 16:46:31 - Root WebApplicationContext: initialization completed in 1049 ms
+2025-09-18 16:46:31 - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-18 16:46:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18 16:46:31 - HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-09-18 16:46:31 - HHH000026: Second-level cache disabled
+2025-09-18 16:46:31 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18 16:46:31 - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-18 16:46:31 - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-18 16:46:32 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18 16:46:32 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 16:46:32 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-18 16:46:33 - AI Monitoring Service initialized
+2025-09-18 16:46:33 - Initializing AI service providers...
+2025-09-18 16:46:33 - Calling DeepSeek API with URL: https://api.deepseek.com/chat/completions
+2025-09-18 16:46:33 - Request payload: {"model":"deepseek-chat","messages":[{"role":"user","content":"hello"}],"temperature":0.1,"stream":false,"max_tokens":10}
+2025-09-18 16:46:37 - DeepSeek API response status: 200 OK
+2025-09-18 16:46:37 - DeepSeek API response body: {"id":"30e226c7-57ae-4868-9c8c-f2b555b3ae85","object":"chat.completion","created":1758185194,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"Hello! How can I help you today?"},"logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"completion_tokens":9,"total_tokens":14,"prompt_tokens_details":{"cached_tokens":0},"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":5},"system_fingerprint":"fp_08f168e49b_prod0820_fp8_kvcache"}
+2025-09-18 16:46:37 - Registered AI provider: DeepSeek AI Service - Status: Configured and healthy
+2025-09-18 16:46:38 - Registered AI provider: Mock AI Service for Testing - Status: CONFIGURED
+2025-09-18 16:46:38 - Initialized 2 AI service providers
+2025-09-18 16:46:39 - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-09-18 16:46:39 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@cfe9f44, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3b0e857d, org.springframework.security.web.context.SecurityContextHolderFilter@30b17647, org.springframework.security.web.header.HeaderWriterFilter@71b09857, org.springframework.web.filter.CorsFilter@4bb8a0dd, org.springframework.security.web.authentication.logout.LogoutFilter@4a2110b3, com.weeklyreport.security.JwtAuthenticationFilter@46524ebe, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2fe59e91, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@222e63c5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f0d5e20, org.springframework.security.web.session.SessionManagementFilter@11e8a92c, org.springframework.security.web.access.ExceptionTranslationFilter@41920141, org.springframework.security.web.access.intercept.AuthorizationFilter@287aa013]
+2025-09-18 16:46:40 - Tomcat started on port 8081 (http) with context path '/api'
+2025-09-18 16:46:40 - Started WeeklyReportApplication in 10.52 seconds (process running for 10.688)
+2025-09-18 16:46:40 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-18 16:46:40 - WeeklyReportHikariCP - Starting...
+2025-09-18 16:46:40 - WeeklyReportHikariCP - Added connection com.mysql.cj.jdbc.ConnectionImpl@218dd55c
+2025-09-18 16:46:40 - WeeklyReportHikariCP - Start completed.
+2025-09-18 16:46:40 - Super admin user already exists: superadmin
+2025-09-18 16:46:40 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-18 16:46:40 - Super admin user already exists: zhangxiaoyu
+2025-09-18 16:46:40 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-18 16:46:40 - Admin user already exists: admin1
+2025-09-18 16:46:40 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-18 16:46:40 - Admin user already exists: admin2
+2025-09-18 16:46:40 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-18 16:46:40 - Manager user already exists: manager1
+=== SIMPLE COMMENTS TABLE FIX ===
+Simple comments table fix failed: StatementCallback; bad SQL grammar [ALTER TABLE comments ADD COLUMN IF NOT EXISTS attachments JSON]
+=== SIMPLE COMMENTS TABLE FIX COMPLETE ===
+2025-09-18 16:46:55 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-18 16:46:55 - Initializing Servlet 'dispatcherServlet'
+2025-09-18 16:46:55 - Completed initialization in 1 ms
+2025-09-18 16:46:55 - Securing GET /reports
+2025-09-18 16:46:55 - Processing authentication for request: /api/reports
+2025-09-18 16:46:55 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-18 16:46:55 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-18 16:46:55 - Successfully authenticated user: manager1 for request: /api/reports
+2025-09-18 16:46:55 - Cache miss for REQUEST dispatch to '/api/reports' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2025-09-18 16:46:55 - Secured GET /reports
+2025-09-18 16:46:55 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-18 16:46:55 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-18 16:46:55 - Getting weekly reports with filters - page: 0, size: 20 for user: 10004
+2025-09-18 16:46:55 - Getting weekly reports with filter for user: 10004
+2025-09-18 16:46:55 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-18 16:46:55 - 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.weekStart desc */ select
+            distinct wr1_0.id,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.attachments,
+            wr1_0.user_id,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.deleted_at,
+            wr1_0.development_opportunities,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.priority,
+            wr1_0.project_id,
+            wr1_0.review_comments,
+            wr1_0.reviewed_at,
+            wr1_0.reviewed_by,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.summary,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.tags,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.view_count,
+            wr1_0.week_end,
+            wr1_0.week_start 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.user_id 
+        where
+            wr1_0.user_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.week_start desc 
+        limit
+            ?, ?
+Hibernate: 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.weekStart desc */ select
+            distinct wr1_0.id,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.attachments,
+            wr1_0.user_id,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.deleted_at,
+            wr1_0.development_opportunities,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.priority,
+            wr1_0.project_id,
+            wr1_0.review_comments,
+            wr1_0.reviewed_at,
+            wr1_0.reviewed_by,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.summary,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.tags,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.view_count,
+            wr1_0.week_end,
+            wr1_0.week_start 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.user_id 
+        where
+            wr1_0.user_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.week_start desc 
+        limit
+            ?, ?
+2025-09-18 16:46:55 - Found 1 reports from repository query
+2025-09-18 16:46:55 - Report ID=100000, canView=true
+2025-09-18 16:46:55 - Converting report ID=100000 to response DTO
+2025-09-18 16:48:11 - Securing POST /auth/refresh
+2025-09-18 16:48:11 - Securing POST /auth/refresh
+2025-09-18 16:48:11 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-18 16:48:11 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-18 16:48:11 - Secured POST /auth/refresh
+2025-09-18 16:48:11 - Secured POST /auth/refresh
+2025-09-18 16:48:11 - Token refresh attempt
+2025-09-18 16:48:11 - Token refresh attempt
+2025-09-18 16:48:11 - Attempting to refresh token
+2025-09-18 16:48:11 - Attempting to refresh token
+2025-09-18 16:48:11 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-18 16:48:11 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-18 16:48:11 - Token refresh failed - User not found
+2025-09-18 16:48:11 - Token refresh failed - User not found
+2025-09-18 16:48:22 - Securing POST /auth/login
+2025-09-18 16:48:22 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-18 16:48:22 - Secured POST /auth/login
+2025-09-18 16:48:22 - Login attempt for user: manager1
+2025-09-18 16:48:22 - Attempting login for user: manager1
+2025-09-18 16:48:22 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-18 16:48:22 - User manager1 logged in successfully
+2025-09-18 16:48:22 - 
+    /* update
+        for com.weeklyreport.entity.User */update users 
+    set
+        avatar_url=?,
+        deleted_at=?,
+        department_id=?,
+        email=?,
+        employee_id=?,
+        first_name=?,
+        full_name=?,
+        last_login=?,
+        last_login_time=?,
+        last_name=?,
+        password=?,
+        phone=?,
+        position=?,
+        role=?,
+        status=?,
+        updated_at=?,
+        username=? 
+    where
+        id=?
+Hibernate: 
+    /* update
+        for com.weeklyreport.entity.User */update users 
+    set
+        avatar_url=?,
+        deleted_at=?,
+        department_id=?,
+        email=?,
+        employee_id=?,
+        first_name=?,
+        full_name=?,
+        last_login=?,
+        last_login_time=?,
+        last_name=?,
+        password=?,
+        phone=?,
+        position=?,
+        role=?,
+        status=?,
+        updated_at=?,
+        username=? 
+    where
+        id=?
+2025-09-18 16:48:22 - Login successful for user: manager1
+2025-09-18 16:48:22 - Securing GET /reports
+2025-09-18 16:48:22 - Processing authentication for request: /api/reports
+2025-09-18 16:48:22 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-18 16:48:22 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-18 16:48:22 - Successfully authenticated user: manager1 for request: /api/reports
+2025-09-18 16:48:22 - Secured GET /reports
+2025-09-18 16:48:22 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-18 16:48:22 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-18 16:48:22 - Getting weekly reports with filters - page: 0, size: 20 for user: 10004
+2025-09-18 16:48:22 - Getting weekly reports with filter for user: 10004
+2025-09-18 16:48:22 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-18 16:48:22 - 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.weekStart desc */ select
+            distinct wr1_0.id,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.attachments,
+            wr1_0.user_id,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.deleted_at,
+            wr1_0.development_opportunities,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.priority,
+            wr1_0.project_id,
+            wr1_0.review_comments,
+            wr1_0.reviewed_at,
+            wr1_0.reviewed_by,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.summary,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.tags,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.view_count,
+            wr1_0.week_end,
+            wr1_0.week_start 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.user_id 
+        where
+            wr1_0.user_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.week_start desc 
+        limit
+            ?, ?
+Hibernate: 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.weekStart desc */ select
+            distinct wr1_0.id,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.attachments,
+            wr1_0.user_id,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.deleted_at,
+            wr1_0.development_opportunities,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.priority,
+            wr1_0.project_id,
+            wr1_0.review_comments,
+            wr1_0.reviewed_at,
+            wr1_0.reviewed_by,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.summary,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.tags,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.view_count,
+            wr1_0.week_end,
+            wr1_0.week_start 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.user_id 
+        where
+            wr1_0.user_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.week_start desc 
+        limit
+            ?, ?
+2025-09-18 16:48:22 - Found 1 reports from repository query
+2025-09-18 16:48:22 - Report ID=100000, canView=true
+2025-09-18 16:48:22 - Converting report ID=100000 to response DTO
+2025-09-18 16:49:05 - Securing GET /reports
+2025-09-18 16:49:05 - Processing authentication for request: /api/reports
+2025-09-18 16:49:05 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-18 16:49:05 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-18 16:49:05 - Successfully authenticated user: manager1 for request: /api/reports
+2025-09-18 16:49:05 - Secured GET /reports
+2025-09-18 16:49:05 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-18 16:49:05 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.WeeklyReportController.getWeeklyReports(java.lang.String,java.lang.String,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Long,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Boolean,java.lang.Boolean,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.String,com.weeklyreport.security.CustomUserPrincipal); target is of class [com.weeklyreport.controller.WeeklyReportController]
+2025-09-18 16:49:05 - Getting weekly reports with filters - page: 0, size: 20 for user: 10004
+2025-09-18 16:49:05 - Getting weekly reports with filter for user: 10004
+2025-09-18 16:49:05 - 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.avatar_url,
+        u1_0.created_at,
+        u1_0.deleted_at,
+        u1_0.department_id,
+        u1_0.email,
+        u1_0.employee_id,
+        u1_0.first_name,
+        u1_0.full_name,
+        u1_0.last_login,
+        u1_0.last_login_time,
+        u1_0.last_name,
+        u1_0.password,
+        u1_0.phone,
+        u1_0.position,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+2025-09-18 16:49:05 - 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.weekStart desc */ select
+            distinct wr1_0.id,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.attachments,
+            wr1_0.user_id,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.deleted_at,
+            wr1_0.development_opportunities,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.priority,
+            wr1_0.project_id,
+            wr1_0.review_comments,
+            wr1_0.reviewed_at,
+            wr1_0.reviewed_by,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.summary,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.tags,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.view_count,
+            wr1_0.week_end,
+            wr1_0.week_start 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.user_id 
+        where
+            wr1_0.user_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.week_start desc 
+        limit
+            ?, ?
+Hibernate: 
+    /* SELECT
+        DISTINCT r 
+    FROM
+        WeeklyReport r 
+    WHERE
+        r.author = :user 
+        OR (
+            :userRole = 'SUPER_ADMIN'
+        ) 
+        OR (
+            :userRole = 'ADMIN'
+        ) 
+        OR (
+            :userRole = 'MANAGER' 
+            AND r.author.department = :userDepartment
+        ) 
+    order by
+        r.weekStart desc */ select
+            distinct wr1_0.id,
+            wr1_0.admin_review_comment,
+            wr1_0.admin_reviewed_at,
+            wr1_0.admin_reviewer_id,
+            wr1_0.ai_analyzed_at,
+            wr1_0.ai_confidence,
+            wr1_0.ai_key_issues,
+            wr1_0.ai_processing_time_ms,
+            wr1_0.ai_provider_used,
+            wr1_0.ai_quality_score,
+            wr1_0.ai_recommendations,
+            wr1_0.ai_risk_level,
+            wr1_0.attachments,
+            wr1_0.user_id,
+            wr1_0.content,
+            wr1_0.created_at,
+            wr1_0.deleted_at,
+            wr1_0.development_opportunities,
+            wr1_0.manager_review_comment,
+            wr1_0.manager_reviewed_at,
+            wr1_0.manager_reviewer_id,
+            wr1_0.priority,
+            wr1_0.project_id,
+            wr1_0.review_comments,
+            wr1_0.reviewed_at,
+            wr1_0.reviewed_by,
+            wr1_0.status,
+            wr1_0.submitted_at,
+            wr1_0.summary,
+            wr1_0.super_admin_review_comment,
+            wr1_0.super_admin_reviewed_at,
+            wr1_0.super_admin_reviewer_id,
+            wr1_0.tags,
+            wr1_0.template_id,
+            wr1_0.title,
+            wr1_0.updated_at,
+            wr1_0.view_count,
+            wr1_0.week_end,
+            wr1_0.week_start 
+        from
+            weekly_reports wr1_0 
+        join
+            users a1_0 
+                on a1_0.id=wr1_0.user_id 
+        where
+            wr1_0.user_id=? 
+            or (
+                ?='SUPER_ADMIN'
+            ) 
+            or (
+                ?='ADMIN'
+            ) 
+            or (
+                ?='MANAGER' 
+                and a1_0.department_id=?
+            ) 
+        order by
+            wr1_0.week_start desc 
+        limit
+            ?, ?
+2025-09-18 16:49:05 - Found 1 reports from repository query
+2025-09-18 16:49:05 - Report ID=100000, canView=true
+2025-09-18 16:49:05 - Converting report ID=100000 to response DTO
+2025-09-18 16:49:29 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18 16:49:29 - WeeklyReportHikariCP - Shutdown initiated...
+2025-09-18 16:49:29 - WeeklyReportHikariCP - Shutdown completed.

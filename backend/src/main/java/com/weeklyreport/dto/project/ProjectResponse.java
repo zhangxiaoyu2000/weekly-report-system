@@ -1,38 +1,47 @@
 package com.weeklyreport.dto.project;
 
 import com.weeklyreport.entity.Project;
+import com.weeklyreport.dto.ai.AIAnalysisResultResponse;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
- * DTO for project responses
+ * DTO for project responses - 严格按照Project.java实体设计
  */
 public class ProjectResponse {
 
     private Long id;
-    private String name;
-    private String description;
-    private Project.ProjectStatus status;
-    private Project.ProjectPriority priority;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private BigDecimal budget;
-    private Integer progress;
-    private String tags;
-    private Boolean isPublic;
-    private Boolean archived;
+    private String name;                            // #项目名称
+    private String description;                     // #项目内容
+    private String members;                         // #项目成员
+    private String expectedResults;                 // #预期结果
+    private String timeline;                        // #时间线
+    private String stopLoss;                        // #止损点
+    private Long createdBy;                         // 创建者ID
+    private String createdByUsername;               // 创建者用户名
+    
+    // 审批流程字段
+    private Long aiAnalysisId;                      // AI分析结果ID
+    private Long adminReviewerId;                   // 管理员审批人ID
+    private Long superAdminReviewerId;              // 超级管理员审批人ID
+    private String rejectionReason;                 // 拒绝理由
+    private Project.ApprovalStatus approvalStatus;  // 审批状态
+    
+    // 时间戳字段
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     
-    // Creator information
-    private Long createdById;
-    private String createdByName;
+    // 兼容性字段
+    private Project.ProjectStatus status;           // 兼容ProjectStatus
+    private Project.ProjectPriority priority;       // 兼容ProjectPriority
+    private Integer progress;                       // 进度百分比
     
-    // Department information
-    private Long departmentId;
-    private String departmentName;
+    // 阶段性任务列表
+    private List<ProjectPhaseResponse> phases;      // #阶段性任务列表
+    
+    // AI分析结果
+    private AIAnalysisResultResponse aiAnalysisResult;      // AI分析结果详情
 
     // Constructors
     public ProjectResponse() {}
@@ -41,27 +50,27 @@ public class ProjectResponse {
         this.id = project.getId();
         this.name = project.getName();
         this.description = project.getDescription();
-        this.status = project.getStatus();
-        this.priority = project.getPriority();
-        this.startDate = project.getStartDate();
-        this.endDate = project.getEndDate();
-        this.budget = project.getBudget();
-        this.progress = project.getProgress();
-        this.tags = project.getTags();
-        this.isPublic = project.getIsPublic();
-        this.archived = project.getArchived();
+        this.members = project.getMembers();
+        this.expectedResults = project.getExpectedResults();
+        this.timeline = project.getTimeline();
+        this.stopLoss = project.getStopLoss();
+        this.createdBy = project.getCreatedBy();
+        
+        // 审批流程字段
+        this.aiAnalysisId = project.getAiAnalysisId();
+        this.adminReviewerId = project.getAdminReviewerId();
+        this.superAdminReviewerId = project.getSuperAdminReviewerId();
+        this.rejectionReason = project.getRejectionReason();
+        this.approvalStatus = project.getApprovalStatus();
+        
+        // 时间戳字段
         this.createdAt = project.getCreatedAt();
         this.updatedAt = project.getUpdatedAt();
         
-        if (project.getCreatedBy() != null) {
-            this.createdById = project.getCreatedBy().getId();
-            this.createdByName = project.getCreatedBy().getFullName();
-        }
-        
-        if (project.getDepartment() != null) {
-            this.departmentId = project.getDepartment().getId();
-            this.departmentName = project.getDepartment().getName();
-        }
+        // 兼容性字段
+        this.status = project.getStatus();
+        this.priority = project.getPriority();
+        this.progress = project.getProgress();
     }
 
     // Getters and Setters
@@ -89,76 +98,92 @@ public class ProjectResponse {
         this.description = description;
     }
 
-    public Project.ProjectStatus getStatus() {
-        return status;
+    public String getMembers() {
+        return members;
     }
 
-    public void setStatus(Project.ProjectStatus status) {
-        this.status = status;
+    public void setMembers(String members) {
+        this.members = members;
     }
 
-    public Project.ProjectPriority getPriority() {
-        return priority;
+    public String getExpectedResults() {
+        return expectedResults;
     }
 
-    public void setPriority(Project.ProjectPriority priority) {
-        this.priority = priority;
+    public void setExpectedResults(String expectedResults) {
+        this.expectedResults = expectedResults;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public String getTimeline() {
+        return timeline;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setTimeline(String timeline) {
+        this.timeline = timeline;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public String getStopLoss() {
+        return stopLoss;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setStopLoss(String stopLoss) {
+        this.stopLoss = stopLoss;
     }
 
-    public BigDecimal getBudget() {
-        return budget;
+    public Long getCreatedBy() {
+        return createdBy;
     }
 
-    public void setBudget(BigDecimal budget) {
-        this.budget = budget;
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public Integer getProgress() {
-        return progress;
+    public String getCreatedByUsername() {
+        return createdByUsername;
     }
 
-    public void setProgress(Integer progress) {
-        this.progress = progress;
+    public void setCreatedByUsername(String createdByUsername) {
+        this.createdByUsername = createdByUsername;
     }
 
-    public String getTags() {
-        return tags;
+    public Long getAiAnalysisId() {
+        return aiAnalysisId;
     }
 
-    public void setTags(String tags) {
-        this.tags = tags;
+    public void setAiAnalysisId(Long aiAnalysisId) {
+        this.aiAnalysisId = aiAnalysisId;
     }
 
-    public Boolean getIsPublic() {
-        return isPublic;
+    public Long getAdminReviewerId() {
+        return adminReviewerId;
     }
 
-    public void setIsPublic(Boolean isPublic) {
-        this.isPublic = isPublic;
+    public void setAdminReviewerId(Long adminReviewerId) {
+        this.adminReviewerId = adminReviewerId;
     }
 
-    public Boolean getArchived() {
-        return archived;
+    public Long getSuperAdminReviewerId() {
+        return superAdminReviewerId;
     }
 
-    public void setArchived(Boolean archived) {
-        this.archived = archived;
+    public void setSuperAdminReviewerId(Long superAdminReviewerId) {
+        this.superAdminReviewerId = superAdminReviewerId;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
+    }
+
+    public Project.ApprovalStatus getApprovalStatus() {
+        return approvalStatus;
+    }
+
+    public void setApprovalStatus(Project.ApprovalStatus approvalStatus) {
+        this.approvalStatus = approvalStatus;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -177,46 +202,64 @@ public class ProjectResponse {
         this.updatedAt = updatedAt;
     }
 
-    public Long getCreatedById() {
-        return createdById;
+    public Project.ProjectStatus getStatus() {
+        return status;
     }
 
-    public void setCreatedById(Long createdById) {
-        this.createdById = createdById;
+    public void setStatus(Project.ProjectStatus status) {
+        this.status = status;
     }
 
-    public String getCreatedByName() {
-        return createdByName;
+    public Project.ProjectPriority getPriority() {
+        return priority;
     }
 
-    public void setCreatedByName(String createdByName) {
-        this.createdByName = createdByName;
+    public void setPriority(Project.ProjectPriority priority) {
+        this.priority = priority;
     }
 
-    public Long getDepartmentId() {
-        return departmentId;
+    public Integer getProgress() {
+        return progress;
     }
 
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
+    public void setProgress(Integer progress) {
+        this.progress = progress;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
+    public List<ProjectPhaseResponse> getPhases() {
+        return phases;
     }
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
+    public void setPhases(List<ProjectPhaseResponse> phases) {
+        this.phases = phases;
+    }
+
+    public AIAnalysisResultResponse getAiAnalysisResult() {
+        return aiAnalysisResult;
+    }
+
+    public void setAiAnalysisResult(AIAnalysisResultResponse aiAnalysisResult) {
+        this.aiAnalysisResult = aiAnalysisResult;
     }
 
     // Helper methods
-    public boolean isOverdue() {
-        return endDate != null && LocalDate.now().isAfter(endDate) 
-               && status != Project.ProjectStatus.COMPLETED && status != Project.ProjectStatus.CANCELLED;
+    public boolean isDraft() {
+        return approvalStatus == Project.ApprovalStatus.AI_ANALYZING;
     }
 
-    public boolean isActive() {
-        return status == Project.ProjectStatus.ACTIVE || status == Project.ProjectStatus.PLANNING;
+    public boolean isSubmitted() {
+        return approvalStatus == Project.ApprovalStatus.AI_ANALYZING;
+    }
+
+    public boolean isApproved() {
+        return approvalStatus == Project.ApprovalStatus.ADMIN_APPROVED || 
+               approvalStatus == Project.ApprovalStatus.SUPER_ADMIN_APPROVED;
+    }
+
+    public boolean isRejected() {
+        return approvalStatus == Project.ApprovalStatus.ADMIN_REJECTED || 
+               approvalStatus == Project.ApprovalStatus.SUPER_ADMIN_REJECTED ||
+               approvalStatus == Project.ApprovalStatus.AI_REJECTED;
     }
 
     @Override
@@ -224,9 +267,8 @@ public class ProjectResponse {
         return "ProjectResponse{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", status=" + status +
-                ", priority=" + priority +
-                ", progress=" + progress +
+                ", approvalStatus=" + approvalStatus +
+                ", createdBy=" + createdBy +
                 '}';
     }
 }

@@ -32,6 +32,13 @@ public abstract class BaseController {
     }
 
     /**
+     * Create an error response with default status
+     */
+    protected <T> ResponseEntity<ApiResponse<T>> error(String message) {
+        return error(message, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
      * Handle general exceptions
      */
     @ExceptionHandler(Exception.class)

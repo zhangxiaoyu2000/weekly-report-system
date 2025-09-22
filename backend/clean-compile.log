@@ -1,0 +1,25 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ weekly-report-backend ---
+[INFO] Deleting /Volumes/project/my-project/backend/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 30 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 136 source files with javac [debug release 17] to target/classes
+[INFO] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java: /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java使用或覆盖了已过时的 API。
+[INFO] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.649 s
+[INFO] Finished at: 2025-09-20T00:22:00+08:00
+[INFO] ------------------------------------------------------------------------

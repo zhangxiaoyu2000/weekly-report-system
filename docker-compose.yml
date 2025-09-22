@@ -6,12 +6,12 @@ services:
     image: mysql:8.0
     container_name: weekly-report-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: weekly_report
-      MYSQL_USER: weekly_report
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpass123
+      MYSQL_DATABASE: qr_auth_dev
+      MYSQL_USER: qrauth
+      MYSQL_PASSWORD: qrauth123
     ports:
-      - "3306:3306"
+      - "3308:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./backend/src/main/resources/db/migration:/docker-entrypoint-initdb.d
@@ -32,12 +32,12 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_NAME: weekly_report
-      DB_USERNAME: weekly_report
-      DB_PASSWORD: password
+      DB_NAME: qr_auth_dev
+      DB_USERNAME: root
+      DB_PASSWORD: rootpass123
       JWT_SECRET: mySecretKeyForProduction
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
       mysql:
         condition: service_healthy

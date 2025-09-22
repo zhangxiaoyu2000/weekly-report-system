@@ -1,7 +1,7 @@
 package com.weeklyreport.service.ai.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -68,6 +68,7 @@ public class AIAnalysisRequest {
         KEYWORDS,          // Extract key words/phrases
         RISK_ASSESSMENT,   // Project risk assessment
         SUGGESTIONS,       // Generate improvement suggestions
-        PROGRESS_PREDICTION // Predict project progress
+        PROGRESS_PREDICTION, // Predict project progress
+        PROJECT_EVALUATION // Project evaluation
     }
 }

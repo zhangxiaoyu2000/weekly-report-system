@@ -80,8 +80,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         Collection<GrantedAuthority> authorities = getAuthorities(user);
         
         boolean enabled = user.getStatus() == User.UserStatus.ACTIVE;
-        boolean accountNonLocked = user.getStatus() != User.UserStatus.LOCKED;
-        boolean accountNonExpired = user.getStatus() != User.UserStatus.DELETED;
+        boolean accountNonLocked = user.getStatus() == User.UserStatus.ACTIVE; // Simplified: only ACTIVE/INACTIVE
+        boolean accountNonExpired = user.getStatus() == User.UserStatus.ACTIVE;
         boolean credentialsNonExpired = true; // Could be enhanced with password expiration logic
 
         logger.debug("Created user principal for user: {} with authorities: {}", 
@@ -112,34 +112,43 @@ public class CustomUserDetailsService implements UserDetailsService {
         
         // Add additional permissions based on role
         switch (user.getRole()) {
+            case SUPER_ADMIN:
+                // Super admin has all permissions
+                authorities.add(new SimpleGrantedAuthority("SUPER_ADMIN_READ"));
+                authorities.add(new SimpleGrantedAuthority("SUPER_ADMIN_WRITE"));
+                authorities.add(new SimpleGrantedAuthority("ADMIN_READ"));
+                authorities.add(new SimpleGrantedAuthority("ADMIN_WRITE"));
+                authorities.add(new SimpleGrantedAuthority("USER_MANAGEMENT"));
+                authorities.add(new SimpleGrantedAuthority("SYSTEM_CONFIG"));
+                authorities.add(new SimpleGrantedAuthority("ALL_REPORTS_READ"));
+                authorities.add(new SimpleGrantedAuthority("REPORT_REVIEW"));
+                authorities.add(new SimpleGrantedAuthority("REPORT_READ"));
+                authorities.add(new SimpleGrantedAuthority("REPORT_WRITE"));
+                authorities.add(new SimpleGrantedAuthority("PROFILE_READ"));
+                authorities.add(new SimpleGrantedAuthority("PROFILE_WRITE"));
+                authorities.add(new SimpleGrantedAuthority("USER_DELETE"));
+                authorities.add(new SimpleGrantedAuthority("DEPARTMENT_READ"));
+                authorities.add(new SimpleGrantedAuthority("DEPARTMENT_WRITE"));
+                authorities.add(new SimpleGrantedAuthority("DEPARTMENT_REPORTS_READ"));
+                break;
+                
             case ADMIN:
                 authorities.add(new SimpleGrantedAuthority("ADMIN_READ"));
                 authorities.add(new SimpleGrantedAuthority("ADMIN_WRITE"));
                 authorities.add(new SimpleGrantedAuthority("USER_MANAGEMENT"));
                 authorities.add(new SimpleGrantedAuthority("SYSTEM_CONFIG"));
-                // Admin has all permissions (fallthrough)
-                
-            case HR_MANAGER:
-                authorities.add(new SimpleGrantedAuthority("HR_READ"));
-                authorities.add(new SimpleGrantedAuthority("HR_WRITE"));
                 authorities.add(new SimpleGrantedAuthority("ALL_REPORTS_READ"));
-                authorities.add(new SimpleGrantedAuthority("EMPLOYEE_MANAGEMENT"));
-                // HR Manager has department permissions (fallthrough)
+                authorities.add(new SimpleGrantedAuthority("REPORT_REVIEW"));
+                authorities.add(new SimpleGrantedAuthority("REPORT_READ"));
+                authorities.add(new SimpleGrantedAuthority("REPORT_WRITE"));
+                authorities.add(new SimpleGrantedAuthority("PROFILE_READ"));
+                authorities.add(new SimpleGrantedAuthority("PROFILE_WRITE"));
+                break;
                 
-            case DEPARTMENT_MANAGER:
+            case MANAGER:
                 authorities.add(new SimpleGrantedAuthority("DEPARTMENT_READ"));
                 authorities.add(new SimpleGrantedAuthority("DEPARTMENT_WRITE"));
                 authorities.add(new SimpleGrantedAuthority("DEPARTMENT_REPORTS_READ"));
-                authorities.add(new SimpleGrantedAuthority("TEAM_MANAGEMENT"));
-                // Department Manager has team leader permissions (fallthrough)
-                
-            case TEAM_LEADER:
-                authorities.add(new SimpleGrantedAuthority("TEAM_READ"));
-                authorities.add(new SimpleGrantedAuthority("TEAM_REPORTS_READ"));
-                authorities.add(new SimpleGrantedAuthority("REPORT_REVIEW"));
-                // Team Leader has employee permissions (fallthrough)
-                
-            case EMPLOYEE:
                 authorities.add(new SimpleGrantedAuthority("REPORT_READ"));
                 authorities.add(new SimpleGrantedAuthority("REPORT_WRITE"));
                 authorities.add(new SimpleGrantedAuthority("PROFILE_READ"));

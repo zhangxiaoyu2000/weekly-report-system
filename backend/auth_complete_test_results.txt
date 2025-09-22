@@ -1,0 +1,55 @@
+=== AUTH模块 - 测试所有未测试接口 ===
+
+1. POST /api/auth/register - 用户注册
+{
+  "success": false,
+  "message": "Internal server error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.weeklyreport.dto.ApiResponse<com.weeklyreport.dto.auth.AuthResponse>> com.weeklyreport.controller.AuthController.register(com.weeklyreport.dto.auth.RegisterRequest) with 2 errors: [Error in object 'registerRequest': codes [PasswordMatching.registerRequest,PasswordMatching]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [registerRequest]; arguments []; default message [],confirmPassword,password]; default message [Password and confirmation do not match]] [Field error in object 'registerRequest' on field 'confirmPassword': rejected value [null]; codes [NotBlank.registerRequest.confirmPassword,NotBlank.confirmPassword,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [registerRequest.confirmPassword,confirmPassword]; arguments []; default message [confirmPassword]]; default message [Password confirmation is required]] ",
+  "data": null,
+  "timestamp": "2025-09-20T13:51:19.94905"
+}
+HTTP_CODE: 500
+
+2. POST /api/auth/refresh - 刷新Token
+{
+  "success": false,
+  "message": "Internal server error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.weeklyreport.dto.ApiResponse<com.weeklyreport.dto.auth.AuthResponse>> com.weeklyreport.controller.AuthController.refreshToken(com.weeklyreport.dto.auth.RefreshTokenRequest): [Field error in object 'refreshTokenRequest' on field 'refreshToken': rejected value [null]; codes [NotBlank.refreshTokenRequest.refreshToken,NotBlank.refreshToken,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [refreshTokenRequest.refreshToken,refreshToken]; arguments []; default message [refreshToken]]; default message [Refresh token is required]] ",
+  "data": null,
+  "timestamp": "2025-09-20T13:51:19.977885"
+}
+HTTP_CODE: 500
+
+3. POST /api/auth/logout - 用户登出
+{
+  "success": true,
+  "message": "Logout successful",
+  "data": "",
+  "timestamp": "2025-09-20T13:51:20.006565"
+}
+HTTP_CODE: 200
+
+4. POST /api/auth/change-password - 修改密码
+{
+  "success": false,
+  "message": "Internal server error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.weeklyreport.dto.ApiResponse<java.lang.String>> com.weeklyreport.controller.AuthController.changePassword(com.weeklyreport.dto.auth.ChangePasswordRequest,jakarta.servlet.http.HttpServletRequest) with 3 errors: [Field error in object 'changePasswordRequest' on field 'confirmNewPassword': rejected value [null]; codes [NotBlank.changePasswordRequest.confirmNewPassword,NotBlank.confirmNewPassword,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [changePasswordRequest.confirmNewPassword,confirmNewPassword]; arguments []; default message [confirmNewPassword]]; default message [Password confirmation is required]] [Error in object 'changePasswordRequest': codes [PasswordMatching.changePasswordRequest,PasswordMatching]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [changePasswordRequest]; arguments []; default message [],confirmNewPassword,newPassword]; default message [Password and confirmation do not match]] [Field error in object 'changePasswordRequest' on field 'currentPassword': rejected value [null]; codes [NotBlank.changePasswordRequest.currentPassword,NotBlank.currentPassword,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [changePasswordRequest.currentPassword,currentPassword]; arguments []; default message [currentPassword]]; default message [Current password is required]] ",
+  "data": null,
+  "timestamp": "2025-09-20T13:51:20.031913"
+}
+HTTP_CODE: 500
+
+5. GET /api/auth/check-username - 检查用户名可用性
+{
+  "success": true,
+  "message": "Username is available",
+  "data": true,
+  "timestamp": "2025-09-20T13:51:20.064283"
+}
+HTTP_CODE: 200
+
+6. GET /api/auth/check-email - 检查邮箱可用性
+{
+  "success": true,
+  "message": "Email is available",
+  "data": true,
+  "timestamp": "2025-09-20T13:51:20.102224"
+}
+HTTP_CODE: 200

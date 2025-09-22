@@ -1,0 +1,539 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ weekly-report-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 30 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ weekly-report-backend ---
+[INFO] skip non existing resourceDirectory /Volumes/project/my-project/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ weekly-report-backend ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ weekly-report-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ weekly-report-backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m              [2m (v3.2.0)[0;39m
+
+2025-09-20 00:15:13 - Starting WeeklyReportApplication using Java 23.0.2 with PID 35278 (/Volumes/project/my-project/backend/target/classes started by zhangxiaoyu in /Volumes/project/my-project/backend)
+2025-09-20 00:15:13 - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-09-20 00:15:13 - The following 1 profile is active: "dev"
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/AIAsyncConfig.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/AIConfig.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/AIResilienceConfig.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/DataInitializer.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/DatabaseConfig$DevelopmentDatabaseConfig.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/DatabaseConfig.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/OpenApiConfig.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/PerformanceConfig.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/config/SecurityConfig.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/controller/AIController.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/controller/AuthController.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/controller/HealthController.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/controller/UserController.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/controller/WeeklyReportController.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/exception/GlobalExceptionHandler.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/AIAnalysisResultRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/CommentRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/DevTaskReportRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/ProjectMemberRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/ProjectPhaseRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/ProjectRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/RoutineTaskRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/SimpleProjectRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/SimpleWeeklyReportRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/TaskReportRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/TaskRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/UserRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/WeeklyReportRepository.class]
+2025-09-20 00:15:13 - Ignored because not a concrete top-level class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/repository/WeeklyReportV2Repository.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/security/CustomUserDetailsService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/security/JwtAccessDeniedHandler.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/security/JwtAuthenticationEntryPoint.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/security/JwtAuthenticationFilter.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/security/JwtTokenProvider.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/AuthService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/RoutineTaskService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/TaskService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/UserService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/WeeklyReportAIService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/WeeklyReportService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/WeeklyReportServiceV3.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/ai/AIAnalysisService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/ai/AIMonitoringService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/ai/AIServiceFactory.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/ai/DataSanitizer.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/ai/EnhancedAIAnalysisService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/ai/deepseek/DeepSeekAIService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/ai/mock/MockAIService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/service/ai/monitoring/AIMetricsService.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/util/SimpleCommentsTableFix.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/util/auth/AuthorizationHelper.class]
+2025-09-20 00:15:13 - Identified candidate component class: file [/Volumes/project/my-project/backend/target/classes/com/weeklyreport/util/auth/PermissionChecker.class]
+2025-09-20 00:15:13 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-20 00:15:13 - Finished Spring Data repository scanning in 36 ms. Found 14 JPA repository interfaces.
+2025-09-20 00:15:14 - Tomcat initialized with port 8081 (http)
+2025-09-20 00:15:14 - Starting service [Tomcat]
+2025-09-20 00:15:14 - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-09-20 00:15:14 - Initializing Spring embedded WebApplicationContext
+2025-09-20 00:15:14 - Root WebApplicationContext: initialization completed in 988 ms
+2025-09-20 00:15:14 - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-20 00:15:14 - Filter 'webMvcObservationFilter' configured for use
+2025-09-20 00:15:14 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-20 00:15:14 - HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-09-20 00:15:14 - HHH000026: Second-level cache disabled
+2025-09-20 00:15:14 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-20 00:15:14 - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-20 00:15:14 - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-20 00:15:15 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-20 00:15:15 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20 00:15:15 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-20 00:15:15 - AI Monitoring Service initialized
+2025-09-20 00:15:15 - Initializing AI service providers...
+2025-09-20 00:15:15 - Calling DeepSeek API with URL: https://api.deepseek.com/chat/completions
+2025-09-20 00:15:15 - Request payload: {"model":"deepseek-chat","messages":[{"role":"user","content":"hello"}],"temperature":0.1,"stream":false,"max_tokens":10}
+2025-09-20 00:15:15 - HTTP POST https://api.deepseek.com/chat/completions
+2025-09-20 00:15:15 - Accept=[text/plain, application/json, application/*+json, */*]
+2025-09-20 00:15:15 - Writing [com.weeklyreport.service.ai.deepseek.dto.DeepSeekRequest@6b584b8c] as "application/json"
+2025-09-20 00:15:17 - Response 200 OK
+2025-09-20 00:15:20 - Reading to [java.lang.String] as "application/json"
+2025-09-20 00:15:20 - DeepSeek API response status: 200 OK
+2025-09-20 00:15:20 - DeepSeek API response body: {"id":"60076595-883a-454f-b736-bc4b9cc95f81","object":"chat.completion","created":1758298517,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"Hello! How can I help you today?"},"logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"completion_tokens":9,"total_tokens":14,"prompt_tokens_details":{"cached_tokens":0},"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":5},"system_fingerprint":"fp_08f168e49b_prod0820_fp8_kvcache"}
+2025-09-20 00:15:20 - Registered AI provider: DeepSeek AI Service - Status: Configured and healthy
+2025-09-20 00:15:20 - Registered AI provider: Mock AI Service for Testing - Status: CONFIGURED
+2025-09-20 00:15:20 - Initialized 2 AI service providers
+2025-09-20 00:15:21 - 46 mappings in 'requestMappingHandlerMapping'
+2025-09-20 00:15:21 - Patterns [/webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-09-20 00:15:22 - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-09-20 00:15:22 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4b3ead45, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@560465ea, org.springframework.security.web.context.SecurityContextHolderFilter@15b4e8ba, org.springframework.security.web.header.HeaderWriterFilter@1221d181, org.springframework.web.filter.CorsFilter@5c75524, org.springframework.security.web.authentication.logout.LogoutFilter@7f1a03e3, com.weeklyreport.security.JwtAuthenticationFilter@1fc1c7e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3aa993ee, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3334cc8b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@647e6004, org.springframework.security.web.session.SessionManagementFilter@776adf0e, org.springframework.security.web.access.ExceptionTranslationFilter@68ebe2e6, org.springframework.security.web.access.intercept.AuthorizationFilter@5a458c94]
+2025-09-20 00:15:22 - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-09-20 00:15:22 - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-09-20 00:15:22 - Starting beans in phase -2147483647
+2025-09-20 00:15:22 - Successfully started bean 'springBootLoggingLifecycle'
+2025-09-20 00:15:22 - Starting beans in phase 2147481599
+2025-09-20 00:15:22 - Tomcat started on port 8081 (http) with context path '/api'
+2025-09-20 00:15:22 - Successfully started bean 'webServerStartStop'
+2025-09-20 00:15:22 - Starting beans in phase 2147482623
+2025-09-20 00:15:22 - Successfully started bean 'webServerGracefulShutdown'
+2025-09-20 00:15:22 - Starting beans in phase 2147483647
+2025-09-20 00:15:22 - Started WeeklyReportApplication in 10.098 seconds (process running for 10.246)
+2025-09-20 00:15:23 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 00:15:23 - WeeklyReportHikariCP-Dev - Starting...
+2025-09-20 00:15:23 - WeeklyReportHikariCP-Dev - Added connection com.mysql.cj.jdbc.ConnectionImpl@5332e7e9
+2025-09-20 00:15:23 - WeeklyReportHikariCP-Dev - Start completed.
+2025-09-20 00:15:23 - Super admin user already exists: superadmin
+2025-09-20 00:15:23 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 00:15:23 - Super admin user already exists: zhangxiaoyu
+2025-09-20 00:15:23 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 00:15:23 - Admin user already exists: admin1
+2025-09-20 00:15:23 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 00:15:23 - Admin user already exists: admin2
+2025-09-20 00:15:23 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 00:15:23 - Manager user already exists: manager1
+=== SIMPLE COMMENTS TABLE FIX ===
+Simple comments table fix failed: StatementCallback; bad SQL grammar [ALTER TABLE comments ADD COLUMN IF NOT EXISTS attachments JSON]
+=== SIMPLE COMMENTS TABLE FIX COMPLETE ===
+2025-09-20 00:16:44 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-20 00:16:44 - Initializing Servlet 'dispatcherServlet'
+2025-09-20 00:16:44 - Detected StandardServletMultipartResolver
+2025-09-20 00:16:44 - Detected AcceptHeaderLocaleResolver
+2025-09-20 00:16:44 - Detected FixedThemeResolver
+2025-09-20 00:16:44 - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@139866a7
+2025-09-20 00:16:44 - Detected org.springframework.web.servlet.support.SessionFlashMapManager@4fbdc558
+2025-09-20 00:16:44 - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-09-20 00:16:44 - Completed initialization in 3 ms
+2025-09-20 00:16:44 - Securing GET /health
+2025-09-20 00:16:44 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 00:16:44 - Cache miss for REQUEST dispatch to '/api/health' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2025-09-20 00:16:44 - Secured GET /health
+2025-09-20 00:16:44 - GET "/api/health", parameters={}
+2025-09-20 00:16:44 - Mapped to com.weeklyreport.controller.HealthController#health()
+2025-09-20 00:16:44 - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 00:16:44 - Writing [com.weeklyreport.dto.ApiResponse@5d06f745]
+2025-09-20 00:16:44 - Completed 200 OK
+2025-09-20 00:16:44 - Securing POST /auth/login
+2025-09-20 00:16:44 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 00:16:44 - Secured POST /auth/login
+2025-09-20 00:16:44 - POST "/api/auth/login", parameters={}
+2025-09-20 00:16:44 - Mapped to com.weeklyreport.controller.AuthController#login(LoginRequest)
+2025-09-20 00:16:44 - Read "application/json;charset=UTF-8" to [LoginRequest{usernameOrEmail='superadmin', password='[PROTECTED]', rememberMe=false}]
+2025-09-20 00:16:44 - Login attempt for user: superadmin
+2025-09-20 00:16:44 - Attempting login for user: superadmin
+2025-09-20 00:16:44 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 00:16:44 - User superadmin logged in successfully
+2025-09-20 00:16:44 - Login successful for user: superadmin
+2025-09-20 00:16:44 - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 00:16:44 - Writing [com.weeklyreport.dto.ApiResponse@79bec77f]
+2025-09-20 00:16:44 - Completed 200 OK
+2025-09-20 00:16:44 - Securing POST /auth/login
+2025-09-20 00:16:44 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 00:16:44 - Secured POST /auth/login
+2025-09-20 00:16:44 - POST "/api/auth/login", parameters={}
+2025-09-20 00:16:44 - Mapped to com.weeklyreport.controller.AuthController#login(LoginRequest)
+2025-09-20 00:16:44 - Read "application/json;charset=UTF-8" to [LoginRequest{usernameOrEmail='superadmin', password='[PROTECTED]', rememberMe=false}]
+2025-09-20 00:16:44 - Login attempt for user: superadmin
+2025-09-20 00:16:44 - Attempting login for user: superadmin
+2025-09-20 00:16:44 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 00:16:45 - User superadmin logged in successfully
+2025-09-20 00:16:45 - Login successful for user: superadmin
+2025-09-20 00:16:45 - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 00:16:45 - Writing [com.weeklyreport.dto.ApiResponse@3cd1c1d9]
+2025-09-20 00:16:45 - Completed 200 OK
+2025-09-20 00:16:45 - Securing GET /weekly-reports/my
+2025-09-20 00:16:45 - Processing authentication for request: /api/weekly-reports/my
+2025-09-20 00:16:45 - Extracted authorities from token: [ROLE_SUPER_ADMIN] for roles: ROLE_SUPER_ADMIN
+2025-09-20 00:16:45 - Created authentication for user superadmin with authorities: [ROLE_SUPER_ADMIN]
+2025-09-20 00:16:45 - Successfully authenticated user: superadmin for request: /api/weekly-reports/my
+2025-09-20 00:16:45 - Secured GET /weekly-reports/my
+2025-09-20 00:16:45 - GET "/api/weekly-reports/my", parameters={}
+2025-09-20 00:16:45 - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-09-20 00:16:45 - Resource not found
+2025-09-20 00:16:45 - Using @ExceptionHandler com.weeklyreport.exception.GlobalExceptionHandler#handleGlobalException(Exception, WebRequest)
+2025-09-20 00:16:45 - Unexpected exception: No static resource weekly-reports/my. - Request: uri=/api/weekly-reports/my
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource weekly-reports/my.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at com.weeklyreport.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:72)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-09-20 00:16:45 - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 00:16:45 - Writing [com.weeklyreport.dto.ApiResponse@6560bfdf]
+2025-09-20 00:16:45 - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource weekly-reports/my.]
+2025-09-20 00:16:45 - Completed 500 INTERNAL_SERVER_ERROR
+2025-09-20 00:18:49 - Stopping beans in phase 2147483647
+2025-09-20 00:18:49 - Bean 'aiTaskExecutor' completed its stop procedure
+2025-09-20 00:18:49 - Stopping beans in phase 2147482623
+2025-09-20 00:18:49 - Bean 'webServerGracefulShutdown' completed its stop procedure
+2025-09-20 00:18:49 - Stopping beans in phase 2147481599
+2025-09-20 00:19:00 - Bean 'webServerStartStop' completed its stop procedure
+2025-09-20 00:19:00 - Stopping beans in phase -2147483647
+2025-09-20 00:19:00 - Bean 'springBootLoggingLifecycle' completed its stop procedure
+2025-09-20 00:19:00 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20 00:19:00 - WeeklyReportHikariCP-Dev - Shutdown initiated...
+2025-09-20 00:19:00 - WeeklyReportHikariCP-Dev - Shutdown completed.

@@ -1,0 +1,309 @@
+=== USERS模块 - 测试所有接口 ===
+
+1. POST /api/users - 创建用户
+{
+  "success": false,
+  "message": "Internal server error: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.weeklyreport.dto.ApiResponse<com.weeklyreport.entity.User>> com.weeklyreport.controller.UserController.createUser(com.weeklyreport.dto.auth.RegisterRequest,com.weeklyreport.security.CustomUserPrincipal) with 2 errors: [Error in object 'registerRequest': codes [PasswordMatching.registerRequest,PasswordMatching]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [registerRequest]; arguments []; default message [],confirmPassword,password]; default message [Password and confirmation do not match]] [Field error in object 'registerRequest' on field 'confirmPassword': rejected value [null]; codes [NotBlank.registerRequest.confirmPassword,NotBlank.confirmPassword,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [registerRequest.confirmPassword,confirmPassword]; arguments []; default message [confirmPassword]]; default message [Password confirmation is required]] ",
+  "data": null,
+  "timestamp": "2025-09-20T13:53:38.741908"
+}
+HTTP_CODE: 500
+
+2. GET /api/users - 获取所有用户
+{
+  "success": true,
+  "message": "Users retrieved successfully",
+  "data": {
+    "content": [
+      {
+        "id": 1,
+        "username": "admin",
+        "email": "admin@company.com",
+        "password": "$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9P/wcs2EWOYKm2u",
+        "role": "ADMIN",
+        "status": "ACTIVE",
+        "createdAt": "2025-09-19T23:54:13",
+        "updatedAt": "2025-09-19T23:54:13",
+        "manager": false,
+        "admin": true,
+        "lastLoginTime": null,
+        "firstName": "admin",
+        "lastName": "",
+        "lastLogin": null,
+        "department": null,
+        "superAdmin": false,
+        "employeeId": null,
+        "phone": null,
+        "avatarUrl": null,
+        "position": null,
+        "active": true,
+        "fullName": "admin"
+      },
+      {
+        "id": 10000,
+        "username": "superadmin",
+        "email": "superadmin@weeklyreport.com",
+        "password": "$2a$12$ygksc6ytewiEurH1MCYm5eSeN9fYByevG3F5ofCh2ox/1HMYHTkTi",
+        "role": "SUPER_ADMIN",
+        "status": "ACTIVE",
+        "createdAt": "2025-09-19T23:54:13",
+        "updatedAt": "2025-09-19T23:54:13",
+        "manager": false,
+        "admin": false,
+        "lastLoginTime": null,
+        "firstName": "superadmin",
+        "lastName": "",
+        "lastLogin": null,
+        "department": null,
+        "superAdmin": true,
+        "employeeId": null,
+        "phone": null,
+        "avatarUrl": null,
+        "position": null,
+        "active": true,
+        "fullName": "superadmin"
+      },
+      {
+        "id": 10001,
+        "username": "zhangxiaoyu",
+        "email": "zhangxiaoyu@weeklyreport.com",
+        "password": "$2a$12$3GXObwtjWxtUNd.UJYY.Demprkwm05PEp/RAjRDtf9/klAx1FUsli",
+        "role": "SUPER_ADMIN",
+        "status": "ACTIVE",
+        "createdAt": "2025-09-19T23:54:13",
+        "updatedAt": "2025-09-19T23:54:13",
+        "manager": false,
+        "admin": false,
+        "lastLoginTime": null,
+        "firstName": "zhangxiaoyu",
+        "lastName": "",
+        "lastLogin": null,
+        "department": null,
+        "superAdmin": true,
+        "employeeId": null,
+        "phone": null,
+        "avatarUrl": null,
+        "position": null,
+        "active": true,
+        "fullName": "zhangxiaoyu"
+      },
+      {
+        "id": 10002,
+        "username": "admin1",
+        "email": "admin1@weeklyreport.com",
+        "password": "$2a$12$vYpNcWkOMOVUAmAzGbznn.2/11bRBg5ISD/g1ilExHe.p/085vFLu",
+        "role": "ADMIN",
+        "status": "ACTIVE",
+        "createdAt": "2025-09-19T23:54:13",
+        "updatedAt": "2025-09-19T23:54:13",
+        "manager": false,
+        "admin": true,
+        "lastLoginTime": null,
+        "firstName": "admin1",
+        "lastName": "",
+        "lastLogin": null,
+        "department": null,
+        "superAdmin": false,
+        "employeeId": null,
+        "phone": null,
+        "avatarUrl": null,
+        "position": null,
+        "active": true,
+        "fullName": "admin1"
+      },
+      {
+        "id": 10003,
+        "username": "admin2",
+        "email": "admin2@weeklyreport.com",
+        "password": "$2a$12$sz9/DZEdxak/k6ZdYVmfs.RM4xVd8OcHej2Ai5RA4ecUbYZLFUn1S",
+        "role": "ADMIN",
+        "status": "ACTIVE",
+        "createdAt": "2025-09-19T23:54:13",
+        "updatedAt": "2025-09-19T23:54:13",
+        "manager": false,
+        "admin": true,
+        "lastLoginTime": null,
+        "firstName": "admin2",
+        "lastName": "",
+        "lastLogin": null,
+        "department": null,
+        "superAdmin": false,
+        "employeeId": null,
+        "phone": null,
+        "avatarUrl": null,
+        "position": null,
+        "active": true,
+        "fullName": "admin2"
+      },
+      {
+        "id": 10004,
+        "username": "manager1",
+        "email": "manager1@weeklyreport.com",
+        "password": "$2a$12$4gyINey6o3hVc6rCoLyKgORgH2sTUhsrE2JesdJKuxUInR2HJ1yOa",
+        "role": "MANAGER",
+        "status": "ACTIVE",
+        "createdAt": "2025-09-19T23:54:13",
+        "updatedAt": "2025-09-19T23:54:13",
+        "manager": true,
+        "admin": false,
+        "lastLoginTime": null,
+        "firstName": "manager1",
+        "lastName": "",
+        "lastLogin": null,
+        "department": null,
+        "superAdmin": false,
+        "employeeId": null,
+        "phone": null,
+        "avatarUrl": null,
+        "position": null,
+        "active": true,
+        "fullName": "manager1"
+      }
+    ],
+    "pageable": {
+      "pageNumber": 0,
+      "pageSize": 20,
+      "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+      },
+      "offset": 0,
+      "paged": true,
+      "unpaged": false
+    },
+    "totalElements": 6,
+    "last": true,
+    "totalPages": 1,
+    "numberOfElements": 6,
+    "first": true,
+    "size": 20,
+    "number": 0,
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "empty": false
+  },
+  "timestamp": "2025-09-20T13:53:38.773812"
+}
+HTTP_CODE: 200
+
+3. GET /api/users/profile - 获取用户资料
+{
+  "success": true,
+  "message": "Profile retrieved successfully",
+  "data": {
+    "id": 10002,
+    "username": "admin1",
+    "email": "admin1@weeklyreport.com",
+    "password": "$2a$12$vYpNcWkOMOVUAmAzGbznn.2/11bRBg5ISD/g1ilExHe.p/085vFLu",
+    "role": "ADMIN",
+    "status": "ACTIVE",
+    "createdAt": "2025-09-19T23:54:13",
+    "updatedAt": "2025-09-19T23:54:13",
+    "manager": false,
+    "admin": true,
+    "lastLoginTime": null,
+    "firstName": "admin1",
+    "lastName": "",
+    "lastLogin": null,
+    "department": null,
+    "superAdmin": false,
+    "employeeId": null,
+    "phone": null,
+    "avatarUrl": null,
+    "position": null,
+    "active": true,
+    "fullName": "admin1"
+  },
+  "timestamp": "2025-09-20T13:53:38.80839"
+}
+HTTP_CODE: 200
+
+4. PUT /api/users/profile - 更新用户资料
+{
+  "success": false,
+  "message": "User not found",
+  "data": null,
+  "timestamp": "2025-09-20T13:53:38.844668"
+}
+HTTP_CODE: 404
+
+5. GET /api/users/10002 - 获取用户详情
+{
+  "success": true,
+  "message": "User retrieved successfully",
+  "data": {
+    "id": 10002,
+    "username": "admin1",
+    "email": "admin1@weeklyreport.com",
+    "password": "$2a$12$vYpNcWkOMOVUAmAzGbznn.2/11bRBg5ISD/g1ilExHe.p/085vFLu",
+    "role": "ADMIN",
+    "status": "ACTIVE",
+    "createdAt": "2025-09-19T23:54:13",
+    "updatedAt": "2025-09-19T23:54:13",
+    "manager": false,
+    "admin": true,
+    "lastLoginTime": null,
+    "firstName": "admin1",
+    "lastName": "",
+    "lastLogin": null,
+    "department": null,
+    "superAdmin": false,
+    "employeeId": null,
+    "phone": null,
+    "avatarUrl": null,
+    "position": null,
+    "active": true,
+    "fullName": "admin1"
+  },
+  "timestamp": "2025-09-20T13:53:38.880484"
+}
+HTTP_CODE: 200
+
+6. GET /api/users/search - 搜索用户
+{
+  "success": false,
+  "message": "Internal server error: Required request parameter 'keyword' for method parameter type String is not present",
+  "data": null,
+  "timestamp": "2025-09-20T13:53:38.909265"
+}
+HTTP_CODE: 500
+
+7. PUT /api/users/10002/status - 更新用户状态
+{
+  "success": false,
+  "message": "Internal server error: Required request parameter 'status' for method parameter type UserStatus is not present",
+  "data": null,
+  "timestamp": "2025-09-20T13:53:38.931829"
+}
+HTTP_CODE: 500
+
+8. PUT /api/users/10002/role - 更新用户角色
+{
+  "success": false,
+  "message": "Internal server error: Required request parameter 'role' for method parameter type Role is not present",
+  "data": null,
+  "timestamp": "2025-09-20T13:53:38.95337"
+}
+HTTP_CODE: 500
+
+9. POST /api/users/10002/reset-password - 重置密码
+{
+  "success": false,
+  "message": "Internal server error: Required request parameter 'newPassword' for method parameter type String is not present",
+  "data": null,
+  "timestamp": "2025-09-20T13:53:38.975797"
+}
+HTTP_CODE: 500
+
+10. DELETE /api/users/10007 - 删除用户 (假设用户存在)
+{
+  "success": false,
+  "message": "User not found",
+  "data": null,
+  "timestamp": "2025-09-20T13:53:39.002668"
+}
+HTTP_CODE: 404

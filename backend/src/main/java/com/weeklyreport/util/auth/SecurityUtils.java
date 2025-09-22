@@ -181,15 +181,6 @@ public class SecurityUtils {
         return RoleHierarchy.hasPermission(user, permission);
     }
 
-    /**
-     * Check if current user has a specific permission
-     */
-    public static boolean hasPermission(User currentUser, RoleHierarchy.Permission permission) {
-        if (currentUser == null) {
-            return false;
-        }
-        return RoleHierarchy.hasPermission(currentUser.getRole(), permission);
-    }
 
     /**
      * Get role-based Spring Security authorities
@@ -206,17 +197,17 @@ public class SecurityUtils {
     }
 
     /**
-     * Check if user account is locked
+     * Check if user account is locked (simplified: same as inactive)
      */
     public static boolean isUserLocked(User user) {
-        return user != null && user.getStatus() == User.UserStatus.LOCKED;
+        return user != null && user.getStatus() == User.UserStatus.INACTIVE;
     }
 
     /**
-     * Check if user is deleted (soft deleted)
+     * Check if user is deleted (simplified: same as inactive)
      */
     public static boolean isUserDeleted(User user) {
-        return user != null && user.getStatus() == User.UserStatus.DELETED;
+        return user != null && user.getStatus() == User.UserStatus.INACTIVE;
     }
 
     /**

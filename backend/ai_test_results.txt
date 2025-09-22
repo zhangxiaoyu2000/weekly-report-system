@@ -1,0 +1,7 @@
+=== AI MODULE TESTING ===
+1. Testing POST /api/ai/analyze:
+{"path":"/api/ai/analyze","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:51.348874","status":401}
+2. Testing POST /api/ai/suggestions:
+{"path":"/api/ai/suggestions","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:51.359268","status":401}
+3. Testing POST /api/ai/project-insights:
+{"path":"/api/ai/project-insights","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:51.369544","status":401}

@@ -15,6 +15,11 @@ public enum AIServiceType {
     ANTHROPIC("anthropic", "Anthropic Claude Service"),
     
     /**
+     * DeepSeek AI service
+     */
+    DEEPSEEK("deepseek", "DeepSeek AI Service"),
+    
+    /**
      * Local AI model service
      */
     LOCAL("local", "Local AI Model Service"),

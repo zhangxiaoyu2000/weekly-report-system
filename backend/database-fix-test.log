@@ -1,0 +1,84 @@
+=== 开始全面API接口测试 ===
+
+步骤1: 用户登录...
+获得令牌: admin=YES, superadmin=YES, manager1=YES
+
+
+=== 测试 HealthController ===
+Testing GET /api/health - 健康检查
+Testing GET /api/health/authenticated - 认证健康检查
+
+=== 测试 AuthController ===
+Testing POST /api/auth/login - 管理员登录
+Testing POST /api/auth/login - 错误登录
+Testing POST /api/auth/register - 用户注册
+Testing POST /api/auth/refresh - 刷新令牌
+Testing POST /api/auth/change-password - 修改密码
+Testing GET /api/auth/check-username?username=testuser999 - 检查用户名可用性
+Testing GET /api/auth/check-email?email=test999@example.com - 检查邮箱可用性
+Testing POST /api/auth/logout - 用户登出
+
+=== 测试 UserController ===
+Testing GET /api/users - 获取用户列表
+Testing GET /api/users?page=0&size=10 - 分页获取用户列表
+Testing GET /api/users/fast - 快速获取用户列表
+Testing GET /api/users/profile - 获取当前用户资料
+Testing PUT /api/users/profile - 更新用户资料
+Testing GET /api/users/1 - 根据ID获取用户
+Testing GET /api/users/search?keyword=admin - 搜索用户
+Testing GET /api/users/role/ADMIN - 获取管理员角色用户
+Testing GET /api/users/statistics - 获取用户统计
+Testing POST /api/users - 创建新用户
+
+=== 测试 AIController ===
+Testing GET /api/ai/health - AI服务健康检查
+Testing GET /api/ai/metrics - AI服务指标
+Testing GET /api/ai/metrics?timeRange=7d - AI服务指标(7天)
+Testing POST /api/ai/analyze/project - 分析项目
+Testing POST /api/ai/analyze/weekly-report - 分析周报
+Testing GET /api/ai/analysis/1 - 获取分析结果
+Testing POST /api/ai/generate-suggestions - 生成AI建议
+Testing GET /api/ai/project-insights/1 - 获取项目洞察
+
+=== 测试 WeeklyReportController ===
+Testing GET /api/weekly-reports - 获取周报列表
+Testing GET /api/weekly-reports?page=0&size=10 - 分页获取周报列表
+Testing GET /api/weekly-reports/my - 获取我的周报
+Testing GET /api/weekly-reports/pending - 获取待处理周报
+Testing POST /api/weekly-reports - 创建周报
+Testing GET /api/weekly-reports/1 - 获取特定周报
+Testing PUT /api/weekly-reports/1/submit - 提交周报
+
+=== 测试 ProjectController ===
+Testing GET /api/projects - 获取项目列表
+Testing GET /api/projects?page=0&size=10 - 分页获取项目列表
+Testing GET /api/projects/my - 获取我的项目
+Testing GET /api/projects/pending - 获取待处理项目
+Testing POST /api/projects - 创建项目
+Testing GET /api/projects/1 - 获取特定项目
+Testing PUT /api/projects/1/submit - 提交项目
+
+=== 测试 TaskController ===
+Testing GET /api/tasks - 获取任务列表
+Testing GET /api/tasks?page=0&size=10 - 分页获取任务列表
+Testing GET /api/tasks/my - 获取我的任务
+Testing GET /api/tasks/by-type/ROUTINE - 按类型获取任务
+Testing POST /api/tasks - 创建任务
+Testing GET /api/tasks/1 - 获取特定任务
+
+=== 测试 DebugController ===
+Testing GET /api/debug/user/admin - 获取用户调试信息
+Testing POST /api/debug/test-password - 测试密码验证
+Testing POST /api/debug/reset-user-password - 重置用户密码
+
+=== 测试 TestController ===
+Testing GET /api/simple/hello - 简单Hello测试
+Testing POST /api/simple/fix-passwords - 修复密码
+
+=== 测试完成 ===
+总计: 53 个接口
+成功: 37 个
+失败: 16 个
+成功率: 70%
+
+详细报告已生成: API接口测试文档.md

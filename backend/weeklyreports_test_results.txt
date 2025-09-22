@@ -1,0 +1,7 @@
+=== WEEKLYREPORTS MODULE TESTING ===
+1. Testing GET /api/weekly-reports:
+{"path":"/api/weekly-reports","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:29.472151","status":401}
+2. Testing POST /api/weekly-reports (new format):
+{"path":"/api/weekly-reports","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:29.481704","status":401}
+3. Testing POST /api/weekly-reports (compatibility format):
+{"path":"/api/weekly-reports","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:25:29.491093","status":401}

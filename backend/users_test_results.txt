@@ -1,0 +1,9 @@
+=== USERS MODULE TESTING ===
+1. Testing GET /api/users:
+{"path":"/api/users","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:26:17.337143","status":401}
+2. Testing GET /api/users/profile:
+{"path":"/api/users/profile","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:26:17.346803","status":401}
+3. Testing POST /api/users:
+{"path":"/api/users","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:26:17.356453","status":401}
+4. Testing GET /api/users/role/MANAGER:
+{"path":"/api/users/role/MANAGER","errorCode":"INSUFFICIENT_AUTHENTICATION","error":"Unauthorized","message":"Authentication failed: Full authentication is required to access this resource","timestamp":"2025-09-20T15:26:17.366228","status":401}

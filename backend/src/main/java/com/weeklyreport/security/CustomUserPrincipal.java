@@ -81,6 +81,10 @@ public class CustomUserPrincipal implements UserDetails {
     public Long getUserId() {
         return userId;
     }
+    
+    public Long getId() {
+        return userId;
+    }
 
     public String getEmail() {
         return email;
@@ -88,6 +92,11 @@ public class CustomUserPrincipal implements UserDetails {
 
     public String getFullName() {
         return fullName;
+    }
+    
+    public boolean isAdmin() {
+        return authorities.stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
     }
 
     @Override

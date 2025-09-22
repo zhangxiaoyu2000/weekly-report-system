@@ -1,0 +1,153 @@
+-- =============================================
+-- 创建新的结构化周报表
+-- Version: V23
+-- Description: 创建支持结构化JSON内容的新周报表
+-- =============================================
+
+-- 创建新的结构化周报表
+CREATE TABLE IF NOT EXISTS weekly_reports_v2 (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '周报ID',
+    user_id BIGINT NOT NULL COMMENT '用户ID',
+    title VARCHAR(200) NOT NULL COMMENT '周报标题',
+    report_week VARCHAR(50) NOT NULL COMMENT '周报周次（中文格式：几月第几周（周几））',
+    
+    -- 结构化内容 (JSON格式存储)
+    content JSON NOT NULL COMMENT '结构化内容 - 包含本周汇报和下周规划的任务引用',
+    
+    -- 补充信息
+    additional_notes TEXT COMMENT '其他备注',
+    development_opportunities TEXT COMMENT '可发展性清单',
+    
+    -- 状态控制
+    status ENUM(
+        'DRAFT', 
+        'SUBMITTED', 
+        'PENDING_AI', 
+        'PENDING_ADMIN', 
+        'PENDING_SUPER_ADMIN', 
+        'APPROVED', 
+        'REJECTED'
+    ) NOT NULL DEFAULT 'DRAFT' COMMENT '周报状态',
+    
+    -- AI分析相关
+    ai_analysis_passed BOOLEAN DEFAULT NULL COMMENT 'AI分析是否通过',
+    ai_analysis_result TEXT COMMENT 'AI分析结果',
+    
+    -- 审批相关
+    admin_reviewer_id BIGINT COMMENT '管理员审批人ID',
+    super_admin_reviewer_id BIGINT COMMENT '超级管理员审批人ID',
+    rejection_reason TEXT COMMENT '拒绝理由',
+    
+    -- 时间控制
+    week_start DATE NOT NULL COMMENT '周开始日期',
+    week_end DATE NOT NULL COMMENT '周结束日期',
+    submitted_at TIMESTAMP NULL COMMENT '提交时间',
+    reviewed_at TIMESTAMP NULL COMMENT '审核时间',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    
+    -- 索引
+    INDEX idx_weekly_reports_v2_user_id (user_id),
+    INDEX idx_weekly_reports_v2_status (status),
+    INDEX idx_weekly_reports_v2_week_start (week_start),
+    INDEX idx_weekly_reports_v2_report_week (report_week),
+    INDEX idx_weekly_reports_v2_admin_reviewer (admin_reviewer_id),
+    INDEX idx_weekly_reports_v2_super_admin_reviewer (super_admin_reviewer_id),
+    INDEX idx_weekly_reports_v2_ai_analysis_passed (ai_analysis_passed),
+    INDEX idx_weekly_reports_v2_submitted_at (submitted_at),
+    INDEX idx_weekly_reports_v2_created_at (created_at),
+    
+    -- 复合索引
+    INDEX idx_weekly_reports_v2_user_week (user_id, week_start),
+    INDEX idx_weekly_reports_v2_status_created (status, created_at),
+    
+    -- 唯一约束：每个用户每周只能有一个周报
+    UNIQUE KEY uk_weekly_reports_v2_user_week (user_id, week_start),
+    
+    -- 外键约束
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (admin_reviewer_id) REFERENCES users(id) ON DELETE SET NULL,
+    FOREIGN KEY (super_admin_reviewer_id) REFERENCES users(id) ON DELETE SET NULL,
+    
+    -- 检查约束
+    CONSTRAINT chk_weekly_reports_v2_week_dates CHECK (week_end >= week_start)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='结构化周报表V2';
+
+-- 创建用于验证JSON结构的存储过程
+DELIMITER //
+CREATE FUNCTION validate_weekly_report_content(content_json JSON) 
+RETURNS BOOLEAN
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+    DECLARE is_valid BOOLEAN DEFAULT FALSE;
+    
+    -- 检查必须的JSON结构
+    IF JSON_CONTAINS_PATH(content_json, 'one', '$.thisWeekReport') 
+       AND JSON_CONTAINS_PATH(content_json, 'one', '$.nextWeekPlan')
+       AND JSON_CONTAINS_PATH(content_json, 'one', '$.thisWeekReport.routineTasks')
+       AND JSON_CONTAINS_PATH(content_json, 'one', '$.thisWeekReport.developmentTasks')
+       AND JSON_CONTAINS_PATH(content_json, 'one', '$.nextWeekPlan.routineTasks')
+       AND JSON_CONTAINS_PATH(content_json, 'one', '$.nextWeekPlan.developmentTasks')
+    THEN
+        SET is_valid = TRUE;
+    END IF;
+    
+    RETURN is_valid;
+END //
+DELIMITER ;
+
+-- 添加检查约束以确保JSON结构正确
+ALTER TABLE weekly_reports_v2 
+ADD CONSTRAINT chk_weekly_reports_v2_content_structure 
+    CHECK (validate_weekly_report_content(content) = TRUE);
+
+-- 插入示例数据（为测试用途）
+INSERT INTO weekly_reports_v2 (
+    user_id, 
+    title, 
+    report_week, 
+    content, 
+    additional_notes, 
+    development_opportunities,
+    week_start, 
+    week_end
+) VALUES (
+    1, 
+    '测试结构化周报', 
+    '9月第3周（周四）', 
+    JSON_OBJECT(
+        'thisWeekReport', JSON_OBJECT(
+            'routineTasks', JSON_ARRAY(
+                JSON_OBJECT(
+                    'taskId', 1,
+                    'actualResult', '完成了代码评审工作',
+                    'analysisOfResultDifferences', '按时完成，质量符合预期'
+                )
+            ),
+            'developmentTasks', JSON_ARRAY(
+                JSON_OBJECT(
+                    'projectId', 1,
+                    'phaseId', 1,
+                    'actualResult', '完成了需求分析阶段',
+                    'analysisOfResultDifferences', '进度超前，质量良好'
+                )
+            )
+        ),
+        'nextWeekPlan', JSON_OBJECT(
+            'routineTasks', JSON_ARRAY(
+                JSON_OBJECT('taskId', 2)
+            ),
+            'developmentTasks', JSON_ARRAY(
+                JSON_OBJECT(
+                    'projectId', 1,
+                    'phaseId', 2
+                )
+            )
+        )
+    ),
+    '本周工作进展顺利，团队配合良好',
+    '可以进一步提升代码review的效率',
+    '2025-09-15',
+    '2025-09-21'
+);

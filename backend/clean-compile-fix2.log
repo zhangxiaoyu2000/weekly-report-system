@@ -1,0 +1,104 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ weekly-report-backend ---
+[INFO] Deleting /Volumes/project/my-project/backend/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 30 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 136 source files with javac [debug release 17] to target/classes
+[INFO] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java: /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java使用或覆盖了已过时的 API。
+[INFO] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/ai/AIAnalysisService.java: 有关详细信息, 请使用 -Xlint:deprecation 重新编译。
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[70,15] 找不到符号
+  符号:   方法 setAiAnalyzedAt(java.time.LocalDateTime)
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[78,19] 找不到符号
+  符号:   方法 setAiQualityScore(java.lang.Double)
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[82,19] 找不到符号
+  符号:   方法 setAiQualityScore(double)
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[86,53] 找不到符号
+  符号:   方法 getAiQualityScore()
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[87,15] 找不到符号
+  符号:   方法 setAiRiskLevel(java.lang.String)
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[91,19] 找不到符号
+  符号:   方法 getAiQualityScore()
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[93,50] 找不到符号
+  符号:   方法 getAiQualityScore()
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[96,60] 找不到符号
+  符号:   方法 getAiQualityScore()
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[97,51] 找不到符号
+  符号:   方法 getAiQualityScore()
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[154,22] 找不到符号
+  符号:   方法 getAiAnalyzedAt()
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[168,30] 找不到符号
+  符号:   方法 getAiAnalyzedAt()
+  位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[INFO] 11 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.593 s
+[INFO] Finished at: 2025-09-20T00:44:17+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project weekly-report-backend: Compilation failure: Compilation failure: 
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[70,15] 找不到符号
+[ERROR]   符号:   方法 setAiAnalyzedAt(java.time.LocalDateTime)
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[78,19] 找不到符号
+[ERROR]   符号:   方法 setAiQualityScore(java.lang.Double)
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[82,19] 找不到符号
+[ERROR]   符号:   方法 setAiQualityScore(double)
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[86,53] 找不到符号
+[ERROR]   符号:   方法 getAiQualityScore()
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[87,15] 找不到符号
+[ERROR]   符号:   方法 setAiRiskLevel(java.lang.String)
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[91,19] 找不到符号
+[ERROR]   符号:   方法 getAiQualityScore()
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[93,50] 找不到符号
+[ERROR]   符号:   方法 getAiQualityScore()
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[96,60] 找不到符号
+[ERROR]   符号:   方法 getAiQualityScore()
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[97,51] 找不到符号
+[ERROR]   符号:   方法 getAiQualityScore()
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[154,22] 找不到符号
+[ERROR]   符号:   方法 getAiAnalyzedAt()
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] /Volumes/project/my-project/backend/src/main/java/com/weeklyreport/service/WeeklyReportAIService.java:[168,30] 找不到符号
+[ERROR]   符号:   方法 getAiAnalyzedAt()
+[ERROR]   位置: 类型为com.weeklyreport.entity.WeeklyReport的变量 report
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

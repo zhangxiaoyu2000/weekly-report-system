@@ -1,0 +1,1 @@
+http://localhost:3005/app/projects/create 并没有触发ai分析,数据库设计，可能需要在周报和项目表中添加ai分析返回的字段

@@ -2,12 +2,13 @@ package com.weeklyreport.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.util.Map;
 
 /**
@@ -15,6 +16,7 @@ import java.util.Map;
  */
 @Configuration
 @ConfigurationProperties(prefix = "ai")
+@EnableAsync
 @Validated
 public class AIConfig {
     
@@ -59,6 +61,13 @@ public class AIConfig {
     @Valid
     @NotNull
     private AnthropicConfig anthropic = new AnthropicConfig();
+    
+    /**
+     * DeepSeek configuration
+     */
+    @Valid
+    @NotNull
+    private DeepSeekConfig deepseek = new DeepSeekConfig();
     
     /**
      * Local AI configuration
@@ -137,6 +146,14 @@ public class AIConfig {
     
     public void setLocal(LocalAIConfig local) {
         this.local = local;
+    }
+    
+    public DeepSeekConfig getDeepseek() {
+        return deepseek;
+    }
+    
+    public void setDeepseek(DeepSeekConfig deepseek) {
+        this.deepseek = deepseek;
     }
     
     public MockAIConfig getMock() {
@@ -352,6 +369,67 @@ public class AIConfig {
         
         public void setConfidence(double confidence) {
             this.confidence = confidence;
+        }
+    }
+    
+    /**
+     * DeepSeek specific configuration
+     */
+    public static class DeepSeekConfig {
+        private String apiKey;
+        private String baseUrl = "https://api.deepseek.com";
+        private String model = "deepseek-chat";
+        private double temperature = 0.7;
+        private int maxTokens = 2000;
+        private boolean enabled = true;
+        
+        // Getters and setters
+        public String getApiKey() {
+            return apiKey;
+        }
+        
+        public void setApiKey(String apiKey) {
+            this.apiKey = apiKey;
+        }
+        
+        public String getBaseUrl() {
+            return baseUrl;
+        }
+        
+        public void setBaseUrl(String baseUrl) {
+            this.baseUrl = baseUrl;
+        }
+        
+        public String getModel() {
+            return model;
+        }
+        
+        public void setModel(String model) {
+            this.model = model;
+        }
+        
+        public double getTemperature() {
+            return temperature;
+        }
+        
+        public void setTemperature(double temperature) {
+            this.temperature = temperature;
+        }
+        
+        public int getMaxTokens() {
+            return maxTokens;
+        }
+        
+        public void setMaxTokens(int maxTokens) {
+            this.maxTokens = maxTokens;
+        }
+        
+        public boolean isEnabled() {
+            return enabled;
+        }
+        
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
         }
     }
 }

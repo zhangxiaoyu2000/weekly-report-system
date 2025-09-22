@@ -1,0 +1,1451 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m              [2m (v3.2.0)[0;39m
+
+2025-09-20 18:55:28.948 [main] INFO  com.weeklyreport.WeeklyReportApplication - Starting WeeklyReportApplication using Java 23.0.2 with PID 58855 (/Volumes/project/my-project/backend/target/classes started by zhangxiaoyu in /Volumes/project/my-project/backend)
+2025-09-20 18:55:28.948 [main] DEBUG com.weeklyreport.WeeklyReportApplication - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-09-20 18:55:28.949 [main] INFO  com.weeklyreport.WeeklyReportApplication - The following 1 profile is active: "dev"
+2025-09-20 18:55:29.485 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-20 18:55:29.527 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 14 JPA repository interfaces.
+2025-09-20 18:55:29.959 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2025-09-20 18:55:29.963 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2025-09-20 18:55:29.963 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-09-20 18:55:29.996 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-09-20 18:55:29.997 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1022 ms
+2025-09-20 18:55:30.142 [main] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-20 18:55:30.142 [main] DEBUG o.s.web.filter.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-09-20 18:55:30.157 [main] DEBUG com.zaxxer.hikari.HikariConfig - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@18ff02e4
+2025-09-20 18:55:30.216 [main] DEBUG o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2025-09-20 18:55:30.224 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-20 18:55:30.247 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-09-20 18:55:30.259 [main] INFO  o.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-09-20 18:55:30.355 [main] INFO  o.s.o.j.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-20 18:55:30.367 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-20 18:55:30.367 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-20 18:55:30.921 [main] INFO  o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-20 18:55:30.922 [main] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20 18:55:31.094 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.113 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.141 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.201 [main] INFO  o.s.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-20 18:55:31.302 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.524 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.525 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.527 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.540 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.545 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.567 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.568 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.569 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.573 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.587 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.589 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.593 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.594 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.594 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.595 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.596 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.596 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.596 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.597 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.597 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.598 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.598 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:31.652 [main] INFO  com.weeklyreport.service.ai.AIMonitoringService - AI Monitoring Service initialized
+2025-09-20 18:55:31.656 [main] INFO  com.weeklyreport.service.ai.AIServiceFactory - Initializing AI service providers...
+2025-09-20 18:55:31.755 [main] DEBUG c.w.service.ai.deepseek.DeepSeekAIService - Calling DeepSeek API with URL: https://api.deepseek.com/chat/completions
+2025-09-20 18:55:31.774 [main] DEBUG c.w.service.ai.deepseek.DeepSeekAIService - Request payload: {"model":"deepseek-chat","messages":[{"role":"user","content":"hello"}],"temperature":0.1,"stream":false,"max_tokens":10}
+2025-09-20 18:55:31.781 [main] DEBUG org.springframework.web.client.RestTemplate - HTTP POST https://api.deepseek.com/chat/completions
+2025-09-20 18:55:31.783 [main] DEBUG org.springframework.web.client.RestTemplate - Accept=[text/plain, application/json, application/*+json, */*]
+2025-09-20 18:55:31.785 [main] DEBUG org.springframework.web.client.RestTemplate - Writing [com.weeklyreport.service.ai.deepseek.dto.DeepSeekRequest@4c47f85d] as "application/json"
+2025-09-20 18:55:33.046 [main] DEBUG org.springframework.web.client.RestTemplate - Response 200 OK
+2025-09-20 18:55:36.164 [main] DEBUG org.springframework.web.client.RestTemplate - Reading to [java.lang.String] as "application/json"
+2025-09-20 18:55:36.168 [main] DEBUG c.w.service.ai.deepseek.DeepSeekAIService - DeepSeek API response status: 200 OK
+2025-09-20 18:55:36.169 [main] DEBUG c.w.service.ai.deepseek.DeepSeekAIService - DeepSeek API response body: {"id":"f6d0be4e-e56e-4560-94f0-c3b25cca8155","object":"chat.completion","created":1758365732,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"Hello! How can I help you today?"},"logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"completion_tokens":9,"total_tokens":14,"prompt_tokens_details":{"cached_tokens":0},"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":5},"system_fingerprint":"fp_08f168e49b_prod0820_fp8_kvcache"}
+2025-09-20 18:55:36.201 [main] INFO  com.weeklyreport.service.ai.AIServiceFactory - Registered AI provider: DeepSeek AI Service - Status: Configured and healthy
+2025-09-20 18:55:36.221 [main] INFO  com.weeklyreport.service.ai.AIServiceFactory - Registered AI provider: Mock AI Service for Testing - Status: CONFIGURED
+2025-09-20 18:55:36.221 [main] INFO  com.weeklyreport.service.ai.AIServiceFactory - Initialized 2 AI service providers
+2025-09-20 18:55:36.235 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.251 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.307 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.310 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.311 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.315 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.315 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.316 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.316 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.317 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.317 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.319 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.319 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.320 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.323 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.344 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.347 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.347 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.349 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.360 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.363 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.365 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.366 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.366 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.367 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.368 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.368 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.369 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.370 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.371 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.371 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.372 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.380 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.381 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.381 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.441 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.442 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.505 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.506 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.507 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.507 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.509 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.510 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.516 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.516 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.517 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.518 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.525 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.527 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.528 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.528 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.529 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.529 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.530 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.530 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.531 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.532 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.532 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.533 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.533 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.534 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.534 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.536 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.536 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.537 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.537 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.538 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.539 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.539 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.540 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.540 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.540 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.541 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.542 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.580 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.580 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.600 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.601 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.602 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.603 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.603 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.604 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.611 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.627 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.682 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.683 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.683 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.684 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.720 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.720 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.732 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.735 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.735 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.737 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.744 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.745 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.766 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.766 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.781 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.782 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.782 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.786 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.787 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.788 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.788 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.789 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.789 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.790 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.814 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.814 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.822 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.823 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.825 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.826 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.827 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.827 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.828 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.857 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.859 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.890 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.893 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.902 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.902 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.906 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.920 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.925 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.925 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.926 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.926 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.927 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.927 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.928 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.934 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.967 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.968 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.968 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.969 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.969 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.971 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:36.971 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.273 [main] INFO  com.weeklyreport.config.WebMvcConfig - 路径匹配配置：API路径优先于静态资源处理
+2025-09-20 18:55:37.336 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 80 mappings in 'requestMappingHandlerMapping'
+2025-09-20 18:55:37.402 [main] INFO  com.weeklyreport.config.WebMvcConfig - 配置静态资源处理器，明确排除API路径
+2025-09-20 18:55:37.402 [main] INFO  com.weeklyreport.config.WebMvcConfig - 静态资源处理器配置完成，/api/**路径已明确排除
+2025-09-20 18:55:37.406 [main] DEBUG o.s.web.servlet.handler.SimpleUrlHandlerMapping - Patterns [/static/**, /public/**, /css/**, /js/**, /images/**, /webjars/**, /**, /swagger-ui*/*swagger-initializer.js, /swagger-ui*/**] in 'resourceHandlerMapping'
+2025-09-20 18:55:37.506 [main] INFO  o.s.b.actuate.endpoint.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-09-20 18:55:37.604 [main] INFO  o.s.security.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4a2a67d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@a3c0a21, org.springframework.security.web.context.SecurityContextHolderFilter@1bc271aa, org.springframework.security.web.header.HeaderWriterFilter@6788303d, org.springframework.web.filter.CorsFilter@4baf4479, org.springframework.security.web.authentication.logout.LogoutFilter@3379b9fa, com.weeklyreport.security.JwtAuthenticationFilter@42211e04, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4b86ed6b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@65258683, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4718c139, org.springframework.security.web.session.SessionManagementFilter@47d70462, org.springframework.security.web.access.ExceptionTranslationFilter@3f4988f4, org.springframework.security.web.access.intercept.AuthorizationFilter@29c5c161]
+2025-09-20 18:55:37.671 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-09-20 18:55:37.701 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 2 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-09-20 18:55:37.907 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.909 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.930 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.931 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.932 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.932 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.933 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.936 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.937 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.937 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.939 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.940 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.947 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.947 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.948 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.949 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.950 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.951 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.952 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.953 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.953 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.954 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.954 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.954 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.955 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.955 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.955 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.956 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.956 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.968 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.973 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.983 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.984 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.985 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.986 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.987 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.987 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.988 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.988 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:37.989 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.000 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.002 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.063 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.064 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.065 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.067 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.068 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.069 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.069 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.078 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.103 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.105 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.105 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.106 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.112 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.112 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.113 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.114 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.114 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.115 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.115 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.115 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.116 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.116 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.116 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.117 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.117 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.118 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.118 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.119 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.119 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.119 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.119 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.120 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.120 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.120 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.121 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.121 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.121 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.123 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.136 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.139 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.205 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.206 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.207 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.207 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.209 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.209 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.210 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.210 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.212 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.222 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.223 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.225 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.226 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.226 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.226 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.227 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.229 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.243 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.243 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.243 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.244 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.249 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.258 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.258 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.259 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.259 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.259 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.260 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.260 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.261 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.261 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.262 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.262 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.263 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.264 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.264 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.265 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.265 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.266 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.267 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.268 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.268 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.268 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.268 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.269 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.269 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.269 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.269 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.270 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.270 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.270 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.271 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.271 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.271 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.272 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.285 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.285 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.299 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.299 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.299 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.300 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.300 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.300 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.301 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.311 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.313 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.342 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.342 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.345 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.358 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.358 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.359 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.359 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.360 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.360 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.360 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.361 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.361 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.362 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.362 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.362 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.363 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.363 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.363 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.364 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.365 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.370 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.371 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.371 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.371 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.372 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.372 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.373 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.373 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.374 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.434 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api'
+2025-09-20 18:55:38.442 [main] INFO  com.weeklyreport.WeeklyReportApplication - Started WeeklyReportApplication in 9.696 seconds (process running for 9.899)
+2025-09-20 18:55:38.480 [main] INFO  com.weeklyreport.config.DataInitializer - === 开始修复现有用户密码编码 ===
+2025-09-20 18:55:38.482 [main] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2025-09-20 18:55:38.482 [main] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Opened new EntityManager [SessionImpl(220463509<open>)] for JPA transaction
+2025-09-20 18:55:38.483 [main] DEBUG com.zaxxer.hikari.HikariConfig - WeeklyReportHikariCP-Dev - configuration:
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - allowPoolSuspension.............false
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - autoCommit......................false
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - catalog.........................none
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionInitSql...............none
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionTestQuery............."SELECT 1 FROM DUAL"
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - connectionTimeout...............15000
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSource......................none
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceClassName.............none
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceJNDI..................none
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - dataSourceProperties............{maintainTimeStats=false, password=<masked>, prepStmtCacheSqlLimit=2048, rewriteBatchedStatements=true, elideSetAutoCommits=true, cacheResultSetMetadata=true, cachePrepStmts=true, prepStmtCacheSize=250, useServerPrepStmts=true, useLocalSessionState=true, cacheServerConfiguration=true}
+2025-09-20 18:55:38.484 [main] DEBUG com.zaxxer.hikari.HikariConfig - driverClassName................."com.mysql.cj.jdbc.Driver"
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - exceptionOverrideClassName......none
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckProperties...........{}
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - healthCheckRegistry.............none
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - idleTimeout.....................180000
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - initializationFailTimeout.......1
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - isolateInternalQueries..........false
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - jdbcUrl.........................jdbc:mysql://localhost:3307/qr_auth_dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - keepaliveTime...................0
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - leakDetectionThreshold..........30000
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - maxLifetime.....................900000
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - maximumPoolSize.................12
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - metricRegistry..................none
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - metricsTrackerFactory...........com.zaxxer.hikari.metrics.micrometer.MicrometerMetricsTrackerFactory@29c004cf
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - minimumIdle.....................3
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - password........................<masked>
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - poolName........................"WeeklyReportHikariCP-Dev"
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - readOnly........................false
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - registerMbeans..................false
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - scheduledExecutor...............none
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - schema..........................none
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - threadFactory...................internal
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - transactionIsolation............default
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - username........................"root"
+2025-09-20 18:55:38.485 [main] DEBUG com.zaxxer.hikari.HikariConfig - validationTimeout...............8000
+2025-09-20 18:55:38.485 [main] INFO  com.zaxxer.hikari.HikariDataSource - WeeklyReportHikariCP-Dev - Starting...
+2025-09-20 18:55:38.570 [main] INFO  com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Added connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c
+2025-09-20 18:55:38.572 [main] INFO  com.zaxxer.hikari.HikariDataSource - WeeklyReportHikariCP-Dev - Start completed.
+2025-09-20 18:55:38.574 [main] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@2ec8a008]
+2025-09-20 18:55:38.604 [main] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0
+2025-09-20 18:55:38.614 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [1]
+2025-09-20 18:55:38.615 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.615 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [admin@company.com]
+2025-09-20 18:55:38.615 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$Bms1kCAmc.v9ZiFXfal0DOhzOzwW.ufDhefqfIiL8EtWT6mB1icW2]
+2025-09-20 18:55:38.615 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [ADMIN]
+2025-09-20 18:55:38.615 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.616 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T18:06:57]
+2025-09-20 18:55:38.616 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [admin]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10000]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [superadmin@weeklyreport.com]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$vGAoDx4ur9HynPRJ5tg1ZORPyDOsLvxMpCove4sxqZz.hwBd41REm]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [SUPER_ADMIN]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T16:24:28]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [superadmin]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10001]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [zhangxiaoyu@weeklyreport.com]
+2025-09-20 18:55:38.617 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$3GXObwtjWxtUNd.UJYY.Demprkwm05PEp/RAjRDtf9/klAx1FUsli]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [SUPER_ADMIN]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [zhangxiaoyu]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10002]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [admin1@weeklyreport.com]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$vYpNcWkOMOVUAmAzGbznn.2/11bRBg5ISD/g1ilExHe.p/085vFLu]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [ADMIN]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [admin1]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10003]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [admin2@weeklyreport.com]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$sz9/DZEdxak/k6ZdYVmfs.RM4xVd8OcHej2Ai5RA4ecUbYZLFUn1S]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [ADMIN]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [admin2]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10004]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [manager1@weeklyreport.com]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$L.G2k4mjAcY9pFDFL3OqseosPhnYU5d3FFAfHHZYPFHQ1njgXEV7G]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T16:24:28]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [manager1]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10005]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T15:23:41]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [test@example.com]
+2025-09-20 18:55:38.618 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$JNNO8DzpGfrjSYjVKUQ34uj1zvZmz9DhL/PU15Y9zSYBL1dgvHENe]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T15:23:41]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [testuser]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10006]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T16:33:11]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [test123@example.com]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$unk.Xu7qcUYUDCOV.sg0xObpdRmQUj6FZKLANFlsm9bu1J4yHDvbq]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T16:33:11]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [testuser123]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10007]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:08:34]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [newuser123@example.com]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$3GfezKMqCqDmaya8iZefQevIXSyMp3N7kQklUIz5TM0/DkbZD1uda]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:08:34]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [newuser123]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10008]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:37:40]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [test1758361059178@example.com]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$r7.WHyQOLGpNVt3aJINe9ukfFndSgA/evEGLXfvboz7it7DmQTmaa]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:37:40]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [testuser1758361059178]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10009]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:37:41]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [newuser1758361060884@example.com]
+2025-09-20 18:55:38.619 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$tWe6qu4Z7HXFppIO4Q4IJuzwMt4yUMRHPbKFYpayuboSKMn.f9oLa]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:37:41]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [newuser1758361060884]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10010]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:38:54]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [test1758361133338@example.com]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$1KXnZ7gi7CGZ4dq33PzotOKMWVNLg5v4L54/tMW/UMI2QbIgjpa7W]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:38:54]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [testuser1758361133338]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10011]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:38:55]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [newuser1758361134934@example.com]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$BoiW8mXROGe65tt9k2OaaemeWdIuAUqriWZ0mPDpNL3l4B0QgeBaC]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:38:55]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [newuser1758361134934]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10012]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:48:04]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [test1758361683269@example.com]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$EveCKqttc4tylukGB5U0w.x2Ny20Dk6K0CE/qngtg6FDYnyF5oalO]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:48:04]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [testuser1758361683269]
+2025-09-20 18:55:38.620 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10013]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:48:05]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [newuser1758361684997@example.com]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$0GHRM83baYfhQcPibBJ1zeVL.rYDMdmXRHMZ4TLOHnywEG5KNHvY.]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:48:05]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [newuser1758361684997]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10014]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:58:55]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [test1758362334422@example.com]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$w.O4TaclWZ.PFe2goifEleEaFwc8VVK5GR2a3iHKCH21ZQ02GVJ9q]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:58:55]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [testuser1758362334422]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10015]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T17:58:56]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [newuser1758362336111@example.com]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$KIsG5dPLqjIIKCHv3zbXwuLXe.FlCsRYiqPbNgrczyYYR6dY/CtBS]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T17:58:56]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [newuser1758362336111]
+2025-09-20 18:55:38.621 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10016]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T18:06:54]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [test1758362813469@example.com]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$dUgH/LMais7C3bECpweUueUSQBoEQQ2wNgYPX/YuY3k.I8Fzq9Yeu]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T18:06:54]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [testuser1758362813469]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10017]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-20T18:06:56]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [newuser1758362815145@example.com]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$GMcpdp2IwhZ1XljV0pVW/OdDEmxKccZl1nyjvGmwPHJchKx6xlbOC]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T18:06:56]
+2025-09-20 18:55:38.622 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [newuser1758362815145]
+2025-09-20 18:55:38.624 [main] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2025-09-20 18:55:38.624 [main] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(220463509<open>)]
+2025-09-20 18:55:38.626 [main] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Closing JPA EntityManager [SessionImpl(220463509<open>)] after transaction
+2025-09-20 18:55:38.629 [main] INFO  com.weeklyreport.config.DataInitializer - 检查 19 个用户的密码编码
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 admin 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 superadmin 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 zhangxiaoyu 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 admin1 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 admin2 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 manager1 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 testuser 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 testuser123 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 newuser123 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 testuser1758361059178 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 newuser1758361060884 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 testuser1758361133338 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 newuser1758361134934 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 testuser1758361683269 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 newuser1758361684997 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 testuser1758362334422 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 newuser1758362336111 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 testuser1758362813469 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] DEBUG com.weeklyreport.config.DataInitializer - 用户 newuser1758362815145 的密码已经加密，跳过
+2025-09-20 18:55:38.629 [main] INFO  com.weeklyreport.config.DataInitializer - === 所有用户密码都已正确编码 ===
+2025-09-20 18:55:38.630 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.657 [main] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 18:55:38.658 [main] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [superadmin]
+2025-09-20 18:55:38.659 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10000]
+2025-09-20 18:55:38.660 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.660 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [superadmin@weeklyreport.com]
+2025-09-20 18:55:38.660 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$vGAoDx4ur9HynPRJ5tg1ZORPyDOsLvxMpCove4sxqZz.hwBd41REm]
+2025-09-20 18:55:38.660 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [SUPER_ADMIN]
+2025-09-20 18:55:38.660 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.660 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T16:24:28]
+2025-09-20 18:55:38.660 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [superadmin]
+2025-09-20 18:55:38.661 [main] DEBUG com.zaxxer.hikari.pool.ProxyConnection - WeeklyReportHikariCP-Dev - Executed rollback on connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c due to dirty commit state on close().
+2025-09-20 18:55:38.661 [main] INFO  com.weeklyreport.config.DataInitializer - Super admin user already exists: superadmin
+2025-09-20 18:55:38.661 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.662 [main] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 18:55:38.662 [main] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [zhangxiaoyu]
+2025-09-20 18:55:38.663 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10001]
+2025-09-20 18:55:38.663 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.663 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [zhangxiaoyu@weeklyreport.com]
+2025-09-20 18:55:38.663 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$3GXObwtjWxtUNd.UJYY.Demprkwm05PEp/RAjRDtf9/klAx1FUsli]
+2025-09-20 18:55:38.663 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [SUPER_ADMIN]
+2025-09-20 18:55:38.663 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.663 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.663 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [zhangxiaoyu]
+2025-09-20 18:55:38.663 [main] DEBUG com.zaxxer.hikari.pool.ProxyConnection - WeeklyReportHikariCP-Dev - Executed rollback on connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c due to dirty commit state on close().
+2025-09-20 18:55:38.663 [main] INFO  com.weeklyreport.config.DataInitializer - Super admin user already exists: zhangxiaoyu
+2025-09-20 18:55:38.664 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.664 [main] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 18:55:38.664 [main] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [admin]
+2025-09-20 18:55:38.665 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [1]
+2025-09-20 18:55:38.665 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.665 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [admin@company.com]
+2025-09-20 18:55:38.665 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$Bms1kCAmc.v9ZiFXfal0DOhzOzwW.ufDhefqfIiL8EtWT6mB1icW2]
+2025-09-20 18:55:38.665 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [ADMIN]
+2025-09-20 18:55:38.665 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.665 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T18:06:57]
+2025-09-20 18:55:38.665 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [admin]
+2025-09-20 18:55:38.666 [main] DEBUG com.zaxxer.hikari.pool.ProxyConnection - WeeklyReportHikariCP-Dev - Executed rollback on connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c due to dirty commit state on close().
+2025-09-20 18:55:38.666 [main] INFO  com.weeklyreport.config.DataInitializer - Admin user already exists: admin
+2025-09-20 18:55:38.666 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.666 [main] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 18:55:38.667 [main] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [admin1]
+2025-09-20 18:55:38.668 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10002]
+2025-09-20 18:55:38.668 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.668 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [admin1@weeklyreport.com]
+2025-09-20 18:55:38.668 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$vYpNcWkOMOVUAmAzGbznn.2/11bRBg5ISD/g1ilExHe.p/085vFLu]
+2025-09-20 18:55:38.668 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [ADMIN]
+2025-09-20 18:55:38.668 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.668 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.668 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [admin1]
+2025-09-20 18:55:38.668 [main] DEBUG com.zaxxer.hikari.pool.ProxyConnection - WeeklyReportHikariCP-Dev - Executed rollback on connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c due to dirty commit state on close().
+2025-09-20 18:55:38.668 [main] INFO  com.weeklyreport.config.DataInitializer - Admin user already exists: admin1
+2025-09-20 18:55:38.668 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.669 [main] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 18:55:38.669 [main] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [admin2]
+2025-09-20 18:55:38.670 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10003]
+2025-09-20 18:55:38.670 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.670 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [admin2@weeklyreport.com]
+2025-09-20 18:55:38.670 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$sz9/DZEdxak/k6ZdYVmfs.RM4xVd8OcHej2Ai5RA4ecUbYZLFUn1S]
+2025-09-20 18:55:38.670 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [ADMIN]
+2025-09-20 18:55:38.670 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.670 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.670 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [admin2]
+2025-09-20 18:55:38.670 [main] DEBUG com.zaxxer.hikari.pool.ProxyConnection - WeeklyReportHikariCP-Dev - Executed rollback on connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c due to dirty commit state on close().
+2025-09-20 18:55:38.670 [main] INFO  com.weeklyreport.config.DataInitializer - Admin user already exists: admin2
+2025-09-20 18:55:38.670 [main] DEBUG o.s.o.j.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler - Creating new EntityManager for shared EntityManager invocation
+2025-09-20 18:55:38.671 [main] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 18:55:38.671 [main] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [manager1]
+2025-09-20 18:55:38.672 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [10004]
+2025-09-20 18:55:38.672 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:38.672 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [manager1@weeklyreport.com]
+2025-09-20 18:55:38.672 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$L.G2k4mjAcY9pFDFL3OqseosPhnYU5d3FFAfHHZYPFHQ1njgXEV7G]
+2025-09-20 18:55:38.672 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [MANAGER]
+2025-09-20 18:55:38.672 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:38.672 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T16:24:28]
+2025-09-20 18:55:38.672 [main] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [manager1]
+2025-09-20 18:55:38.672 [main] DEBUG com.zaxxer.hikari.pool.ProxyConnection - WeeklyReportHikariCP-Dev - Executed rollback on connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c due to dirty commit state on close().
+2025-09-20 18:55:38.673 [main] INFO  com.weeklyreport.config.DataInitializer - Manager user already exists: manager1
+=== SIMPLE COMMENTS TABLE FIX ===
+2025-09-20 18:55:38.682 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Before cleanup stats (total=1, active=1, idle=0, waiting=0)
+2025-09-20 18:55:38.682 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - After cleanup  stats (total=1, active=1, idle=0, waiting=0)
+2025-09-20 18:55:38.686 [WeeklyReportHikariCP-Dev connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Added connection com.mysql.cj.jdbc.ConnectionImpl@4c2edadc
+2025-09-20 18:55:38.696 [main] DEBUG com.zaxxer.hikari.pool.ProxyConnection - WeeklyReportHikariCP-Dev - Executed rollback on connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c due to dirty commit state on close().
+Simple comments table fix failed: StatementCallback; bad SQL grammar [ALTER TABLE comments ADD COLUMN IF NOT EXISTS attachments JSON]
+=== SIMPLE COMMENTS TABLE FIX COMPLETE ===
+2025-09-20 18:55:38.703 [WeeklyReportHikariCP-Dev connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Added connection com.mysql.cj.jdbc.ConnectionImpl@d13d0e7
+2025-09-20 18:55:38.717 [WeeklyReportHikariCP-Dev connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - After adding stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:55:40.965 [http-nio-8081-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-20 18:55:40.965 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-09-20 18:55:40.966 [http-nio-8081-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-09-20 18:55:40.966 [http-nio-8081-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-09-20 18:55:40.966 [http-nio-8081-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-09-20 18:55:40.967 [http-nio-8081-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@380d659d
+2025-09-20 18:55:40.967 [http-nio-8081-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@2390128e
+2025-09-20 18:55:40.967 [http-nio-8081-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-09-20 18:55:40.967 [http-nio-8081-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-09-20 18:55:40.975 [http-nio-8081-exec-1] DEBUG org.springframework.security.web.FilterChainProxy - Securing GET /health
+2025-09-20 18:55:40.980 [http-nio-8081-exec-1] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 18:55:40.981 [http-nio-8081-exec-1] WARN  o.s.web.servlet.handler.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/api/health' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2025-09-20 18:55:40.985 [http-nio-8081-exec-1] DEBUG org.springframework.security.web.FilterChainProxy - Secured GET /health
+2025-09-20 18:55:40.986 [http-nio-8081-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/health", parameters={}
+2025-09-20 18:55:40.987 [http-nio-8081-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.weeklyreport.controller.HealthController#health()
+2025-09-20 18:55:40.993 [http-nio-8081-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 18:55:40.994 [http-nio-8081-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Writing [com.weeklyreport.dto.ApiResponse@6187715a]
+2025-09-20 18:55:40.997 [http-nio-8081-exec-1] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2025-09-20 18:55:54.813 [http-nio-8081-exec-2] DEBUG org.springframework.security.web.FilterChainProxy - Securing POST /auth/login
+2025-09-20 18:55:54.814 [http-nio-8081-exec-2] DEBUG o.s.s.w.a.AnonymousAuthenticationFilter - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 18:55:54.815 [http-nio-8081-exec-2] DEBUG org.springframework.security.web.FilterChainProxy - Secured POST /auth/login
+2025-09-20 18:55:54.815 [http-nio-8081-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - POST "/api/auth/login", parameters={}
+2025-09-20 18:55:54.815 [http-nio-8081-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.weeklyreport.controller.AuthController#login(LoginRequest)
+2025-09-20 18:55:54.822 [http-nio-8081-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [LoginRequest{usernameOrEmail='admin', password='[PROTECTED]', rememberMe=false}]
+2025-09-20 18:55:54.828 [http-nio-8081-exec-2] INFO  com.weeklyreport.controller.AuthController - Login attempt for user: admin
+2025-09-20 18:55:54.828 [http-nio-8081-exec-2] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Creating new transaction with name [com.weeklyreport.service.AuthService.login]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2025-09-20 18:55:54.828 [http-nio-8081-exec-2] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Opened new EntityManager [SessionImpl(156652526<open>)] for JPA transaction
+2025-09-20 18:55:54.829 [http-nio-8081-exec-2] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@7ed31a32]
+2025-09-20 18:55:54.829 [http-nio-8081-exec-2] INFO  com.weeklyreport.service.AuthService - Attempting login for user: admin
+2025-09-20 18:55:54.829 [http-nio-8081-exec-2] DEBUG org.hibernate.SQL - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 18:55:54.831 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [admin]
+2025-09-20 18:55:54.833 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.extract - extracted value (1:BIGINT) -> [1]
+2025-09-20 18:55:54.833 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.extract - extracted value (2:TIMESTAMP) -> [2025-09-19T23:54:13]
+2025-09-20 18:55:54.833 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.extract - extracted value (3:VARCHAR) -> [admin@company.com]
+2025-09-20 18:55:54.833 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.extract - extracted value (4:VARCHAR) -> [$2a$12$Bms1kCAmc.v9ZiFXfal0DOhzOzwW.ufDhefqfIiL8EtWT6mB1icW2]
+2025-09-20 18:55:54.833 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.extract - extracted value (5:ENUM) -> [ADMIN]
+2025-09-20 18:55:54.833 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.extract - extracted value (6:ENUM) -> [ACTIVE]
+2025-09-20 18:55:54.833 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.extract - extracted value (7:TIMESTAMP) -> [2025-09-20T18:06:57]
+2025-09-20 18:55:54.833 [http-nio-8081-exec-2] TRACE org.hibernate.orm.jdbc.extract - extracted value (8:VARCHAR) -> [admin]
+2025-09-20 18:55:55.207 [http-nio-8081-exec-2] INFO  com.weeklyreport.service.AuthService - User admin logged in successfully
+2025-09-20 18:55:55.208 [http-nio-8081-exec-2] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Initiating transaction commit
+2025-09-20 18:55:55.208 [http-nio-8081-exec-2] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Committing JPA transaction on EntityManager [SessionImpl(156652526<open>)]
+2025-09-20 18:55:55.212 [http-nio-8081-exec-2] DEBUG org.springframework.orm.jpa.JpaTransactionManager - Closing JPA EntityManager [SessionImpl(156652526<open>)] after transaction
+2025-09-20 18:55:55.212 [http-nio-8081-exec-2] INFO  com.weeklyreport.controller.AuthController - Login successful for user: admin
+2025-09-20 18:55:55.212 [http-nio-8081-exec-2] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 18:55:55.212 [http-nio-8081-exec-2] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Writing [com.weeklyreport.dto.ApiResponse@58dc9a44]
+2025-09-20 18:55:55.215 [http-nio-8081-exec-2] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 200 OK
+2025-09-20 18:55:55.227 [http-nio-8081-exec-4] DEBUG org.springframework.security.web.FilterChainProxy - Securing GET /ai/test
+2025-09-20 18:55:55.228 [http-nio-8081-exec-4] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Processing authentication for request: /api/ai/test
+2025-09-20 18:55:55.228 [http-nio-8081-exec-4] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - JWT token found in request /api/ai/test, length: 279
+2025-09-20 18:55:55.235 [http-nio-8081-exec-4] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - JWT token validation successful for request: /api/ai/test
+2025-09-20 18:55:55.236 [http-nio-8081-exec-4] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Token type: ACCESS for request: /api/ai/test
+2025-09-20 18:55:55.237 [http-nio-8081-exec-4] DEBUG com.weeklyreport.security.JwtTokenProvider - Extracted authorities from token: [ROLE_ADMIN] for roles: ROLE_ADMIN
+2025-09-20 18:55:55.238 [http-nio-8081-exec-4] DEBUG com.weeklyreport.security.JwtTokenProvider - Created authentication for user admin with authorities: [ROLE_ADMIN]
+2025-09-20 18:55:55.238 [http-nio-8081-exec-4] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Successfully authenticated user: admin for request: /api/ai/test
+2025-09-20 18:55:55.238 [http-nio-8081-exec-4] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - User authorities: [ROLE_ADMIN]
+2025-09-20 18:55:55.245 [http-nio-8081-exec-4] DEBUG org.springframework.security.web.FilterChainProxy - Secured GET /ai/test
+2025-09-20 18:55:55.245 [http-nio-8081-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/ai/test", parameters={}
+2025-09-20 18:55:55.245 [http-nio-8081-exec-4] DEBUG o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-09-20 18:55:55.246 [http-nio-8081-exec-4] DEBUG o.s.w.servlet.resource.ResourceHttpRequestHandler - Resource not found
+2025-09-20 18:55:55.247 [http-nio-8081-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.weeklyreport.exception.GlobalExceptionHandler#handleGlobalException(Exception, WebRequest)
+2025-09-20 18:55:55.247 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - Unexpected exception: No static resource ai/test. - Request: uri=/api/ai/test
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource ai/test.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at com.weeklyreport.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:105)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-09-20 18:55:55.248 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - === 全局异常详细诊断 ===
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常完整类名: org.springframework.web.servlet.resource.NoResourceFoundException
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常消息: No static resource ai/test.
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常原因: 无
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 请求完整信息: uri=/api/ai/test;client=127.0.0.1;user=admin
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常发生位置: org.springframework.web.servlet.resource.ResourceHttpRequestHandler:handleRequest:585
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[0]: org.springframework.web.servlet.resource.ResourceHttpRequestHandler:handleRequest:585
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[1]: org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter:handle:52
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[2]: org.springframework.web.servlet.DispatcherServlet:doDispatch:1089
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 当前时间: 2025-09-20T18:55:55.249300
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 可用处理器数: 8
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] ERROR com.weeklyreport.exception.GlobalExceptionHandler - === 全局异常诊断结束 ===
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 18:55:55.249 [http-nio-8081-exec-4] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Writing [com.weeklyreport.dto.ApiResponse@67aac50f]
+2025-09-20 18:55:55.250 [http-nio-8081-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource ai/test.]
+2025-09-20 18:55:55.250 [http-nio-8081-exec-4] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-09-20 18:55:55.258 [http-nio-8081-exec-5] DEBUG org.springframework.security.web.FilterChainProxy - Securing GET /ai/health
+2025-09-20 18:55:55.258 [http-nio-8081-exec-5] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Processing authentication for request: /api/ai/health
+2025-09-20 18:55:55.259 [http-nio-8081-exec-5] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - JWT token found in request /api/ai/health, length: 279
+2025-09-20 18:55:55.259 [http-nio-8081-exec-5] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - JWT token validation successful for request: /api/ai/health
+2025-09-20 18:55:55.260 [http-nio-8081-exec-5] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Token type: ACCESS for request: /api/ai/health
+2025-09-20 18:55:55.261 [http-nio-8081-exec-5] DEBUG com.weeklyreport.security.JwtTokenProvider - Extracted authorities from token: [ROLE_ADMIN] for roles: ROLE_ADMIN
+2025-09-20 18:55:55.262 [http-nio-8081-exec-5] DEBUG com.weeklyreport.security.JwtTokenProvider - Created authentication for user admin with authorities: [ROLE_ADMIN]
+2025-09-20 18:55:55.262 [http-nio-8081-exec-5] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Successfully authenticated user: admin for request: /api/ai/health
+2025-09-20 18:55:55.262 [http-nio-8081-exec-5] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - User authorities: [ROLE_ADMIN]
+2025-09-20 18:55:55.265 [http-nio-8081-exec-5] DEBUG org.springframework.security.web.FilterChainProxy - Secured GET /ai/health
+2025-09-20 18:55:55.265 [http-nio-8081-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/ai/health", parameters={}
+2025-09-20 18:55:55.265 [http-nio-8081-exec-5] DEBUG o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-09-20 18:55:55.266 [http-nio-8081-exec-5] DEBUG o.s.w.servlet.resource.ResourceHttpRequestHandler - Resource not found
+2025-09-20 18:55:55.266 [http-nio-8081-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.weeklyreport.exception.GlobalExceptionHandler#handleGlobalException(Exception, WebRequest)
+2025-09-20 18:55:55.266 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - Unexpected exception: No static resource ai/health. - Request: uri=/api/ai/health
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource ai/health.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at com.weeklyreport.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:105)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - === 全局异常详细诊断 ===
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常完整类名: org.springframework.web.servlet.resource.NoResourceFoundException
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常消息: No static resource ai/health.
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常原因: 无
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 请求完整信息: uri=/api/ai/health;client=127.0.0.1;user=admin
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常发生位置: org.springframework.web.servlet.resource.ResourceHttpRequestHandler:handleRequest:585
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[0]: org.springframework.web.servlet.resource.ResourceHttpRequestHandler:handleRequest:585
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[1]: org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter:handle:52
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[2]: org.springframework.web.servlet.DispatcherServlet:doDispatch:1089
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 当前时间: 2025-09-20T18:55:55.267443
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 可用处理器数: 8
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] ERROR com.weeklyreport.exception.GlobalExceptionHandler - === 全局异常诊断结束 ===
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Writing [com.weeklyreport.dto.ApiResponse@60460715]
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource ai/health.]
+2025-09-20 18:55:55.267 [http-nio-8081-exec-5] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-09-20 18:55:55.276 [http-nio-8081-exec-6] DEBUG org.springframework.security.web.FilterChainProxy - Securing GET /ai/metrics
+2025-09-20 18:55:55.276 [http-nio-8081-exec-6] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Processing authentication for request: /api/ai/metrics
+2025-09-20 18:55:55.276 [http-nio-8081-exec-6] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - JWT token found in request /api/ai/metrics, length: 279
+2025-09-20 18:55:55.277 [http-nio-8081-exec-6] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - JWT token validation successful for request: /api/ai/metrics
+2025-09-20 18:55:55.278 [http-nio-8081-exec-6] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Token type: ACCESS for request: /api/ai/metrics
+2025-09-20 18:55:55.279 [http-nio-8081-exec-6] DEBUG com.weeklyreport.security.JwtTokenProvider - Extracted authorities from token: [ROLE_ADMIN] for roles: ROLE_ADMIN
+2025-09-20 18:55:55.280 [http-nio-8081-exec-6] DEBUG com.weeklyreport.security.JwtTokenProvider - Created authentication for user admin with authorities: [ROLE_ADMIN]
+2025-09-20 18:55:55.280 [http-nio-8081-exec-6] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - Successfully authenticated user: admin for request: /api/ai/metrics
+2025-09-20 18:55:55.280 [http-nio-8081-exec-6] DEBUG com.weeklyreport.security.JwtAuthenticationFilter - User authorities: [ROLE_ADMIN]
+2025-09-20 18:55:55.283 [http-nio-8081-exec-6] DEBUG org.springframework.security.web.FilterChainProxy - Secured GET /ai/metrics
+2025-09-20 18:55:55.283 [http-nio-8081-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - GET "/api/ai/metrics", parameters={}
+2025-09-20 18:55:55.284 [http-nio-8081-exec-6] DEBUG o.s.web.servlet.handler.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+2025-09-20 18:55:55.284 [http-nio-8081-exec-6] DEBUG o.s.w.servlet.resource.ResourceHttpRequestHandler - Resource not found
+2025-09-20 18:55:55.284 [http-nio-8081-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.weeklyreport.exception.GlobalExceptionHandler#handleGlobalException(Exception, WebRequest)
+2025-09-20 18:55:55.284 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - Unexpected exception: No static resource ai/metrics. - Request: uri=/api/ai/metrics
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource ai/metrics.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at com.weeklyreport.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:105)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - === 全局异常详细诊断 ===
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常完整类名: org.springframework.web.servlet.resource.NoResourceFoundException
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常消息: No static resource ai/metrics.
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常原因: 无
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 请求完整信息: uri=/api/ai/metrics;client=127.0.0.1;user=admin
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 异常发生位置: org.springframework.web.servlet.resource.ResourceHttpRequestHandler:handleRequest:585
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[0]: org.springframework.web.servlet.resource.ResourceHttpRequestHandler:handleRequest:585
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[1]: org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter:handle:52
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 栈帧[2]: org.springframework.web.servlet.DispatcherServlet:doDispatch:1089
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 当前时间: 2025-09-20T18:55:55.285722
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - 可用处理器数: 8
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] ERROR com.weeklyreport.exception.GlobalExceptionHandler - === 全局异常诊断结束 ===
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-09-20 18:55:55.285 [http-nio-8081-exec-6] DEBUG o.s.w.s.m.m.annotation.HttpEntityMethodProcessor - Writing [com.weeklyreport.dto.ApiResponse@3835255f]
+2025-09-20 18:55:55.286 [http-nio-8081-exec-6] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource ai/metrics.]
+2025-09-20 18:55:55.286 [http-nio-8081-exec-6] DEBUG org.springframework.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+2025-09-20 18:56:08.684 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Before cleanup stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:56:08.685 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - After cleanup  stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:56:08.685 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2025-09-20 18:56:38.690 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Before cleanup stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:56:38.692 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - After cleanup  stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:56:38.692 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2025-09-20 18:57:08.700 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Before cleanup stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:57:08.702 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - After cleanup  stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:57:08.702 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2025-09-20 18:57:38.702 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Before cleanup stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:57:38.703 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - After cleanup  stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:57:38.703 [WeeklyReportHikariCP-Dev housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Fill pool skipped, pool has sufficient level or currently being filled (queueDepth=0).
+2025-09-20 18:57:42.534 [SpringApplicationShutdownHook] INFO  o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20 18:57:42.538 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - WeeklyReportHikariCP-Dev - Shutdown initiated...
+2025-09-20 18:57:42.538 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - Before shutdown stats (total=3, active=0, idle=3, waiting=0)
+2025-09-20 18:57:42.539 [WeeklyReportHikariCP-Dev connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - WeeklyReportHikariCP-Dev - Closing connection com.mysql.cj.jdbc.ConnectionImpl@3f92912c: (connection evicted)
+2025-09-20 18:57:42.542 [WeeklyReportHikariCP-Dev connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - WeeklyReportHikariCP-Dev - Closing connection com.mysql.cj.jdbc.ConnectionImpl@4c2edadc: (connection evicted)
+2025-09-20 18:57:42.542 [WeeklyReportHikariCP-Dev connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase - WeeklyReportHikariCP-Dev - Closing connection com.mysql.cj.jdbc.ConnectionImpl@d13d0e7: (connection evicted)
+2025-09-20 18:57:42.543 [SpringApplicationShutdownHook] DEBUG com.zaxxer.hikari.pool.HikariPool - WeeklyReportHikariCP-Dev - After shutdown stats (total=0, active=0, idle=0, waiting=0)
+2025-09-20 18:57:42.543 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - WeeklyReportHikariCP-Dev - Shutdown completed.

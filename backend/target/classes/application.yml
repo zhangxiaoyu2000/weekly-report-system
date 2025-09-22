@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
   servlet:
     context-path: /api
 
@@ -10,29 +10,42 @@ spring:
   profiles:
     active: dev
   
-  # Database configuration with optimized HikariCP settings
+  # 禁用默认静态资源处理，防止与API路径冲突（context-path=/api时/ai被误认为静态资源）
+  web:
+    resources:
+      add-mappings: false  # 关键：禁用Spring Boot自动静态资源映射
+  
+  # Spring MVC配置
+  mvc:
+    throw-exception-if-no-handler-found: true  # 启用以正确处理404错误
+    dispatch-options-request: false
+  
+  # Database configuration with MySQL  
   datasource:
-    url: jdbc:mysql://localhost:3306/weekly_report?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-    username: ${DB_USERNAME:weekly_report}
-    password: ${DB_PASSWORD:password}
+    url: jdbc:mysql://localhost:3307/qr_auth_dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:rootpass123}
     driver-class-name: com.mysql.cj.jdbc.Driver
     
     # HikariCP connection pool configuration
     hikari:
-      # Connection pool sizing
-      minimum-idle: 5
-      maximum-pool-size: 20
-      idle-timeout: 300000  # 5 minutes
-      max-lifetime: 1800000  # 30 minutes
-      connection-timeout: 20000  # 20 seconds
+      # Enhanced connection pool sizing for better performance
+      minimum-idle: 3
+      maximum-pool-size: 15
+      idle-timeout: 180000  # 3 minutes (reduced for faster turnover)
+      max-lifetime: 900000  # 15 minutes (reduced for better connection health)
+      connection-timeout: 15000  # 15 seconds (increased for stability)
       
-      # Performance settings
-      leak-detection-threshold: 60000  # 1 minute
+      # Enhanced performance settings
+      leak-detection-threshold: 30000  # 30 seconds (faster detection)
       pool-name: WeeklyReportHikariCP
       
-      # Connection validation
-      connection-test-query: SELECT 1
-      validation-timeout: 5000
+      # Enhanced connection validation
+      connection-test-query: SELECT 1 FROM DUAL
+      validation-timeout: 8000  # 8 seconds (increased)
+      
+      # Connection behavior configuration
+      auto-commit: false  # CRITICAL: Let Hibernate manage transactions
       
       # Additional connection properties
       data-source-properties:
@@ -47,10 +60,17 @@ spring:
         elideSetAutoCommits: true
         maintainTimeStats: false
     
-  # Enhanced JPA configuration
+  # Flyway configuration  
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: false
+    out-of-order: true
+    clean-disabled: true
   jpa:
     hibernate:
-      ddl-auto: validate  # Use Flyway for schema management
+      ddl-auto: none  # Disable validation to allow VARCHAR columns with ENUM entities
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
@@ -59,15 +79,6 @@ spring:
       hibernate:
         # Dialect and SQL settings
         dialect: org.hibernate.dialect.MySQL8Dialect
-        
-  # Flyway configuration  
-  flyway:
-    enabled: true
-    locations: classpath:db/migration
-    baseline-on-migrate: true
-    validate-on-migrate: true
-    out-of-order: false
-    clean-disabled: true
         format_sql: true
         use_sql_comments: true
         
@@ -80,32 +91,30 @@ spring:
         order_updates: true
         batch_versioned_data: true
         
-        # Cache configuration
+        # Cache configuration - disabled in dev profile
         cache:
-          use_second_level_cache: true
-          use_query_cache: true
-          region:
-            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+          use_second_level_cache: false
+          use_query_cache: false
         
         # Connection and session settings
         connection:
-          provider_disables_autocommit: true
+          provider_disables_autocommit: true  # Let Hibernate manage autocommit
         temp:
           use_jdbc_metadata_defaults: false
           
         # Statistics and monitoring
-        generate_statistics: true
+        generate_statistics: false
         session:
           events:
             log:
               LOG_QUERIES_SLOWER_THAN_MS: 1000
               
-    defer-datasource-initialization: true
+    defer-datasource-initialization: false
     open-in-view: false  # Disable to avoid lazy loading issues in web layer
 
   # Transaction management configuration
   transaction:
-    default-timeout: 30  # 30 seconds default timeout
+    default-timeout: 45  # 45 seconds unified timeout (increased for stability)
     rollback-on-commit-failure: true
   
   # Security configuration
@@ -116,24 +125,62 @@ spring:
 
 # JWT configuration
 jwt:
-  secret: ${JWT_SECRET:MyVerySecureWeeklyReportJwtSigningKey2024!@#}
-  access-token-expiration: ${JWT_ACCESS_EXPIRATION:900000}   # 15 minutes (900000 ms)
+  secret: ${JWT_SECRET:MyVerySecureWeeklyReportJwtSigningKeyForHS512AlgorithmMustBe512BitsOrGreater2024!@#$%^&*()_+=}
+  access-token-expiration: ${JWT_ACCESS_EXPIRATION:3600000}   # 60 minutes (3600000 ms)
   refresh-token-expiration: ${JWT_REFRESH_EXPIRATION:604800000}  # 7 days (604800000 ms)
 
 # Logging configuration
 logging:
   level:
+    # 应用程序详细日志
     com.weeklyreport: DEBUG
+    com.weeklyreport.controller: DEBUG  # 控制器详细日志
+    com.weeklyreport.service: DEBUG     # 服务层详细日志
+    com.weeklyreport.repository: DEBUG  # 数据访问层详细日志
+    com.weeklyreport.security: DEBUG    # 安全组件详细日志
+    com.weeklyreport.exception: DEBUG   # 异常处理详细日志
+    
+    # Spring Security详细日志
     org.springframework.security: DEBUG
-    com.zaxxer.hikari: INFO  # Monitor connection pool
+    org.springframework.security.web: DEBUG
+    org.springframework.security.access: DEBUG
+    org.springframework.security.authentication: DEBUG
+    
+    # 数据库连接池详细监控
+    com.zaxxer.hikari: DEBUG
+    com.zaxxer.hikari.pool: DEBUG
+    com.zaxxer.hikari.pool.HikariPool: DEBUG
+    
+    # Hibernate/JPA详细日志
     org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Show parameter bindings
-    org.hibernate.stat: INFO  # Hibernate statistics
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.stat: INFO
+    org.hibernate.orm.jdbc.bind: TRACE  # 参数绑定
+    org.hibernate.orm.jdbc.extract: TRACE  # 结果集提取
+    
+    # Spring事务管理详细日志
+    org.springframework.transaction: DEBUG
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.orm.jpa.JpaTransactionManager: DEBUG
+    
+    # Web请求详细日志
+    org.springframework.web: DEBUG
+    org.springframework.web.servlet: DEBUG
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    
+    # 根日志级别设为INFO以避免过多噪音
+    root: INFO
+    
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"
+  charset:
+    console: UTF-8
+    file: UTF-8
   file:
     name: logs/weekly-report.log
+    max-size: 100MB  # 单个日志文件最大大小
+    max-history: 10  # 保留的历史日志文件数量
 
 # Actuator configuration for monitoring
 management:
@@ -167,7 +214,7 @@ management:
 
 # CORS configuration
 cors:
-  allowed-origins: http://localhost:3000,http://localhost:3002
+  allowed-origins: http://localhost:3000,http://localhost:3002,http://localhost:3005,http://localhost:3006,http://localhost:3007,http://localhost:3008,http://localhost:3009
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
   allowed-headers: "*"
   allow-credentials: true
@@ -175,10 +222,19 @@ cors:
 # AI Services configuration
 ai:
   enabled: true
-  default-provider: mock  # Use mock by default for development
+  default-provider: deepseek  # Use fixed DeepSeek implementation
   enable-fallback: true
   max-retries: 3
   timeout-ms: 30000
+  
+  # DeepSeek configuration
+  deepseek:
+    enabled: true
+    api-key: ${DEEPSEEK_API_KEY:sk-4613204f1ddc4fcf88894d77be5da3e8}
+    base-url: https://api.deepseek.com
+    model: deepseek-chat
+    temperature: 0.7
+    max-tokens: 2000
   
   # OpenAI configuration
   openai:
@@ -206,11 +262,6 @@ ai:
     temperature: 0.7
     max-tokens: 2048
   
-  # Mock AI configuration for testing and development
-  mock:
-    enabled: true  # Enabled by default for development
-    simulated-delay: 1000  # 1 second delay to simulate processing
-    confidence: 0.95
 
 ---
 # Development profile
@@ -219,42 +270,35 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: 
     hikari:
-      minimum-idle: 2
-      maximum-pool-size: 10
-      idle-timeout: 300000
-      max-lifetime: 1800000
-      connection-timeout: 10000
+      minimum-idle: 3
+      maximum-pool-size: 12
+      idle-timeout: 180000
+      max-lifetime: 900000
+      connection-timeout: 15000
       pool-name: WeeklyReportHikariCP-Dev
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-      settings:
-        web-allow-others: true  # Allow external connections in dev mode
+      validation-timeout: 8000
+      leak-detection-threshold: 30000
+      auto-commit: false  # CRITICAL: Let Hibernate manage transactions
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none  # Disable validation to allow VARCHAR columns with ENUM entities
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
         use_sql_comments: true
-        generate_statistics: true
+        generate_statistics: false
+  flyway:
+    enabled: false  # Disable Flyway in dev profile to avoid circular dependency
 
-# AI configuration for development - use mock service
+# AI configuration for development - use DeepSeek
 ai:
-  default-provider: mock
-  mock:
+  default-provider: deepseek
+  deepseek:
     enabled: true
-    simulated-delay: 500  # Faster in dev
   openai:
-    enabled: false  # Keep disabled unless testing with real API
+    enabled: false
 
 ---
 # Test profile
@@ -263,10 +307,10 @@ spring:
     activate:
       on-profile: test
   datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:mysql://localhost:3307/qr_auth_dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:rootpass123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       minimum-idle: 1
       maximum-pool-size: 5
@@ -276,24 +320,29 @@ spring:
       pool-name: WeeklyReportHikariCP-Test
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate  # Use Flyway for schema management
     show-sql: false  # Reduce test noise
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: false
-        hbm2ddl:
-          import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+        jdbc:
+          batch_size: 20
+          fetch_size: 50
+          time_zone: UTC
         generate_statistics: false
+  flyway:
+    enabled: false
+    clean-disabled: false  # Allow clean in test environment
+    baseline-on-migrate: true
 
-# AI configuration for testing - use mock service with no delay
+# AI configuration for testing - use DeepSeek
 ai:
-  default-provider: mock
-  mock:
+  default-provider: deepseek
+  deepseek:
     enabled: true
-    simulated-delay: 0  # No delay in tests
   openai:
-    enabled: false  # Disabled in tests
+    enabled: false
 
 ---
 # Docker profile
@@ -302,9 +351,9 @@ spring:
     activate:
       on-profile: docker
   datasource:
-    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:weekly_report}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&rewriteBatchedStatements=true
-    username: ${DB_USERNAME:weekly_report}
-    password: ${DB_PASSWORD:password}
+    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:qr_auth_dev}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:rootpass123}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       minimum-idle: 5
@@ -329,7 +378,7 @@ spring:
         maintainTimeStats: false
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate  # Use Flyway for schema management
     show-sql: false
     properties:
       hibernate:
@@ -342,6 +391,10 @@ spring:
         order_updates: true
         batch_versioned_data: true
         generate_statistics: false  # Disable in docker for performance
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    validate-on-migrate: true
 
 ---
 # Production profile
@@ -387,17 +440,17 @@ spring:
         batch_versioned_data: true
         generate_statistics: false
         connection:
-          provider_disables_autocommit: true
+          provider_disables_autocommit: false
 
-# AI configuration for production - enable real AI services
+# AI configuration for production - use DeepSeek
 ai:
-  default-provider: openai  # Use OpenAI in production
+  default-provider: deepseek
   enable-fallback: true
-  max-retries: 2  # Fewer retries in production
+  max-retries: 2
+  deepseek:
+    enabled: true
   openai:
-    enabled: true  # Enable OpenAI in production (requires API key)
-  mock:
-    enabled: false  # Disable mock in production
+    enabled: false
   
 # Production-specific logging
 logging:

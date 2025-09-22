@@ -30,6 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, 
                                   FilterChain filterChain) throws ServletException, IOException {
@@ -41,31 +42,63 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String jwt = getJwtFromRequest(request);
             
             if (StringUtils.hasText(jwt)) {
+                logger.debug("JWT token found in request {}, length: {}", requestURI, jwt.length());
+                
                 if (jwtTokenProvider.validateToken(jwt)) {
+                    logger.debug("JWT token validation successful for request: {}", requestURI);
+                    
                     // Only process access tokens for authentication
-                    if (jwtTokenProvider.getTokenType(jwt) == JwtTokenProvider.TokenType.ACCESS) {
+                    JwtTokenProvider.TokenType tokenType = jwtTokenProvider.getTokenType(jwt);
+                    logger.debug("Token type: {} for request: {}", tokenType, requestURI);
+                    
+                    if (tokenType == JwtTokenProvider.TokenType.ACCESS) {
                         Authentication authentication = jwtTokenProvider.getAuthentication(jwt);
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                         
                         logger.debug("Successfully authenticated user: {} for request: {}", 
                                    authentication.getName(), requestURI);
+                        logger.debug("User authorities: {}", authentication.getAuthorities());
                     } else {
-                        logger.debug("Ignoring non-access token for authentication");
+                        logger.debug("Ignoring non-access token for authentication: {}", tokenType);
                     }
                 } else {
-                    logger.debug("Invalid JWT token for request: {}", requestURI);
+                    logger.warn("JWT token validation failed for request: {}", requestURI);
+                    logger.debug("Invalid token details: prefix={}, length={}", 
+                               jwt.substring(0, Math.min(10, jwt.length())), jwt.length());
                     SecurityContextHolder.clearContext();
                 }
             } else {
                 logger.debug("No JWT token found in request: {}", requestURI);
+                logger.debug("Authorization header: {}", request.getHeader(AUTHORIZATION_HEADER));
             }
         } catch (Exception ex) {
-            logger.error("Cannot set user authentication for request {}: {}", requestURI, ex.getMessage());
+            logger.error("JWT认证异常 - 请求: {}, 异常类型: {}, 详细信息: {}", 
+                        requestURI, ex.getClass().getSimpleName(), ex.getMessage());
+            
+            // 详细的认证错误诊断
+            logger.error("=== JWT认证错误诊断 ===");
+            logger.error("请求URI: {}", requestURI);
+            logger.error("请求方法: {}", request.getMethod());
+            logger.error("Authorization头: {}", request.getHeader(AUTHORIZATION_HEADER));
+            logger.error("用户代理: {}", request.getHeader("User-Agent"));
+            logger.error("远程地址: {}", request.getRemoteAddr());
+            
+            try {
+                String jwt = getJwtFromRequest(request);
+                if (jwt != null) {
+                    logger.error("提取的JWT长度: {}", jwt.length());
+                    logger.error("JWT前缀: {}", jwt.substring(0, Math.min(20, jwt.length())));
+                }
+            } catch (Exception jwtEx) {
+                logger.error("无法分析JWT: {}", jwtEx.getMessage());
+            }
+            
+            logger.error("=== JWT认证错误诊断结束 ===");
+            
             SecurityContextHolder.clearContext();
             
-            // For debugging purposes - can be removed in production
             if (logger.isDebugEnabled()) {
-                logger.debug("Authentication error details", ex);
+                logger.debug("Authentication error stack trace", ex);
             }
         }
 
@@ -93,12 +126,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
         
+        // Remove context path for matching
+        if (path.startsWith("/api")) {
+            path = path.substring(4); // Remove "/api" prefix
+        }
+        
         // Skip JWT processing for these paths
-        return path.startsWith("/api/auth/") ||
-               path.startsWith("/api/actuator/") ||
-               path.startsWith("/api/h2-console/") ||
-               path.equals("/api/health") ||
-               path.equals("/api/") ||
-               path.startsWith("/api/public/");
+        return path.startsWith("/auth/") ||
+               path.startsWith("/actuator/") ||
+               path.equals("/health") ||
+               path.equals("/") ||
+               path.startsWith("/public/");
     }
 }

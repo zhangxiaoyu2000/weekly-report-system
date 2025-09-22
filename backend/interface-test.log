@@ -1,0 +1,571 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.weeklyreport:weekly-report-backend >---------------
+[INFO] Building weekly-report-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ weekly-report-backend >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ weekly-report-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 30 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ weekly-report-backend ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ weekly-report-backend ---
+[INFO] skip non existing resourceDirectory /Volumes/project/my-project/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ weekly-report-backend ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ weekly-report-backend <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ weekly-report-backend ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m              [2m (v3.2.0)[0;39m
+
+2025-09-20 13:41:03 - Starting WeeklyReportApplication using Java 23.0.2 with PID 9808 (/Volumes/project/my-project/backend/target/classes started by zhangxiaoyu in /Volumes/project/my-project/backend)
+2025-09-20 13:41:03 - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-09-20 13:41:03 - The following 1 profile is active: "dev"
+2025-09-20 13:41:04 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-20 13:41:04 - Finished Spring Data repository scanning in 38 ms. Found 14 JPA repository interfaces.
+2025-09-20 13:41:04 - Tomcat initialized with port 8081 (http)
+2025-09-20 13:41:04 - Starting service [Tomcat]
+2025-09-20 13:41:04 - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-09-20 13:41:04 - Initializing Spring embedded WebApplicationContext
+2025-09-20 13:41:04 - Root WebApplicationContext: initialization completed in 1011 ms
+2025-09-20 13:41:05 - Filter 'jwtAuthenticationFilter' configured for use
+2025-09-20 13:41:05 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-20 13:41:05 - HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-09-20 13:41:05 - HHH000026: Second-level cache disabled
+2025-09-20 13:41:05 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-20 13:41:05 - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-20 13:41:05 - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-09-20 13:41:05 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-20 13:41:05 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20 13:41:06 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-20 13:41:06 - AI Monitoring Service initialized
+2025-09-20 13:41:06 - Initializing AI service providers...
+2025-09-20 13:41:06 - Calling DeepSeek API with URL: https://api.deepseek.com/chat/completions
+2025-09-20 13:41:06 - Request payload: {"model":"deepseek-chat","messages":[{"role":"user","content":"hello"}],"temperature":0.1,"stream":false,"max_tokens":10}
+2025-09-20 13:41:11 - DeepSeek API response status: 200 OK
+2025-09-20 13:41:11 - DeepSeek API response body: {"id":"0a5ee067-acf6-449a-a881-6d3d6dc01e20","object":"chat.completion","created":1758346867,"model":"deepseek-chat","choices":[{"index":0,"message":{"role":"assistant","content":"Hello! How can I help you today?"},"logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":5,"completion_tokens":9,"total_tokens":14,"prompt_tokens_details":{"cached_tokens":0},"prompt_cache_hit_tokens":0,"prompt_cache_miss_tokens":5},"system_fingerprint":"fp_08f168e49b_prod0820_fp8_kvcache"}
+2025-09-20 13:41:11 - Registered AI provider: DeepSeek AI Service - Status: Configured and healthy
+2025-09-20 13:41:11 - Registered AI provider: Mock AI Service for Testing - Status: CONFIGURED
+2025-09-20 13:41:11 - Initialized 2 AI service providers
+2025-09-20 13:41:12 - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-09-20 13:41:12 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@21880359, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@70ba2b39, org.springframework.security.web.context.SecurityContextHolderFilter@4d1de87a, org.springframework.security.web.header.HeaderWriterFilter@7998eb53, org.springframework.web.filter.CorsFilter@7ab61b45, org.springframework.security.web.authentication.logout.LogoutFilter@76bc642f, com.weeklyreport.security.JwtAuthenticationFilter@4de91056, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@37b71300, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@681d20da, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@49222373, org.springframework.security.web.session.SessionManagementFilter@5871dc87, org.springframework.security.web.access.ExceptionTranslationFilter@222b3f2, org.springframework.security.web.access.intercept.AuthorizationFilter@5dafd27c]
+2025-09-20 13:41:13 - Tomcat started on port 8081 (http) with context path '/api'
+2025-09-20 13:41:13 - Started WeeklyReportApplication in 9.964 seconds (process running for 10.115)
+2025-09-20 13:41:13 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:41:13 - WeeklyReportHikariCP-Dev - Starting...
+2025-09-20 13:41:13 - WeeklyReportHikariCP-Dev - Added connection com.mysql.cj.jdbc.ConnectionImpl@36b52ee
+2025-09-20 13:41:13 - WeeklyReportHikariCP-Dev - Start completed.
+2025-09-20 13:41:13 - Super admin user already exists: superadmin
+2025-09-20 13:41:13 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:41:13 - Super admin user already exists: zhangxiaoyu
+2025-09-20 13:41:13 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:41:13 - Admin user already exists: admin
+2025-09-20 13:41:13 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:41:13 - Admin user already exists: admin1
+2025-09-20 13:41:13 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:41:13 - Admin user already exists: admin2
+2025-09-20 13:41:13 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:41:13 - Manager user already exists: manager1
+=== SIMPLE COMMENTS TABLE FIX ===
+Simple comments table fix failed: StatementCallback; bad SQL grammar [ALTER TABLE comments ADD COLUMN IF NOT EXISTS attachments JSON]
+=== SIMPLE COMMENTS TABLE FIX COMPLETE ===
+2025-09-20 13:42:19 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-20 13:42:19 - Initializing Servlet 'dispatcherServlet'
+2025-09-20 13:42:19 - Completed initialization in 1 ms
+2025-09-20 13:42:19 - Securing GET /health
+2025-09-20 13:42:19 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:42:19 - Cache miss for REQUEST dispatch to '/api/health' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2025-09-20 13:42:19 - Secured GET /health
+2025-09-20 13:42:59 - Securing GET /projects
+2025-09-20 13:42:59 - Processing authentication for request: /api/projects
+2025-09-20 13:42:59 - No JWT token found in request: /api/projects
+2025-09-20 13:42:59 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:42:59 - Unauthorized access attempt to: /api/projects from IP: 0:0:0:0:0:0:0:1. Error: Full authentication is required to access this resource
+2025-09-20 13:42:59 - Securing GET /projects/1
+2025-09-20 13:42:59 - Processing authentication for request: /api/projects/1
+2025-09-20 13:42:59 - No JWT token found in request: /api/projects/1
+2025-09-20 13:42:59 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:42:59 - Unauthorized access attempt to: /api/projects/1 from IP: 0:0:0:0:0:0:0:1. Error: Full authentication is required to access this resource
+2025-09-20 13:42:59 - Securing POST /projects
+2025-09-20 13:42:59 - Processing authentication for request: /api/projects
+2025-09-20 13:42:59 - No JWT token found in request: /api/projects
+2025-09-20 13:42:59 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:42:59 - Unauthorized access attempt to: /api/projects from IP: 0:0:0:0:0:0:0:1. Error: Full authentication is required to access this resource
+2025-09-20 13:42:59 - Securing PUT /projects/1
+2025-09-20 13:42:59 - Processing authentication for request: /api/projects/1
+2025-09-20 13:42:59 - No JWT token found in request: /api/projects/1
+2025-09-20 13:42:59 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:42:59 - Unauthorized access attempt to: /api/projects/1 from IP: 0:0:0:0:0:0:0:1. Error: Full authentication is required to access this resource
+2025-09-20 13:42:59 - Securing DELETE /projects/1
+2025-09-20 13:42:59 - Processing authentication for request: /api/projects/1
+2025-09-20 13:42:59 - No JWT token found in request: /api/projects/1
+2025-09-20 13:42:59 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:42:59 - Unauthorized access attempt to: /api/projects/1 from IP: 0:0:0:0:0:0:0:1. Error: Full authentication is required to access this resource
+2025-09-20 13:43:18 - Securing POST /auth/login
+2025-09-20 13:43:18 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:43:18 - Secured POST /auth/login
+2025-09-20 13:43:18 - Login attempt for user: admin
+2025-09-20 13:43:18 - Attempting login for user: admin
+2025-09-20 13:43:18 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:43:18 - Invalid password attempt for user: admin
+2025-09-20 13:43:18 - Login failed for user: admin - Invalid username/email or password
+2025-09-20 13:43:54 - Securing POST /auth/login
+2025-09-20 13:43:54 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:43:54 - Secured POST /auth/login
+2025-09-20 13:43:54 - Login attempt for user: admin1
+2025-09-20 13:43:54 - Attempting login for user: admin1
+2025-09-20 13:43:54 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:43:55 - User admin1 logged in successfully
+2025-09-20 13:43:55 - Login successful for user: admin1
+2025-09-20 13:44:10 - Securing GET /projects
+2025-09-20 13:44:10 - Processing authentication for request: /api/projects
+2025-09-20 13:44:10 - Extracted authorities from token: [ROLE_ADMIN] for roles: ROLE_ADMIN
+2025-09-20 13:44:10 - Created authentication for user admin1 with authorities: [ROLE_ADMIN]
+2025-09-20 13:44:10 - Successfully authenticated user: admin1 for request: /api/projects
+2025-09-20 13:44:10 - Secured GET /projects
+2025-09-20 13:44:10 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.ProjectController.getAllProjects(int,int,java.lang.String,java.lang.String); target is of class [com.weeklyreport.controller.ProjectController]
+2025-09-20 13:44:10 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.ProjectController.getAllProjects(int,int,java.lang.String,java.lang.String); target is of class [com.weeklyreport.controller.ProjectController]
+2025-09-20 13:44:10 - 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.admin_reviewer_id,
+        p1_0.ai_analysis_id,
+        p1_0.approval_status,
+        p1_0.created_at,
+        p1_0.created_by,
+        p1_0.description,
+        p1_0.expected_results,
+        p1_0.members,
+        p1_0.name,
+        p1_0.rejection_reason,
+        p1_0.stop_loss,
+        p1_0.super_admin_reviewer_id,
+        p1_0.timeline,
+        p1_0.updated_at 
+    from
+        projects p1_0 
+    order by
+        p1_0.created_at desc 
+    limit
+        ?, ?
+Hibernate: 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.admin_reviewer_id,
+        p1_0.ai_analysis_id,
+        p1_0.approval_status,
+        p1_0.created_at,
+        p1_0.created_by,
+        p1_0.description,
+        p1_0.expected_results,
+        p1_0.members,
+        p1_0.name,
+        p1_0.rejection_reason,
+        p1_0.stop_loss,
+        p1_0.super_admin_reviewer_id,
+        p1_0.timeline,
+        p1_0.updated_at 
+    from
+        projects p1_0 
+    order by
+        p1_0.created_at desc 
+    limit
+        ?, ?
+2025-09-20 13:44:10 - Securing POST /projects
+2025-09-20 13:44:10 - Processing authentication for request: /api/projects
+2025-09-20 13:44:10 - Extracted authorities from token: [ROLE_ADMIN] for roles: ROLE_ADMIN
+2025-09-20 13:44:10 - Created authentication for user admin1 with authorities: [ROLE_ADMIN]
+2025-09-20 13:44:10 - Successfully authenticated user: admin1 for request: /api/projects
+2025-09-20 13:44:10 - Secured POST /projects
+2025-09-20 13:44:10 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.ProjectController.createProject(com.weeklyreport.dto.project.ProjectCreateRequest); target is of class [com.weeklyreport.controller.ProjectController]
+2025-09-20 13:44:10 - Failed to authorize ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.ProjectController.createProject(com.weeklyreport.dto.project.ProjectCreateRequest); target is of class [com.weeklyreport.controller.ProjectController] with authorization manager org.springframework.security.config.annotation.method.configuration.DeferringObservationAuthorizationManager@3e92fb10 and decision ExpressionAuthorizationDecision [granted=false, expressionAttribute=hasRole('MANAGER')]
+2025-09-20 13:44:10 - Securing GET /projects/1
+2025-09-20 13:44:10 - Processing authentication for request: /api/projects/1
+2025-09-20 13:44:10 - Extracted authorities from token: [ROLE_ADMIN] for roles: ROLE_ADMIN
+2025-09-20 13:44:10 - Created authentication for user admin1 with authorities: [ROLE_ADMIN]
+2025-09-20 13:44:10 - Successfully authenticated user: admin1 for request: /api/projects/1
+2025-09-20 13:44:10 - Secured GET /projects/1
+2025-09-20 13:44:10 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.ProjectController.getProject(java.lang.Long); target is of class [com.weeklyreport.controller.ProjectController]
+2025-09-20 13:44:10 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.ProjectController.getProject(java.lang.Long); target is of class [com.weeklyreport.controller.ProjectController]
+2025-09-20 13:44:10 - 
+    select
+        p1_0.id,
+        p1_0.admin_reviewer_id,
+        p1_0.ai_analysis_id,
+        p1_0.approval_status,
+        p1_0.created_at,
+        p1_0.created_by,
+        p1_0.description,
+        p1_0.expected_results,
+        p1_0.members,
+        p1_0.name,
+        p1_0.rejection_reason,
+        p1_0.stop_loss,
+        p1_0.super_admin_reviewer_id,
+        p1_0.timeline,
+        p1_0.updated_at 
+    from
+        projects p1_0 
+    where
+        p1_0.id=?
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.admin_reviewer_id,
+        p1_0.ai_analysis_id,
+        p1_0.approval_status,
+        p1_0.created_at,
+        p1_0.created_by,
+        p1_0.description,
+        p1_0.expected_results,
+        p1_0.members,
+        p1_0.name,
+        p1_0.rejection_reason,
+        p1_0.stop_loss,
+        p1_0.super_admin_reviewer_id,
+        p1_0.timeline,
+        p1_0.updated_at 
+    from
+        projects p1_0 
+    where
+        p1_0.id=?
+2025-09-20 13:44:25 - Securing POST /auth/login
+2025-09-20 13:44:25 - Set SecurityContextHolder to anonymous SecurityContext
+2025-09-20 13:44:25 - Secured POST /auth/login
+2025-09-20 13:44:25 - Login attempt for user: manager1
+2025-09-20 13:44:25 - Attempting login for user: manager1
+2025-09-20 13:44:25 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:44:25 - User manager1 logged in successfully
+2025-09-20 13:44:25 - Login successful for user: manager1
+2025-09-20 13:44:36 - Securing POST /projects
+2025-09-20 13:44:36 - Processing authentication for request: /api/projects
+2025-09-20 13:44:36 - Extracted authorities from token: [ROLE_MANAGER] for roles: ROLE_MANAGER
+2025-09-20 13:44:36 - Created authentication for user manager1 with authorities: [ROLE_MANAGER]
+2025-09-20 13:44:36 - Successfully authenticated user: manager1 for request: /api/projects
+2025-09-20 13:44:36 - Secured POST /projects
+2025-09-20 13:44:36 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.ProjectController.createProject(com.weeklyreport.dto.project.ProjectCreateRequest); target is of class [com.weeklyreport.controller.ProjectController]
+2025-09-20 13:44:36 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.weeklyreport.controller.ProjectController.createProject(com.weeklyreport.dto.project.ProjectCreateRequest); target is of class [com.weeklyreport.controller.ProjectController]
+2025-09-20 13:44:36 - Fetching profile for user: manager1
+2025-09-20 13:44:36 - 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.status,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+2025-09-20 13:44:36 - 
+    /* <criteria> */ select
+        p1_0.id 
+    from
+        projects p1_0 
+    where
+        p1_0.name=? 
+    limit
+        ?
+Hibernate: 
+    /* <criteria> */ select
+        p1_0.id 
+    from
+        projects p1_0 
+    where
+        p1_0.name=? 
+    limit
+        ?
+2025-09-20 13:44:36 - 
+    /* insert for
+        com.weeklyreport.entity.Project */insert 
+    into
+        projects (admin_reviewer_id, ai_analysis_id, approval_status, created_at, created_by, description, expected_results, members, name, rejection_reason, stop_loss, super_admin_reviewer_id, timeline, updated_at) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    /* insert for
+        com.weeklyreport.entity.Project */insert 
+    into
+        projects (admin_reviewer_id, ai_analysis_id, approval_status, created_at, created_by, description, expected_results, members, name, rejection_reason, stop_loss, super_admin_reviewer_id, timeline, updated_at) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-09-20 13:44:36 - Project created: 10 by user: 10004
+2025-09-20 13:46:31 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-20 13:46:31 - WeeklyReportHikariCP-Dev - Shutdown initiated...
+2025-09-20 13:46:31 - WeeklyReportHikariCP-Dev - Shutdown completed.

@@ -201,8 +201,7 @@ public interface ProjectMemberRepository extends JpaRepository<ProjectMember, Lo
      * Search members by user details
      */
     @Query("SELECT pm FROM ProjectMember pm WHERE pm.project = :project AND " +
-           "(LOWER(pm.user.fullName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-           "LOWER(pm.user.username) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+           "(LOWER(pm.user.username) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
            "LOWER(pm.user.email) LIKE LOWER(CONCAT('%', :searchTerm, '%')))")
     List<ProjectMember> searchMembers(@Param("project") Project project, 
                                      @Param("searchTerm") String searchTerm);
