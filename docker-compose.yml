@@ -59,7 +59,7 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - "3001:80"
+      - "3002:80"
     depends_on:
       backend:
         condition: service_healthy
