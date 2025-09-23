@@ -91,17 +91,6 @@
             <scope>test</scope>
         </dependency>
         
-        <!-- Flyway Database Migration -->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
-        
-        <!-- Flyway MySQL Support -->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-mysql</artifactId>
-        </dependency>
         
         <!-- SpringDoc OpenAPI for API Documentation -->
         <dependency>
@@ -150,22 +139,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             
-            <!-- Flyway Maven Plugin -->
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>9.22.0</version>
-                <configuration>
-                    <url>jdbc:mysql://localhost:3307/qr_auth_dev</url>
-                    <user>qrauth</user>
-                    <password>qrauth123</password>
-                    <locations>
-                        <location>classpath:db/migration</location>
-                    </locations>
-                    <baselineOnMigrate>true</baselineOnMigrate>
-                    <validateOnMigrate>true</validateOnMigrate>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
