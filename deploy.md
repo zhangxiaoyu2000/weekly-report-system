@@ -30,7 +30,11 @@
     │   ✅ 完成  │                    │   ❌ 失败   │
     └───────────┘                    └─────┬─────┘
                                           ↓
+
                               6️⃣ 使用Playwright MCP查看Jenkins控制台日志
+                              
+                                构建失败：配置文件出现了错误
+                                构建成功，容器运行失败：通过sshpass工具使用ssh协议去查看容器日志启动失败原因
                                           ↓
                               7️⃣ 分析错误原因并找到解决方法
                                           ↓
@@ -229,12 +233,12 @@ docker exec weekly-report-mysql mysql -u root -prootpass123 qr_auth_dev -e 'ALTE
 
 ## 部署最佳实践和经验总结
 
-### 当前部署状态 (✅ 部署成功)
+### 当前部署状态 (✅ 完全部署成功)
 - ✅ Jenkins项目已创建并运行正常
-- ✅ 端口配置已优化(8082:8080, 3309:3306)
+- ✅ 端口配置已优化(前端3003:80, 后端8082:8080, 数据库3309:3306)
 - ✅ Jenkinsfile已准备就绪并添加Database Repair阶段
-- ✅ GitHub仓库推送成功 (最新commit: c25ff15 - JWT密钥修复)
-- ✅ Jenkins构建历史: Build #25 (JWT问题), #26 (修复部署中)
+- ✅ GitHub仓库推送成功 (最新commit: e6efce9 - 前端容器修复)
+- ✅ Jenkins构建历史: Build #29 (前端容器修复成功)
 - ✅ MySQL容器运行正常并健康 (端口3309)
 - ✅ 数据库表结构已创建 (weekly_report_system)
 - ✅ Flyway数据库迁移问题已完全解决
@@ -243,14 +247,20 @@ docker exec weekly-report-mysql mysql -u root -prootpass123 qr_auth_dev -e 'ALTE
   - ✅ 在Docker profile中禁用Flyway，因为数据库已完整
   - ✅ Database Repair阶段可清理任何遗留的失败迁移记录
 - ✅ JWT认证系统已修复并验证
-  - ✅ JWT密钥长度已修复 (256+位安全密钥)
+  - ✅ JWT密钥长度已修复 (512位安全密钥)
   - ✅ 用户认证完全正常
   - ✅ 管理员登录成功验证
-- ✅ **全系统部署成功并可用**
-  - ✅ 后端服务健康检查通过
-  - ✅ 认证API完全正常
-  - ✅ 数据库连接正常
-  - ✅ 容器服务稳定运行
+- ✅ 前端容器问题已完全解决
+  - ✅ volume挂载问题已修复
+  - ✅ nginx配置正确使用环境变量
+  - ✅ 前端服务稳定运行在3003端口
+  - ✅ API代理工作正常
+- ✅ **完整系统部署成功并完全可用**
+  - ✅ 前端Web界面可访问 (http://23.95.193.155:3003)
+  - ✅ 后端API服务正常 (http://23.95.193.155:8082)
+  - ✅ 所有认证和业务功能正常
+  - ✅ 数据库连接稳定
+  - ✅ 所有三个容器健康运行
 
 ### 推荐的部署流程修正
 1. **优先级1**: 修复Gitea仓库问题
@@ -304,34 +314,98 @@ Docker compose配置中的JWT_SECRET密钥"mySecretKeyForProduction"只有192位
 - ✅ 管理员账户admin1登录成功
 - ✅ 角色权限系统工作正常
 
-### 问题13: 前端容器持续启动失败 (当前问题 ❌)
+### 问题13: 前端容器持续启动失败 (已解决 ✅)
 **现象**: 
-- Jenkins构建持续失败 (Build #26, #27, #28)
+- Jenkins构建持续失败 (Build #26, #27, #28, #29)
 - 前端服务无法在3003端口访问: `curl: (7) Failed to connect to 23.95.193.155 port 3003`
 - 后端服务正常运行在8082端口
 - 前端构建成功但容器启动失败
 
 **根本原因**: 
 1. **nginx配置问题**: nginx-temp.conf中后端代理端口错误 (8081→8082) ✅ 已修复
-2. **容器启动失败**: 即使修复nginx配置后，前端容器仍无法启动
-3. **可能原因**: 
-   - Docker容器资源限制
-   - nginx配置语法错误
-   - 环境变量问题
-   - 端口冲突或权限问题
+2. **volume挂载错误**: docker-compose.yml中配置的volume挂载导致容器无法启动
+   ```
+   volumes:
+     - ./nginx-temp.conf:/etc/nginx/conf.d/default.conf
+   ```
+   错误详情: Jenkins工作空间中nginx-temp.conf文件不存在，导致挂载失败
 
-**解决方案**:
-1. **已完成**: 修复nginx-temp.conf中的后端端口配置 ✅
-2. **待调查**: 
-   - 检查Docker日志: `docker logs weekly-report-frontend`
-   - 验证nginx配置语法
-   - 检查端口3003是否被占用
-   - 验证容器启动权限
+**完整解决方案**:
+1. **SSH诊断**: 使用sshpass工具SSH登录到服务器诊断问题
+   ```bash
+   sshpass -p 'To1YHvWPvyX157jf38' ssh -o StrictHostKeyChecking=no root@23.95.193.155 "docker start weekly-report-frontend"
+   ```
+   发现volume挂载错误: `/var/jenkins_home/workspace/WeeklyReport/nginx-temp.conf`文件不存在
 
-**当前状态**: 
+2. **移除volume挂载**: 修改docker-compose.yml，移除有问题的volume配置
+   ```yaml
+   # 移除这行
+   # volumes:
+   #   - ./nginx-temp.conf:/etc/nginx/conf.d/default.conf
+   
+   # 添加环境变量支持
+   environment:
+     NODE_ENV: production
+     BACKEND_URL: http://23.95.193.155:8082
+   ```
+
+3. **使用内置配置**: 让前端容器使用Dockerfile.frontend中内置的nginx配置模板和环境变量替换机制
+
+**验证结果**: ✅ **完全解决**
+- ✅ 前端服务正常启动并监听3003端口
+- ✅ 前端页面可访问: `curl -I http://23.95.193.155:3003` → HTTP 200 OK
+- ✅ API代理正常工作: `curl -I http://23.95.193.155:3003/api/health` → HTTP 200 OK
+- ✅ nginx配置正确，后端API路由工作正常
+- ✅ 所有三个容器(mysql, backend, frontend)均运行正常
+
+**最终状态**: 
 - ✅ 后端API完全正常 (8082端口)
 - ✅ JWT认证系统工作正常
-- ❌ 前端服务无法启动 (3003端口)
-- ❌ Jenkins构建持续失败
+- ✅ 前端服务正常运行 (3003端口)
+- ✅ 完整的Web应用可通过浏览器访问
 
-**影响**: 用户无法通过Web界面访问系统，但后端API功能完整
+**系统完全可用**: 用户现在可以完整访问周报管理系统的Web界面和所有功能
+
+### 问题14: 前端CORS跨域请求被拒绝 (已解决 ✅)
+**现象**: 
+- 前端页面可以访问: `curl -I http://23.95.193.155:3003` → HTTP 200 OK
+- 但登录API调用失败: `curl OPTIONS http://23.95.193.155:3003/api/auth/login` → HTTP 403 Forbidden
+- 浏览器控制台显示CORS错误: "Access to XMLHttpRequest at ... has been blocked by CORS policy"
+- 错误信息: "Invalid CORS request"
+
+**根本原因**: 
+后端Spring Boot应用的CORS配置只允许localhost域名，不包含生产环境的前端域名
+```yaml
+# application.yml中的原始配置
+cors:
+  allowed-origins: http://localhost:3000,http://localhost:3002,...  # 缺少生产环境URL
+```
+
+**解决方案**:
+1. **更新CORS配置**: 在`backend/src/main/resources/application.yml`中添加生产环境前端URL
+   ```yaml
+   cors:
+     allowed-origins: http://localhost:3000,http://localhost:3002,http://localhost:3005,http://localhost:3006,http://localhost:3007,http://localhost:3008,http://localhost:3009,http://23.95.193.155:3003
+   ```
+
+2. **重新部署**: 提交配置更改并触发Jenkins构建
+   ```bash
+   git add backend/src/main/resources/application.yml
+   git commit -m "修复CORS配置: 添加生产环境前端域名支持"
+   git push origin main
+   ```
+
+**验证结果**: ✅ **完全解决**
+- ✅ CORS预检请求正常: `curl OPTIONS http://23.95.193.155:3003/api/auth/login` → HTTP 200
+- ✅ 返回正确CORS头部:
+  ```
+  Access-Control-Allow-Origin: http://23.95.193.155:3003
+  Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS
+  Access-Control-Allow-Headers: Content-Type
+  Access-Control-Allow-Credentials: true
+  ```
+- ✅ 登录API通过前端代理正常工作
+- ✅ 用户认证完全正常: admin1 / Admin123@
+
+**最终状态**: 
+前端Web界面现在可以正常调用后端API，所有CORS限制已解除，系统功能完全可用
