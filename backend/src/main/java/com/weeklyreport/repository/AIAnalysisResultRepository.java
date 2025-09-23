@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -267,20 +268,23 @@ public interface AIAnalysisResultRepository extends JpaRepository<AIAnalysisResu
     /**
      * 删除指定周报的所有AI分析结果（简化版本）- 删除周报相关的所有AI分析
      */
-    @Query("DELETE FROM AIAnalysisResult a WHERE a.reportId = :reportId AND a.entityType = 'WEEKLY_REPORT'")
-    int deleteByReportId(@Param("reportId") Long reportId);
+    @Modifying
+    @Query("DELETE FROM AIAnalysisResult a WHERE a.reportId = :reportId AND a.entityType = :entityType")
+    int deleteByReportId(@Param("reportId") Long reportId, @Param("entityType") AIAnalysisResult.EntityType entityType);
     
     /**
      * 删除过期的已完成分析
      */
-    @Query("DELETE FROM AIAnalysisResult a WHERE a.status = 'COMPLETED' AND a.completedAt < :cutoffDate")
-    int deleteOldCompletedAnalysis(@Param("cutoffDate") LocalDateTime cutoffDate);
+    @Modifying
+    @Query("DELETE FROM AIAnalysisResult a WHERE a.status = :status AND a.completedAt < :cutoffDate")
+    int deleteOldCompletedAnalysis(@Param("status") AIAnalysisResult.AnalysisStatus status, @Param("cutoffDate") LocalDateTime cutoffDate);
     
     /**
      * 删除过期的失败分析
      */
-    @Query("DELETE FROM AIAnalysisResult a WHERE a.status = 'FAILED' AND a.updatedAt < :cutoffDate")
-    int deleteOldFailedAnalysis(@Param("cutoffDate") LocalDateTime cutoffDate);
+    @Modifying
+    @Query("DELETE FROM AIAnalysisResult a WHERE a.status = :status AND a.updatedAt < :cutoffDate")
+    int deleteOldFailedAnalysis(@Param("status") AIAnalysisResult.AnalysisStatus status, @Param("cutoffDate") LocalDateTime cutoffDate);
 
     // 批量更新操作
     

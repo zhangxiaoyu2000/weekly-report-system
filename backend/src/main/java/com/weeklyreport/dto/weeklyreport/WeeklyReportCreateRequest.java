@@ -210,6 +210,17 @@ public class WeeklyReportCreateRequest {
         public void setDevelopmentalTasks(List<DevelopmentalTaskDTO> developmentalTasks) {
             this.developmentalTasks = developmentalTasks;
         }
+        
+        // 支持下划线格式的字段名（前端兼容性）
+        @JsonProperty("Routine_tasks")
+        public void setRoutine_tasks(List<RoutineTaskDTO> routineTasks) {
+            this.routineTasks = routineTasks;
+        }
+        
+        @JsonProperty("Developmental_tasks")
+        public void setDevelopmental_tasks(List<DevelopmentalTaskDTO> developmentalTasks) {
+            this.developmentalTasks = developmentalTasks;
+        }
     }
 
     /**
@@ -333,6 +344,17 @@ public class WeeklyReportCreateRequest {
         }
 
         public void setDevelopmentalTasks(List<NextWeekDevelopmentalTaskDTO> developmentalTasks) {
+            this.developmentalTasks = developmentalTasks;
+        }
+        
+        // 支持下划线格式的字段名（前端兼容性）
+        @JsonProperty("Routine_tasks")
+        public void setRoutine_tasks(List<NextWeekRoutineTaskDTO> routineTasks) {
+            this.routineTasks = routineTasks;
+        }
+        
+        @JsonProperty("Developmental_tasks")
+        public void setDevelopmental_tasks(List<NextWeekDevelopmentalTaskDTO> developmentalTasks) {
             this.developmentalTasks = developmentalTasks;
         }
     }

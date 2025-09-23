@@ -118,8 +118,33 @@ public class AICallbackTransactionService {
             Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new RuntimeException("Project not found: " + projectId));
             
-            // 更新审批状态
-            project.setApprovalStatus(status);
+            // 检查当前状态，防止AI回调覆盖人工审核状态
+            Project.ApprovalStatus currentStatus = project.getApprovalStatus();
+            
+            // 如果项目已经被人工审核（管理员或超级管理员），则不允许AI回调覆盖状态
+            if (currentStatus == Project.ApprovalStatus.ADMIN_APPROVED ||
+                currentStatus == Project.ApprovalStatus.ADMIN_REJECTED ||
+                currentStatus == Project.ApprovalStatus.SUPER_ADMIN_APPROVED ||
+                currentStatus == Project.ApprovalStatus.SUPER_ADMIN_REJECTED ||
+                currentStatus == Project.ApprovalStatus.FINAL_APPROVED) {
+                
+                logger.warn("阻止AI回调覆盖人工审核状态！项目ID: {}, 当前状态: {}, 尝试设置: {}", 
+                           projectId, currentStatus, status);
+                return; // 直接返回，不更新状态
+            }
+            
+            // 只有当前状态是AI相关状态时，才允许AI回调更新
+            if (currentStatus == Project.ApprovalStatus.AI_ANALYZING ||
+                currentStatus == Project.ApprovalStatus.AI_APPROVED ||
+                currentStatus == Project.ApprovalStatus.AI_REJECTED) {
+                
+                logger.info("AI回调更新状态：项目ID: {}, 从 {} 更新为 {}", projectId, currentStatus, status);
+                // 更新审批状态
+                project.setApprovalStatus(status);
+            } else {
+                logger.warn("项目状态异常，当前状态: {}，无法通过AI回调更新为: {}", currentStatus, status);
+                return; // 不更新状态
+            }
             
             // 如果有分析结果ID，则关联
             if (analysisResultId != null) {

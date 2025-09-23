@@ -378,8 +378,8 @@ async function loadReportData() {
       console.log('解析周报content数据:', report.content)
       
       // 解析日常性任务 (本周汇报)
-      if (report.content.Routine_tasks) {
-        report.content.Routine_tasks.forEach(routineTask => {
+      if (report.content.routineTasks) {
+        report.content.routineTasks.forEach(routineTask => {
           tasks.value.push({
             tempId: `routine_this_${routineTask.task_id}`,
             taskName: routineTask.taskDetails?.taskName || '日常性任务',
@@ -401,8 +401,8 @@ async function loadReportData() {
       }
       
       // 解析发展性任务 (本周汇报)
-      if (report.content.Developmental_tasks) {
-        report.content.Developmental_tasks.forEach(devTask => {
+      if (report.content.developmentalTasks) {
+        report.content.developmentalTasks.forEach(devTask => {
           tasks.value.push({
             tempId: `dev_this_${devTask.project_id}_${devTask.phase_id}`,
             taskName: devTask.projectDetails?.name || '发展性任务',
@@ -430,8 +430,8 @@ async function loadReportData() {
       console.log('解析周报nextWeekPlan数据:', report.nextWeekPlan)
       
       // 解析下周日常性任务
-      if (report.nextWeekPlan.Routine_tasks) {
-        report.nextWeekPlan.Routine_tasks.forEach(routineTask => {
+      if (report.nextWeekPlan.routineTasks) {
+        report.nextWeekPlan.routineTasks.forEach(routineTask => {
           tasks.value.push({
             tempId: `routine_next_${routineTask.task_id}`,
             taskName: routineTask.taskDetails?.taskName || '日常性任务',
@@ -453,8 +453,8 @@ async function loadReportData() {
       }
       
       // 解析下周发展性任务
-      if (report.nextWeekPlan.Developmental_tasks) {
-        report.nextWeekPlan.Developmental_tasks.forEach(devTask => {
+      if (report.nextWeekPlan.developmentalTasks) {
+        report.nextWeekPlan.developmentalTasks.forEach(devTask => {
           tasks.value.push({
             tempId: `dev_next_${devTask.project_id}_${devTask.phase_id}`,
             taskName: devTask.projectDetails?.name || '发展性任务',
@@ -556,12 +556,12 @@ function generateStructuredContent() {
   const developmentTasks = thisWeekTasks.filter(task => task.taskType === 'DEVELOPMENT')
   
   const content = {
-    Routine_tasks: routineTasks.map(task => ({
+    routineTasks: routineTasks.map(task => ({
       task_id: String(task.taskTemplateId || ''),
       actual_result: task.actualResults || '',
       AnalysisofResultDifferences: task.resultDifferenceAnalysis || ''
     })),
-    Developmental_tasks: developmentTasks.map(task => ({
+    developmentalTasks: developmentTasks.map(task => ({
       project_id: String(task.simpleProjectId || ''),
       phase_id: String(task.projectPhaseId || ''),
       actual_result: task.actualResults || '',
@@ -575,10 +575,10 @@ function generateStructuredContent() {
   const nextWeekDevelopmentTasks = nextWeekTasks.filter(task => task.taskType === 'DEVELOPMENT')
   
   const nextWeekPlan = {
-    Routine_tasks: nextWeekRoutineTasks.map(task => ({
+    routineTasks: nextWeekRoutineTasks.map(task => ({
       task_id: String(task.taskTemplateId || '')
     })),
-    Developmental_tasks: nextWeekDevelopmentTasks.map(task => ({
+    developmentalTasks: nextWeekDevelopmentTasks.map(task => ({
       project_id: String(task.simpleProjectId || ''),
       phase_id: String(task.projectPhaseId || '')
     }))

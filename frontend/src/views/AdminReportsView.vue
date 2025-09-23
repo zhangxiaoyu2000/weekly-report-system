@@ -57,7 +57,7 @@
                 <div>
                   <h2 class="text-xl font-bold text-white">{{ report.title }}</h2>
                   <p class="text-blue-100 text-sm">
-                    {{ report.reportWeek }} · 提交人: {{ report.author?.fullName || report.authorName || '未知' }}
+                    {{ report.reportWeek }} · 提交人: {{ report.author?.fullName || report.author?.username || report.authorName || '未知' }}
                   </p>
                 </div>
               </div>
@@ -105,11 +105,11 @@
                       <div class="flex items-center justify-between">
                         <span class="font-medium text-gray-900">{{ task.taskDetails?.taskName || task.taskName || '任务名称' }}</span>
                       </div>
-                      <div v-if="task.actual_result" class="mt-2 text-sm text-gray-600">
-                        <strong>实际结果：</strong>{{ task.actual_result }}
+                      <div v-if="task.actual_result || task.actualResult" class="mt-2 text-sm text-gray-600">
+                        <strong>实际结果：</strong>{{ task.actual_result || task.actualResult || '' }}
                       </div>
-                      <div v-if="task.analysisofResultDifferences || task.AnalysisofResultDifferences" class="mt-1 text-sm text-gray-500">
-                        <strong>差异分析：</strong>{{ task.analysisofResultDifferences || task.AnalysisofResultDifferences }}
+                      <div v-if="task.analysisofResultDifferences || task.AnalysisofResultDifferences || task.resultDifferenceAnalysis" class="mt-1 text-sm text-gray-500">
+                        <strong>差异分析：</strong>{{ task.analysisofResultDifferences || task.AnalysisofResultDifferences || task.resultDifferenceAnalysis || '' }}
                       </div>
                     </div>
                   </div>
@@ -132,13 +132,13 @@
                       class="bg-white rounded p-3 border-l-4 border-purple-500 cursor-pointer hover:bg-gray-50 transition-colors"
                     >
                       <div class="flex items-center justify-between">
-                        <span class="font-medium text-gray-900">{{ task.projectDetails?.name || task.projectName || '项目名称' }}</span>
+                        <span class="font-medium text-gray-900">{{ task.projectDetails?.projectName || task.projectDetails?.name || task.projectName || '项目名称' }}</span>
                       </div>
                       <div v-if="task.phaseDetails?.phaseName" class="text-sm text-gray-600">
                         <strong>阶段：</strong>{{ task.phaseDetails.phaseName }}
                       </div>
-                      <div v-if="task.actual_result" class="mt-2 text-sm text-gray-600">
-                        <strong>实际结果：</strong>{{ task.actual_result }}
+                      <div v-if="task.actual_result || task.actualResult" class="mt-2 text-sm text-gray-600">
+                        <strong>实际结果：</strong>{{ task.actual_result || task.actualResult || '' }}
                       </div>
                     </div>
                   </div>
@@ -193,7 +193,7 @@
                       @click="openTaskModal(task)"
                       class="bg-white rounded p-3 border-l-4 border-purple-500 cursor-pointer hover:bg-gray-50 transition-colors"
                     >
-                      <span class="font-medium text-gray-900">{{ task.projectDetails?.name || task.projectName || '项目名称' }}</span>
+                      <span class="font-medium text-gray-900">{{ task.projectDetails?.projectName || task.projectDetails?.name || task.projectName || '项目名称' }}</span>
                       <div v-if="task.phaseDetails?.phaseName" class="text-sm text-gray-600">
                         <strong>阶段：</strong>{{ task.phaseDetails.phaseName }}
                       </div>
@@ -297,7 +297,7 @@
         <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
           <div>
             <h3 class="text-lg font-medium text-gray-900">任务详情</h3>
-            <p class="text-sm text-gray-500">{{ selectedTask?.taskDetails?.taskName || selectedTask?.taskName || selectedTask?.projectDetails?.name || selectedTask?.projectName || '任务名称' }}</p>
+            <p class="text-sm text-gray-500">{{ selectedTask?.taskDetails?.taskName || selectedTask?.taskName || selectedTask?.projectDetails?.projectName || selectedTask?.projectDetails?.name || selectedTask?.projectName || '任务名称' }}</p>
           </div>
           <button @click="closeTaskModal" class="text-gray-400 hover:text-gray-600">
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -341,7 +341,7 @@
             <div v-if="isThisWeekTask(selectedTask)">
               <label class="block text-sm font-medium text-gray-700">实际结果 *</label>
               <div class="mt-1 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                <p class="text-sm text-gray-700">{{ selectedTask.actual_result || selectedTask.actualResults || '暂未填写实际结果' }}</p>
+                <p class="text-sm text-gray-700">{{ selectedTask.actual_result || selectedTask.actualResult || selectedTask.actualResults || '暂未填写实际结果' }}</p>
               </div>
             </div>
 
@@ -358,7 +358,7 @@
           <div v-else-if="isDevelopmentTask(selectedTask)" class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700">任务名称</label>
-              <p class="mt-1 text-sm text-gray-900">{{ selectedTask.projectDetails?.name || selectedTask.projectName || '未指定' }}</p>
+              <p class="mt-1 text-sm text-gray-900">{{ selectedTask.projectDetails?.projectName || selectedTask.projectDetails?.name || selectedTask.projectName || '未指定' }}</p>
             </div>
 
             <!-- 🚀 项目信息 -->
@@ -367,15 +367,15 @@
               <div class="space-y-2 text-sm">
                 <div>
                   <span class="font-medium text-gray-700">项目名称：</span>
-                  <span class="text-gray-600">{{ selectedTask.projectDetails?.name || selectedTask.projectName || '未关联项目' }}</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.projectName || selectedTask.projectDetails?.name || selectedTask.projectName || '未关联项目' }}</span>
                 </div>
                 <div>
                   <span class="font-medium text-gray-700">项目内容：</span>
-                  <span class="text-gray-600">{{ selectedTask.projectDetails?.content || selectedTask.projectContent || '未填写项目内容' }}</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.projectContent || selectedTask.projectDetails?.content || selectedTask.projectContent || '未填写项目内容' }}</span>
                 </div>
                 <div>
                   <span class="font-medium text-gray-700">项目成员：</span>
-                  <span class="text-gray-600">{{ selectedTask.projectDetails?.members || selectedTask.projectMembers || '未指定项目成员' }}</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.projectMembers || selectedTask.projectDetails?.members || selectedTask.projectMembers || '未指定项目成员' }}</span>
                 </div>
                 <div>
                   <span class="font-medium text-gray-700">预期结果：</span>
@@ -423,7 +423,7 @@
             <div v-if="isThisWeekTask(selectedTask)">
               <label class="block text-sm font-medium text-gray-700">实际结果 *</label>
               <div class="mt-1 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                <p class="text-sm text-gray-700">{{ selectedTask.actual_result || selectedTask.actualResults || '暂未填写实际结果' }}</p>
+                <p class="text-sm text-gray-700">{{ selectedTask.actual_result || selectedTask.actualResult || selectedTask.actualResults || '暂未填写实际结果' }}</p>
               </div>
             </div>
 
@@ -458,7 +458,7 @@
         <div class="modal-body">
           <div class="report-info">
             <p><strong>周报标题:</strong> {{ selectedReport?.title }}</p>
-            <p><strong>提交人:</strong> {{ selectedReport?.author?.fullName || selectedReport?.authorName || '未知' }}</p>
+            <p><strong>提交人:</strong> {{ selectedReport?.author?.fullName || selectedReport?.author?.username || selectedReport?.authorName || '未知' }}</p>
           </div>
           
           <div class="reject-reason">
@@ -664,16 +664,20 @@ const getTasksByType = (report: any, section: string, taskType: string) => {
   
   if (section === 'THIS_WEEK_REPORT') {
     if (taskType === 'ROUTINE') {
-      tasks = report.content.routine_tasks || report.content.Routine_tasks || []
+      // 修复字段名称不匹配问题：支持后端返回的驼峰格式和前端期望的下划线格式
+      tasks = report.content.routineTasks || report.content.routine_tasks || report.content.Routine_tasks || []
     } else if (taskType === 'DEVELOPMENT') {
-      tasks = report.content.developmental_tasks || report.content.Developmental_tasks || []
+      // 修复字段名称不匹配问题：支持后端返回的驼峰格式和前端期望的下划线格式
+      tasks = report.content.developmentalTasks || report.content.developmental_tasks || report.content.Developmental_tasks || []
     }
   } else if (section === 'NEXT_WEEK_PLAN') {
     if (report.nextWeekPlan) {
       if (taskType === 'ROUTINE') {
-        tasks = report.nextWeekPlan.routine_tasks || report.nextWeekPlan.Routine_tasks || []
+        // 修复字段名称不匹配问题：支持后端返回的驼峰格式和前端期望的下划线格式
+        tasks = report.nextWeekPlan.routineTasks || report.nextWeekPlan.routine_tasks || report.nextWeekPlan.Routine_tasks || []
       } else if (taskType === 'DEVELOPMENT') {
-        tasks = report.nextWeekPlan.developmental_tasks || report.nextWeekPlan.Developmental_tasks || []
+        // 修复字段名称不匹配问题：支持后端返回的驼峰格式和前端期望的下划线格式
+        tasks = report.nextWeekPlan.developmentalTasks || report.nextWeekPlan.developmental_tasks || report.nextWeekPlan.Developmental_tasks || []
       }
     }
   }
@@ -778,7 +782,7 @@ const isDevelopmentTask = (task: any) => {
 
 const isThisWeekTask = (task: any) => {
   // 判断是否是本周汇报任务（有实际结果和差异分析）
-  return task.actual_result || task.actualResults || task.analysisofResultDifferences || task.AnalysisofResultDifferences
+  return task.actual_result || task.actualResult || task.actualResults || task.analysisofResultDifferences || task.AnalysisofResultDifferences || task.resultDifferenceAnalysis
 }
 
 const loadReports = async (status?: string) => {

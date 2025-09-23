@@ -1,0 +1,49 @@
+{
+  "testCases": [
+    {
+      "description": "Test project name validation - 1 character (should fail)",
+      "request": {
+        "name": "A",
+        "description": "Test project",
+        "phases": [
+          {
+            "phaseName": "Phase 1",
+            "expectedResults": "Expected result for phase 1"
+          }
+        ]
+      },
+      "expectedResult": "validation error - name too short"
+    },
+    {
+      "description": "Test project name validation - 2 characters (should pass)",
+      "request": {
+        "name": "AB",
+        "description": "Test project",
+        "phases": [
+          {
+            "phaseName": "Phase 1", 
+            "expectedResults": "Expected result for phase 1"
+          }
+        ]
+      },
+      "expectedResult": "success"
+    },
+    {
+      "description": "Test expected_results field handling",
+      "request": {
+        "name": "Test Project",
+        "description": "Test project description",
+        "phases": [
+          {
+            "phaseName": "Phase 1",
+            "description": "Phase description",
+            "assignedMembers": "Team A",
+            "schedule": "Q1 2024",
+            "expectedResults": "This is the expected results field that should be saved properly"
+          }
+        ]
+      },
+      "expectedResult": "success with expected_results properly saved"
+    }
+  ]
+}

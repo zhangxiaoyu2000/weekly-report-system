@@ -248,6 +248,29 @@ public class ProjectController extends BaseController {
             @Valid @RequestBody ProjectCreateRequest request) {
         
         try {
+            // 调试: 记录完整的请求内容
+            logger.info("=== 创建项目请求开始 ===");
+            logger.info("项目名称: {}", request.getName());
+            logger.info("项目描述: {}", request.getDescription());
+            logger.info("阶段数量: {}", request.getPhases() != null ? request.getPhases().size() : 0);
+            
+            if (request.getPhases() != null) {
+                for (int i = 0; i < request.getPhases().size(); i++) {
+                    var phase = request.getPhases().get(i);
+                    logger.info("阶段 {}: 名称=[{}], expectedResults=[{}], 字符长度=[{}]", 
+                               i + 1, phase.getPhaseName(), phase.getExpectedResults(), 
+                               phase.getExpectedResults() != null ? phase.getExpectedResults().length() : 0);
+                    
+                    // 验证JSON反序列化
+                    if (phase.getExpectedResults() != null && !phase.getExpectedResults().isEmpty()) {
+                        logger.info("阶段 {} expectedResults 内容详细检查:", i + 1);
+                        logger.info("- 原始内容: [{}]", phase.getExpectedResults());
+                        logger.info("- 内容为空: {}", phase.getExpectedResults().trim().isEmpty());
+                        logger.info("- Unicode字符数: {}", phase.getExpectedResults().codePointCount(0, phase.getExpectedResults().length()));
+                    }
+                }
+            }
+            
             Long currentUserId = getCurrentUser().getId();
             
             // 检查项目名称是否已存在
@@ -287,20 +310,46 @@ public class ProjectController extends BaseController {
             // 创建项目阶段
             List<ProjectPhaseResponse> phaseResponses = null;
             if (request.getPhases() != null && !request.getPhases().isEmpty()) {
+                logger.info("开始创建项目阶段，共 {} 个阶段", request.getPhases().size());
                 List<ProjectPhase> savedPhases = request.getPhases().stream()
                     .map(phaseRequest -> {
+                        logger.info("处理阶段: {}, expectedResults: {}", 
+                                   phaseRequest.getPhaseName(), phaseRequest.getExpectedResults());
                         ProjectPhase phase = new ProjectPhase();
                         phase.setProjectId(savedProject.getId());
                         phase.setPhaseName(phaseRequest.getPhaseName());
                         phase.setDescription(phaseRequest.getDescription());
                         phase.setAssignedMembers(phaseRequest.getAssignedMembers());
                         phase.setSchedule(phaseRequest.getSchedule());
-                        phase.setExpectedResults(phaseRequest.getExpectedResults());
+                        
+                        // 处理 expectedResults 为 null 的情况，设置默认值
+                        String expectedResults = phaseRequest.getExpectedResults();
+                        if (expectedResults == null || expectedResults.trim().isEmpty()) {
+                            expectedResults = ""; // 设置为空字符串而不是null
+                        }
+                        phase.setExpectedResults(expectedResults);
+                        logger.info("阶段对象创建完成，expectedResults设置为: {}", phase.getExpectedResults());
                         return phase;
                     })
                     .collect(Collectors.toList());
                 
                 projectPhaseRepository.saveAll(savedPhases);
+                logger.info("阶段保存到数据库完成");
+                
+                // 验证保存后的数据
+                savedPhases.forEach(phase -> {
+                    logger.info("已保存阶段 ID: {}, expectedResults: [{}], 字符长度: {}", 
+                               phase.getId(), phase.getExpectedResults(),
+                               phase.getExpectedResults() != null ? phase.getExpectedResults().length() : 0);
+                    
+                    // 立即从数据库重新查询验证
+                    ProjectPhase fromDb = projectPhaseRepository.findById(phase.getId()).orElse(null);
+                    if (fromDb != null) {
+                        logger.info("数据库中的实际值 ID: {}, expectedResults: [{}]", 
+                                   fromDb.getId(), fromDb.getExpectedResults());
+                    }
+                });
+                
                 phaseResponses = savedPhases.stream()
                     .map(ProjectPhaseResponse::new)
                     .collect(Collectors.toList());
@@ -829,12 +878,13 @@ public class ProjectController extends BaseController {
             logger.info("Admin approval process - Project: {}, Current User: {}, User ID: {}, Username: {}", 
                        id, currentUser, currentUserId, currentUser.getUsername());
             
-            // 检查项目状态：应该是AI分析通过状态、提交状态或管理员审核状态
+            // 检查项目状态：应该是AI分析通过状态、提交状态、管理员审核状态或管理员拒绝状态（允许重新审核）
             if (project.getApprovalStatus() != Project.ApprovalStatus.AI_APPROVED && 
                 project.getApprovalStatus() != Project.ApprovalStatus.AI_ANALYZING &&
-                project.getApprovalStatus() != Project.ApprovalStatus.ADMIN_REVIEWING) {
+                project.getApprovalStatus() != Project.ApprovalStatus.ADMIN_REVIEWING &&
+                project.getApprovalStatus() != Project.ApprovalStatus.ADMIN_REJECTED) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(ApiResponse.error("Project must be in AI_APPROVED, AI_ANALYZING, or ADMIN_REVIEWING status for admin review"));
+                    .body(ApiResponse.error("Project must be in AI_APPROVED, AI_ANALYZING, ADMIN_REVIEWING, or ADMIN_REJECTED status for admin review"));
             }
             
             logger.info("Before adminApprove - Project ID: {}, adminReviewerId: {}", 
@@ -986,9 +1036,10 @@ public class ProjectController extends BaseController {
             
             if (isAdmin && 
                 (currentStatus == Project.ApprovalStatus.AI_APPROVED ||
-                 currentStatus == Project.ApprovalStatus.ADMIN_REVIEWING)) {
+                 currentStatus == Project.ApprovalStatus.ADMIN_REVIEWING ||
+                 currentStatus == Project.ApprovalStatus.ADMIN_REJECTED)) {
                 canReject = true;
-                logger.info("ADMIN can reject: status {} matches AI_APPROVED or ADMIN_REVIEWING", currentStatus);
+                logger.info("ADMIN can reject: status {} matches AI_APPROVED, ADMIN_REVIEWING, or ADMIN_REJECTED", currentStatus);
             } else if (isSuperAdmin && 
                        (currentStatus == Project.ApprovalStatus.ADMIN_APPROVED ||
                         currentStatus == Project.ApprovalStatus.ADMIN_REJECTED ||

@@ -130,7 +130,7 @@
                   
                   <!-- 管理员拒绝状态 - 修改按钮 -->
                   <button
-                    v-if="report.status === 'ADMIN_REJECTED'"
+                    v-if="report.status === 'ADMIN_REJECTED' || report.approvalStatus === 'ADMIN_REJECTED'"
                     @click="editReport(report.id)"
                     class="text-white hover:text-blue-200 transition-colors"
                     title="修改周报"
@@ -371,6 +371,17 @@
                 可发展性清单
               </h4>
               <p class="text-gray-700">{{ report.developmentOpportunities }}</p>
+            </div>
+
+            <!-- 拒绝原因 -->
+            <div v-if="(report.status === 'ADMIN_REJECTED' || report.approvalStatus === 'ADMIN_REJECTED') && report.rejectionReason" class="mt-6 bg-red-50 rounded-lg p-4 border border-red-200">
+              <h4 class="font-medium text-red-800 mb-2 flex items-center">
+                <svg class="h-5 w-5 text-red-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                管理员拒绝原因
+              </h4>
+              <p class="text-red-700 leading-relaxed">{{ report.rejectionReason }}</p>
             </div>
 
             <!-- 其他备注 -->

@@ -10,7 +10,7 @@ import java.util.List;
 public class ProjectCreateRequest {
 
     @NotBlank(message = "Project name cannot be blank")
-    @Size(max = 200, message = "Project name must not exceed 200 characters")
+    @Size(min = 2, max = 200, message = "Project name must be between 2 and 200 characters")
     private String name;                            // #项目名称
 
     @Size(max = 5000, message = "Description must not exceed 5000 characters")

@@ -84,6 +84,8 @@ export interface WeeklyReport {
   aiConfidence?: number
   aiAnalysisStatus?: string
   aiAnalysisCompletedAt?: string
+  // 审批相关字段
+  rejectionReason?: string
 }
 
 // HTTP请求工具函数
@@ -796,6 +798,7 @@ export const reportService = {
             title: report.title,
             reportWeek: report.reportWeek,
             status: report.approvalStatus,
+            approvalStatus: report.approvalStatus,
             createdAt: report.createdAt,
             updatedAt: report.updatedAt,
             additionalNotes: report.additionalNotes,
@@ -806,7 +809,9 @@ export const reportService = {
             aiAnalysisResult: report.aiAnalysisResult,
             aiConfidence: report.aiConfidence,
             aiAnalysisStatus: report.aiAnalysisStatus,
-            aiAnalysisCompletedAt: report.aiAnalysisCompletedAt
+            aiAnalysisCompletedAt: report.aiAnalysisCompletedAt,
+            // 审批相关字段
+            rejectionReason: report.rejectionReason
           }
         })
         

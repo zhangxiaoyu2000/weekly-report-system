@@ -49,7 +49,7 @@
                 <!-- 日常性任务 -->
                 <div v-if="report.content.routineTasks && report.content.routineTasks.length > 0" class="task-section">
                   <h4>日常性任务 ({{ report.content.routineTasks.length }}项)</h4>
-                  <div v-for="task in report.content.routineTasks" :key="task.task_id" class="task-item">
+                  <div v-for="task in report.content.routineTasks" :key="task.task_id" class="task-item clickable" @click="openTaskModal(task)">
                     <p><strong>任务:</strong> {{ task.taskDetails?.taskName || '未知任务' }}</p>
                     <p v-if="task.actual_result"><strong>实际结果:</strong> {{ task.actual_result }}</p>
                     <p v-if="task.AnalysisofResultDifferences"><strong>差异分析:</strong> {{ task.AnalysisofResultDifferences }}</p>
@@ -59,7 +59,7 @@
                 <!-- 发展性任务 -->
                 <div v-if="report.content.developmentalTasks && report.content.developmentalTasks.length > 0" class="task-section">
                   <h4>发展性任务 ({{ report.content.developmentalTasks.length }}项)</h4>
-                  <div v-for="task in report.content.developmentalTasks" :key="task.project_id" class="task-item">
+                  <div v-for="task in report.content.developmentalTasks" :key="task.project_id" class="task-item clickable" @click="openTaskModal(task)">
                     <p><strong>项目:</strong> {{ task.projectDetails?.projectName || '未知项目' }}</p>
                     <p v-if="task.phaseDetails?.phaseName"><strong>阶段:</strong> {{ task.phaseDetails.phaseName }}</p>
                     <p v-if="task.actual_result"><strong>实际结果:</strong> {{ task.actual_result }}</p>
@@ -75,7 +75,7 @@
                 <!-- 下周日常性任务 -->
                 <div v-if="report.nextWeekPlan.routineTasks && report.nextWeekPlan.routineTasks.length > 0" class="task-section">
                   <h4>下周日常性任务 ({{ report.nextWeekPlan.routineTasks.length }}项)</h4>
-                  <div v-for="task in report.nextWeekPlan.routineTasks" :key="task.task_id" class="task-item">
+                  <div v-for="task in report.nextWeekPlan.routineTasks" :key="task.task_id" class="task-item clickable" @click="openTaskModal(task)">
                     <p><strong>任务:</strong> {{ task.taskDetails?.taskName || '未知任务' }}</p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@
                 <!-- 下周发展性任务 -->
                 <div v-if="report.nextWeekPlan.developmentalTasks && report.nextWeekPlan.developmentalTasks.length > 0" class="task-section">
                   <h4>下周发展性任务 ({{ report.nextWeekPlan.developmentalTasks.length }}项)</h4>
-                  <div v-for="task in report.nextWeekPlan.developmentalTasks" :key="task.project_id" class="task-item">
+                  <div v-for="task in report.nextWeekPlan.developmentalTasks" :key="task.project_id" class="task-item clickable" @click="openTaskModal(task)">
                     <p><strong>项目:</strong> {{ task.projectDetails?.projectName || '未知项目' }}</p>
                     <p v-if="task.phaseDetails?.phaseName"><strong>阶段:</strong> {{ task.phaseDetails.phaseName }}</p>
                   </div>
@@ -139,6 +139,162 @@
         </div>
       </div>
     </div>
+
+    <!-- 任务详情模态框 -->
+    <div v-if="showTaskModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-y-auto">
+        <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+          <div>
+            <h3 class="text-lg font-medium text-gray-900">任务详情</h3>
+            <p class="text-sm text-gray-500">{{ selectedTask?.taskDetails?.taskName || selectedTask?.taskName || selectedTask?.projectDetails?.projectName || selectedTask?.projectDetails?.name || selectedTask?.projectName || '任务名称' }}</p>
+          </div>
+          <button @click="closeTaskModal" class="text-gray-400 hover:text-gray-600">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="px-6 py-4" v-if="selectedTask">
+          <!-- 日常性任务信息 -->
+          <div v-if="isRoutineTask(selectedTask)" class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">任务名称</label>
+              <p class="mt-1 text-sm text-gray-900">{{ selectedTask.taskDetails?.taskName || selectedTask.taskName || '未指定' }}</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">负责人</label>
+                <p class="mt-1 text-sm text-gray-900">{{ selectedTask.taskDetails?.personnelAssignment || selectedTask.personnelAssignment || '未指定' }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">时间线</label>
+                <p class="mt-1 text-sm text-gray-900">{{ selectedTask.taskDetails?.timeline || selectedTask.timeline || '未指定' }}</p>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">量化指标</label>
+              <p class="mt-1 text-sm text-gray-900">{{ selectedTask.taskDetails?.quantitativeMetrics || selectedTask.quantitativeMetrics || '未指定' }}</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">预期结果</label>
+              <div class="mt-1 p-3 bg-green-50 rounded-lg border border-green-200">
+                <p class="text-sm text-gray-700">{{ selectedTask.taskDetails?.expectedResults || selectedTask.expectedResults || '未填写预期结果' }}</p>
+              </div>
+            </div>
+
+            <!-- 实际结果 -->
+            <div v-if="isThisWeekTask(selectedTask)">
+              <label class="block text-sm font-medium text-gray-700">实际结果</label>
+              <div class="mt-1 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <p class="text-sm text-gray-700">{{ selectedTask.actual_result || selectedTask.actualResult || selectedTask.actualResults || '暂未填写实际结果' }}</p>
+              </div>
+            </div>
+
+            <!-- 结果差异分析 -->
+            <div v-if="isThisWeekTask(selectedTask)">
+              <label class="block text-sm font-medium text-gray-700">结果差异分析</label>
+              <div class="mt-1 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                <p class="text-sm text-gray-700">{{ selectedTask.analysisofResultDifferences || selectedTask.AnalysisofResultDifferences || selectedTask.resultDifferenceAnalysis || '暂未填写差异分析' }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 发展性任务信息 -->
+          <div v-else-if="isDevelopmentTask(selectedTask)" class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">项目名称</label>
+              <p class="mt-1 text-sm text-gray-900">{{ selectedTask.projectDetails?.projectName || selectedTask.projectDetails?.name || selectedTask.projectName || '未指定' }}</p>
+            </div>
+
+            <!-- 🚀 项目信息 -->
+            <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
+              <h4 class="text-sm font-medium text-purple-800 mb-3">🚀 项目信息</h4>
+              <div class="space-y-2 text-sm">
+                <div>
+                  <span class="font-medium text-gray-700">项目名称：</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.projectName || selectedTask.projectDetails?.name || selectedTask.projectName || '未关联项目' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">项目内容：</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.projectContent || selectedTask.projectDetails?.content || selectedTask.projectContent || '未填写项目内容' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">项目成员：</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.projectMembers || selectedTask.projectDetails?.members || selectedTask.projectMembers || '未指定项目成员' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">预期结果：</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.expectedResults || selectedTask.expectedResults || '未填写预期结果' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">时间线：</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.timeline || selectedTask.timeline || '未制定时间线' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">止损点：</span>
+                  <span class="text-gray-600">{{ selectedTask.projectDetails?.stopLoss || selectedTask.stopLoss || '未设置止损点' }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 🎯 阶段信息 -->
+            <div v-if="selectedTask.phaseDetails" class="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+              <h4 class="text-sm font-medium text-indigo-800 mb-3">🎯 阶段信息</h4>
+              <div class="space-y-2 text-sm">
+                <div>
+                  <span class="font-medium text-gray-700">阶段名称：</span>
+                  <span class="text-gray-600">{{ selectedTask.phaseDetails?.phaseName || '未关联阶段' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">阶段描述：</span>
+                  <span class="text-gray-600">{{ selectedTask.phaseDetails?.phaseDescription || '未填写阶段描述' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">负责成员：</span>
+                  <span class="text-gray-600">{{ selectedTask.phaseDetails?.assignedMembers || '未指定负责成员' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">时间安排：</span>
+                  <span class="text-gray-600">{{ selectedTask.phaseDetails?.timeline || '未制定时间安排' }}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-gray-700">预期结果：</span>
+                  <span class="text-gray-600">{{ selectedTask.phaseDetails?.estimatedResults || '未填写预期结果' }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 实际结果 -->
+            <div v-if="isThisWeekTask(selectedTask)">
+              <label class="block text-sm font-medium text-gray-700">实际结果</label>
+              <div class="mt-1 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <p class="text-sm text-gray-700">{{ selectedTask.actual_result || selectedTask.actualResult || selectedTask.actualResults || '暂未填写实际结果' }}</p>
+              </div>
+            </div>
+
+            <!-- 结果差异分析 -->
+            <div v-if="isThisWeekTask(selectedTask)">
+              <label class="block text-sm font-medium text-gray-700">结果差异分析</label>
+              <div class="mt-1 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                <p class="text-sm text-gray-700">{{ selectedTask.analysisofResultDifferences || selectedTask.AnalysisofResultDifferences || selectedTask.resultDifferenceAnalysis || '暂未填写差异分析' }}</p>
+              </div>
+            </div>
+
+            <!-- 预期结果（下周规划任务） -->
+            <div v-if="!isThisWeekTask(selectedTask) && selectedTask.expectedResults">
+              <label class="block text-sm font-medium text-gray-700">预期结果</label>
+              <div class="mt-1 p-3 bg-green-50 rounded-lg border border-green-200">
+                <p class="text-sm text-gray-700">{{ selectedTask.expectedResults }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -151,6 +307,10 @@ const authStore = useAuthStore()
 
 const activeTab = ref('all')
 const allReports = ref([])
+
+// 任务详情模态框相关状态
+const showTaskModal = ref(false)
+const selectedTask = ref(null)
 
 const tabs = computed(() => {
   const reports = allReports.value
@@ -291,6 +451,33 @@ const renderMarkdown = (content: string) => {
     console.error('Markdown解析失败:', error)
     return content
   }
+}
+
+// 任务模态框函数
+const openTaskModal = (task: any) => {
+  selectedTask.value = task
+  showTaskModal.value = true
+}
+
+const closeTaskModal = () => {
+  showTaskModal.value = false
+  selectedTask.value = null
+}
+
+// 判断任务类型和时间的辅助函数
+const isRoutineTask = (task: any) => {
+  // 检查是否为日常任务
+  return task.task_id || task.taskDetails || task.taskName
+}
+
+const isDevelopmentTask = (task: any) => {
+  // 检查是否为发展任务
+  return task.project_id || task.projectDetails || task.projectName
+}
+
+const isThisWeekTask = (task: any) => {
+  // 判断是否是本周汇报任务（有实际结果和差异分析）
+  return task.actual_result || task.actualResult || task.actualResults || task.analysisofResultDifferences || task.AnalysisofResultDifferences || task.resultDifferenceAnalysis
 }
 
 onMounted(() => {
@@ -619,6 +806,17 @@ onMounted(() => {
 .task-item p strong {
   color: #374151;
   font-weight: 600;
+}
+
+.task-item.clickable {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-item.clickable:hover {
+  background: #f8fafc;
+  border-left-color: #3b82f6;
+  transform: translateX(2px);
 }
 
 .ai-confidence {

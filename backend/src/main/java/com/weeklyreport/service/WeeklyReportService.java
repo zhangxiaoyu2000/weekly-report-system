@@ -421,7 +421,11 @@ public class WeeklyReportService {
         devTaskReportRepository.deleteByWeeklyReportId(reportId);
         
         // 4.2 清除旧的AI分析结果 - 修复重复数据问题
-        int deletedAIResults = aiAnalysisResultRepository.deleteByReportId(reportId);
+        // 首先清空周报的AI分析引用，避免外键约束错误
+        report.setAiAnalysisId(null);
+        weeklyReportRepository.save(report);
+        
+        int deletedAIResults = aiAnalysisResultRepository.deleteByReportId(reportId, AIAnalysisResult.EntityType.WEEKLY_REPORT);
         logger.info("🔧 清除了 {} 条旧的AI分析结果", deletedAIResults);
         
         // 5. 重新创建本周汇报内容（修复问题1：确保结果差异分析插入）
@@ -440,12 +444,13 @@ public class WeeklyReportService {
             logger.warn("🔧 ⚠️ 更新时没有下周规划内容 - 这会导致下周规划数据丢失");
         }
         
-        // 7. 重新触发AI分析（可选 - 根据业务需求决定是否需要）
-        // 注意：更新后是否需要重新分析取决于业务逻辑
-        // 如果需要重新分析，可以调用 aiAnalysisService.analyzeWeeklyReportAsync(savedReport);
+        // 7. 重新触发AI分析（周报内容更新后需要重新分析）
+        // 注意：更新后将状态设为AI_REJECTED以便重新编辑和提交
+        savedReport.setApprovalStatus(WeeklyReport.ApprovalStatus.AI_REJECTED);
+        WeeklyReport finalReport = weeklyReportRepository.save(savedReport);
         
-        logger.info("🔧 ✅ 周报更新成功，ID: {}，已清理旧的AI分析数据", reportId);
-        return savedReport;
+        logger.info("🔧 ✅ 周报更新成功，ID: {}，状态已重置为AI_REJECTED可重新提交", reportId);
+        return finalReport;
     }
 
     /**

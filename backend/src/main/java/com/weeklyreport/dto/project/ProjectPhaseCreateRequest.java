@@ -1,6 +1,7 @@
 package com.weeklyreport.dto.project;
 
 import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * DTO for creating new project phases - 严格按照ProjectPhase.java设计
@@ -24,6 +25,7 @@ public class ProjectPhaseCreateRequest {
     private String schedule;                        // #时间安排
 
     @Size(max = 5000, message = "Expected results must not exceed 5000 characters")
+    @JsonProperty(value = "expectedResults")  // 主要字段名
     private String expectedResults;                 // #预期结果
 
     // Constructors
@@ -81,6 +83,12 @@ public class ProjectPhaseCreateRequest {
 
     public void setExpectedResults(String expectedResults) {
         this.expectedResults = expectedResults;
+    }
+    
+    // 支持下划线格式的字段名（前端兼容性）
+    @JsonProperty("expected_results")
+    public void setExpected_results(String expected_results) {
+        this.expectedResults = expected_results;
     }
 
     @Override
