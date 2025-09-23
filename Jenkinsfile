@@ -71,7 +71,7 @@ pipeline {
                     sh '''
                         echo "Checking backend health..."
                         for i in {1..10}; do
-                            if curl -f http://23.95.193.155:8081/api/health; then
+                            if curl -f http://23.95.193.155:8082/api/health; then
                                 echo "Backend health check passed"
                                 break
                             fi
@@ -104,7 +104,7 @@ pipeline {
                     echo "=== Running Containers ==="
                     docker ps | grep weekly-report
                     echo "=== Port Status ==="
-                    netstat -tlnp | grep -E "(8081|3308)"
+                    netstat -tlnp | grep -E "(8082|3309)"
                 '''
             }
         }
@@ -115,8 +115,9 @@ pipeline {
             echo 'Deployment completed successfully!'
             sh '''
                 echo "=== Deployment Summary ==="
-                echo "Backend: http://localhost:8081"
-                echo "MySQL: localhost:3308"
+                echo "Frontend: http://23.95.193.155:3003"
+                echo "Backend: http://23.95.193.155:8082"
+                echo "MySQL: 23.95.193.155:3309"
                 echo "Services Status:"
                 docker-compose -f ${DOCKER_COMPOSE_FILE} ps
             '''
