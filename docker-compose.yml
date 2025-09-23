@@ -5,9 +5,9 @@ services:
     container_name: weekly-report-mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpass123
-      MYSQL_DATABASE: qr_auth_dev
-      MYSQL_USER: qrauth
-      MYSQL_PASSWORD: qrauth123
+      MYSQL_DATABASE: weekly_report_system
+      MYSQL_USER: weekly_report_user
+      MYSQL_PASSWORD: weekly_report_pass
     ports:
       - "3309:3306"
     volumes:
