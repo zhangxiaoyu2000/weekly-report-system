@@ -20,6 +20,9 @@ gitea:
     http://23.95.193.155:12300/zhangxiaoyu/WeeklyReport.git
     用户名：zhangxiaoyu  密码:2049251148abcZY
 
+mysql数据库脚本：
+    create-database-schema.sql    
+
 ## 重点
 不要回退版本，就用这个版本，不要想去拉取gitea中之前的版本
 
@@ -102,6 +105,20 @@ docker exec weekly-report-mysql mysql -u root -prootpass123 qr_auth_dev -e 'ALTE
 - 但容器内部8080端口未监听，Java进程无法找到
 - 外部访问API返回连接错误
 **当前状态**: 需要进一步调查网络绑定或应用配置问题
+
+### 问题8: 后端数据库连接配置问题 (当前问题)
+**现象**: 
+- 后端健康检查正常: `GET /api/health` 返回200 OK
+- 登录API失败: `POST /api/auth/login` 返回500内部服务器错误
+- 错误信息: "Login failed due to server error"
+**原因**: 后端可能连接到错误的MySQL实例，或者目标数据库中缺少必要的表结构和用户数据
+**解决方案**: 
+1. 确认后端连接的是3308端口的weekly-report-mysql-new容器
+2. 如果连接错误实例，需要修改docker-compose环境变量指向正确的MySQL
+3. 如果连接正确但数据缺失，需要：
+   - 在目标数据库中创建用户表和数据
+   - 执行数据库迁移脚本
+   - 修复用户表role字段类型
 
 ## 部署最佳实践和经验总结
 

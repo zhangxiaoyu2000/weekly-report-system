@@ -1,36 +1,39 @@
+version: '3.8'
+
 services:
   # MySQL Database
   mysql:
     image: mysql:8.0
-    container_name: weekly-report-mysql
+    container_name: weekly-report-mysql-prod
     environment:
       MYSQL_ROOT_PASSWORD: rootpass123
-      MYSQL_DATABASE: qr_auth_dev
+      MYSQL_DATABASE: weekly_report_system
       MYSQL_USER: qrauth
       MYSQL_PASSWORD: qrauth123
     ports:
       - "3309:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./backend/src/main/resources/db/migration:/docker-entrypoint-initdb.d
+      - mysql_data_prod:/var/lib/mysql
+      - ./create-database-schema.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - weekly-report-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpass123"]
+      interval: 30s
       timeout: 20s
       retries: 10
 
-  # Backend Spring Boot Application
+  # Backend Spring Boot Application  
   backend:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    container_name: weekly-report-backend
+    container_name: weekly-report-backend-prod
     environment:
       SPRING_PROFILES_ACTIVE: docker
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_NAME: qr_auth_dev
+      DB_NAME: weekly_report_system
       DB_USERNAME: root
       DB_PASSWORD: rootpass123
       JWT_SECRET: mySecretKeyForProduction
@@ -46,18 +49,17 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 90s
-    volumes:
-      - ./logs:/app/logs
 
-  # Frontend Vue.js Application
+  # Frontend Nginx Application
   frontend:
     build:
       context: .
       dockerfile: Dockerfile.frontend
-    container_name: weekly-report-frontend
+    container_name: weekly-report-frontend-prod
     environment:
       NODE_ENV: production
+      VITE_API_BASE_URL: http://23.95.193.155:8082/api  # 测试服务器后端API地址
+      BACKEND_URL: http://backend:8080  # nginx代理到后端容器
     ports:
       - "3003:80"
     depends_on:
@@ -65,18 +67,9 @@ services:
         condition: service_healthy
     networks:
       - weekly-report-network
-    volumes:
-      - ./nginx-temp.conf:/etc/nginx/conf.d/default.conf
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
 
 volumes:
-  mysql_data:
-    driver: local
+  mysql_data_prod:
 
 networks:
   weekly-report-network:
