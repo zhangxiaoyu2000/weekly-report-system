@@ -319,44 +319,18 @@ const tabs = computed(() => {
       key: 'all', 
       label: '全部周报', 
       count: reports.length 
-    },
-    { 
-      key: 'thisweek', 
-      label: '本周', 
-      count: reports.filter(r => isThisWeekReport(r.reportWeek)).length 
     }
   ]
 })
 
 const filteredReports = computed(() => {
   console.log('过滤周报数据:', { activeTab: activeTab.value, allReports: allReports.value })
-  switch (activeTab.value) {
-    case 'all':
-      return allReports.value
-    case 'thisweek':
-      return allReports.value.filter(r => isThisWeekReport(r.reportWeek))
-    default:
-      return allReports.value
-  }
+  return allReports.value
 })
-
-const isThisWeekReport = (reportWeek: string) => {
-  if (!reportWeek) return false
-  // 获取当前周的格式 (例如: "2024年第1周")
-  const now = new Date()
-  const currentYear = now.getFullYear()
-  const startOfYear = new Date(currentYear, 0, 1)
-  const days = Math.floor((now.getTime() - startOfYear.getTime()) / (24 * 60 * 60 * 1000))
-  const currentWeek = Math.ceil((days + startOfYear.getDay() + 1) / 7)
-  const currentWeekString = `${currentYear}年第${currentWeek}周`
-  
-  return reportWeek.includes(currentWeekString) || reportWeek.includes(`第${currentWeek}周`)
-}
 
 const getTabLabel = (tabKey: string) => {
   const tabMap = {
-    'all': '全部周报',
-    'thisweek': '本周'
+    'all': '全部周报'
   }
   return tabMap[tabKey] || ''
 }
