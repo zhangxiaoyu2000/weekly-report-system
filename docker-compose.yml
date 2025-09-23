@@ -65,6 +65,8 @@ services:
         condition: service_healthy
     networks:
       - weekly-report-network
+    volumes:
+      - ./nginx-temp.conf:/etc/nginx/conf.d/default.conf
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/health"]
       interval: 30s

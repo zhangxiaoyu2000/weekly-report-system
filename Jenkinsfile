@@ -71,7 +71,7 @@ pipeline {
                     sh '''
                         echo "Checking backend health..."
                         for i in {1..10}; do
-                            if curl -f http://localhost:8081/api/health; then
+                            if curl -f http://23.95.193.155:8081/api/health; then
                                 echo "Backend health check passed"
                                 break
                             fi
