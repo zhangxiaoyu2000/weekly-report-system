@@ -32,23 +32,23 @@ CREATE TABLE IF NOT EXISTS ai_analysis_results (
     ))
 );
 
--- Create indexes for ai_analysis_results (with IF NOT EXISTS)
-CREATE INDEX IF NOT EXISTS idx_analysis_report ON ai_analysis_results(report_id);
-CREATE INDEX IF NOT EXISTS idx_analysis_type ON ai_analysis_results(analysis_type);
-CREATE INDEX IF NOT EXISTS idx_analysis_status ON ai_analysis_results(status);
-CREATE INDEX IF NOT EXISTS idx_analysis_created ON ai_analysis_results(created_at);
-CREATE INDEX IF NOT EXISTS idx_analysis_completed ON ai_analysis_results(completed_at);
+-- Create indexes for ai_analysis_results
+CREATE INDEX idx_analysis_report ON ai_analysis_results(report_id);
+CREATE INDEX idx_analysis_type ON ai_analysis_results(analysis_type);
+CREATE INDEX idx_analysis_status ON ai_analysis_results(status);
+CREATE INDEX idx_analysis_created ON ai_analysis_results(created_at);
+CREATE INDEX idx_analysis_completed ON ai_analysis_results(completed_at);
 
 -- Composite indexes for common query patterns
-CREATE INDEX IF NOT EXISTS idx_analysis_report_type ON ai_analysis_results(report_id, analysis_type);
-CREATE INDEX IF NOT EXISTS idx_analysis_type_status ON ai_analysis_results(analysis_type, status);
-CREATE INDEX IF NOT EXISTS idx_analysis_status_created ON ai_analysis_results(status, created_at);
+CREATE INDEX idx_analysis_report_type ON ai_analysis_results(report_id, analysis_type);
+CREATE INDEX idx_analysis_type_status ON ai_analysis_results(analysis_type, status);
+CREATE INDEX idx_analysis_status_created ON ai_analysis_results(status, created_at);
 
 -- Index for confidence-based queries (MySQL doesn't support partial indexes)
-CREATE INDEX IF NOT EXISTS idx_analysis_confidence ON ai_analysis_results(confidence);
+CREATE INDEX idx_analysis_confidence ON ai_analysis_results(confidence);
 
 -- Index for performance monitoring (MySQL doesn't support partial indexes)
-CREATE INDEX IF NOT EXISTS idx_analysis_processing_time ON ai_analysis_results(processing_time_ms);
+CREATE INDEX idx_analysis_processing_time ON ai_analysis_results(processing_time_ms);
 
 -- Comments for documentation
 -- AI-generated analysis results for weekly reports
