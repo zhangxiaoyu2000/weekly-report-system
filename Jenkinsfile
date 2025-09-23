@@ -28,6 +28,37 @@ pipeline {
             }
         }
         
+        stage('Database Repair') {
+            steps {
+                script {
+                    // Start MySQL only to repair database
+                    sh '''
+                        echo "Starting MySQL for database repair..."
+                        docker-compose -f ${DOCKER_COMPOSE_FILE} up -d mysql
+                        
+                        echo "Waiting for MySQL to be ready..."
+                        for i in {1..30}; do
+                            if docker exec weekly-report-mysql mysqladmin ping -h localhost -u root -prootpass123 2>/dev/null; then
+                                echo "MySQL is ready"
+                                break
+                            fi
+                            echo "Waiting for MySQL... ($i/30)"
+                            sleep 5
+                        done
+                        
+                        echo "Cleaning up failed Flyway migrations..."
+                        docker exec weekly-report-mysql mysql -u root -prootpass123 -e "
+                            USE weekly_report_system;
+                            DELETE FROM flyway_schema_history WHERE version = '3' AND success = 0;
+                            SELECT 'Flyway V3 failed migration cleaned' as status;
+                        " || echo "Database repair completed or no failed migrations found"
+                        
+                        echo "Database repair completed"
+                    '''
+                }
+            }
+        }
+        
         stage('Build and Deploy') {
             steps {
                 script {
