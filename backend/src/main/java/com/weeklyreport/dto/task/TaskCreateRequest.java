@@ -18,8 +18,6 @@ public class TaskCreateRequest {
     @Size(max = 200, message = "Timeline must not exceed 200 characters")
     private String timeline;                        // #时间线
 
-    @Size(max = 300, message = "Quantitative metrics must not exceed 300 characters")
-    private String quantitativeMetrics;             // #量化指标
 
     @Size(max = 500, message = "Expected results must not exceed 500 characters")
     private String expectedResults;                 // #预期结果
@@ -64,13 +62,6 @@ public class TaskCreateRequest {
         this.timeline = timeline;
     }
 
-    public String getQuantitativeMetrics() {
-        return quantitativeMetrics;
-    }
-
-    public void setQuantitativeMetrics(String quantitativeMetrics) {
-        this.quantitativeMetrics = quantitativeMetrics;
-    }
 
     public String getExpectedResults() {
         return expectedResults;

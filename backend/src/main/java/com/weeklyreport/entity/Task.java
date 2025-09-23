@@ -42,9 +42,6 @@ public class Task {
     @Column(name = "timeline", length = 200)
     private String timeline;                        // #时间线
 
-    @Size(max = 300, message = "Quantitative metrics must not exceed 300 characters")
-    @Column(name = "quantitative_metrics", length = 300)
-    private String quantitativeMetrics;             // #量化指标
 
     @Size(max = 500, message = "Expected results must not exceed 500 characters")
     @Column(name = "expected_results", length = 500)
@@ -126,13 +123,6 @@ public class Task {
         this.timeline = timeline;
     }
 
-    public String getQuantitativeMetrics() {
-        return quantitativeMetrics;
-    }
-
-    public void setQuantitativeMetrics(String quantitativeMetrics) {
-        this.quantitativeMetrics = quantitativeMetrics;
-    }
 
     public String getExpectedResults() {
         return expectedResults;
@@ -194,13 +184,12 @@ public class Task {
     }
 
     public int getCompletionPercentage() {
-        int totalFields = 5; // taskName, personnelAssignment, timeline, quantitativeMetrics, expectedResults
+        int totalFields = 4; // taskName, personnelAssignment, timeline, expectedResults
         int filledFields = 0;
 
         if (taskName != null && !taskName.trim().isEmpty()) filledFields++;
         if (personnelAssignment != null && !personnelAssignment.trim().isEmpty()) filledFields++;
         if (timeline != null && !timeline.trim().isEmpty()) filledFields++;
-        if (quantitativeMetrics != null && !quantitativeMetrics.trim().isEmpty()) filledFields++;
         if (expectedResults != null && !expectedResults.trim().isEmpty()) filledFields++;
 
         return (filledFields * 100) / totalFields;

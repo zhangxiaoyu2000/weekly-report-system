@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Server Login Test</title>
+</head>
+<body>
+    <h1>Testing Test Server Login</h1>
+    <div id="result"></div>
+    
+    <script>
+    async function testLogin() {
+        const result = document.getElementById('result');
+        result.innerHTML = 'Testing login...';
+        
+        try {
+            // Test frontend access
+            result.innerHTML += '<br>✅ Frontend page loaded successfully';
+            
+            // Test login API call
+            const response = await fetch('http://23.95.193.155:3002/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    usernameOrEmail: 'admin',
+                    password: 'admin123'
+                })
+            });
+            
+            const data = await response.text();
+            
+            if (response.ok) {
+                result.innerHTML += '<br>✅ Login API call successful!';
+                result.innerHTML += '<br>Response: ' + data;
+            } else {
+                result.innerHTML += '<br>❌ Login API call failed';
+                result.innerHTML += '<br>Status: ' + response.status;
+                result.innerHTML += '<br>Response: ' + data.substring(0, 200) + '...';
+            }
+            
+        } catch (error) {
+            result.innerHTML += '<br>❌ Error: ' + error.message;
+        }
+    }
+    
+    // Auto-run test
+    window.onload = testLogin;
+    </script>
+</body>
+</html>

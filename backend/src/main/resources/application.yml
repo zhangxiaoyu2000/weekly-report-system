@@ -22,7 +22,7 @@ spring:
   
   # Database configuration with MySQL  
   datasource:
-    url: jdbc:mysql://localhost:3309/qr_auth_dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3309/weekly_report_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:rootpass123}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -307,7 +307,7 @@ spring:
     activate:
       on-profile: test
   datasource:
-    url: jdbc:mysql://localhost:3309/qr_auth_dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3309/weekly_report_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:rootpass123}
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地前端测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>本地周报系统测试</h1>
+    
+    <h2>前端测试</h2>
+    <button onclick="testFrontend()">测试前端连接</button>
+    <div id="frontend-result"></div>
+    
+    <h2>数据库测试</h2>
+    <button onclick="testDatabase()">测试数据库连接</button>
+    <div id="database-result"></div>
+    
+    <h2>API测试（需要后端启动）</h2>
+    <button onclick="testAPI()">测试API连接</button>
+    <div id="api-result"></div>
+    
+    <script>
+        function testFrontend() {
+            const result = document.getElementById('frontend-result');
+            
+            // 测试前端是否正常加载
+            fetch('http://localhost:3003/')
+                .then(response => {
+                    if (response.ok) {
+                        result.innerHTML = '<div class="test-result success">✅ 前端服务正常 - 端口3003</div>';
+                    } else {
+                        result.innerHTML = '<div class="test-result error">❌ 前端响应异常</div>';
+                    }
+                })
+                .catch(error => {
+                    result.innerHTML = '<div class="test-result error">❌ 前端连接失败: ' + error.message + '</div>';
+                });
+        }
+        
+        function testDatabase() {
+            const result = document.getElementById('database-result');
+            
+            // 通过docker命令测试数据库
+            result.innerHTML = '<div class="test-result">🔄 检查数据库连接... (请查看控制台输出)</div>';
+            
+            // 这里只能显示测试说明，实际测试需要通过docker命令
+            setTimeout(() => {
+                result.innerHTML = `
+                    <div class="test-result">
+                        📝 数据库测试命令：<br>
+                        <code>docker exec weekly-report-mysql-local mysql -u root -prootpass123 weekly_report_system -e "SELECT COUNT(*) as user_count FROM users;"</code><br>
+                        预期结果：显示用户数量
+                    </div>
+                `;
+            }, 1000);
+        }
+        
+        function testAPI() {
+            const result = document.getElementById('api-result');
+            
+            // 测试API健康检查
+            fetch('http://localhost:8082/api/health')
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('API响应状态: ' + response.status);
+                    }
+                })
+                .then(data => {
+                    result.innerHTML = '<div class="test-result success">✅ API服务正常 - 端口8082<br>响应: ' + data + '</div>';
+                })
+                .catch(error => {
+                    result.innerHTML = '<div class="test-result error">❌ API连接失败: ' + error.message + '<br>请确保后端服务已启动</div>';
+                });
+        }
+        
+        // 页面加载时自动测试前端
+        window.onload = function() {
+            testFrontend();
+        };
+    </script>
+</body>
+</html>

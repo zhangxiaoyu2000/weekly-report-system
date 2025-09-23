@@ -48,25 +48,14 @@
           ></textarea>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label>量化指标 *</label>
-            <textarea 
-              v-model="form.quantitativeMetrics" 
-              required
-              placeholder="如何衡量任务完成质量和效果"
-              rows="3"
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label>预期结果 *</label>
-            <textarea 
-              v-model="form.expectedResults" 
-              required
-              placeholder="预期达到的目标和成果"
-              rows="3"
-            ></textarea>
-          </div>
+        <div class="form-group">
+          <label>预期结果 *</label>
+          <textarea 
+            v-model="form.expectedResults" 
+            required
+            placeholder="预期达到的目标和成果"
+            rows="3"
+          ></textarea>
         </div>
 
         <div class="form-actions">
@@ -139,9 +128,6 @@
                 <strong>时间线：</strong>{{ truncateText(task.timeline, 50) }}
               </div>
               <div class="info-item">
-                <strong>量化指标：</strong>{{ truncateText(task.quantitativeMetrics, 80) }}
-              </div>
-              <div class="info-item">
                 <strong>预期结果：</strong>{{ truncateText(task.expectedResults, 80) }}
               </div>
             </div>
@@ -169,7 +155,6 @@ interface Task {
   taskType: 'ROUTINE' | 'DEVELOPMENT'
   personnelAssignment?: string
   timeline?: string
-  quantitativeMetrics?: string
   expectedResults?: string
   actualResults?: string
   createdBy?: number
@@ -195,7 +180,6 @@ const form = reactive({
   taskType: 'ROUTINE' as const,
   personnelAssignment: '',
   timeline: '',
-  quantitativeMetrics: '',
   expectedResults: '',
 })
 
@@ -260,7 +244,6 @@ const resetForm = () => {
     taskType: 'ROUTINE' as const,
     personnelAssignment: '',
     timeline: '',
-    quantitativeMetrics: '',
     expectedResults: '',
   })
 }
@@ -280,7 +263,6 @@ const editTask = (task: Task) => {
     taskType: task.taskType,
     personnelAssignment: task.personnelAssignment || '',
     timeline: task.timeline || '',
-    quantitativeMetrics: task.quantitativeMetrics || '',
     expectedResults: task.expectedResults || '',
   })
   showCreateForm.value = true
@@ -295,7 +277,6 @@ const saveTask = async () => {
       taskName: form.taskName,
       personnelAssignment: form.personnelAssignment,
       timeline: form.timeline,
-      quantitativeMetrics: form.quantitativeMetrics,
       expectedResults: form.expectedResults,
       taskType: form.taskType
     }

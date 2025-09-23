@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Proxy Test</title>
+</head>
+<body>
+    <h1>API代理测试页面</h1>
+    <button onclick="testAPI()">测试API连接</button>
+    <div id="result"></div>
+    
+    <script>
+    async function testAPI() {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '测试中...';
+        
+        try {
+            // 测试健康检查
+            const healthResponse = await fetch('/api/health');
+            const healthData = await healthResponse.json();
+            
+            resultDiv.innerHTML = `
+                <h3>✅ API代理测试成功!</h3>
+                <p><strong>状态码:</strong> ${healthResponse.status}</p>
+                <p><strong>响应数据:</strong></p>
+                <pre>${JSON.stringify(healthData, null, 2)}</pre>
+            `;
+        } catch (error) {
+            resultDiv.innerHTML = `
+                <h3>❌ API代理测试失败</h3>
+                <p><strong>错误:</strong> ${error.message}</p>
+            `;
+        }
+    }
+    </script>
+</body>
+</html>

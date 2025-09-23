@@ -124,7 +124,6 @@ public class TaskController extends BaseController {
             task.setTaskName(request.getTaskName());
             task.setPersonnelAssignment(request.getPersonnelAssignment());
             task.setTimeline(request.getTimeline());
-            task.setQuantitativeMetrics(request.getQuantitativeMetrics());
             task.setExpectedResults(request.getExpectedResults());
             // TaskType字段已删除，不再设置
             task.setCreatedBy(currentUser.getId()); // 自动设置为当前用户
@@ -206,7 +205,6 @@ public class TaskController extends BaseController {
             task.setTaskName(request.getTaskName());
             task.setPersonnelAssignment(request.getPersonnelAssignment());
             task.setTimeline(request.getTimeline());
-            task.setQuantitativeMetrics(request.getQuantitativeMetrics());
             task.setExpectedResults(request.getExpectedResults());
             // TaskType字段已删除，不再设置
             

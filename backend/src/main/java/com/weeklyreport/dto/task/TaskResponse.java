@@ -12,7 +12,6 @@ public class TaskResponse {
     private String taskName;                        // #任务名称
     private String personnelAssignment;             // #人员分配
     private String timeline;                        // #时间线
-    private String quantitativeMetrics;             // #量化指标
     private String expectedResults;                 // #预期结果
     private String actualResults;                   // #实际结果
     private String resultDifferenceAnalysis;        // #结果差异分析
@@ -37,7 +36,6 @@ public class TaskResponse {
         this.taskName = task.getTaskName();
         this.personnelAssignment = task.getPersonnelAssignment();
         this.timeline = task.getTimeline();
-        this.quantitativeMetrics = task.getQuantitativeMetrics();
         this.expectedResults = task.getExpectedResults();
         this.actualResults = null; // 已移至DevTaskReport表
         this.resultDifferenceAnalysis = null; // 已移至DevTaskReport表
@@ -84,13 +82,6 @@ public class TaskResponse {
         this.timeline = timeline;
     }
 
-    public String getQuantitativeMetrics() {
-        return quantitativeMetrics;
-    }
-
-    public void setQuantitativeMetrics(String quantitativeMetrics) {
-        this.quantitativeMetrics = quantitativeMetrics;
-    }
 
     public String getExpectedResults() {
         return expectedResults;

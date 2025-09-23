@@ -188,6 +188,7 @@ com/weeklyreport/service/ai/deepseek/dto/DeepSeekRequest$Message.class
 com/weeklyreport/util/SimpleCommentsTableFix.class
 com/weeklyreport/controller/ProjectController.class
 com/weeklyreport/dto/weeklyreport/WeeklyReportCreateRequest$DevelopmentalTaskDTO.class
+com/weeklyreport/entity/WeeklyReport$1.class
 com/weeklyreport/service/ai/mock/MockAIService.class
 com/weeklyreport/dto/ai/AIAnalysisRequest.class
 com/weeklyreport/repository/DevTaskReportRepository.class
@@ -237,6 +238,7 @@ com/weeklyreport/dto/weeklyreport/WeeklyReportUpdateRequest$NextWeekRoutineTaskD
 com/weeklyreport/entity/WeeklyReport.class
 com/weeklyreport/entity/Project$ProjectPriority.class
 com/weeklyreport/dto/project/ProjectMemberResponse.class
+com/weeklyreport/entity/Project$1.class
 com/weeklyreport/entity/Comment$CommentType.class
 com/weeklyreport/service/ai/dto/EnhancedAIAnalysisRequest.class
 com/weeklyreport/service/ai/DataSanitizer.class

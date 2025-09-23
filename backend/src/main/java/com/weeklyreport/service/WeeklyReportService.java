@@ -802,7 +802,6 @@ public class WeeklyReportService {
         taskDetails.setTaskName(task.getTaskName());
         taskDetails.setPersonnelAssignment(task.getPersonnelAssignment());
         taskDetails.setTimeline(task.getTimeline());
-        taskDetails.setQuantitativeMetrics(task.getQuantitativeMetrics());
         taskDetails.setExpectedResults(task.getExpectedResults());
         dto.setTaskDetails(taskDetails);
         
@@ -858,7 +857,6 @@ public class WeeklyReportService {
         taskDetails.setTaskName(task.getTaskName());
         taskDetails.setPersonnelAssignment(task.getPersonnelAssignment());
         taskDetails.setTimeline(task.getTimeline());
-        taskDetails.setQuantitativeMetrics(task.getQuantitativeMetrics());
         taskDetails.setExpectedResults(task.getExpectedResults());
         dto.setTaskDetails(taskDetails);
         
@@ -1080,7 +1078,6 @@ public class WeeklyReportService {
         dto.setTaskName(task.getTaskName());
         dto.setPersonnelAssignment(task.getPersonnelAssignment());
         dto.setTimeline(task.getTimeline());
-        dto.setQuantitativeMetrics(task.getQuantitativeMetrics());
         dto.setExpectedResults(task.getExpectedResults());
         
         // 重要：从TaskReport关联表获取执行结果，而不是Task表

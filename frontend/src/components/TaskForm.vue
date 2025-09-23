@@ -39,7 +39,7 @@
         </option>
       </select>
       <small v-if="selectedRoutineTask" class="text-gray-600 block mt-1">
-        {{ selectedRoutineTask.quantitativeMetrics ? `指标: ${selectedRoutineTask.quantitativeMetrics}` : '日常性任务已选择，任务信息已自动填入' }}
+        日常性任务已选择，任务信息已自动填入
       </small>
     </div>
 
@@ -110,10 +110,6 @@
             <div v-if="selectedRoutineTask.timeline">
               <span class="font-medium text-gray-700 dark:text-gray-300">时间线：</span>
               <span class="text-gray-600 dark:text-gray-400">{{ selectedRoutineTask.timeline }}</span>
-            </div>
-            <div v-if="selectedRoutineTask.quantitativeMetrics">
-              <span class="font-medium text-gray-700 dark:text-gray-300">量化指标：</span>
-              <span class="text-gray-600 dark:text-gray-400">{{ selectedRoutineTask.quantitativeMetrics }}</span>
             </div>
             <div v-if="selectedRoutineTask.expectedResults" class="md:col-span-2">
               <span class="font-medium text-gray-700 dark:text-gray-300">预期结果：</span>
@@ -270,7 +266,6 @@ interface Task {
   reportSection: 'THIS_WEEK_REPORT' | 'NEXT_WEEK_PLAN'
   personnelAssignment: string
   timeline: string
-  quantitativeMetrics: string
   expectedResults: string
   actualResults: string
   resultDifferenceAnalysis: string
@@ -348,7 +343,6 @@ const onTemplateChange = () => {
       taskName: existingTask.taskName || localTask.value.taskName,
       personnelAssignment: existingTask.personnelAssignment || localTask.value.personnelAssignment,
       timeline: existingTask.timeline || localTask.value.timeline,
-      quantitativeMetrics: existingTask.quantitativeMetrics || localTask.value.quantitativeMetrics,
       expectedResults: existingTask.expectedResults || localTask.value.expectedResults,
       priority: existingTask.priority || localTask.value.priority
     }
@@ -387,7 +381,6 @@ const onRoutineTaskChange = () => {
       taskName: routineTask.taskName,
       personnelAssignment: routineTask.personnelAssignment,
       timeline: routineTask.timeline,
-      quantitativeMetrics: routineTask.quantitativeMetrics,
       expectedResults: routineTask.expectedResults,
       priority: routineTask.priority,
       taskTemplateId: routineTask.id // ⭐ 保存真实的数据库任务ID
@@ -451,9 +444,6 @@ const onPhaseChange = () => {
     }
     if (phase.timeline) {
       updatedTask.timeline = phase.timeline
-    }
-    if (phase.keyIndicators) {
-      updatedTask.quantitativeMetrics = phase.keyIndicators
     }
     if (phase.estimatedResults) {
       updatedTask.expectedResults = phase.estimatedResults

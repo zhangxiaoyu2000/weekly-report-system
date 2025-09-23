@@ -60,8 +60,8 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     // Note: position field removed from User entity
 
     // Find managers and team leaders
-    @Query("SELECT u FROM User u WHERE u.role IN :managerRoles AND u.status = 'ACTIVE'")
-    List<User> findManagers(@Param("managerRoles") List<User.Role> managerRoles);
+    @Query("SELECT u FROM User u WHERE u.role IN :managerRoles AND u.status = :activeStatus")
+    List<User> findManagers(@Param("managerRoles") List<User.Role> managerRoles, @Param("activeStatus") User.UserStatus activeStatus);
 
     // Find users created in time range
     List<User> findByCreatedAtBetween(LocalDateTime startDate, LocalDateTime endDate);
@@ -80,8 +80,8 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     
     // Department count queries removed as User entity no longer has department field
     
-    @Query("SELECT u.role, COUNT(u) FROM User u WHERE u.status = 'ACTIVE' GROUP BY u.role")
-    List<Object[]> countActiveUsersByRole();
+    @Query("SELECT u.role, COUNT(u) FROM User u WHERE u.status = :activeStatus GROUP BY u.role")
+    List<Object[]> countActiveUsersByRole(@Param("activeStatus") User.UserStatus activeStatus);
 
     // Update methods (for batch operations)
     @Query("UPDATE User u SET u.status = :newStatus WHERE u.id IN :userIds")
@@ -97,14 +97,15 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     // Query removed as WeeklyReport entity no longer has author field
 
     // Complex queries for user management - department filter removed
-    @Query("SELECT u FROM User u WHERE u.status = 'ACTIVE' AND " +
+    @Query("SELECT u FROM User u WHERE u.status = :activeStatus AND " +
            "(:role IS NULL OR u.role = :role)")
-    Page<User> findUsersWithFilters(@Param("role") User.Role role,
+    Page<User> findUsersWithFilters(@Param("activeStatus") User.UserStatus activeStatus,
+                                   @Param("role") User.Role role,
                                    Pageable pageable);
 
     // Email and notification queries
-    @Query("SELECT u.email FROM User u WHERE u.status = 'ACTIVE' AND u.role IN :roles")
-    List<String> findEmailsByRoles(@Param("roles") List<User.Role> roles);
+    @Query("SELECT u.email FROM User u WHERE u.status = :activeStatus AND u.role IN :roles")
+    List<String> findEmailsByRoles(@Param("activeStatus") User.UserStatus activeStatus, @Param("roles") List<User.Role> roles);
     
     // Department batch queries removed as User entity no longer has department field
 

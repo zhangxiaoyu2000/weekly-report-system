@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: weekly-report-mysql-local
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass123
+      MYSQL_DATABASE: weekly_report_system
+      MYSQL_USER: qrauth
+      MYSQL_PASSWORD: qrauth123
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql_data_local:/var/lib/mysql
+      - ./create-database-schema.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - weekly-report-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpass123"]
+      interval: 30s
+      timeout: 20s
+      retries: 10
+
+  # Backend Spring Boot Application  
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: weekly-report-backend-local
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: weekly_report_system
+      DB_USERNAME: root
+      DB_PASSWORD: rootpass123
+      JWT_SECRET: mySecretKeyForLocal
+    ports:
+      - "8082:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - weekly-report-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Frontend Nginx Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: weekly-report-frontend-local
+    environment:
+      NODE_ENV: production
+      VITE_API_BASE_URL: http://localhost:8082/api  # 本地后端API地址
+      BACKEND_URL: http://backend:8080  # nginx代理到后端容器
+    ports:
+      - "3003:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - weekly-report-network
+
+networks:
+  weekly-report-network:
+    driver: bridge
+
+volumes:
+  mysql_data_local:
