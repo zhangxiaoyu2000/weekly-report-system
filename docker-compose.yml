@@ -33,7 +33,7 @@ services:
       DB_NAME: weekly_report_system
       DB_USERNAME: root
       DB_PASSWORD: rootpass123
-      JWT_SECRET: mySecretKeyForProduction
+      JWT_SECRET: MyVerySecureWeeklyReportJwtSigningKeyForHS512AlgorithmMustBe512BitsOrGreater2024!@#$%^&*()_+=
     ports:
       - "8082:8080"
     depends_on:
