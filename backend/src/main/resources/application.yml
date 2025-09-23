@@ -351,7 +351,7 @@ spring:
     activate:
       on-profile: docker
   datasource:
-    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3308}/${DB_NAME:qr_auth_dev}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:weekly_report_system}?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:rootpass123}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -392,7 +392,7 @@ spring:
         batch_versioned_data: true
         generate_statistics: false  # Disable in docker for performance
   flyway:
-    enabled: true
+    enabled: false  # Database schema already complete
     baseline-on-migrate: true
     validate-on-migrate: false
 
