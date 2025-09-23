@@ -15,23 +15,19 @@ SELECT username, role FROM users;
 
 -- 1. 添加status字段（如果不存在）
 SET @sql = IF((SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'users' AND COLUMN_NAME = 'status' AND TABLE_SCHEMA = DATABASE()) = 0, 
-    'ALTER TABLE users ADD COLUMN status VARCHAR(20) NOT NULL DEFAULT ''ACTIVE'' COMMENT ''用户状态''', 
+    'ALTER TABLE users ADD COLUMN status ENUM(''ACTIVE'',''INACTIVE'') NOT NULL DEFAULT ''ACTIVE'' COMMENT ''用户状态''', 
     'SELECT "status column already exists"');
 PREPARE stmt FROM @sql; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
--- 2. 修改role字段类型为VARCHAR以匹配@Enumerated(EnumType.STRING)
-ALTER TABLE users MODIFY COLUMN role VARCHAR(50) NOT NULL COMMENT '用户角色';
+-- 2. 修改role字段类型为ENUM以匹配Java枚举
+ALTER TABLE users MODIFY COLUMN role ENUM('MANAGER','ADMIN','SUPER_ADMIN','EMPLOYEE') NOT NULL DEFAULT 'MANAGER' COMMENT '用户角色';
 
 -- 3. 更新role值以匹配Java枚举定义
 -- SUPERVISOR -> MANAGER (主管)
--- ADMIN -> ADMIN (管理员) 
--- SUPER_ADMIN -> SUPER_ADMIN (超级管理员)
 UPDATE users SET role = 'MANAGER' WHERE role = 'SUPERVISOR';
-UPDATE users SET role = 'ADMIN' WHERE role = 'ADMIN';
-UPDATE users SET role = 'SUPER_ADMIN' WHERE role = 'SUPER_ADMIN';
 
 -- 4. 确保所有用户状态为ACTIVE
-UPDATE users SET status = 'ACTIVE' WHERE status IS NULL OR status = '';
+UPDATE users SET status = 'ACTIVE' WHERE status IS NULL OR status = '' OR status NOT IN ('ACTIVE','INACTIVE');
 
 -- 5. 添加时间戳字段（如果不存在）
 SET @sql = IF((SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'users' AND COLUMN_NAME = 'created_at' AND TABLE_SCHEMA = DATABASE()) = 0, 

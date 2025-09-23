@@ -47,13 +47,11 @@ public class User {
     private String password;                        // #密码
 
     @NotNull(message = "Role cannot be null")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false, length = 20)
+    @Column(name = "role", nullable = false)
     private Role role = Role.MANAGER;               // #角色 (系统角色分为主管，管理员和超级管理员)
 
     @NotNull(message = "Status cannot be null")
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, length = 20)
+    @Column(name = "status", nullable = false)
     private UserStatus status = UserStatus.ACTIVE; // #状态
 
     // 时间戳字段
