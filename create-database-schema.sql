@@ -61,10 +61,15 @@ CREATE TABLE projects (
     rejection_reason TEXT COMMENT '拒绝理由',
     approval_status ENUM(
         'AI_ANALYZING',            -- AI分析中
+        'AI_APPROVED',             -- AI分析通过
         'AI_REJECTED',             -- AI分析拒绝
         'ADMIN_REVIEWING',         -- 管理员审核中
         'ADMIN_APPROVED',          -- 管理员审核通过
-        'ADMIN_REJECTED'           -- 管理员审核拒绝
+        'ADMIN_REJECTED',          -- 管理员审核拒绝
+        'SUPER_ADMIN_REVIEWING',   -- 超级管理员审核中
+        'SUPER_ADMIN_APPROVED',    -- 超级管理员审核通过
+        'SUPER_ADMIN_REJECTED',    -- 超级管理员审核拒绝
+        'FINAL_APPROVED'           -- 最终批准
     ) NOT NULL DEFAULT 'AI_ANALYZING' COMMENT '审批状态',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
