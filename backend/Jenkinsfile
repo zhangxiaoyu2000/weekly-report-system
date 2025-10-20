@@ -1,0 +1,218 @@
+pipeline {
+    agent any
+    
+    environment {
+        PROJECT_NAME = 'weekly-report-backend'
+        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
+        BACKEND_PORT = '8080'
+        MYSQL_PORT = '3306'
+        // 从环境变量或参数获取前端URL，用于CORS配置
+        FRONTEND_URL = "${params.FRONTEND_URL ?: 'http://localhost:3003'}"
+    }
+    
+    parameters {
+        string(name: 'FRONTEND_URL', defaultValue: 'http://23.95.193.155:3003', description: '前端应用URL（用于CORS配置）')
+        choice(name: 'DEPLOY_ENV', choices: ['production', 'staging', 'development'], description: '部署环境')
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+                echo '✅ 代码检出完成'
+            }
+        }
+        
+        stage('Environment Setup') {
+            steps {
+                script {
+                    // 停止现有容器
+                    sh '''
+                        echo "🔄 停止现有容器..."
+                        if docker ps -a | grep -q ${PROJECT_NAME}; then
+                            docker-compose -f ${DOCKER_COMPOSE_FILE} down || true
+                        fi
+                        
+                        # 清理悬挂镜像
+                        docker image prune -f || true
+                    '''
+                }
+            }
+        }
+        
+        stage('Database Preparation') {
+            steps {
+                script {
+                    sh '''
+                        echo "🗄️  准备数据库..."
+                        
+                        # 启动MySQL容器
+                        docker-compose -f ${DOCKER_COMPOSE_FILE} up -d mysql
+                        
+                        # 等待MySQL就绪
+                        echo "⏳ 等待MySQL启动..."
+                        for i in {1..60}; do
+                            if docker exec weekly-report-backend-mysql mysqladmin ping -h localhost -u root -prootpass123 2>/dev/null; then
+                                echo "✅ MySQL已就绪"
+                                break
+                            fi
+                            echo "⏳ 等待MySQL启动... ($i/60)"
+                            sleep 5
+                        done
+                        
+                        # 清理可能失败的Flyway迁移记录
+                        echo "🔧 清理数据库迁移记录..."
+                        docker exec weekly-report-backend-mysql mysql -u root -prootpass123 -e "
+                            USE weekly_report_system;
+                            DELETE FROM flyway_schema_history WHERE success = 0;
+                            SELECT '数据库清理完成' as status;
+                        " || echo "数据库清理完成或无需清理"
+                    '''
+                }
+            }
+        }
+        
+        stage('Backend Build & Deploy') {
+            steps {
+                script {
+                    try {
+                        sh '''
+                            echo "🔨 构建并启动后端服务..."
+                            
+                            # 设置环境变量
+                            export FRONTEND_URL="${FRONTEND_URL}"
+                            
+                            # 构建并启动后端服务
+                            docker-compose -f ${DOCKER_COMPOSE_FILE} up --build -d backend
+                            
+                            # 等待后端服务健康
+                            echo "⏳ 等待后端服务启动..."
+                            for i in {1..30}; do
+                                if curl -f http://localhost:${BACKEND_PORT}/api/health >/dev/null 2>&1; then
+                                    echo "✅ 后端服务已启动"
+                                    break
+                                fi
+                                echo "⏳ 等待后端服务... ($i/30)"
+                                sleep 10
+                            done
+                        '''
+                    } catch (Exception e) {
+                        echo "❌ 后端构建失败: ${e.getMessage()}"
+                        sh '''
+                            echo "📋 获取调试日志..."
+                            docker-compose -f ${DOCKER_COMPOSE_FILE} logs backend
+                        '''
+                        throw e
+                    }
+                }
+            }
+        }
+        
+        stage('Health Check') {
+            steps {
+                script {
+                    sh '''
+                        echo "🏥 执行健康检查..."
+                        
+                        # 检查后端API健康状态
+                        echo "🔍 检查后端API..."
+                        for i in {1..10}; do
+                            if curl -f http://localhost:${BACKEND_PORT}/api/health; then
+                                echo "✅ 后端API健康检查通过"
+                                break
+                            fi
+                            echo "⏳ 后端API未就绪... ($i/10)"
+                            sleep 5
+                        done
+                        
+                        # 检查数据库连接
+                        echo "🔍 检查数据库连接..."
+                        if docker exec weekly-report-backend-mysql mysqladmin ping -h localhost -u root -prootpass123; then
+                            echo "✅ 数据库连接正常"
+                        else
+                            echo "❌ 数据库连接失败"
+                            exit 1
+                        fi
+                        
+                        # 测试基本API端点
+                        echo "🔍 测试API端点..."
+                        curl -I http://localhost:${BACKEND_PORT}/api/auth/login || echo "⚠️  认证端点测试"
+                    '''
+                }
+            }
+        }
+        
+        stage('Integration Test') {
+            steps {
+                script {
+                    sh '''
+                        echo "🧪 执行集成测试..."
+                        
+                        # 基本API可用性测试
+                        echo "测试健康端点..."
+                        HEALTH_RESPONSE=$(curl -s http://localhost:${BACKEND_PORT}/api/health)
+                        echo "健康检查响应: $HEALTH_RESPONSE"
+                        
+                        # 数据库连接测试
+                        echo "测试数据库连接..."
+                        docker exec weekly-report-backend-mysql mysql -u root -prootpass123 -e "SELECT 'Database connection successful' as test_result;"
+                        
+                        echo "✅ 集成测试完成"
+                    '''
+                }
+            }
+        }
+        
+        stage('Service Status') {
+            steps {
+                sh '''
+                    echo "📊 最终服务状态..."
+                    echo "=== Docker容器状态 ==="
+                    docker-compose -f ${DOCKER_COMPOSE_FILE} ps
+                    
+                    echo "=== 运行中的容器 ==="
+                    docker ps | grep weekly-report
+                    
+                    echo "=== 端口监听状态 ==="
+                    netstat -tlnp | grep -E "(${BACKEND_PORT}|${MYSQL_PORT})" || echo "端口检查完成"
+                    
+                    echo "=== 服务健康状态 ==="
+                    curl -s http://localhost:${BACKEND_PORT}/api/health || echo "健康检查完成"
+                '''
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo '🎉 后端部署成功!'
+            sh '''
+                echo "📋 部署摘要:"
+                echo "后端API: http://localhost:${BACKEND_PORT}"
+                echo "数据库: localhost:${MYSQL_PORT}"
+                echo "健康检查: http://localhost:${BACKEND_PORT}/api/health"
+                echo "前端CORS配置: ${FRONTEND_URL}"
+                echo ""
+                echo "服务状态:"
+                docker-compose -f ${DOCKER_COMPOSE_FILE} ps
+            '''
+        }
+        
+        failure {
+            echo '❌ 后端部署失败!'
+            sh '''
+                echo "📋 调试信息:"
+                echo "=== Docker Compose日志 ==="
+                docker-compose -f ${DOCKER_COMPOSE_FILE} logs
+                echo "=== 容器状态 ==="
+                docker ps -a | grep weekly-report
+            '''
+        }
+        
+        always {
+            echo '🧹 清理工作空间...'
+            // 保留容器运行，只清理构建缓存
+            sh 'docker builder prune -f || true'
+        }
+    }
+}

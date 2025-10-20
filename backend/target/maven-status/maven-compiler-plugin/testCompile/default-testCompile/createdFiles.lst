@@ -1,0 +1,7 @@
+com/weeklyreport/comment/SimpleCommentTest.class
+com/weeklyreport/weeklyreport/service/WeeklyReportAIThresholdTest.class
+com/weeklyreport/ai/service/AIAnalysisServiceAsyncTest.class
+com/weeklyreport/weeklyreport/service/WeeklyReportAIThresholdTest$RecordingEventPublisher.class
+com/weeklyreport/ai/AIAnalysisServiceIntegrationTest.class
+com/weeklyreport/ai/AIAnalysisIntegrationTest.class
+com/weeklyreport/AICallbackTest.class

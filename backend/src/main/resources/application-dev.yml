@@ -1,0 +1,77 @@
+# 本地开发环境配置
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3309/weekly_report_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: root
+    password: rootpass123
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 12
+      idle-timeout: 180000
+      max-lifetime: 900000
+      connection-timeout: 15000
+      leak-detection-threshold: 30000
+      pool-name: WeeklyReportHikariCP-Dev
+      connection-test-query: SELECT 1
+      validation-timeout: 8000
+      auto-commit: false
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        generate_statistics: false
+        session:
+          events:
+            log:
+              LOG_QUERIES_SLOWER_THAN_MS: 1000
+
+  # Redis配置 - 本地开发环境
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+      timeout: 2000
+
+# 开发环境详细日志
+logging:
+  level:
+    com.weeklyreport: DEBUG
+    com.weeklyreport.controller: DEBUG
+    com.weeklyreport.service: DEBUG
+    com.weeklyreport.repository: DEBUG
+    com.weeklyreport.security: DEBUG
+    com.weeklyreport.exception: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.web: DEBUG
+    org.springframework.security.access: DEBUG
+    org.springframework.security.authentication: DEBUG
+    com.zaxxer.hikari: DEBUG
+    com.zaxxer.hikari.pool: DEBUG
+    com.zaxxer.hikari.pool.HikariPool: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.stat: INFO
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.orm.jdbc.extract: TRACE
+    org.springframework.transaction: DEBUG
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.orm.jpa.JpaTransactionManager: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.web.servlet: DEBUG
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    root: INFO
+
+# AI配置 - 开发环境使用DeepSeek
+ai:
+  default-provider: deepseek
+  deepseek:
+    enabled: true
+  openai:
+    enabled: false

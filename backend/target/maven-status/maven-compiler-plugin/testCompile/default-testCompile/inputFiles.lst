@@ -1,3 +1,6 @@
-/Volumes/project/my-project/backend/src/test/java/com/weeklyreport/ai/AIAnalysisIntegrationTest.java
-/Volumes/project/my-project/backend/src/test/java/com/weeklyreport/ai/AIAnalysisServiceIntegrationTest.java
-/Volumes/project/my-project/backend/src/test/java/com/weeklyreport/AICallbackTest.java
+/Volumes/project/Projects/WeeklyReport/backend/src/test/java/com/weeklyreport/ai/AIAnalysisServiceIntegrationTest.java
+/Volumes/project/Projects/WeeklyReport/backend/src/test/java/com/weeklyreport/weeklyreport/service/WeeklyReportAIThresholdTest.java
+/Volumes/project/Projects/WeeklyReport/backend/src/test/java/com/weeklyreport/comment/SimpleCommentTest.java
+/Volumes/project/Projects/WeeklyReport/backend/src/test/java/com/weeklyreport/ai/AIAnalysisIntegrationTest.java
+/Volumes/project/Projects/WeeklyReport/backend/src/test/java/com/weeklyreport/ai/service/AIAnalysisServiceAsyncTest.java
+/Volumes/project/Projects/WeeklyReport/backend/src/test/java/com/weeklyreport/AICallbackTest.java
